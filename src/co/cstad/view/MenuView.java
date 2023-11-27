@@ -1,4 +1,4 @@
-package co.cstad.util;
+package co.cstad.view;
 
 
 import java.util.Scanner;

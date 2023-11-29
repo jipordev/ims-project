@@ -1,5 +1,4 @@
 package co.cstad.util;
 
-public class MenuView {
-
+public class Singleton {
 }

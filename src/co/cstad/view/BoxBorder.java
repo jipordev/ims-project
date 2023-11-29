@@ -1,4 +1,4 @@
-package co.cstad.util;
+package co.cstad.view;
 
 public interface BoxBorder {
     static final String TOP_LEFT_CORNER = "┌";

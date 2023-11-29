@@ -34,5 +34,4 @@ public class MenuViewManager extends MenuViewAdmin {
         System.out.println(BOTTOM_LEFT_CORNER + HORIZONTAL_BORDER.repeat(62) + BOTTOM_RIGHT_CORNER);
         System.out.print(reset);
     }
-    public void
 }

@@ -1,9 +1,7 @@
 package co.cstad.view;
 
 
-import java.util.Scanner;
-
-public class MenuView implements boxBorder{
+public class MenuView implements BoxBorder {
     //First Interface (CSTAD)
     public void startInterface() {
         for (int i = 0; i <= 100; i+=2) {

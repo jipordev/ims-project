@@ -1,6 +1,6 @@
 package co.cstad.view;
 
-public class MenuViewAdmin implements boxBorder {
+public class MenuViewAdmin implements BoxBorder {
 
     //Menu LogIn
 

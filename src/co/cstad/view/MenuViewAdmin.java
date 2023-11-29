@@ -2,7 +2,7 @@ package co.cstad.view;
 
 public class MenuViewAdmin implements boxBorder {
 
-    public void menuLogin(){
+    public static void menuLogin(){
         System.out.print(cyan);
         System.out.println("┌" + "─".repeat(62) + "┐");
 
@@ -31,7 +31,7 @@ public class MenuViewAdmin implements boxBorder {
         System.out.print(reset);
     }
     //First Interface (CSTAD Interface)
-    public void startInterface() {
+    public static void startInterface() {
         for (int i = 0; i <= 100; i+=2) {
             int totalBlocks = 41;
             int blocksToShow = (i * totalBlocks) / 100;
@@ -62,7 +62,7 @@ public class MenuViewAdmin implements boxBorder {
         System.out.print(reset);
     }
     //Menu LogIn
-    public void menuLogin2(){
+    public static void menuLogin2(){
         System.out.print(cyan);
         System.out.println(TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(62) + TOP_RIGHT_CORNER);
 
@@ -84,7 +84,7 @@ public class MenuViewAdmin implements boxBorder {
         System.out.println(BOTTOM_LEFT_CORNER + HORIZONTAL_BORDER.repeat(28) + BOTTOM_RIGHT_CORNER + SPACE + VERTICAL_BORDER);
 
         System.out.println(VERTICAL_BORDER + SPACE + TOP_LEFT_CORNER+ HORIZONTAL_BORDER.repeat(58) + TOP_RIGHT_CORNER + SPACE + VERTICAL_BORDER);
-        System.out.println(VERTICAL_BORDER + SPACE + VERTICAL_BORDER+" ".repeat(14)+ yellow + "Choose Option Between : 1 - 2 " +  " ".repeat(14) + cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
+        System.out.println(VERTICAL_BORDER + SPACE + VERTICAL_BORDER+" ".repeat(14)+ yellow + "Choose Option Between : 1 - 3 " +  " ".repeat(14) + cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
         System.out.println(VERTICAL_BORDER + SPACE + BOTTOM_LEFT_CORNER + HORIZONTAL_BORDER.repeat(58) + BOTTOM_RIGHT_CORNER + SPACE + VERTICAL_BORDER);
 
         System.out.println(BOTTOM_LEFT_CORNER + HORIZONTAL_BORDER.repeat(62) + BOTTOM_RIGHT_CORNER);
@@ -95,7 +95,7 @@ public class MenuViewAdmin implements boxBorder {
 //        int id = scanner.nextInt();
     }
     // Menu About Us
-    public void menuAboutUs(){
+    public static void menuAboutUs(){
         System.out.print(cyan);
         System.out.println(TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(62) + TOP_RIGHT_CORNER);
 
@@ -127,7 +127,7 @@ public class MenuViewAdmin implements boxBorder {
         System.out.println(BOTTOM_LEFT_CORNER + HORIZONTAL_BORDER.repeat(62) + BOTTOM_RIGHT_CORNER);
         System.out.print(reset);
     }
-    public void menuExit(){
+    public static void menuExit(){
         System.out.print(cyan);
         System.out.println(TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(62) + TOP_RIGHT_CORNER);
 
@@ -159,7 +159,7 @@ public class MenuViewAdmin implements boxBorder {
 //        System.out.print(" -->> ENTER PASSWORD : ");
 //        int id = scanner.nextInt();
     }
-    public void menuItemAdmin() {
+    public static void menuItemAdmin() {
         System.out.print(cyan);
         System.out.println(TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(62) + TOP_RIGHT_CORNER);
 
@@ -231,7 +231,7 @@ public class MenuViewAdmin implements boxBorder {
         System.out.println(BOTTOM_LEFT_CORNER + HORIZONTAL_BORDER.repeat(62) + BOTTOM_RIGHT_CORNER);
         System.out.print(reset);
     }
-    public void menuInvoiceAdmin() {
+    public static void menuInvoiceAdmin() {
         System.out.print(cyan);
         System.out.println(TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(62) + TOP_RIGHT_CORNER);
 
@@ -267,7 +267,7 @@ public class MenuViewAdmin implements boxBorder {
         System.out.println(BOTTOM_LEFT_CORNER + HORIZONTAL_BORDER.repeat(62) + BOTTOM_RIGHT_CORNER);
         System.out.print(reset);
     }
-    public void menuUserAdmin() {
+    public static void menuUserAdmin() {
         System.out.print(cyan);
         System.out.println(TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(62) + TOP_RIGHT_CORNER);
 
@@ -303,7 +303,7 @@ public class MenuViewAdmin implements boxBorder {
         System.out.println(BOTTOM_LEFT_CORNER + HORIZONTAL_BORDER.repeat(62) + BOTTOM_RIGHT_CORNER);
         System.out.print(reset);
     }
-    public void menuReportAdmin() {
+    public static void menuReportAdmin() {
         System.out.print(cyan);
         System.out.println(TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(62) + TOP_RIGHT_CORNER);
 
@@ -339,15 +339,6 @@ public class MenuViewAdmin implements boxBorder {
         System.out.println(BOTTOM_LEFT_CORNER + HORIZONTAL_BORDER.repeat(62) + BOTTOM_RIGHT_CORNER);
         System.out.print(reset);
     }
-
-
-
-
-
-
-
-
-
 
     private static String getProgressBar(int blocksToShow, int totalBlocks) {
         String progressBar = "█".repeat(Math.max(0, blocksToShow)) +

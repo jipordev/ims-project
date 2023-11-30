@@ -1,6 +1,5 @@
 package co.cstad.view;
 
-
 public class MenuView implements BoxBorder {
     //First Interface (CSTAD)
     public void startInterface() {
@@ -98,4 +97,33 @@ public class MenuView implements BoxBorder {
                 " ".repeat(Math.max(0, totalBlocks - blocksToShow));
         return green + progressBar;
     }
+
+    void confirmation(){
+        System.out.println(cyan + TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(40) + TOP_RIGHT_CORNER);
+        System.out.println(VERTICAL_BORDER + SPACE.repeat(10)+ reset + yellow + "{ - CONFIRMATION - }"+ reset + cyan + SPACE.repeat(10)+VERTICAL_BORDER);
+        System.out.println(VERTICAL_BORDER+ HORIZONTAL_BORDER.repeat(40)+ VERTICAL_BORDER);
+        System.out.println(VERTICAL_BORDER+ SPACE.repeat(13) + yellow +"Are you sure?"+ reset + cyan + SPACE.repeat(14)+ VERTICAL_BORDER);
+        System.out.println(VERTICAL_BORDER   + SPACE.repeat(40) + VERTICAL_BORDER);
+        System.out.println(VERTICAL_BORDER+" ".repeat(8)+TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(8)+TOP_RIGHT_CORNER+" ".repeat(5)+ TOP_LEFT_CORNER +HORIZONTAL_BORDER.repeat(8)+ TOP_RIGHT_CORNER+" ".repeat(7)+ VERTICAL_BORDER);
+        System.out.println(VERTICAL_BORDER+" ".repeat(8)+ VERTICAL_BORDER + blue +" 1.Yes  "+ reset + cyan  + VERTICAL_BORDER + SPACE.repeat(5)+ VERTICAL_BORDER + reset+ red +" 2.No"+ reset+ cyan+ SPACE.repeat(3) + VERTICAL_BORDER + SPACE.repeat(7)+ VERTICAL_BORDER);
+        System.out.println(VERTICAL_BORDER+" ".repeat(8)+BOTTOM_LEFT_CORNER+ HORIZONTAL_BORDER.repeat(8)+BOTTOM_RIGHT_CORNER+" ".repeat(5)+ BOTTOM_LEFT_CORNER+ HORIZONTAL_BORDER.repeat(8)+ BOTTOM_RIGHT_CORNER+" ".repeat(7)+ VERTICAL_BORDER);
+        System.out.println(VERTICAL_BORDER   + SPACE.repeat(40) + VERTICAL_BORDER);
+        System.out.println(BOTTOM_LEFT_CORNER + HORIZONTAL_BORDER.repeat(40) + BOTTOM_RIGHT_CORNER + reset);
+    }
+
+    void inputValidation(){
+        System.out.println(cyan + TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(40) + TOP_RIGHT_CORNER);
+        System.out.println(VERTICAL_BORDER+ SPACE.repeat(40)+ VERTICAL_BORDER);
+        System.out.println(VERTICAL_BORDER + SPACE.repeat(7) + TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(24) + TOP_RIGHT_CORNER+ SPACE.repeat(7) + VERTICAL_BORDER);
+        System.out.println(VERTICAL_BORDER + SPACE.repeat(7)+ VERTICAL_BORDER+ reset + red + " Input invalid data...!"+ reset + cyan + SPACE + VERTICAL_BORDER + SPACE.repeat(7)+VERTICAL_BORDER);
+        System.out.println(VERTICAL_BORDER + SPACE.repeat(7) + BOTTOM_LEFT_CORNER + HORIZONTAL_BORDER.repeat(24) + BOTTOM_RIGHT_CORNER+ SPACE.repeat(7) + VERTICAL_BORDER);
+
+        System.out.println(VERTICAL_BORDER+ SPACE.repeat(40)+ VERTICAL_BORDER);
+        System.out.println(VERTICAL_BORDER + SPACE.repeat(2) + TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(34) + TOP_RIGHT_CORNER+ SPACE.repeat(2) + VERTICAL_BORDER);
+        System.out.println(VERTICAL_BORDER + SPACE.repeat(2)+ VERTICAL_BORDER+ reset + yellow + " Press Enter key to Try again...!"+ reset + cyan + SPACE + VERTICAL_BORDER + SPACE.repeat(2)+VERTICAL_BORDER);
+        System.out.println(VERTICAL_BORDER + SPACE.repeat(2) + BOTTOM_LEFT_CORNER + HORIZONTAL_BORDER.repeat(34) + BOTTOM_RIGHT_CORNER+ SPACE.repeat(2) + VERTICAL_BORDER);
+        System.out.println(VERTICAL_BORDER   + SPACE.repeat(40) + VERTICAL_BORDER);
+        System.out.println(BOTTOM_LEFT_CORNER + HORIZONTAL_BORDER.repeat(40) + BOTTOM_RIGHT_CORNER);
+    }
+
 }

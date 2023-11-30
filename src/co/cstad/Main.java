@@ -36,6 +36,14 @@ public class Main {
                         int optionManager = Integer.parseInt(inputValue("Choose Option Between : 1 - 4: "));
                         switch (optionManager) {
                             //case 1 ->
+                            case 2 -> {
+                                System.out.println("\n".repeat(20));
+                                //menuViewManager.
+                            }
+                            case 3 -> {
+                                System.out.println("\n".repeat(20));
+                            }
+                            case 4 -> System.exit(0);
                         }
                     }
                 } else if (username.equals("report") && password.equals("123")) {

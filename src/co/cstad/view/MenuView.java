@@ -98,4 +98,6 @@ public class MenuView implements BoxBorder {
                 " ".repeat(Math.max(0, totalBlocks - blocksToShow));
         return green + progressBar;
     }
+
+
 }

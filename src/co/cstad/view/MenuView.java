@@ -439,7 +439,4 @@ public class MenuView implements BoxBorder {
         table.addCell(" ".repeat(2)+blue+"Active");
         System.out.println(cyan+ table.render());
     }
-
-
-
 }

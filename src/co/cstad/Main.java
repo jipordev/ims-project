@@ -42,9 +42,10 @@ public class Main {
 
                 // Admin logic
                     if (username.equals("admin") && password.equals("123")) {
-                        menuViewAdmin.mainMenuAdmin();
+
                         int optionAdmin;
                         do{
+                            menuViewAdmin.mainMenuAdmin();
                             optionAdmin = Integer.parseInt(inputValue("  >> Choose Option Between [ 1 - 6 ] : "));
                             switch (optionAdmin){
                                 case 1 ->{

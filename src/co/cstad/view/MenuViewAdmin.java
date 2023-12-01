@@ -47,9 +47,6 @@ public class MenuViewAdmin implements BoxBorder {
     }
 
 
-<<<<<<<<< Temporary merge branch 1
-
-
     // Customer
     public void customerMenu() {
         System.out.print(cyan);

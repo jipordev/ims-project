@@ -4,7 +4,6 @@ import co.cstad.view.MenuView;
 import co.cstad.view.MenuViewAdmin;
 import co.cstad.view.MenuViewManager;
 import co.cstad.view.MenuViewReport;
-
 import java.util.Scanner;
 
 public class Main {

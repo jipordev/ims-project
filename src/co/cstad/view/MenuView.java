@@ -271,8 +271,6 @@ public class MenuView implements BoxBorder {
     }
 
 
-
-
     private static String getProgressBar(int blocksToShow, int totalBlocks) {
         String progressBar = "█".repeat(Math.max(0, blocksToShow)) +
                 " ".repeat(Math.max(0, totalBlocks - blocksToShow));

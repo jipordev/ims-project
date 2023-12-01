@@ -45,9 +45,10 @@ public class Main {
 
                 // Admin logic
                     if (username.equals("admin") && password.equals("123")) {
-                        menuViewAdmin.mainMenuAdmin();
+
                         int optionAdmin;
                         do{
+                            menuViewAdmin.mainMenuAdmin();
                             optionAdmin = Integer.parseInt(inputValue("  >> Choose Option Between [ 1 - 6 ] : "));
                             switch (optionAdmin){
 
@@ -77,11 +78,11 @@ public class Main {
                                             case 3 -> menuView.itemDelete();
                                             case 4 -> menuView.itemRead();
                                             case 5 -> {
-                                                break;
+                                                System.out.println("\n".repeat(20));
                                             }
                                             default -> System.out.println("Invalid Option Item...!");
                                         }
-                                    }while (true);
+                                    }while (optionItem != 5);
                                 }
 
                                 case 2 ->{
@@ -189,7 +190,6 @@ public class Main {
                                     }while (optionCustomer!=5);
                                 }
                                 case 3 ->{
-
                                     int chooseInvoice;
                                     do{
                                         menuView.invoiceMenu();
@@ -222,7 +222,41 @@ public class Main {
 
                                 }
                                 case 4 ->{
-                                    menuViewAdmin.userMenu();
+                                    int chooseUser;
+                                    do{
+                                        menuViewAdmin.userMenu();
+                                        chooseUser = Integer.parseInt(inputValue("  >> Choose Option Between [ 1 - 5 ] : "));
+                                        switch (chooseUser){
+                                            case 1 ->{
+                                                int invoiceID = Integer.parseInt(inputValue("  >> Enter Customer ID to Return : "));
+                                                if(invoiceID==101){
+                                                    menuView.readInvoice();
+                                                    menuView.confirmation();
+                                                    System.out.print("  >> Choose [Yes/yes] OR [No/no] : ");
+                                                    String choose = scanner.nextLine();
+                                                }
+
+                                            }
+                                            case 2 ->{
+                                                menuView.invoiceList();
+
+                                            }
+                                            case 3->{
+
+                                            }
+                                            case 4 ->{
+
+                                            }
+                                            case 5 -> {
+
+                                            }
+                                            default -> {
+                                                System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
+                                                System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 3 .");
+                                            }
+                                        }
+
+                                    }while(chooseUser!=3);
                                 }
                                 case 5 ->{
                                     menuView.reportMenu();

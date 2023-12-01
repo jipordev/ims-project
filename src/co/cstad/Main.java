@@ -17,6 +17,7 @@ public class Main {
     static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
         boolean check = false;
         menuView.startInterface();
         try {
@@ -85,10 +86,141 @@ public class Main {
                                 }
 
                                 case 2 ->{
-                                    menuViewAdmin.customerMenu();
+
+                                    int optionCustomer;
+                                    do{
+                                        menuViewAdmin.customerMenu();
+                                        optionCustomer = Integer.parseInt(inputValue("  >> Choose Option Between [ 1 - 5 ] : "));
+                                        switch (optionCustomer){
+                                            case 1 ->{
+                                                menuViewAdmin.newCustomer();
+                                                menuView.confirmation();
+
+                                                System.out.println("\n".repeat(2));
+                                            }
+                                            case 2 ->{
+                                                menuViewAdmin.customerList();
+
+                                                System.out.println("\n".repeat(2));
+
+                                            }
+                                            case 3 ->{
+                                                    int updateID = Integer.parseInt(inputValue("  >> Enter Customer ID to Update : "));
+                                                    if(updateID==1){
+                                                        menuViewAdmin.readCustomer();
+                                                        int chooseUpdate;
+                                                        do{
+                                                            menuViewAdmin.optionListUp();
+                                                            chooseUpdate = Integer.parseInt(inputValue("  >> Choose Option Between [ 1 - 8 ] : "));
+                                                            switch (chooseUpdate){
+                                                                case 1 ->{
+                                                                    menuViewAdmin.upAllCustomer();
+                                                                    menuView.confirmation();
+                                                                    System.out.print("  >> Choose [Yes/yes] OR [No/no] : ");
+                                                                    String choose = scanner.nextLine();
+                                                                }
+                                                                case 2 ->{
+                                                                    menuViewAdmin.upNameCustomer();
+                                                                    menuView.confirmation();
+                                                                    System.out.print("  >> Choose [Yes/yes] OR [No/no] : ");
+                                                                    String choose = scanner.nextLine();
+                                                                }
+                                                                case 3 ->{
+                                                                    menuViewAdmin.upAddressCustomer();
+                                                                    menuView.confirmation();
+                                                                    System.out.print("  >> Choose [Yes/yes] OR [No/no] : ");
+                                                                    String choose = scanner.nextLine();
+                                                                }
+                                                                case 4 ->{
+                                                                    menuViewAdmin.upContact1Customer();
+                                                                    menuView.confirmation();
+                                                                    System.out.print("  >> Choose [Yes/yes] OR [No/no] : ");
+                                                                    String choose = scanner.nextLine();
+                                                                }
+                                                                case 5 ->{
+                                                                    menuViewAdmin.upContact2Customer();
+                                                                    menuView.confirmation();
+                                                                    System.out.print("  >> Choose [Yes/yes] OR [No/no] : ");
+                                                                    String choose = scanner.nextLine();
+                                                                }
+                                                                case 6 ->{
+                                                                    menuViewAdmin.upTypeCustomer();
+                                                                    menuView.confirmation();
+                                                                    System.out.print("  >> Choose [Yes/yes] OR [No/no] : ");
+                                                                    String choose = scanner.nextLine();
+                                                                }
+                                                                case 7 ->{
+                                                                    //menuViewAdmin.upStatusCustomer();
+                                                                    //menuView.confirmation();
+                                                                }
+                                                                case 8 ->{
+
+                                                                }
+                                                                default -> {
+                                                                    System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
+                                                                    System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 5 .");
+                                                                }
+                                                            }
+                                                        }while(chooseUpdate!=8);
+                                                    }
+
+
+
+                                            }
+                                            case 4 ->{
+                                                int deleteID = Integer.parseInt(inputValue("  >> Enter Customer ID to Delete : "));
+                                                if(deleteID==1){
+                                                    menuViewAdmin.readCustomer();
+                                                    menuView.confirmation();
+                                                    System.out.print("  >> Choose [Yes/yes] OR [No/no] : ");
+                                                    String choose = scanner.nextLine();
+
+                                                }
+
+                                            }
+                                            case 5 ->{
+
+                                            }
+                                            default -> {
+                                                System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
+                                                System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 5 .");
+                                            }
+                                        }
+
+                                    }while (optionCustomer!=5);
                                 }
                                 case 3 ->{
-                                    menuView.invoiceMenu();
+
+                                    int chooseInvoice;
+                                    do{
+                                        menuView.invoiceMenu();
+                                        chooseInvoice = Integer.parseInt(inputValue("  >> Choose Option Between [ 1 - 3 ] : "));
+                                        switch (chooseInvoice){
+                                            case 1 ->{
+                                                int invoiceID = Integer.parseInt(inputValue("  >> Enter Customer ID to Return : "));
+                                                if(invoiceID==101){
+                                                    menuView.readInvoice();
+                                                    menuView.confirmation();
+                                                    System.out.print("  >> Choose [Yes/yes] OR [No/no] : ");
+                                                    String choose = scanner.nextLine();
+                                                }
+
+                                            }
+                                            case 2 ->{
+                                                menuView.invoiceList();
+
+                                            }
+                                            case 3->{
+
+                                            }
+                                            default -> {
+                                                System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
+                                                System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 3 .");
+                                            }
+                                        }
+
+                                    }while(chooseInvoice!=3);
+
                                 }
                                 case 4 ->{
                                     menuViewAdmin.userMenu();

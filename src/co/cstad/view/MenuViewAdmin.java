@@ -109,6 +109,4 @@ public class MenuViewAdmin implements BoxBorder {
         System.out.println(BOTTOM_LEFT_CORNER + HORIZONTAL_BORDER.repeat(62) + BOTTOM_RIGHT_CORNER);
         System.out.print(reset);
     }
-
-
 }

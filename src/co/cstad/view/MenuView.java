@@ -1,6 +1,5 @@
 package co.cstad.view;
 
-
 import org.nocrala.tools.texttablefmt.BorderStyle;
 import org.nocrala.tools.texttablefmt.ShownBorders;
 import org.nocrala.tools.texttablefmt.Table;
@@ -292,7 +291,7 @@ public class MenuView implements BoxBorder {
     }
 
 
-    void inputValidation(){
+    public void inputValidation(){
         System.out.println(cyan + TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(40) + TOP_RIGHT_CORNER);
         System.out.println(VERTICAL_BORDER+ SPACE.repeat(40)+ VERTICAL_BORDER);
         System.out.println(VERTICAL_BORDER + SPACE.repeat(7) + TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(24) + TOP_RIGHT_CORNER+ SPACE.repeat(7) + VERTICAL_BORDER);
@@ -305,6 +304,139 @@ public class MenuView implements BoxBorder {
         System.out.println(VERTICAL_BORDER + SPACE.repeat(2) + BOTTOM_LEFT_CORNER + HORIZONTAL_BORDER.repeat(34) + BOTTOM_RIGHT_CORNER+ SPACE.repeat(2) + VERTICAL_BORDER);
         System.out.println(VERTICAL_BORDER   + SPACE.repeat(40) + VERTICAL_BORDER);
         System.out.println(BOTTOM_LEFT_CORNER + HORIZONTAL_BORDER.repeat(40) + BOTTOM_RIGHT_CORNER);
+    }
+
+    public void itemConfirmation(){
+        System.out.println();
+        Table table = new Table(2, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
+        table.setColumnWidth(0,30,30);
+        table.setColumnWidth(1,30,30);
+        table.addCell(" ".repeat(3) + cyan + "Description:");
+        table.addCell(" ".repeat(3) + cyan + "111");
+        table.addCell(" ".repeat(3)+ cyan + "Code:");
+        table.addCell(" ".repeat(3)+ cyan + "CSTAD111222");
+        table.addCell(" ".repeat(3)+ cyan + "Name:");
+        table.addCell(" ".repeat(3)+ cyan +"Hanuman Beer:");
+        table.addCell(" ".repeat(3)+ cyan +"Unit:");
+        table.addCell(" ".repeat(3)+ cyan +"0.25$");
+        table.addCell(" ".repeat(3)+ cyan +"Quantity:");
+        table.addCell(" ".repeat(3)+ cyan +"400");
+        table.addCell(" ".repeat(3)+ cyan +"Price_A:");
+        table.addCell(" ".repeat(3)+ cyan +"0.25$");
+        table.addCell(" ".repeat(3)+ cyan +"Price_B:");
+        table.addCell(" ".repeat(3)+ cyan +"0.27$");
+        table.addCell(" ".repeat(3)+ cyan +"Price_C:");
+        table.addCell(" ".repeat(3)+ cyan +"0.30$");
+        table.addCell(" ".repeat(3)+ cyan +"Status:");
+        table.addCell(" ".repeat(3)+ cyan +"Active" + reset);
+        System.out.println( table.render());
+    }
+
+    public void itemStockIn(){
+        System.out.println("Enter Description:");
+        System.out.println("Enter Unit:");
+        System.out.println("Enter Quantity:");
+        System.out.println("Enter Capacity:");
+        System.out.println("Enter Price_A:");
+        System.out.println("Enter Price_B:");
+        System.out.println("Enter Price_C:");
+        System.out.println();
+        itemConfirmation();
+        confirmation();
+    }
+
+    public void menuItemUpdate(){
+        System.out.println("Enter Item id to update: ");
+        Table table = new Table(2, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
+        table.setColumnWidth(0,15,30);
+        table.setColumnWidth(1,15,30);
+        table.addCell(" ".repeat(3)+"1.All");
+        table.addCell(" ".repeat(3)+"2.Name");
+        table.addCell(" ".repeat(3)+"3.Uit");
+        table.addCell(" ".repeat(3)+"4.Qty");
+        table.addCell(" ".repeat(3)+"5.Status");
+        table.addCell(" ".repeat(3)+"6.Price");
+        System.out.println(table.render());
+    }
+
+    public void itemUpdateAll(){
+        System.out.println("Enter New Description:");
+        System.out.println("Enter New Unit:");
+        System.out.println("Enter New Quantity:");
+        System.out.println("Enter New Capacity:");
+        System.out.println("Enter New Price_A:");
+        System.out.println("Enter New Price_B:");
+        System.out.println("Enter New Price_C:");
+    }
+
+    public void itemUpdateName(){
+        System.out.print("Enter New Item Name to Update: ");
+        itemConfirmation();
+        confirmation();
+    }
+
+    public void itemUpdateUint(){
+        System.out.print("Enter New Item Unit to Update: ");
+        itemConfirmation();
+        confirmation();
+    }
+
+    public void itemUpdateQty(){
+        System.out.print("Enter New Item Qty to Update: ");
+        itemConfirmation();
+        confirmation();
+    }
+
+    public void itemUpdateStatus(){
+        System.out.print("Enter New Item Statues to Update: ");
+        itemConfirmation();
+        confirmation();
+    }
+
+    public void itemUpdatePrice(){
+        System.out.print("Enter New Item Price to Update: ");
+        itemConfirmation();
+        confirmation();
+    }
+
+    public void itemDelete(){
+        System.out.println("Enter Item id to delete");
+        itemConfirmation();
+        confirmation();
+    }
+
+    public void itemRead(){
+        Table table = new Table(9, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
+        table.setColumnWidth(0,15,20);
+        table.setColumnWidth(1,15,20);
+        table.setColumnWidth(2,15,20);
+        table.setColumnWidth(3,15,20);
+        table.setColumnWidth(4,15,20);
+        table.setColumnWidth(5,15,20);
+        table.setColumnWidth(6,15,20);
+        table.setColumnWidth(7,15,20);
+        table.setColumnWidth(8,15,20);
+
+        table.addCell(" ".repeat(2)+cyan+ "ID");
+        table.addCell(" ".repeat(2)+cyan+"CODE");
+        table.addCell(" ".repeat(2)+cyan+"Name");
+        table.addCell(" ".repeat(2)+cyan+"Unit");
+        table.addCell(" ".repeat(2)+cyan+"Qty");
+        table.addCell(" ".repeat(2)+cyan+"Price_A");
+        table.addCell(" ".repeat(2)+cyan+"Price_B");
+        table.addCell(" ".repeat(2)+cyan+"Price_C");
+        table.addCell(" ".repeat(2)+cyan+"Status");
+
+        table.addCell(" ".repeat(2)+blue+"111");
+        table.addCell(" ".repeat(2)+blue+"CSTAD1122");
+        table.addCell(" ".repeat(2)+blue+"Sting");
+        table.addCell(" ".repeat(2)+blue+"000");
+        table.addCell(" ".repeat(2)+blue+"000");
+        table.addCell(" ".repeat(2)+blue+"1.02$");
+        table.addCell(" ".repeat(2)+blue+"1.0$");
+        table.addCell(" ".repeat(2)+blue+"0.99S");
+        table.addCell(" ".repeat(2)+blue+"Active");
+        System.out.println(cyan+ table.render());
     }
 
 

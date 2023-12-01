@@ -12,6 +12,10 @@ public class Main {
     static MenuViewAdmin menuViewAdmin = new MenuViewAdmin();
     static MenuViewManager menuViewManager = new MenuViewManager();
     static MenuViewReport menuViewReport = new MenuViewReport();
+
+    // scanner
+    static Scanner scanner = new Scanner(System.in);
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         boolean check = false;
@@ -48,9 +52,40 @@ public class Main {
                             menuViewAdmin.mainMenuAdmin();
                             optionAdmin = Integer.parseInt(inputValue("  >> Choose Option Between [ 1 - 6 ] : "));
                             switch (optionAdmin){
+
+                                // Item
                                 case 1 ->{
-                                    menuView.itemMenu();
+                                    int optionItem;
+                                    do {
+                                        menuView.itemMenu();
+                                        System.out.print("Choose option(1-5): ");
+                                        optionItem = scanner.nextInt();
+                                        switch (optionItem){
+                                            case 1 -> menuView.itemStockIn();
+                                            case 2 -> {
+                                                menuView.menuItemUpdate();
+                                                System.out.println("Choose option to update(1-6): ");
+                                                int optionItemUpdate = scanner.nextInt();
+                                                switch (optionItemUpdate){
+                                                    case 1 -> menuView.itemUpdateAll();
+                                                    case 2 -> menuView.itemUpdateName();
+                                                    case 3 -> menuView.itemUpdateUint();
+                                                    case 4 -> menuView.itemUpdateQty();
+                                                    case 5 -> menuView.itemUpdateStatus();
+                                                    case 6 -> menuView.itemUpdatePrice();
+                                                    default -> System.out.println("Invalid Option Update...!");
+                                                }
+                                            }
+                                            case 3 -> menuView.itemDelete();
+                                            case 4 -> menuView.itemRead();
+                                            case 5 -> {
+                                                break;
+                                            }
+                                            default -> System.out.println("Invalid Option Item...!");
+                                        }
+                                    }while (true);
                                 }
+
                                 case 2 ->{
 
                                     int optionCustomer;

@@ -1,5 +1,4 @@
 package co.cstad;
-
 import co.cstad.view.MenuView;
 import co.cstad.view.MenuViewAdmin;
 import co.cstad.view.MenuViewManager;
@@ -25,7 +24,6 @@ public class Main {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-
 
 
         do{

@@ -4,7 +4,12 @@ import org.nocrala.tools.texttablefmt.BorderStyle;
 import org.nocrala.tools.texttablefmt.ShownBorders;
 import org.nocrala.tools.texttablefmt.Table;
 
+import java.util.Scanner;
+
+
 public class MenuView implements BoxBorder {
+
+    static Scanner scanner = new Scanner(System.in);
 
 
     //First Interface (CSTAD)
@@ -312,23 +317,23 @@ public class MenuView implements BoxBorder {
         Table table = new Table(2, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
         table.setColumnWidth(0,30,30);
         table.setColumnWidth(1,30,30);
-        table.addCell(" ".repeat(3) + cyan + "Description:");
-        table.addCell(" ".repeat(3) + cyan + "111");
-        table.addCell(" ".repeat(3)+ cyan + "Code:");
-        table.addCell(" ".repeat(3)+ cyan + "CSTAD111222");
-        table.addCell(" ".repeat(3)+ cyan + "Name:");
-        table.addCell(" ".repeat(3)+ cyan +"Hanuman Beer:");
-        table.addCell(" ".repeat(3)+ cyan +"Unit:");
-        table.addCell(" ".repeat(3)+ cyan +"0.25$");
-        table.addCell(" ".repeat(3)+ cyan +"Quantity:");
-        table.addCell(" ".repeat(3)+ cyan +"400");
-        table.addCell(" ".repeat(3)+ cyan +"Price_A:");
-        table.addCell(" ".repeat(3)+ cyan +"0.25$");
-        table.addCell(" ".repeat(3)+ cyan +"Price_B:");
-        table.addCell(" ".repeat(3)+ cyan +"0.27$");
-        table.addCell(" ".repeat(3)+ cyan +"Price_C:");
-        table.addCell(" ".repeat(3)+ cyan +"0.30$");
-        table.addCell(" ".repeat(3)+ cyan +"Status:");
+        table.addCell(" ".repeat(3) + yellow + "Description:" +reset);
+        table.addCell(" ".repeat(3) + cyan + "111" + reset);
+        table.addCell(" ".repeat(3)+ yellow + "Code:" + reset);
+        table.addCell(" ".repeat(3)+ cyan + "CSTAD111222" + reset);
+        table.addCell(" ".repeat(3)+ yellow + "Name:" + reset);
+        table.addCell(" ".repeat(3)+ cyan + "Hanuman Beer:"  + reset);
+        table.addCell(" ".repeat(3)+ yellow +"Unit:" + reset);
+        table.addCell(" ".repeat(3)+ cyan +"0.25$" + reset);
+        table.addCell(" ".repeat(3)+ yellow +"Quantity:" + reset);
+        table.addCell(" ".repeat(3)+ cyan +"400" + reset);
+        table.addCell(" ".repeat(3)+ yellow +"Price_A:" + reset);
+        table.addCell(" ".repeat(3)+ cyan +"0.25$" + reset);
+        table.addCell(" ".repeat(3)+ yellow +"Price_B:" + reset);
+        table.addCell(" ".repeat(3)+ cyan +"0.27$" + reset);
+        table.addCell(" ".repeat(3)+ yellow +"Price_C:");
+        table.addCell(" ".repeat(3)+ cyan +"0.30$" + reset);
+        table.addCell(" ".repeat(3)+ yellow +"Status:" + reset);
         table.addCell(" ".repeat(3)+ cyan +"Active" + reset);
         System.out.println( table.render());
     }
@@ -347,10 +352,15 @@ public class MenuView implements BoxBorder {
     }
 
     public void menuItemUpdate(){
-        System.out.println("Enter Item id to update: ");
-        Table table = new Table(2, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
+        System.out.print("Enter Item id to update: ");
+        int idItempUpdate = scanner.nextInt();
+        Table table = new Table(6, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
         table.setColumnWidth(0,15,30);
         table.setColumnWidth(1,15,30);
+        table.setColumnWidth(2,15,30);
+        table.setColumnWidth(3,15,30);
+        table.setColumnWidth(4,15,30);
+        table.setColumnWidth(5,15,30);
         table.addCell(" ".repeat(3)+"1.All");
         table.addCell(" ".repeat(3)+"2.Name");
         table.addCell(" ".repeat(3)+"3.Uit");
@@ -401,7 +411,8 @@ public class MenuView implements BoxBorder {
     }
 
     public void itemDelete(){
-        System.out.println("Enter Item id to delete");
+        System.out.print("Enter Item id to delete: ");
+        int idItemDelete = scanner.nextInt();
         itemConfirmation();
         confirmation();
     }
@@ -418,18 +429,18 @@ public class MenuView implements BoxBorder {
         table.setColumnWidth(7,15,20);
         table.setColumnWidth(8,15,20);
 
-        table.addCell(" ".repeat(2)+cyan+ "ID");
-        table.addCell(" ".repeat(2)+cyan+"CODE");
-        table.addCell(" ".repeat(2)+cyan+"Name");
-        table.addCell(" ".repeat(2)+cyan+"Unit");
-        table.addCell(" ".repeat(2)+cyan+"Qty");
-        table.addCell(" ".repeat(2)+cyan+"Price_A");
-        table.addCell(" ".repeat(2)+cyan+"Price_B");
-        table.addCell(" ".repeat(2)+cyan+"Price_C");
-        table.addCell(" ".repeat(2)+cyan+"Status");
+        table.addCell(" ".repeat(2)+ yellow + "ID");
+        table.addCell(" ".repeat(2)+ yellow +"CODE");
+        table.addCell(" ".repeat(2)+ yellow +"Name");
+        table.addCell(" ".repeat(2)+ yellow +"Unit");
+        table.addCell(" ".repeat(2)+ yellow +"Qty");
+        table.addCell(" ".repeat(2)+ yellow +"Price_A");
+        table.addCell(" ".repeat(2)+ yellow +"Price_B");
+        table.addCell(" ".repeat(2)+ yellow +"Price_C");
+        table.addCell(" ".repeat(2)+ yellow +"Status");
 
         table.addCell(" ".repeat(2)+blue+"111");
-        table.addCell(" ".repeat(2)+blue+"CSTAD1122");
+        table.addCell(" ".repeat(2)+blue+"CSTAD1123");
         table.addCell(" ".repeat(2)+blue+"Sting");
         table.addCell(" ".repeat(2)+blue+"000");
         table.addCell(" ".repeat(2)+blue+"000");
@@ -437,6 +448,27 @@ public class MenuView implements BoxBorder {
         table.addCell(" ".repeat(2)+blue+"1.0$");
         table.addCell(" ".repeat(2)+blue+"0.99S");
         table.addCell(" ".repeat(2)+blue+"Active");
-        System.out.println(cyan+ table.render());
+
+        table.addCell(" ".repeat(2)+blue+"222");
+        table.addCell(" ".repeat(2)+blue+"CSTAD1124");
+        table.addCell(" ".repeat(2)+blue+"Hanuman");
+        table.addCell(" ".repeat(2)+blue+"000");
+        table.addCell(" ".repeat(2)+blue+"000");
+        table.addCell(" ".repeat(2)+blue+"1.02$");
+        table.addCell(" ".repeat(2)+blue+"1.0$");
+        table.addCell(" ".repeat(2)+blue+"0.99S");
+        table.addCell(" ".repeat(2)+blue+"Active");
+
+        table.addCell(" ".repeat(2)+ blue +" ");
+        table.addCell(" ".repeat(2)+ blue +" ");
+        table.addCell(" ".repeat(2)+ blue +" ");
+        table.addCell(" ".repeat(2)+ blue +" ");
+        table.addCell(" ".repeat(2)+ blue +" ");
+        table.addCell(" ".repeat(2)+ blue +" ");
+        table.addCell(" ".repeat(2)+ blue +" ");
+        table.addCell(" ".repeat(2)+ blue +" ");
+        table.addCell(" ".repeat(2)+ blue +" ");
+
+        System.out.println(table.render());
     }
 }

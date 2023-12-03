@@ -1,8 +1,11 @@
 package co.cstad;
+
 import co.cstad.view.MenuView;
 import co.cstad.view.MenuViewAdmin;
 import co.cstad.view.MenuViewManager;
 import co.cstad.view.MenuViewReport;
+
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Main {
@@ -12,18 +15,18 @@ public class Main {
     static MenuViewReport menuViewReport = new MenuViewReport();
 
     // scanner
-    static Scanner scanner = new Scanner(System.in);
+    public static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         boolean check = false;
         menuView.startInterface();
-        try {
-            Thread.sleep(2000);
-            System.out.println("\n".repeat(20));
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            Thread.sleep(2000);
+//            System.out.println("\n".repeat(10));
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
 
 
 
@@ -34,7 +37,7 @@ public class Main {
 
             switch (option) {
 
-            // Case 1 : Log In
+                // Case 1 : Log In
                 case 1 -> {
 
                     System.out.println( " \n" + "_".repeat(50));
@@ -42,7 +45,7 @@ public class Main {
                     String password = inputValue("  => Enter Password : ");
                     System.out.println("_".repeat(50) + "\n".repeat(4));
 
-                // Admin logic
+                    // Admin logic
                     if (username.equals("admin") && password.equals("123")) {
 
                         int optionAdmin;
@@ -52,15 +55,15 @@ public class Main {
                             System.out.println("\n".repeat(3));
                             switch (optionAdmin){
 
-                                // Item start
+                                // Item
                                 case 1 ->{
                                     System.out.println(
                                             " ".repeat(50)+"██╗████████╗███████╗███╗   ███╗    ███╗   ███╗███████╗███╗   ██╗██╗   ██╗\n" +
-                                            " ".repeat(50)+"██║╚══██╔══╝██╔════╝████╗ ████║    ████╗ ████║██╔════╝████╗  ██║██║   ██║\n" +
-                                            " ".repeat(50)+"██║   ██║   █████╗  ██╔████╔██║    ██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║\n" +
-                                            " ".repeat(50)+"██║   ██║   ██╔══╝  ██║╚██╔╝██║    ██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║   ██║\n" +
-                                            " ".repeat(50)+"██║   ██║   ███████╗██║ ╚═╝ ██║    ██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝\n" +
-                                            " ".repeat(50)+"╚═╝   ╚═╝   ╚══════╝╚═╝     ╚═╝    ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝ \n\n");
+                                                    " ".repeat(50)+"██║╚══██╔══╝██╔════╝████╗ ████║    ████╗ ████║██╔════╝████╗  ██║██║   ██║\n" +
+                                                    " ".repeat(50)+"██║   ██║   █████╗  ██╔████╔██║    ██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║\n" +
+                                                    " ".repeat(50)+"██║   ██║   ██╔══╝  ██║╚██╔╝██║    ██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║   ██║\n" +
+                                                    " ".repeat(50)+"██║   ██║   ███████╗██║ ╚═╝ ██║    ██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝\n" +
+                                                    " ".repeat(50)+"╚═╝   ╚═╝   ╚══════╝╚═╝     ╚═╝    ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝ \n\n");
                                     int optionItem;
                                     do {
                                         menuView.itemMenu();
@@ -68,44 +71,10 @@ public class Main {
                                         System.out.println("\n".repeat(5));
                                         switch (optionItem){
                                             case 1 -> {
-                                                menuViewAdmin.itemStockIn();
-                                                menuView.confirmation();
-                                            }
-                                            case 1 -> {
                                                 System.out.println( "~".repeat(20) + "  ENTER NEW ITEM  " + "~".repeat(20));
                                                 menuView.itemStockIn();
                                             }
                                             case 2 -> {
-                                                menuViewAdmin.menuItemUpdate();
-                                                System.out.println("Choose option to update(1-6): ");
-                                                int optionItemUpdate = scanner.nextInt();
-                                                switch (optionItemUpdate){
-                                                    case 1 -> {
-                                                        menuViewAdmin.itemUpdateAll();
-                                                        menuView.confirmation();
-                                                    }
-                                                    case 2 -> {
-                                                        menuViewAdmin.itemUpdateName();
-                                                        menuView.confirmation();
-                                                    }
-                                                    case 3 -> {
-                                                        menuViewAdmin.itemUpdateUint();
-                                                        menuView.confirmation();
-                                                    }
-                                                    case 4 -> {
-                                                        menuViewAdmin.itemUpdateQty();
-                                                        menuView.confirmation();
-                                                    }
-                                                    case 5 -> {
-                                                        menuViewAdmin.itemUpdateStatus();
-                                                        menuView.confirmation();
-                                                    }
-                                                    case 6 -> {
-                                                        menuViewAdmin.itemUpdatePrice();
-                                                        menuView.confirmation();
-                                                    }
-                                                    default -> System.out.println("Invalid Option Update...!");
-                                                }
                                                 int optionItemUpdate;
                                                 do {
                                                     menuView.menuItemUpdate();
@@ -153,13 +122,6 @@ public class Main {
                                                     }
                                                 }while(optionItemUpdate !=9);
                                             }
-                                            case 3 -> {
-                                                menuViewAdmin.itemDelete();
-                                                menuView.confirmation();
-                                            }
-                                            case 4 -> {
-                                                menuViewAdmin.itemRead();
-                                            }
                                             case 3 ->{
                                                 menuView.itemDelete();
                                                 System.out.println("\n\n");
@@ -169,7 +131,6 @@ public class Main {
                                                 System.out.println("\n\n");
                                             }
                                             case 5 -> {
-                                                System.out.println("\n".repeat(20));
                                                 System.out.println(
                                                         " ".repeat(40)+"███████╗██╗  ██╗██╗████████╗    ██╗████████╗███████╗███╗   ███╗    ███╗   ███╗███████╗███╗   ██╗██╗   ██╗\n" +
                                                                 " ".repeat(40)+"██╔════╝╚██╗██╔╝██║╚══██╔══╝    ██║╚══██╔══╝██╔════╝████╗ ████║    ████╗ ████║██╔════╝████╗  ██║██║   ██║\n" +
@@ -183,13 +144,10 @@ public class Main {
                                         }
                                     }while (optionItem!=5);
                                 }
-                                // Item end
 
-
-                                // Costumer start
                                 case 2 ->{
                                     System.out.println(
-                                                    " ".repeat(40)+ " ██████╗██╗   ██╗███████╗████████╗ ██████╗ ███╗   ███╗███████╗██████╗     ███╗   ███╗███████╗███╗   ██╗██╗   ██╗\n" +
+                                            " ".repeat(40)+ " ██████╗██╗   ██╗███████╗████████╗ ██████╗ ███╗   ███╗███████╗██████╗     ███╗   ███╗███████╗███╗   ██╗██╗   ██╗\n" +
                                                     " ".repeat(40)+ "██╔════╝██║   ██║██╔════╝╚══██╔══╝██╔═══██╗████╗ ████║██╔════╝██╔══██╗    ████╗ ████║██╔════╝████╗  ██║██║   ██║\n" +
                                                     " ".repeat(40)+ "██║     ██║   ██║███████╗   ██║   ██║   ██║██╔████╔██║█████╗  ██████╔╝    ██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║\n" +
                                                     " ".repeat(40)+ "██║     ██║   ██║╚════██║   ██║   ██║   ██║██║╚██╔╝██║██╔══╝  ██╔══██╗    ██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║   ██║\n" +
@@ -212,72 +170,72 @@ public class Main {
 
                                             }
                                             case 3 ->{
-                                                    int updateID = Integer.parseInt(inputValue("  >> Enter Customer ID to Update : "));
-                                                    if(updateID==1){
-                                                        menuViewAdmin.readCustomer();
-                                                        int chooseUpdate;
-                                                        do{
-                                                            menuViewAdmin.optionListUp();
-                                                            chooseUpdate = Integer.parseInt(inputValue("  >> Choose Option Between [ 1 - 8 ] : "));
-                                                            System.out.println("\n".repeat(5));
-                                                            switch (chooseUpdate){
-                                                                case 1 ->{
-                                                                    menuViewAdmin.upAllCustomer();
-                                                                    menuView.confirmation();
-                                                                    System.out.print("  >> Choose [Yes/yes] OR [No/no] : ");
-                                                                    String choose = scanner.nextLine();
-                                                                    System.out.println("\n\n");
-                                                                }
-                                                                case 2 ->{
-                                                                    menuViewAdmin.upNameCustomer();
-                                                                    menuView.confirmation();
-                                                                    System.out.print("  >> Choose [Yes/yes] OR [No/no] : ");
-                                                                    String choose = scanner.nextLine();
-                                                                    System.out.println("\n\n");
-                                                                }
-                                                                case 3 ->{
-                                                                    menuViewAdmin.upAddressCustomer();
-                                                                    menuView.confirmation();
-                                                                    System.out.print("  >> Choose [Yes/yes] OR [No/no] : ");
-                                                                    String choose = scanner.nextLine();
-                                                                    System.out.println("\n\n");
-                                                                }
-                                                                case 4 ->{
-                                                                    menuViewAdmin.upContact1Customer();
-                                                                    menuView.confirmation();
-                                                                    System.out.print("  >> Choose [Yes/yes] OR [No/no] : ");
-                                                                    String choose = scanner.nextLine();
-                                                                    System.out.println("\n\n");
-                                                                }
-                                                                case 5 ->{
-                                                                    menuViewAdmin.upContact2Customer();
-                                                                    menuView.confirmation();
-                                                                    System.out.print("  >> Choose [Yes/yes] OR [No/no] : ");
-                                                                    String choose = scanner.nextLine();
-                                                                    System.out.println("\n\n");
-                                                                }
-                                                                case 6 ->{
-                                                                    menuViewAdmin.upTypeCustomer();
-                                                                    menuView.confirmation();
-                                                                    System.out.print("  >> Choose [Yes/yes] OR [No/no] : ");
-                                                                    String choose = scanner.nextLine();
-                                                                    System.out.println("\n\n");
-                                                                }
-                                                                case 7 ->{
-                                                                    System.out.println("\n\n");
-                                                                    //menuViewAdmin.upStatusCustomer();
-                                                                    //menuView.confirmation();
-                                                                }
-                                                                case 8 ->{
-
-                                                                }
-                                                                default -> {
-                                                                    System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
-                                                                    System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 5 .");
-                                                                }
+                                                int updateID = Integer.parseInt(inputValue("  >> Enter Customer ID to Update : "));
+                                                if(updateID==1){
+                                                    menuViewAdmin.readCustomer();
+                                                    int chooseUpdate;
+                                                    do{
+                                                        menuViewAdmin.optionListUp();
+                                                        chooseUpdate = Integer.parseInt(inputValue("  >> Choose Option Between [ 1 - 8 ] : "));
+                                                        System.out.println("\n".repeat(5));
+                                                        switch (chooseUpdate){
+                                                            case 1 ->{
+                                                                menuViewAdmin.upAllCustomer();
+                                                                menuView.confirmation();
+                                                                System.out.print("  >> Choose [Yes/yes] OR [No/no] : ");
+                                                                String choose = scanner.nextLine();
+                                                                System.out.println("\n\n");
                                                             }
-                                                        }while(chooseUpdate!=8);
-                                                    }
+                                                            case 2 ->{
+                                                                menuViewAdmin.upNameCustomer();
+                                                                menuView.confirmation();
+                                                                System.out.print("  >> Choose [Yes/yes] OR [No/no] : ");
+                                                                String choose = scanner.nextLine();
+                                                                System.out.println("\n\n");
+                                                            }
+                                                            case 3 ->{
+                                                                menuViewAdmin.upAddressCustomer();
+                                                                menuView.confirmation();
+                                                                System.out.print("  >> Choose [Yes/yes] OR [No/no] : ");
+                                                                String choose = scanner.nextLine();
+                                                                System.out.println("\n\n");
+                                                            }
+                                                            case 4 ->{
+                                                                menuViewAdmin.upContact1Customer();
+                                                                menuView.confirmation();
+                                                                System.out.print("  >> Choose [Yes/yes] OR [No/no] : ");
+                                                                String choose = scanner.nextLine();
+                                                                System.out.println("\n\n");
+                                                            }
+                                                            case 5 ->{
+                                                                menuViewAdmin.upContact2Customer();
+                                                                menuView.confirmation();
+                                                                System.out.print("  >> Choose [Yes/yes] OR [No/no] : ");
+                                                                String choose = scanner.nextLine();
+                                                                System.out.println("\n\n");
+                                                            }
+                                                            case 6 ->{
+                                                                menuViewAdmin.upTypeCustomer();
+                                                                menuView.confirmation();
+                                                                System.out.print("  >> Choose [Yes/yes] OR [No/no] : ");
+                                                                String choose = scanner.nextLine();
+                                                                System.out.println("\n\n");
+                                                            }
+                                                            case 7 ->{
+                                                                System.out.println("\n\n");
+                                                                //menuViewAdmin.upStatusCustomer();
+                                                                //menuView.confirmation();
+                                                            }
+                                                            case 8 ->{
+
+                                                            }
+                                                            default -> {
+                                                                System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
+                                                                System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 5 .");
+                                                            }
+                                                        }
+                                                    }while(chooseUpdate!=8);
+                                                }
 
 
 
@@ -297,11 +255,11 @@ public class Main {
                                             case 5 ->{
                                                 System.out.println(
                                                         " ".repeat(40)+"███████╗██╗  ██╗██╗████████╗     ██████╗██╗   ██╗███████╗████████╗ ██████╗ ███╗   ███╗███████╗██████╗     ███╗   ███╗███████╗███╗   ██╗██╗   ██╗\n" +
-                                                        " ".repeat(40)+"██╔════╝╚██╗██╔╝██║╚══██╔══╝    ██╔════╝██║   ██║██╔════╝╚══██╔══╝██╔═══██╗████╗ ████║██╔════╝██╔══██╗    ████╗ ████║██╔════╝████╗  ██║██║   ██║\n" +
-                                                        " ".repeat(40)+"█████╗   ╚███╔╝ ██║   ██║       ██║     ██║   ██║███████╗   ██║   ██║   ██║██╔████╔██║█████╗  ██████╔╝    ██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║\n" +
-                                                        " ".repeat(40)+"██╔══╝   ██╔██╗ ██║   ██║       ██║     ██║   ██║╚════██║   ██║   ██║   ██║██║╚██╔╝██║██╔══╝  ██╔══██╗    ██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║   ██║\n" +
-                                                        " ".repeat(40)+"███████╗██╔╝ ██╗██║   ██║       ╚██████╗╚██████╔╝███████║   ██║   ╚██████╔╝██║ ╚═╝ ██║███████╗██║  ██║    ██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝\n" +
-                                                        " ".repeat(40)+"╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝        ╚═════╝ ╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝     ╚═╝╚══════╝╚═╝  ╚═╝    ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝ \n");
+                                                                " ".repeat(40)+"██╔════╝╚██╗██╔╝██║╚══██╔══╝    ██╔════╝██║   ██║██╔════╝╚══██╔══╝██╔═══██╗████╗ ████║██╔════╝██╔══██╗    ████╗ ████║██╔════╝████╗  ██║██║   ██║\n" +
+                                                                " ".repeat(40)+"█████╗   ╚███╔╝ ██║   ██║       ██║     ██║   ██║███████╗   ██║   ██║   ██║██╔████╔██║█████╗  ██████╔╝    ██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║\n" +
+                                                                " ".repeat(40)+"██╔══╝   ██╔██╗ ██║   ██║       ██║     ██║   ██║╚════██║   ██║   ██║   ██║██║╚██╔╝██║██╔══╝  ██╔══██╗    ██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║   ██║\n" +
+                                                                " ".repeat(40)+"███████╗██╔╝ ██╗██║   ██║       ╚██████╗╚██████╔╝███████║   ██║   ╚██████╔╝██║ ╚═╝ ██║███████╗██║  ██║    ██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝\n" +
+                                                                " ".repeat(40)+"╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝        ╚═════╝ ╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝     ╚═╝╚══════╝╚═╝  ╚═╝    ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝ \n");
                                             }
                                             default -> {
                                                 System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
@@ -313,7 +271,7 @@ public class Main {
                                 }
                                 case 3 ->{
                                     System.out.println(
-                                                    " ".repeat(40)+         "██╗███╗   ██╗██╗   ██╗ ██████╗ ██╗ ██████╗███████╗    ███╗   ███╗███████╗███╗   ██╗██╗   ██╗\n" +
+                                            " ".repeat(40)+         "██╗███╗   ██╗██╗   ██╗ ██████╗ ██╗ ██████╗███████╗    ███╗   ███╗███████╗███╗   ██╗██╗   ██╗\n" +
                                                     " ".repeat(40)+        "██║████╗  ██║██║   ██║██╔═══██╗██║██╔════╝██╔════╝    ████╗ ████║██╔════╝████╗  ██║██║   ██║\n" +
                                                     " ".repeat(40)+        "██║██╔██╗ ██║██║   ██║██║   ██║██║██║     █████╗      ██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║\n" +
                                                     " ".repeat(40)+        "██║██║╚██╗██║╚██╗ ██╔╝██║   ██║██║██║     ██╔══╝      ██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║   ██║\n" +
@@ -359,41 +317,6 @@ public class Main {
 
                                 }
                                 case 4 ->{
-                                    int chooseUser;
-                                    do{
-                                        menuViewAdmin.userMenu();
-                                        chooseUser = Integer.parseInt(inputValue("  >> Choose Option Between [ 1 - 5 ] : "));
-                                        switch (chooseUser){
-                                            case 1 ->{
-                                                int invoiceID = Integer.parseInt(inputValue("  >> Enter Customer ID to Return : "));
-                                                if(invoiceID==101){
-                                                    menuView.readInvoice();
-                                                    menuView.confirmation();
-                                                    System.out.print("  >> Choose [Yes/yes] OR [No/no] : ");
-                                                    String choose = scanner.nextLine();
-                                                }
-
-                                            }
-                                            case 2 ->{
-                                                menuView.invoiceList();
-
-                                            }
-                                            case 3->{
-
-                                            }
-                                            case 4 ->{
-
-                                            }
-                                            case 5 -> {
-
-                                            }
-                                            default -> {
-                                                System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
-                                                System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 3 .");
-                                            }
-                                        }
-
-                                    }while(chooseUser!=3);
                                     System.out.println(" ".repeat(40)+"██╗   ██╗███████╗███████╗██████╗     ███╗   ███╗███████╗███╗   ██╗██╗   ██╗\n" +
                                             " ".repeat(40)+"██║   ██║██╔════╝██╔════╝██╔══██╗    ████╗ ████║██╔════╝████╗  ██║██║   ██║\n" +
                                             " ".repeat(40)+"██║   ██║███████╗█████╗  ██████╔╝    ██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║\n" +
@@ -512,9 +435,14 @@ public class Main {
                                         }
                                     } while (chooseUser != 5);
                                 }
-
-                                // Report
                                 case 5 ->{
+                                    System.out.println(" ".repeat(40)+"██████╗ ███████╗██████╗  ██████╗ ██████╗ ████████╗    ███╗   ███╗███████╗███╗   ██╗██╗   ██╗\n" +
+                                            " ".repeat(40)+"██╔══██╗██╔════╝██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝    ████╗ ████║██╔════╝████╗  ██║██║   ██║\n" +
+                                            " ".repeat(40)+"██████╔╝█████╗  ██████╔╝██║   ██║██████╔╝   ██║       ██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║\n" +
+                                            " ".repeat(40)+"██╔══██╗██╔══╝  ██╔═══╝ ██║   ██║██╔══██╗   ██║       ██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║   ██║\n" +
+                                            " ".repeat(40)+"██║  ██║███████╗██║     ╚██████╔╝██║  ██║   ██║       ██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝\n" +
+                                            " ".repeat(40)+"╚═╝  ╚═╝╚══════╝╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝       ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝ ");
+                                    int chooseReport;
                                     int optionReport;
                                     do{
                                         menuView.reportMenu();
@@ -536,39 +464,6 @@ public class Main {
                                         scanner.nextLine();
                                         scanner.nextLine();
                                     }while (optionReport != 9);
-                                    System.out.println(" ".repeat(40)+"██████╗ ███████╗██████╗  ██████╗ ██████╗ ████████╗    ███╗   ███╗███████╗███╗   ██╗██╗   ██╗\n" +
-                                            " ".repeat(40)+"██╔══██╗██╔════╝██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝    ████╗ ████║██╔════╝████╗  ██║██║   ██║\n" +
-                                            " ".repeat(40)+"██████╔╝█████╗  ██████╔╝██║   ██║██████╔╝   ██║       ██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║\n" +
-                                            " ".repeat(40)+"██╔══██╗██╔══╝  ██╔═══╝ ██║   ██║██╔══██╗   ██║       ██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║   ██║\n" +
-                                            " ".repeat(40)+"██║  ██║███████╗██║     ╚██████╔╝██║  ██║   ██║       ██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝\n" +
-                                            " ".repeat(40)+"╚═╝  ╚═╝╚══════╝╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝       ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝ ");
-                                    int chooseReport;
-                                    do {
-                                        menuView.reportMenu();
-                                        chooseReport = Integer.parseInt(inputValue("  >> Choose Option Between [ 1 - 9 ] : "));
-                                        switch (chooseReport) {
-                                            case 1 -> {}
-                                            case 2 -> {}
-                                            case 3 -> {}
-                                            case 4 -> {}
-                                            case 5 -> {}
-                                            case 6 -> {}
-                                            case 7 -> {}
-                                            case 8 -> {}
-                                            case 9 -> {
-                                                System.out.println(" ".repeat(40)+"███████╗██╗  ██╗██╗████████╗    ██████╗ ███████╗██████╗  ██████╗ ██████╗ ████████╗    ███╗   ███╗███████╗███╗   ██╗██╗   ██╗\n" +
-                                                        " ".repeat(40)+"██╔════╝╚██╗██╔╝██║╚══██╔══╝    ██╔══██╗██╔════╝██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝    ████╗ ████║██╔════╝████╗  ██║██║   ██║\n" +
-                                                        " ".repeat(40)+"█████╗   ╚███╔╝ ██║   ██║       ██████╔╝█████╗  ██████╔╝██║   ██║██████╔╝   ██║       ██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║\n" +
-                                                        " ".repeat(40)+"██╔══╝   ██╔██╗ ██║   ██║       ██╔══██╗██╔══╝  ██╔═══╝ ██║   ██║██╔══██╗   ██║       ██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║   ██║\n" +
-                                                        " ".repeat(40)+"███████╗██╔╝ ██╗██║   ██║       ██║  ██║███████╗██║     ╚██████╔╝██║  ██║   ██║       ██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝\n" +
-                                                        " ".repeat(40)+"╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝       ╚═╝  ╚═╝╚══════╝╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝       ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝ ");
-                                            }
-                                            default -> {
-                                                System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
-                                                System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 9 .");
-                                            }
-                                        }
-                                    } while (chooseReport != 9);
                                 }
                                 case 6 ->{
                                     System.out.println(" ".repeat(30) + "██████╗  █████╗  ██████╗██╗  ██╗    ██╗      ██████╗  ██████╗ ██╗███╗   ██╗    ███╗   ███╗███████╗███╗   ██╗██╗   ██╗\n" +
@@ -589,7 +484,10 @@ public class Main {
                     }
 
 
-                // Manager Logic
+
+
+
+                    // Manager Logic
                     else if (username.equals("manager") && password.equals("123")) {
                         int optionManager;
                         do{
@@ -616,7 +514,9 @@ public class Main {
 
 
 
-                // Report Logic
+
+
+                    // Report Logic
                     else if (username.equals("report") && password.equals("123")) {
                         System.out.println("\n".repeat(20));
                         menuViewReport.mainMenuReport();
@@ -645,14 +545,14 @@ public class Main {
                 }
 
 
-            // Case 2 : Display Information About Us
+                // Case 2 : Display Information About Us
                 case 2 -> {
                     System.out.println("\n".repeat(20));
                     menuView.menuAboutUs();
 
                 }
 
-            // Case 3 : Exit Program
+                // Case 3 : Exit Program
                 case 3 -> {
                     System.out.println(" ".repeat(60) + "██████╗ ██╗   ██╗███████╗    ██████╗ ██╗   ██╗███████╗\n" +
                             " ".repeat(60) + "██╔══██╗╚██╗ ██╔╝██╔════╝    ██╔══██╗╚██╗ ██╔╝██╔════╝\n" +

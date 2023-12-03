@@ -6,7 +6,7 @@ import org.nocrala.tools.texttablefmt.Table;
 
 import java.util.Scanner;
 
-import static co.cstad.Main.scanner;
+
 
 public class MenuView implements BoxBorder {
     Scanner scanner = new Scanner(System.in);

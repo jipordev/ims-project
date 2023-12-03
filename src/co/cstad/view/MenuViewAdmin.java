@@ -25,7 +25,7 @@ public class MenuViewAdmin implements BoxBorder {
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(28) + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
         System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + " ".repeat(28) + cyan + VERTICAL_BORDER);
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(6) + yellow + " ██████╗ ██████╗ " + reset + " ".repeat(5) + cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
-        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + red + "  1 > ITEM  " + " ".repeat(16) + cyan + VERTICAL_BORDER);
+        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  1 > ITEM  " + " ".repeat(16) + cyan + VERTICAL_BORDER);
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(6) + yellow + "██╔════╝ ╚════██╗" + reset + " ".repeat(5) + cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
         System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  2 > CUSTOMER " + " ".repeat(13) + cyan + VERTICAL_BORDER);
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(6) + yellow + "██║  ███╗ █████╔╝" + reset + " ".repeat(5) + cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
@@ -434,6 +434,7 @@ public class MenuViewAdmin implements BoxBorder {
 
 
 
+
     // User
     public void userMenu() {
         System.out.print(cyan);
@@ -466,6 +467,262 @@ public class MenuViewAdmin implements BoxBorder {
         System.out.println(BOTTOM_LEFT_CORNER + HORIZONTAL_BORDER.repeat(62) + BOTTOM_RIGHT_CORNER);
         System.out.print(reset);
     }
+    public void optionListUser(){
+        Table table = new Table(4, BorderStyle.UNICODE_BOX,ShownBorders.SURROUND);
+        table.setColumnWidth(0,20,20);
+        table.setColumnWidth(1,20,20);
+        table.setColumnWidth(2,20,20);
+        table.setColumnWidth(3,20,20);
+
+        table.addCell(yellow +"  1 > Admin " + reset  );
+        table.addCell(yellow +"  2 > Manager " + reset  );
+        table.addCell(yellow +"  3 > Report " + reset  );
+        table.addCell(yellow +"  4 > Back  " + reset  );
+        System.out.print(table.render());
+        System.out.println("\n");
+
+    }
+    public void inputUserList(){
+        Table table = new Table(1, BorderStyle.UNICODE_BOX_DOUBLE_BORDER,ShownBorders.SURROUND);
+        table.setColumnWidth(0,40,50);
+
+
+        System.out.println(green + "_".repeat(50) + reset);
+        System.out.print("Enter UserName : ");
+        String des = scanner.nextLine();
+        System.out.print("Enter Address : ");
+        double unit = scanner.nextDouble();
+        System.out.print("Enter Email : ");
+        int qty = scanner.nextInt();
+        System.out.print("Enter Contact : ");
+        int priceA = scanner.nextInt();
+        System.out.print("Enter Password : ");
+        int priceB = scanner.nextInt();
+        System.out.print("Enter Confirm Password : ");
+        int priceC = scanner.nextInt();
+        System.out.println(green + "_".repeat(50) + reset + "\n");
+
+
+        table.addCell(yellow +"  - Description Item " + reset  + " ".repeat(0) + ": " + des);
+        table.addCell(yellow +"  - Unit Item " + reset  + " ".repeat(7) + ": " + unit);
+        table.addCell(yellow +"  - Quantity Item " + reset  + " ".repeat(3) + ": " + qty);
+        table.addCell(yellow +"  - Price_A  Item " + reset  + " ".repeat(3) + ": " + priceA);
+        table.addCell(yellow +"  - Price_B  Item " + reset  + " ".repeat(3) + ": " + priceB);
+        table.addCell(yellow +"  - Price_C  Item " + reset + " ".repeat(3) + ": " + priceC );
+        System.out.print(table.render());
+        System.out.println("\n");
+
+    }
+    public void readUser(){
+        Table table = new Table(7, BorderStyle.UNICODE_BOX,ShownBorders.ALL);
+        table.setColumnWidth(0,15,25);
+        table.setColumnWidth(1,20,50);
+        table.setColumnWidth(2,20,50);
+        table.setColumnWidth(3,20,50);
+        table.setColumnWidth(4,20,50);
+        table.setColumnWidth(5,20,50);
+        table.setColumnWidth(6,20,50);
+
+
+
+
+
+        table.addCell(yellow +"   ID  " + reset);
+        table.addCell(yellow +"   Role  " + reset  );
+        table.addCell(yellow +"   Name  " + reset);
+        table.addCell(yellow +"   Address  "+ reset );
+        table.addCell(yellow +"   Email  "+ reset );
+        table.addCell(yellow +"   Contact  " + reset );
+        table.addCell(yellow +"   Password   "+ reset );
+
+
+
+        table.addCell("   101  ");
+        table.addCell("   Admin  ");
+        table.addCell("   Delo  ");
+        table.addCell("   #PP CAMBODIA ");
+        table.addCell("   delo11@gmail.com  ");
+        table.addCell("   010 199 000 ");
+        table.addCell("   123  ");
+        table.addCell("   201  ");
+        table.addCell("   Manager  ");
+        table.addCell("   Java ");
+        table.addCell("   #PP CAMBODIA ");
+        table.addCell("   java111@gmail.com  ");
+        table.addCell("   010 099 200 ");
+        table.addCell("   1234  ");
+
+
+        table.addCell("     ");
+        table.addCell("     ");
+        table.addCell("     ");
+        table.addCell("     ");
+        table.addCell("     ");
+        table.addCell("     ");
+        table.addCell("     ");
+
+        System.out.print(table.render());
+        System.out.println("\n");
+        System.out.print("  >> Choose [Yes/yes] OR [No/no] : ");
+        String choose = scanner.nextLine();
+
+
+    }
+    public void optionListUpUser(){
+        Table table = new Table(3, BorderStyle.UNICODE_BOX,ShownBorders.SURROUND);
+        table.setColumnWidth(0,20,20);
+        table.setColumnWidth(1,20,20);
+        table.setColumnWidth(2,20,20);
+        table.setColumnWidth(3,20,20);
+
+        table.addCell(yellow +"  1 > ALL " + reset  );
+        table.addCell(yellow +"  2 > USER NAME " + reset  );
+        table.addCell(yellow +"  3 > PASSWORD " + reset  );
+        table.addCell(yellow +"  4 > ROLE " + reset  );
+        table.addCell(yellow +"  5 > STATUS " + reset  );
+        table.addCell(yellow +"  6 > EXIT " + reset  );
+        System.out.print(table.render());
+        System.out.println("\n");
+
+    }
+
+    public void userUpdateAll(){
+        Table table = new Table(1, BorderStyle.UNICODE_BOX_DOUBLE_BORDER,ShownBorders.SURROUND);
+        table.setColumnWidth(0,50,200);
+
+
+        System.out.println(green + "_".repeat(50) + reset);
+        System.out.println("Enter New User Name : ");
+        String des = scanner.nextLine();
+        System.out.println("Enter New Role : ");
+        String unit = scanner.nextLine();
+        System.out.println("Enter New Status : ");
+        String qty = scanner.nextLine();
+        System.out.println("Enter New Password : ");
+        String priceA = scanner.nextLine();
+        System.out.println("Enter New Confirm Password : ");
+        String priceB = scanner.nextLine();
+
+        System.out.println(green + "_".repeat(50) + reset + "\n");
+
+
+        table.addCell(yellow +"  - User Name " + reset  + " ".repeat(0) + ": " + des);
+        table.addCell(yellow +"  - Role " + reset  + " ".repeat(7) + ": " + unit);
+        table.addCell(yellow +"  - Status " + reset  + " ".repeat(3) + ": " + qty);
+        table.addCell(yellow +"  - Password " + reset  + " ".repeat(3) + ": " + priceA);
+
+        System.out.print(table.render());
+        System.out.println("\n");
+
+
+    }
+    public void userUpdateName(){
+        Table table = new Table(1, BorderStyle.UNICODE_BOX_DOUBLE_BORDER,ShownBorders.SURROUND);
+        table.setColumnWidth(0,50,200);
+
+
+        System.out.println(green + "_".repeat(50) + reset);
+        System.out.println("Enter New User Name : ");
+        String des = scanner.nextLine();
+        System.out.println(green + "_".repeat(50) + reset + "\n");
+
+
+        table.addCell(yellow +"  - User Name " + reset  + " ".repeat(0) + ": " + des);
+        table.addCell(yellow +"  - Role " + reset  + " ".repeat(7) + ": " + "Admin");
+        table.addCell(yellow +"  - Status " + reset  + " ".repeat(3) + ": " + "Active");
+        table.addCell(yellow +"  - Password " + reset  + " ".repeat(3) + ": " + "123");
+
+
+        System.out.print(table.render());
+        System.out.println("\n");
+
+    }
+
+    public void userUpdateRole(){
+        Table table = new Table(1, BorderStyle.UNICODE_BOX_DOUBLE_BORDER,ShownBorders.SURROUND);
+        table.setColumnWidth(0,50,200);
+
+
+        System.out.println(green + "_".repeat(50) + reset);
+        System.out.println("Enter New User Role : ");
+        String des = scanner.nextLine();
+        System.out.println(green + "_".repeat(50) + reset + "\n");
+
+
+        table.addCell(yellow +"  - User Name " + reset  + " ".repeat(0) + ": " + "DaJa");
+        table.addCell(yellow +"  - Role " + reset  + " ".repeat(7) + ": " + des);
+        table.addCell(yellow +"  - Status " + reset  + " ".repeat(3) + ": " + "Active");
+        table.addCell(yellow +"  - Password " + reset  + " ".repeat(3) + ": " + "123");
+
+
+        System.out.print(table.render());
+        System.out.println("\n");
+
+    }
+
+    public void userUpdatePassword(){
+        Table table = new Table(1, BorderStyle.UNICODE_BOX_DOUBLE_BORDER,ShownBorders.SURROUND);
+        table.setColumnWidth(0,50,200);
+
+
+        System.out.println(green + "_".repeat(50) + reset);
+        System.out.println("Enter New User Password : ");
+        String des = scanner.nextLine();
+        System.out.println(green + "_".repeat(50) + reset + "\n");
+
+
+        table.addCell(yellow +"  - User Name " + reset  + " ".repeat(0) + ": " + "Daja" );
+        table.addCell(yellow +"  - Role " + reset  + " ".repeat(7) + ": " + "Admin");
+        table.addCell(yellow +"  - Status " + reset  + " ".repeat(3) + ": " + "Active");
+        table.addCell(yellow +"  - Password " + reset  + " ".repeat(3) + ": " + des);
+
+
+        System.out.print(table.render());
+        System.out.println("\n");
+
+
+
+    }
+
+    public void userUpdateStatus(){
+        Table table = new Table(1, BorderStyle.UNICODE_BOX_DOUBLE_BORDER,ShownBorders.SURROUND);
+        table.setColumnWidth(0,50,200);
+
+
+        System.out.println(green + "_".repeat(50) + reset);
+        System.out.println("Enter New User Status : ");
+        String des = scanner.nextLine();
+        System.out.println(green + "_".repeat(50) + reset + "\n");
+
+
+        table.addCell(yellow +"  - User Name " + reset  + " ".repeat(0) + ": " + "Daja");
+        table.addCell(yellow +"  - Role " + reset  + " ".repeat(7) + ": " + "Admin");
+        table.addCell(yellow +"  - Status " + reset  + " ".repeat(3) + ": " + des);
+        table.addCell(yellow +"  - Password " + reset  + " ".repeat(3) + ": " + "123");
+
+
+        System.out.print(table.render());
+        System.out.println("\n");
+
+
+    }
+    public void disUser(){
+        Table table = new Table(1, BorderStyle.UNICODE_BOX,ShownBorders.SURROUND);
+        table.setColumnWidth(0,50,200);
+
+        table.addCell(yellow +"  - User ID : " + reset  + " ".repeat(9) +"101");
+        table.addCell(yellow +"  - User Role : " + reset  + " ".repeat(9) +"Admin");
+        table.addCell(yellow +"  - User Name : " + reset  + " ".repeat(7) + "Daja");
+        table.addCell(yellow +"  - User Address : " + reset  + " ".repeat(4) + "#PP - CAMBODIA");
+        table.addCell(yellow +"  - User Contact : " + reset  + " ".repeat(2) + "01234444");
+        table.addCell(yellow +"  - User Password : " + reset  + " ".repeat(2) + "123");
+
+        System.out.print(table.render());
+        System.out.println("\n");
+
+    }
+
+
 
 
 }

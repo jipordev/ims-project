@@ -4,39 +4,43 @@ import org.nocrala.tools.texttablefmt.BorderStyle;
 import org.nocrala.tools.texttablefmt.ShownBorders;
 import org.nocrala.tools.texttablefmt.Table;
 
-public class MenuView implements BoxBorder {
+import java.util.Scanner;
 
+import static co.cstad.Main.scanner;
+
+public class MenuView implements BoxBorder {
+    Scanner scanner = new Scanner(System.in);
 
     //First Interface (CSTAD)
     public void startInterface() {
-        for (int i = 0; i <= 100; i+=2) {
-            int totalBlocks = 50;
-            int blocksToShow = (i * totalBlocks) / 100;
-            System.out.print(" ".repeat(20) + " Loading [ " + i + "% ]");
-            System.out.print(" ".repeat(10) + getProgressBar(blocksToShow, totalBlocks) + "\r");
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        }
+//        for (int i = 0; i <= 100; i+=2) {
+//            int totalBlocks = 50;
+//            int blocksToShow = (i * totalBlocks) / 100;
+//            System.out.print(" ".repeat(20) + " Loading [ " + i + "% ]");
+//            System.out.print(" ".repeat(10) + getProgressBar(blocksToShow, totalBlocks) + "\r");
+//            try {
+//                Thread.sleep(100);
+//            } catch (InterruptedException e) {
+//                throw new RuntimeException(e);
+//            }
+//        }
+        System.out.println("\n".repeat(5));
         System.out.print(cyan);
-
-        System.out.println(TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(72) + TOP_RIGHT_CORNER);
-        System.out.println(VERTICAL_BORDER + SPACE + TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(68) + TOP_RIGHT_CORNER + SPACE + VERTICAL_BORDER);
-        System.out.println(VERTICAL_BORDER + SPACE + VERTICAL_BORDER + SPACE.repeat(4) + TOP_LEFT_CORNER + TOP_RIGHT_CORNER + SPACE.repeat(56) + TOP_LEFT_CORNER + TOP_RIGHT_CORNER + SPACE.repeat(4) + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
-        System.out.println(VERTICAL_BORDER + SPACE + VERTICAL_BORDER + SPACE.repeat(2) + TOP_LEFT_CORNER + TOP_RIGHT_CORNER + VERTICAL_BORDER + VERTICAL_BORDER + TOP_LEFT_CORNER + TOP_RIGHT_CORNER + SPACE.repeat(6) + magenta + " ██████╗███████╗████████╗ █████╗ ██████╗ " + cyan + SPACE.repeat(5) + TOP_LEFT_CORNER + TOP_RIGHT_CORNER + VERTICAL_BORDER + VERTICAL_BORDER + TOP_LEFT_CORNER + TOP_RIGHT_CORNER + SPACE.repeat(2) + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
-        System.out.println(VERTICAL_BORDER + SPACE + VERTICAL_BORDER + SPACE.repeat(2) + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + SPACE.repeat(6) + magenta + "██╔════╝██╔════╝╚══██╔══╝██╔══██╗██╔══██╗" + cyan + SPACE.repeat(5) + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + SPACE.repeat(2) + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
-        System.out.println(VERTICAL_BORDER + SPACE + VERTICAL_BORDER + SPACE.repeat(2) + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + SPACE.repeat(6) + magenta + "██║     ███████╗   ██║   ███████║██║  ██║" + cyan + SPACE.repeat(5) + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + SPACE.repeat(2) + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
-        System.out.println(VERTICAL_BORDER + SPACE + VERTICAL_BORDER + SPACE.repeat(2) + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + SPACE.repeat(6) + magenta + "██║     ╚════██║   ██║   ██╔══██║██║  ██║" + cyan + SPACE.repeat(5) + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + SPACE.repeat(2) + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
-        System.out.println(VERTICAL_BORDER + SPACE + VERTICAL_BORDER + SPACE.repeat(2) + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + SPACE.repeat(6) + magenta + "╚██████╗███████║   ██║   ██║  ██║██████╔╝" + cyan + SPACE.repeat(5) + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + SPACE.repeat(2) + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
-        System.out.println(VERTICAL_BORDER + SPACE + VERTICAL_BORDER + SPACE.repeat(2) + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + SPACE.repeat(6) + magenta + " ╚═════╝╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═════╝ " + cyan + SPACE.repeat(5) + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + SPACE.repeat(2) + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
-        System.out.println(VERTICAL_BORDER + SPACE + VERTICAL_BORDER + SPACE.repeat(2) + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + SPACE.repeat(6) + magenta +HORIZONTAL_BORDER.repeat(41) + cyan + SPACE.repeat(5) + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + SPACE.repeat(2) + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
-        System.out.println(VERTICAL_BORDER + SPACE + VERTICAL_BORDER + SPACE.repeat(2) + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + SPACE.repeat(6) + magenta + "CENTER OF SCIENCE TECHNOLOGY AND ADVANCED" + cyan + SPACE.repeat(5) + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + SPACE.repeat(2) + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
-        System.out.println(VERTICAL_BORDER + SPACE + VERTICAL_BORDER + SPACE.repeat(2) + BOTTOM_LEFT_CORNER + BOTTOM_RIGHT_CORNER + VERTICAL_BORDER + VERTICAL_BORDER + BOTTOM_LEFT_CORNER + BOTTOM_RIGHT_CORNER + SPACE.repeat(21) + magenta + "DEVELOPMENT" + cyan + SPACE.repeat(20) + BOTTOM_LEFT_CORNER + BOTTOM_RIGHT_CORNER + VERTICAL_BORDER + VERTICAL_BORDER + BOTTOM_LEFT_CORNER + BOTTOM_RIGHT_CORNER + SPACE.repeat(2) + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
-        System.out.println(VERTICAL_BORDER + SPACE + VERTICAL_BORDER + SPACE.repeat(4) +  BOTTOM_LEFT_CORNER + BOTTOM_RIGHT_CORNER + SPACE.repeat(56) + BOTTOM_LEFT_CORNER + BOTTOM_RIGHT_CORNER + SPACE.repeat(4) + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
-        System.out.println(VERTICAL_BORDER + SPACE + BOTTOM_LEFT_CORNER + HORIZONTAL_BORDER.repeat(68) + BOTTOM_RIGHT_CORNER + SPACE + VERTICAL_BORDER);
-        System.out.println(BOTTOM_LEFT_CORNER + HORIZONTAL_BORDER.repeat(72) + BOTTOM_RIGHT_CORNER);
+        System.out.println(SPACE.repeat(50) + TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(72) + TOP_RIGHT_CORNER);
+        System.out.println(SPACE.repeat(50) + VERTICAL_BORDER + SPACE + TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(68) + TOP_RIGHT_CORNER + SPACE + VERTICAL_BORDER);
+        System.out.println(SPACE.repeat(50) + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + SPACE.repeat(4) + TOP_LEFT_CORNER + TOP_RIGHT_CORNER + SPACE.repeat(56) + TOP_LEFT_CORNER + TOP_RIGHT_CORNER + SPACE.repeat(4) + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
+        System.out.println(SPACE.repeat(50) +VERTICAL_BORDER + SPACE + VERTICAL_BORDER + SPACE.repeat(2) + TOP_LEFT_CORNER + TOP_RIGHT_CORNER + VERTICAL_BORDER + VERTICAL_BORDER + TOP_LEFT_CORNER + TOP_RIGHT_CORNER + SPACE.repeat(6) + magenta + " ██████╗███████╗████████╗ █████╗ ██████╗ " + cyan + SPACE.repeat(5) + TOP_LEFT_CORNER + TOP_RIGHT_CORNER + VERTICAL_BORDER + VERTICAL_BORDER + TOP_LEFT_CORNER + TOP_RIGHT_CORNER + SPACE.repeat(2) + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
+        System.out.println(SPACE.repeat(50) +VERTICAL_BORDER + SPACE + VERTICAL_BORDER + SPACE.repeat(2) + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + SPACE.repeat(6) + magenta + "██╔════╝██╔════╝╚══██╔══╝██╔══██╗██╔══██╗" + cyan + SPACE.repeat(5) + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + SPACE.repeat(2) + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
+        System.out.println(SPACE.repeat(50) +VERTICAL_BORDER + SPACE + VERTICAL_BORDER + SPACE.repeat(2) + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + SPACE.repeat(6) + magenta + "██║     ███████╗   ██║   ███████║██║  ██║" + cyan + SPACE.repeat(5) + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + SPACE.repeat(2) + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
+        System.out.println(SPACE.repeat(50) +VERTICAL_BORDER + SPACE + VERTICAL_BORDER + SPACE.repeat(2) + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + SPACE.repeat(6) + magenta + "██║     ╚════██║   ██║   ██╔══██║██║  ██║" + cyan + SPACE.repeat(5) + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + SPACE.repeat(2) + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
+        System.out.println(SPACE.repeat(50) +VERTICAL_BORDER + SPACE + VERTICAL_BORDER + SPACE.repeat(2) + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + SPACE.repeat(6) + magenta + "╚██████╗███████║   ██║   ██║  ██║██████╔╝" + cyan + SPACE.repeat(5) + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + SPACE.repeat(2) + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
+        System.out.println(SPACE.repeat(50) +VERTICAL_BORDER + SPACE + VERTICAL_BORDER + SPACE.repeat(2) + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + SPACE.repeat(6) + magenta + " ╚═════╝╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═════╝ " + cyan + SPACE.repeat(5) + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + SPACE.repeat(2) + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
+        System.out.println(SPACE.repeat(50) +VERTICAL_BORDER + SPACE + VERTICAL_BORDER + SPACE.repeat(2) + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + SPACE.repeat(6) + magenta +HORIZONTAL_BORDER.repeat(41) + cyan + SPACE.repeat(5) + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + SPACE.repeat(2) + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
+        System.out.println(SPACE.repeat(50) +VERTICAL_BORDER + SPACE + VERTICAL_BORDER + SPACE.repeat(2) + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + SPACE.repeat(6) + magenta + "CENTER OF SCIENCE TECHNOLOGY AND ADVANCED" + cyan + SPACE.repeat(5) + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + VERTICAL_BORDER + SPACE.repeat(2) + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
+        System.out.println(SPACE.repeat(50) +VERTICAL_BORDER + SPACE + VERTICAL_BORDER + SPACE.repeat(2) + BOTTOM_LEFT_CORNER + BOTTOM_RIGHT_CORNER + VERTICAL_BORDER + VERTICAL_BORDER + BOTTOM_LEFT_CORNER + BOTTOM_RIGHT_CORNER + SPACE.repeat(21) + magenta + "DEVELOPMENT" + cyan + SPACE.repeat(20) + BOTTOM_LEFT_CORNER + BOTTOM_RIGHT_CORNER + VERTICAL_BORDER + VERTICAL_BORDER + BOTTOM_LEFT_CORNER + BOTTOM_RIGHT_CORNER + SPACE.repeat(2) + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
+        System.out.println(SPACE.repeat(50) +VERTICAL_BORDER + SPACE + VERTICAL_BORDER + SPACE.repeat(4) +  BOTTOM_LEFT_CORNER + BOTTOM_RIGHT_CORNER + SPACE.repeat(56) + BOTTOM_LEFT_CORNER + BOTTOM_RIGHT_CORNER + SPACE.repeat(4) + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
+        System.out.println(SPACE.repeat(50) +VERTICAL_BORDER + SPACE + BOTTOM_LEFT_CORNER + HORIZONTAL_BORDER.repeat(68) + BOTTOM_RIGHT_CORNER + SPACE + VERTICAL_BORDER);
+        System.out.println(SPACE.repeat(50) +BOTTOM_LEFT_CORNER + HORIZONTAL_BORDER.repeat(72) + BOTTOM_RIGHT_CORNER);
         System.out.print(reset);
     }
 
@@ -306,137 +310,333 @@ public class MenuView implements BoxBorder {
         System.out.println(BOTTOM_LEFT_CORNER + HORIZONTAL_BORDER.repeat(40) + BOTTOM_RIGHT_CORNER);
     }
 
-    public void itemConfirmation(){
-        System.out.println();
-        Table table = new Table(2, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
-        table.setColumnWidth(0,30,30);
-        table.setColumnWidth(1,30,30);
-        table.addCell(" ".repeat(3) + cyan + "Description:");
-        table.addCell(" ".repeat(3) + cyan + "111");
-        table.addCell(" ".repeat(3)+ cyan + "Code:");
-        table.addCell(" ".repeat(3)+ cyan + "CSTAD111222");
-        table.addCell(" ".repeat(3)+ cyan + "Name:");
-        table.addCell(" ".repeat(3)+ cyan +"Hanuman Beer:");
-        table.addCell(" ".repeat(3)+ cyan +"Unit:");
-        table.addCell(" ".repeat(3)+ cyan +"0.25$");
-        table.addCell(" ".repeat(3)+ cyan +"Quantity:");
-        table.addCell(" ".repeat(3)+ cyan +"400");
-        table.addCell(" ".repeat(3)+ cyan +"Price_A:");
-        table.addCell(" ".repeat(3)+ cyan +"0.25$");
-        table.addCell(" ".repeat(3)+ cyan +"Price_B:");
-        table.addCell(" ".repeat(3)+ cyan +"0.27$");
-        table.addCell(" ".repeat(3)+ cyan +"Price_C:");
-        table.addCell(" ".repeat(3)+ cyan +"0.30$");
-        table.addCell(" ".repeat(3)+ cyan +"Status:");
-        table.addCell(" ".repeat(3)+ cyan +"Active" + reset);
-        System.out.println( table.render());
-    }
+
 
     public void itemStockIn(){
-        System.out.println("Enter Description:");
-        System.out.println("Enter Unit:");
-        System.out.println("Enter Quantity:");
-        System.out.println("Enter Capacity:");
-        System.out.println("Enter Price_A:");
-        System.out.println("Enter Price_B:");
-        System.out.println("Enter Price_C:");
-        System.out.println();
-        itemConfirmation();
+        Table table = new Table(1, BorderStyle.UNICODE_BOX_DOUBLE_BORDER,ShownBorders.SURROUND);
+        table.setColumnWidth(0,50,200);
+
+
+        System.out.println(green + "_".repeat(50) + reset);
+        System.out.print("Enter Description : ");
+        String des = scanner.nextLine();
+        System.out.print("Enter Unit : ");
+        int unit = scanner.nextInt();
+        System.out.print("Enter Quantity : ");
+        int qty = scanner.nextInt();
+        System.out.print("Enter Price_A : ");
+        double priceA = scanner.nextDouble();
+        System.out.print("Enter Price_B : ");
+        double priceB = scanner.nextDouble();
+        System.out.print("Enter Price_C : ");
+        double priceC = scanner.nextDouble();
+        System.out.println(green + "_".repeat(50) + reset + "\n");
+
+
+        table.addCell(yellow +"  - Description Item " + reset  + " ".repeat(0) + ": " + des);
+        table.addCell(yellow +"  - Unit Item " + reset  + " ".repeat(7) + ": " + unit);
+        table.addCell(yellow +"  - Quantity Item " + reset  + " ".repeat(3) + ": " + qty);
+        table.addCell(yellow +"  - Price_A  Item " + reset  + " ".repeat(3) + ": " + priceA);
+        table.addCell(yellow +"  - Price_B  Item " + reset  + " ".repeat(3) + ": " + priceB);
+        table.addCell(yellow +"  - Price_C  Item " + reset + " ".repeat(3) + ": " + priceC );
+        System.out.print(table.render());
+        System.out.println("\n");
         confirmation();
+        scanner.nextLine();
+        System.out.print("  >> Choose [Yes/yes] OR [No/no] : ");
+        String choose = scanner.nextLine();
+
     }
 
     public void menuItemUpdate(){
-        System.out.println("Enter Item id to update: ");
-        Table table = new Table(2, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
-        table.setColumnWidth(0,15,30);
-        table.setColumnWidth(1,15,30);
-        table.addCell(" ".repeat(3)+"1.All");
-        table.addCell(" ".repeat(3)+"2.Name");
-        table.addCell(" ".repeat(3)+"3.Uit");
-        table.addCell(" ".repeat(3)+"4.Qty");
-        table.addCell(" ".repeat(3)+"5.Status");
-        table.addCell(" ".repeat(3)+"6.Price");
-        System.out.println(table.render());
+        Table table = new Table(3, BorderStyle.UNICODE_BOX,ShownBorders.SURROUND);
+        table.setColumnWidth(0,25,25);
+        table.setColumnWidth(1,25,25);
+        table.setColumnWidth(2,25,25);
+
+        table.addCell(yellow +"  1 > ALL " + reset  );
+        table.addCell(yellow +"  2 > DESCRIPTION " + reset  );
+        table.addCell(yellow +"  3 > UNIT " + reset  );
+        table.addCell(yellow +"  4 > QUANTITY " + reset  );
+        table.addCell(yellow +"  5 > PRICE_A " + reset  );
+        table.addCell(yellow +"  6 > PRICE_B " + reset  );
+        table.addCell(yellow +"  7 > PRICE_C " + reset  );
+        table.addCell(yellow +"  8 > STATUS " + reset  );
+        table.addCell(yellow +"  9 > EXIT " + reset  );
+        System.out.print(table.render());
+        System.out.println("\n");
+
     }
 
     public void itemUpdateAll(){
-        System.out.println("Enter New Description:");
-        System.out.println("Enter New Unit:");
-        System.out.println("Enter New Quantity:");
-        System.out.println("Enter New Capacity:");
-        System.out.println("Enter New Price_A:");
-        System.out.println("Enter New Price_B:");
-        System.out.println("Enter New Price_C:");
+        Table table = new Table(1, BorderStyle.UNICODE_BOX_DOUBLE_BORDER,ShownBorders.SURROUND);
+        table.setColumnWidth(0,50,200);
+
+
+        System.out.println(green + "_".repeat(50) + reset);
+        System.out.print("Enter Description : ");
+        String des = scanner.nextLine();
+        System.out.print("Enter Unit : ");
+        int unit = scanner.nextInt();
+        System.out.print("Enter Quantity : ");
+        int qty = scanner.nextInt();
+        System.out.print("Enter Price_A : ");
+        double priceA = scanner.nextDouble();
+        System.out.print("Enter Price_B : ");
+        double priceB = scanner.nextDouble();
+        System.out.print("Enter Price_C : ");
+        double priceC = scanner.nextDouble();
+        System.out.println(green + "_".repeat(50) + reset + "\n");
+
+
+        table.addCell(yellow +"  - Description Item " + reset  + " ".repeat(0) + ": " + des);
+        table.addCell(yellow +"  - Unit Item " + reset  + " ".repeat(7) + ": " + unit);
+        table.addCell(yellow +"  - Quantity Item " + reset  + " ".repeat(3) + ": " + qty);
+        table.addCell(yellow +"  - Price_A  Item " + reset  + " ".repeat(3) + ": " + priceA);
+        table.addCell(yellow +"  - Price_B  Item " + reset  + " ".repeat(3) + ": " + priceB);
+        table.addCell(yellow +"  - Price_C  Item " + reset + " ".repeat(3) + ": " + priceC );
+        System.out.print(table.render());
+        System.out.println("\n");
+        confirmation();
+        scanner.nextLine();
+        System.out.print("  >> Choose [Yes/yes] OR [No/no] : ");
+        String choose = scanner.nextLine();
+
     }
 
-    public void itemUpdateName(){
-        System.out.print("Enter New Item Name to Update: ");
-        itemConfirmation();
+    public void itemUpdateDes(){
+        Table table = new Table(1, BorderStyle.UNICODE_BOX_DOUBLE_BORDER,ShownBorders.SURROUND);
+        table.setColumnWidth(0,50,200);
+
+
+        System.out.println(green + "_".repeat(50) + reset);
+        System.out.print("Enter Description : ");
+        String des = scanner.nextLine();
+        System.out.println(green + "_".repeat(50) + reset + "\n");
+
+
+        table.addCell(yellow +"  - Description Item " + reset  + " ".repeat(0) + ": " + des);
+        table.addCell(yellow +"  - Unit Item " + reset  + " ".repeat(7) + ": " + "10");
+        table.addCell(yellow +"  - Quantity Item " + reset  + " ".repeat(3) + ": " + "23");
+        table.addCell(yellow +"  - Price_A  Item " + reset  + " ".repeat(3) + ": " + "10");
+        table.addCell(yellow +"  - Price_B  Item " + reset  + " ".repeat(3) + ": " + "8");
+        table.addCell(yellow +"  - Price_C  Item " + reset + " ".repeat(3) + ": " + "7" );
+        System.out.print(table.render());
+        System.out.println("\n");
         confirmation();
+        scanner.nextLine();
+        System.out.print("  >> Choose [Yes/yes] OR [No/no] : ");
+        String choose = scanner.nextLine();
+
     }
 
-    public void itemUpdateUint(){
-        System.out.print("Enter New Item Unit to Update: ");
-        itemConfirmation();
+    public void itemUpdateUnit(){
+        Table table = new Table(1, BorderStyle.UNICODE_BOX_DOUBLE_BORDER,ShownBorders.SURROUND);
+        table.setColumnWidth(0,50,200);
+
+
+        System.out.println(green + "_".repeat(50) + reset);
+        System.out.print("Enter Unit : ");
+        int unit= scanner.nextInt();
+        System.out.println(green + "_".repeat(50) + reset + "\n");
+
+
+        table.addCell(yellow +"  - Description Item " + reset  + " ".repeat(0) + ": " + "Sting");
+        table.addCell(yellow +"  - Unit Item " + reset  + " ".repeat(7) + ": " + unit);
+        table.addCell(yellow +"  - Quantity Item " + reset  + " ".repeat(3) + ": " + "23");
+        table.addCell(yellow +"  - Price_A  Item " + reset  + " ".repeat(3) + ": " + "10");
+        table.addCell(yellow +"  - Price_B  Item " + reset  + " ".repeat(3) + ": " + "8");
+        table.addCell(yellow +"  - Price_C  Item " + reset + " ".repeat(3) + ": " + "7" );
+        System.out.print(table.render());
+        System.out.println("\n");
         confirmation();
+        scanner.nextLine();
+        System.out.print("  >> Choose [Yes/yes] OR [No/no] : ");
+        String choose = scanner.nextLine();
+
     }
 
     public void itemUpdateQty(){
-        System.out.print("Enter New Item Qty to Update: ");
-        itemConfirmation();
+        Table table = new Table(1, BorderStyle.UNICODE_BOX_DOUBLE_BORDER,ShownBorders.SURROUND);
+        table.setColumnWidth(0,50,200);
+
+
+        System.out.println(green + "_".repeat(50) + reset);
+        System.out.print("Enter Quantity : ");
+        int qty= scanner.nextInt();
+        System.out.println(green + "_".repeat(50) + reset + "\n");
+
+
+        table.addCell(yellow +"  - Description Item " + reset  + " ".repeat(0) + ": " + "Sting");
+        table.addCell(yellow +"  - Unit Item " + reset  + " ".repeat(7) + ": " + "10");
+        table.addCell(yellow +"  - Quantity Item " + reset  + " ".repeat(3) + ": " + qty);
+        table.addCell(yellow +"  - Price_A  Item " + reset  + " ".repeat(3) + ": " + "10");
+        table.addCell(yellow +"  - Price_B  Item " + reset  + " ".repeat(3) + ": " + "8");
+        table.addCell(yellow +"  - Price_C  Item " + reset + " ".repeat(3) + ": " + "7" );
+        System.out.print(table.render());
+        System.out.println("\n");
         confirmation();
+        scanner.nextLine();
+        System.out.print("  >> Choose [Yes/yes] OR [No/no] : ");
+        String choose = scanner.nextLine();
+
+    }
+
+    public void itemUpdatePriceA(){
+        Table table = new Table(1, BorderStyle.UNICODE_BOX_DOUBLE_BORDER,ShownBorders.SURROUND);
+        table.setColumnWidth(0,50,200);
+
+
+        System.out.println(green + "_".repeat(50) + reset);
+        System.out.print("Enter Price A : ");
+        double priceA= scanner.nextDouble();
+        System.out.println(green + "_".repeat(50) + reset + "\n");
+
+
+        table.addCell(yellow +"  - Description Item " + reset  + " ".repeat(0) + ": " + "Sting");
+        table.addCell(yellow +"  - Unit Item " + reset  + " ".repeat(7) + ": " + "10");
+        table.addCell(yellow +"  - Quantity Item " + reset  + " ".repeat(3) + ": " + "23");
+        table.addCell(yellow +"  - Price_A  Item " + reset  + " ".repeat(3) + ": " + priceA);
+        table.addCell(yellow +"  - Price_B  Item " + reset  + " ".repeat(3) + ": " + "8");
+        table.addCell(yellow +"  - Price_C  Item " + reset + " ".repeat(3) + ": " + "7" );
+        System.out.print(table.render());
+        System.out.println("\n");
+        confirmation();
+        scanner.nextLine();
+        System.out.print("  >> Choose [Yes/yes] OR [No/no] : ");
+        String choose = scanner.nextLine();
+
+    }
+
+    public void itemUpdatePriceC(){
+        Table table = new Table(1, BorderStyle.UNICODE_BOX_DOUBLE_BORDER,ShownBorders.SURROUND);
+        table.setColumnWidth(0,50,200);
+
+
+        System.out.println(green + "_".repeat(50) + reset);
+        System.out.print("Enter Price C : ");
+        double priceC= scanner.nextDouble();
+        System.out.println(green + "_".repeat(50) + reset + "\n");
+
+
+        table.addCell(yellow +"  - Description Item " + reset  + " ".repeat(0) + ": " + "Sting");
+        table.addCell(yellow +"  - Unit Item " + reset  + " ".repeat(7) + ": " + "10");
+        table.addCell(yellow +"  - Quantity Item " + reset  + " ".repeat(3) + ": " + "23");
+        table.addCell(yellow +"  - Price_A  Item " + reset  + " ".repeat(3) + ": " + "10");
+        table.addCell(yellow +"  - Price_B  Item " + reset  + " ".repeat(3) + ": " + "8");
+        table.addCell(yellow +"  - Price_C  Item " + reset + " ".repeat(3) + ": " + priceC );
+        System.out.print(table.render());
+        System.out.println("\n");
+        confirmation();
+        scanner.nextLine();
+        System.out.print("  >> Choose [Yes/yes] OR [No/no] : ");
+        String choose = scanner.nextLine();
+
+    }
+    public void itemUpdatePriceB(){
+        Table table = new Table(1, BorderStyle.UNICODE_BOX_DOUBLE_BORDER,ShownBorders.SURROUND);
+        table.setColumnWidth(0,50,200);
+
+
+        System.out.println(green + "_".repeat(50) + reset);
+        System.out.print("Enter Price B : ");
+        double priceB= scanner.nextDouble();
+        System.out.println(green + "_".repeat(50) + reset + "\n");
+
+
+        table.addCell(yellow +"  - Description Item " + reset  + " ".repeat(0) + ": " + "Sting");
+        table.addCell(yellow +"  - Unit Item " + reset  + " ".repeat(7) + ": " + "10");
+        table.addCell(yellow +"  - Quantity Item " + reset  + " ".repeat(3) + ": " + "23");
+        table.addCell(yellow +"  - Price_A  Item " + reset  + " ".repeat(3) + ": " + "10");
+        table.addCell(yellow +"  - Price_B  Item " + reset  + " ".repeat(3) + ": " + priceB);
+        table.addCell(yellow +"  - Price_C  Item " + reset + " ".repeat(3) + ": " + "7" );
+        System.out.print(table.render());
+        System.out.println("\n");
+        confirmation();
+        scanner.nextLine();
+        System.out.print("  >> Choose [Yes/yes] OR [No/no] : ");
+        String choose = scanner.nextLine();
+
     }
 
     public void itemUpdateStatus(){
-        System.out.print("Enter New Item Statues to Update: ");
-        itemConfirmation();
-        confirmation();
-    }
-
-    public void itemUpdatePrice(){
         System.out.print("Enter New Item Price to Update: ");
-        itemConfirmation();
+
         confirmation();
     }
 
     public void itemDelete(){
-        System.out.println("Enter Item id to delete");
-        itemConfirmation();
+        Table table = new Table(1, BorderStyle.UNICODE_BOX_DOUBLE_BORDER,ShownBorders.SURROUND);
+        table.setColumnWidth(0,50,200);
+
+
+        table.addCell(yellow +"  - Description Item " + reset  + " ".repeat(0) + ": " + "Sting");
+        table.addCell(yellow +"  - Unit Item " + reset  + " ".repeat(7) + ": " + "10");
+        table.addCell(yellow +"  - Quantity Item " + reset  + " ".repeat(3) + ": " + "23");
+        table.addCell(yellow +"  - Price_A  Item " + reset  + " ".repeat(3) + ": " + "10");
+        table.addCell(yellow +"  - Price_B  Item " + reset  + " ".repeat(3) + ": " + "8");
+        table.addCell(yellow +"  - Price_C  Item " + reset + " ".repeat(3) + ": " + "7" );
+        System.out.print(table.render());
+        System.out.println("\n");
         confirmation();
+
+        System.out.print("  >> Choose [Yes/yes] OR [No/no] : ");
+        String choose = scanner.nextLine();
+
     }
 
     public void itemRead(){
-        Table table = new Table(9, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
-        table.setColumnWidth(0,15,20);
-        table.setColumnWidth(1,15,20);
-        table.setColumnWidth(2,15,20);
-        table.setColumnWidth(3,15,20);
-        table.setColumnWidth(4,15,20);
-        table.setColumnWidth(5,15,20);
-        table.setColumnWidth(6,15,20);
-        table.setColumnWidth(7,15,20);
-        table.setColumnWidth(8,15,20);
+        Table table = new Table(9, BorderStyle.UNICODE_BOX,ShownBorders.ALL);
+        table.setColumnWidth(0,15,25);
+        table.setColumnWidth(1,20,50);
+        table.setColumnWidth(2,20,50);
+        table.setColumnWidth(3,20,50);
+        table.setColumnWidth(4,20,50);
+        table.setColumnWidth(5,20,50);
+        table.setColumnWidth(6,20,50);
+        table.setColumnWidth(7,20,50);
+        table.setColumnWidth(8,20,50);
 
-        table.addCell(" ".repeat(2)+cyan+ "ID");
-        table.addCell(" ".repeat(2)+cyan+"CODE");
-        table.addCell(" ".repeat(2)+cyan+"Name");
-        table.addCell(" ".repeat(2)+cyan+"Unit");
-        table.addCell(" ".repeat(2)+cyan+"Qty");
-        table.addCell(" ".repeat(2)+cyan+"Price_A");
-        table.addCell(" ".repeat(2)+cyan+"Price_B");
-        table.addCell(" ".repeat(2)+cyan+"Price_C");
-        table.addCell(" ".repeat(2)+cyan+"Status");
 
-        table.addCell(" ".repeat(2)+blue+"111");
-        table.addCell(" ".repeat(2)+blue+"CSTAD1122");
-        table.addCell(" ".repeat(2)+blue+"Sting");
-        table.addCell(" ".repeat(2)+blue+"000");
-        table.addCell(" ".repeat(2)+blue+"000");
-        table.addCell(" ".repeat(2)+blue+"1.02$");
-        table.addCell(" ".repeat(2)+blue+"1.0$");
-        table.addCell(" ".repeat(2)+blue+"0.99S");
-        table.addCell(" ".repeat(2)+blue+"Active");
-        System.out.println(cyan+ table.render());
+
+
+        table.addCell(yellow +"   ID  " + reset);
+        table.addCell(yellow +"   Code  " + reset  );
+        table.addCell(yellow +"   Description  " + reset);
+        table.addCell(yellow +"   Unit  "+ reset );
+        table.addCell(yellow +"   Quantity  "+ reset );
+        table.addCell(yellow +"   Price A  " + reset );
+        table.addCell(yellow +"   Price B   "+ reset );
+        table.addCell(yellow +"   RPrice C  "+ reset );
+        table.addCell(yellow +"   Status  " + reset );
+
+
+
+        table.addCell("   101  ");
+        table.addCell("   CSTAD1111  ");
+        table.addCell("   String  ");
+        table.addCell("   10  ");
+        table.addCell("   23  ");
+        table.addCell("   10  ");
+        table.addCell("   7  ");
+        table.addCell("   7  ");
+        table.addCell("   Active  ");
+        table.addCell("     ");
+        table.addCell("     ");
+        table.addCell("     ");
+        table.addCell("     ");
+        table.addCell("     ");
+        table.addCell("     ");
+        table.addCell("     ");
+        table.addCell("     ");
+        table.addCell("     ");
+
+        System.out.print(table.render());
+        System.out.println("\n");
+        System.out.print("  >> Choose [Yes/yes] OR [No/no] : ");
+        String choose = scanner.nextLine();
+
+
     }
 
 

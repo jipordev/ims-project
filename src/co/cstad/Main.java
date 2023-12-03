@@ -1,11 +1,8 @@
 package co.cstad;
-
 import co.cstad.view.MenuView;
 import co.cstad.view.MenuViewAdmin;
 import co.cstad.view.MenuViewManager;
 import co.cstad.view.MenuViewReport;
-
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Main {
@@ -15,18 +12,18 @@ public class Main {
     static MenuViewReport menuViewReport = new MenuViewReport();
 
     // scanner
-    public static Scanner scanner = new Scanner(System.in);
+    static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         boolean check = false;
         menuView.startInterface();
-//        try {
-//            Thread.sleep(2000);
-//            System.out.println("\n".repeat(10));
-//        } catch (InterruptedException e) {
-//            throw new RuntimeException(e);
-//        }
+        try {
+            Thread.sleep(2000);
+            System.out.println("\n".repeat(20));
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
 
 
@@ -55,7 +52,7 @@ public class Main {
                             System.out.println("\n".repeat(3));
                             switch (optionAdmin){
 
-                                // Item
+                                // Item start
                                 case 1 ->{
                                     System.out.println(
                                             " ".repeat(50)+"██╗████████╗███████╗███╗   ███╗    ███╗   ███╗███████╗███╗   ██╗██╗   ██╗\n" +
@@ -71,10 +68,44 @@ public class Main {
                                         System.out.println("\n".repeat(5));
                                         switch (optionItem){
                                             case 1 -> {
+                                                menuViewAdmin.itemStockIn();
+                                                menuView.confirmation();
+                                            }
+                                            case 1 -> {
                                                 System.out.println( "~".repeat(20) + "  ENTER NEW ITEM  " + "~".repeat(20));
                                                 menuView.itemStockIn();
                                             }
                                             case 2 -> {
+                                                menuViewAdmin.menuItemUpdate();
+                                                System.out.println("Choose option to update(1-6): ");
+                                                int optionItemUpdate = scanner.nextInt();
+                                                switch (optionItemUpdate){
+                                                    case 1 -> {
+                                                        menuViewAdmin.itemUpdateAll();
+                                                        menuView.confirmation();
+                                                    }
+                                                    case 2 -> {
+                                                        menuViewAdmin.itemUpdateName();
+                                                        menuView.confirmation();
+                                                    }
+                                                    case 3 -> {
+                                                        menuViewAdmin.itemUpdateUint();
+                                                        menuView.confirmation();
+                                                    }
+                                                    case 4 -> {
+                                                        menuViewAdmin.itemUpdateQty();
+                                                        menuView.confirmation();
+                                                    }
+                                                    case 5 -> {
+                                                        menuViewAdmin.itemUpdateStatus();
+                                                        menuView.confirmation();
+                                                    }
+                                                    case 6 -> {
+                                                        menuViewAdmin.itemUpdatePrice();
+                                                        menuView.confirmation();
+                                                    }
+                                                    default -> System.out.println("Invalid Option Update...!");
+                                                }
                                                 int optionItemUpdate;
                                                 do {
                                                     menuView.menuItemUpdate();
@@ -122,6 +153,13 @@ public class Main {
                                                     }
                                                 }while(optionItemUpdate !=9);
                                             }
+                                            case 3 -> {
+                                                menuViewAdmin.itemDelete();
+                                                menuView.confirmation();
+                                            }
+                                            case 4 -> {
+                                                menuViewAdmin.itemRead();
+                                            }
                                             case 3 ->{
                                                 menuView.itemDelete();
                                                 System.out.println("\n\n");
@@ -131,6 +169,7 @@ public class Main {
                                                 System.out.println("\n\n");
                                             }
                                             case 5 -> {
+                                                System.out.println("\n".repeat(20));
                                                 System.out.println(
                                                         " ".repeat(40)+"███████╗██╗  ██╗██╗████████╗    ██╗████████╗███████╗███╗   ███╗    ███╗   ███╗███████╗███╗   ██╗██╗   ██╗\n" +
                                                                 " ".repeat(40)+"██╔════╝╚██╗██╔╝██║╚══██╔══╝    ██║╚══██╔══╝██╔════╝████╗ ████║    ████╗ ████║██╔════╝████╗  ██║██║   ██║\n" +
@@ -144,7 +183,10 @@ public class Main {
                                         }
                                     }while (optionItem!=5);
                                 }
+                                // Item end
 
+
+                                // Costumer start
                                 case 2 ->{
                                     System.out.println(
                                                     " ".repeat(40)+ " ██████╗██╗   ██╗███████╗████████╗ ██████╗ ███╗   ███╗███████╗██████╗     ███╗   ███╗███████╗███╗   ██╗██╗   ██╗\n" +
@@ -317,6 +359,41 @@ public class Main {
 
                                 }
                                 case 4 ->{
+                                    int chooseUser;
+                                    do{
+                                        menuViewAdmin.userMenu();
+                                        chooseUser = Integer.parseInt(inputValue("  >> Choose Option Between [ 1 - 5 ] : "));
+                                        switch (chooseUser){
+                                            case 1 ->{
+                                                int invoiceID = Integer.parseInt(inputValue("  >> Enter Customer ID to Return : "));
+                                                if(invoiceID==101){
+                                                    menuView.readInvoice();
+                                                    menuView.confirmation();
+                                                    System.out.print("  >> Choose [Yes/yes] OR [No/no] : ");
+                                                    String choose = scanner.nextLine();
+                                                }
+
+                                            }
+                                            case 2 ->{
+                                                menuView.invoiceList();
+
+                                            }
+                                            case 3->{
+
+                                            }
+                                            case 4 ->{
+
+                                            }
+                                            case 5 -> {
+
+                                            }
+                                            default -> {
+                                                System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
+                                                System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 3 .");
+                                            }
+                                        }
+
+                                    }while(chooseUser!=3);
                                     System.out.println(" ".repeat(40)+"██╗   ██╗███████╗███████╗██████╗     ███╗   ███╗███████╗███╗   ██╗██╗   ██╗\n" +
                                             " ".repeat(40)+"██║   ██║██╔════╝██╔════╝██╔══██╗    ████╗ ████║██╔════╝████╗  ██║██║   ██║\n" +
                                             " ".repeat(40)+"██║   ██║███████╗█████╗  ██████╔╝    ██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║\n" +
@@ -435,7 +512,30 @@ public class Main {
                                         }
                                     } while (chooseUser != 5);
                                 }
+
+                                // Report
                                 case 5 ->{
+                                    int optionReport;
+                                    do{
+                                        menuView.reportMenu();
+                                        System.out.print("Please option(1-9): ");
+                                        optionReport = scanner.nextInt();
+                                        switch (optionReport){
+                                            case 1 -> menuViewAdmin.stockCountReport();
+                                            case 2 -> menuViewAdmin.stockInReport();
+                                            case 3 -> menuViewAdmin.stockOutReport();
+                                            case 4 -> menuViewAdmin.invoiceDetail();
+                                            case 5 -> menuViewAdmin.invoideAdjustment();
+                                            case 6 -> menuViewAdmin.itemsPriceHistory();
+                                            case 7 -> menuViewAdmin.stockAlertReport();
+                                            case 8 -> menuViewAdmin.summaryReport();
+                                            case 9 -> System.out.println("Back to Main Menu");
+                                            default -> System.out.println("Invalid option, please try again...!");
+                                        }
+                                        System.out.println("Press Enter key to continue...");
+                                        scanner.nextLine();
+                                        scanner.nextLine();
+                                    }while (optionReport != 9);
                                     System.out.println(" ".repeat(40)+"██████╗ ███████╗██████╗  ██████╗ ██████╗ ████████╗    ███╗   ███╗███████╗███╗   ██╗██╗   ██╗\n" +
                                             " ".repeat(40)+"██╔══██╗██╔════╝██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝    ████╗ ████║██╔════╝████╗  ██║██║   ██║\n" +
                                             " ".repeat(40)+"██████╔╝█████╗  ██████╔╝██║   ██║██████╔╝   ██║       ██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║\n" +

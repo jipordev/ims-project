@@ -7,7 +7,7 @@ import org.nocrala.tools.texttablefmt.Table;
 import java.util.Scanner;
 
 public class MenuViewAdmin implements BoxBorder {
-    Scanner scanner = new Scanner(System.in);
+    static Scanner scanner = new Scanner(System.in);
 
     // Main Menu Admin
     public void mainMenuAdmin() {
@@ -577,9 +577,266 @@ public class MenuViewAdmin implements BoxBorder {
     }
 
 
+    // 5.Report
+    public void stockCountReport(){
+        System.out.println(yellow + "\t\tStock Count Report" + reset);
+        Table table = new Table(4, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
+        table.setColumnWidth(0,15,20);
+        table.setColumnWidth(1,15,20);
+        table.setColumnWidth(2,15,20);
+        table.setColumnWidth(3,15,20);
 
+        table.addCell(" ".repeat(2)+ yellow + "Stock_Count_Id");
+        table.addCell(" ".repeat(2)+ yellow +"Item_Id");
+        table.addCell(" ".repeat(2)+ yellow +"Stock_Count_Date");
+        table.addCell(" ".repeat(2)+ yellow +"Qty");
 
+        table.addCell(" ".repeat(2)+blue+"1");
+        table.addCell(" ".repeat(2)+blue+"111");
+        table.addCell(" ".repeat(2)+blue+"2023-01-02");
+        table.addCell(" ".repeat(2)+blue+"1.02$");
+        table.addCell(" ".repeat(2)+blue+"2");
+        table.addCell(" ".repeat(2)+blue+"222");
+        table.addCell(" ".repeat(2)+blue+"2023-01-03");
+        table.addCell(" ".repeat(2)+blue+"1.25$");
 
+        table.addCell(" ".repeat(2)+ blue +" ");
+        table.addCell(" ".repeat(2)+ blue +" ");
+        table.addCell(" ".repeat(2)+ blue +" ");
+        table.addCell(" ".repeat(2)+ blue +" ");
+
+        System.out.println(table.render());
+    }
+
+    public void stockInReport(){
+        System.out.println(yellow + "\t\tStock In Report"+reset);
+        Table table = new Table(5, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
+        table.setColumnWidth(0,15,20);
+        table.setColumnWidth(1,15,20);
+        table.setColumnWidth(2,15,20);
+        table.setColumnWidth(3,15,20);
+        table.setColumnWidth(4,15,20);
+
+        table.addCell(" ".repeat(2)+ yellow + "Stock_In_Id");
+        table.addCell(" ".repeat(2)+ yellow +"Item_Id");
+        table.addCell(" ".repeat(2)+ yellow +"Stock_Count_Date");
+        table.addCell(" ".repeat(2)+ yellow +"Price_In");
+        table.addCell(" ".repeat(2)+ yellow +"Last_Qty" + reset);
+
+        table.addCell(" ".repeat(2)+blue+"1");
+        table.addCell(" ".repeat(2)+blue+"111");
+        table.addCell(" ".repeat(2)+blue+"2023-01-02");
+        table.addCell(" ".repeat(2)+blue+"1.02$");
+        table.addCell(" ".repeat(2)+blue+"50");
+        table.addCell(" ".repeat(2)+blue+"2");
+        table.addCell(" ".repeat(2)+blue+"222");
+        table.addCell(" ".repeat(2)+blue+"2023-01-03");
+        table.addCell(" ".repeat(2)+blue+"1.25$");
+        table.addCell(" ".repeat(2)+blue+"1200" + reset);
+
+        table.addCell(" ".repeat(2)+ blue +" ");
+        table.addCell(" ".repeat(2)+ blue +" ");
+        table.addCell(" ".repeat(2)+ blue +" ");
+        table.addCell(" ".repeat(2)+ blue +" ");
+        table.addCell(" ".repeat(2)+ blue +" "+reset);
+
+        System.out.println(table.render());
+    }
+
+    public void stockOutReport(){
+        System.out.println(yellow + "\t\tStock Out Report"+reset);
+        Table table = new Table(5, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
+        table.setColumnWidth(0,15,20);
+        table.setColumnWidth(1,15,20);
+        table.setColumnWidth(2,15,20);
+        table.setColumnWidth(3,15,20);
+        table.setColumnWidth(4,15,20);
+
+        table.addCell(" ".repeat(2)+ yellow + "Stock_In_Id");
+        table.addCell(" ".repeat(2)+ yellow +"Item_Id");
+        table.addCell(" ".repeat(2)+ yellow +"Stock_Count_Date");
+        table.addCell(" ".repeat(2)+ yellow +"Price_In");
+        table.addCell(" ".repeat(2)+ yellow +"Last_Qty" + reset);
+
+        table.addCell(" ".repeat(2)+blue+"1");
+        table.addCell(" ".repeat(2)+blue+"111");
+        table.addCell(" ".repeat(2)+blue+"2023-01-02");
+        table.addCell(" ".repeat(2)+blue+"1.02$");
+        table.addCell(" ".repeat(2)+blue+"50");
+        table.addCell(" ".repeat(2)+blue+"2");
+        table.addCell(" ".repeat(2)+blue+"222");
+        table.addCell(" ".repeat(2)+blue+"2023-01-03");
+        table.addCell(" ".repeat(2)+blue+"1.25$");
+        table.addCell(" ".repeat(2)+blue+"1200" + reset);
+
+        table.addCell(" ".repeat(2)+ blue +" ");
+        table.addCell(" ".repeat(2)+ blue +" ");
+        table.addCell(" ".repeat(2)+ blue +" ");
+        table.addCell(" ".repeat(2)+ blue +" ");
+        table.addCell(" ".repeat(2)+ blue +" "+reset);
+
+        System.out.println(table.render());
+    }
+
+    public void invoiceDetail(){
+        System.out.println(yellow + "\t\tInvoice Detail"+reset);
+        Table table = new Table(5, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
+        table.setColumnWidth(0,15,20);
+        table.setColumnWidth(1,15,20);
+        table.setColumnWidth(2,15,20);
+        table.setColumnWidth(3,15,20);
+        table.setColumnWidth(4,15,20);
+
+        table.addCell(" ".repeat(2)+ yellow + "Invoice_Detail_Id");
+        table.addCell(" ".repeat(2)+ yellow +"Invoice_Id");
+        table.addCell(" ".repeat(2)+ yellow +"Item_Id");
+        table.addCell(" ".repeat(2)+ yellow +"Qty");
+        table.addCell(" ".repeat(2)+ yellow +"Unit_Price" + reset);
+
+        table.addCell(" ".repeat(2)+blue+"1");
+        table.addCell(" ".repeat(2)+blue+"111");
+        table.addCell(" ".repeat(2)+blue+"111");
+        table.addCell(" ".repeat(2)+blue+"200");
+        table.addCell(" ".repeat(2)+blue+"4000");
+
+        table.addCell(" ".repeat(2)+blue+"2");
+        table.addCell(" ".repeat(2)+blue+"222");
+        table.addCell(" ".repeat(2)+blue+"222");
+        table.addCell(" ".repeat(2)+blue+"1200");
+        table.addCell(" ".repeat(2)+blue+"3000");
+
+        table.addCell(" ".repeat(2)+ blue +" ");
+        table.addCell(" ".repeat(2)+ blue +" ");
+        table.addCell(" ".repeat(2)+ blue +" ");
+        table.addCell(" ".repeat(2)+ blue +" ");
+        table.addCell(" ".repeat(2)+ blue +" "+reset);
+
+        System.out.println(table.render());
+    }
+
+    public void invoideAdjustment(){
+        System.out.println(yellow + "\t\tInvoice Adjustment"+reset);
+        Table table = new Table(6, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
+        table.setColumnWidth(0,15,20);
+        table.setColumnWidth(1,15,20);
+        table.setColumnWidth(2,15,20);
+        table.setColumnWidth(3,15,20);
+        table.setColumnWidth(4,15,20);
+        table.setColumnWidth(5,15,20);
+
+        table.addCell(" ".repeat(1)+ yellow + "Invoice_Adjustment");
+        table.addCell(" ".repeat(2)+ yellow +"Invoice_Id");
+        table.addCell(" ".repeat(2)+ yellow +"Item_Id");
+        table.addCell(" ".repeat(2)+ yellow +"Qty");
+        table.addCell(" ".repeat(2)+ yellow +"Unit_Price");
+        table.addCell(" ".repeat(2)+ yellow +"Returned_Date" + reset);
+
+        table.addCell(" ".repeat(2)+blue+" ");
+        table.addCell(" ".repeat(2)+blue+"1");
+        table.addCell(" ".repeat(2)+blue+"111");
+        table.addCell(" ".repeat(2)+blue+"50");
+        table.addCell(" ".repeat(2)+blue+"500");
+        table.addCell(" ".repeat(2)+blue+"2023-11-12");
+
+        table.addCell(" ".repeat(2)+blue+" ");
+        table.addCell(" ".repeat(2)+blue+"2");
+        table.addCell(" ".repeat(2)+blue+"222");
+        table.addCell(" ".repeat(2)+blue+"50");
+        table.addCell(" ".repeat(2)+blue+"500");
+        table.addCell(" ".repeat(2)+blue+"2023-11-12");
+
+        table.addCell(" ".repeat(2)+ blue +" ");
+        table.addCell(" ".repeat(2)+ blue +" ");
+        table.addCell(" ".repeat(2)+ blue +" ");
+        table.addCell(" ".repeat(2)+ blue +" ");
+        table.addCell(" ".repeat(2)+ blue +" ");
+        table.addCell(" ".repeat(2)+ blue +" "+reset);
+
+        System.out.println(table.render());
+    }
+
+    public void itemsPriceHistory(){
+        System.out.println(yellow + "\t\tItems Price History"+reset);
+        Table table = new Table(4, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
+        table.setColumnWidth(0,15,20);
+        table.setColumnWidth(1,15,20);
+        table.setColumnWidth(2,15,20);
+        table.setColumnWidth(3,15,20);
+
+        table.addCell(" ".repeat(2)+ yellow +"Id");
+        table.addCell(" ".repeat(2)+ yellow +"Item_Id");
+        table.addCell(" ".repeat(2)+ yellow +"Price");
+        table.addCell(" ".repeat(2)+ yellow +"Update_At" + reset);
+
+        table.addCell(" ".repeat(2)+blue+"1");
+        table.addCell(" ".repeat(2)+blue+"111");
+        table.addCell(" ".repeat(2)+blue+"5000");
+        table.addCell(" ".repeat(2)+blue+"50");
+
+        table.addCell(" ".repeat(2)+blue+"2");
+        table.addCell(" ".repeat(2)+blue+"222");
+        table.addCell(" ".repeat(2)+blue+"4500");
+        table.addCell(" ".repeat(2)+blue+"150");
+
+        table.addCell(" ".repeat(2)+ blue +" ");
+        table.addCell(" ".repeat(2)+ blue +" ");
+        table.addCell(" ".repeat(2)+ blue +" ");
+        table.addCell(" ".repeat(2)+ blue +" "+reset);
+
+        System.out.println(table.render());
+    }
+
+    public void stockAlertReport(){
+        System.out.println(yellow + "\t\tStock Alert Report"+reset);
+        Table table = new Table(3, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
+        table.setColumnWidth(0,15,20);
+        table.setColumnWidth(1,15,20);
+        table.setColumnWidth(2,15,20);
+
+        table.addCell(" ".repeat(2)+ yellow +"Id");
+        table.addCell(" ".repeat(2)+ yellow +"Item_Id");
+        table.addCell(" ".repeat(2)+ yellow +"Qty_Alert" + reset);
+
+        table.addCell(" ".repeat(2)+blue+"1");
+        table.addCell(" ".repeat(2)+blue+"111");
+        table.addCell(" ".repeat(2)+blue+"10");
+
+        table.addCell(" ".repeat(2)+blue+"2");
+        table.addCell(" ".repeat(2)+blue+"222");
+        table.addCell(" ".repeat(2)+blue+"5");
+
+        table.addCell(" ".repeat(2)+ blue +" ");
+        table.addCell(" ".repeat(2)+ blue +" ");
+        table.addCell(" ".repeat(2)+ blue +" "+reset);
+
+        System.out.println(table.render());
+    }
+
+    public void summaryReport(){
+        System.out.println(yellow + "\t\tSummary Report"+reset);
+        Table table = new Table(3, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
+        table.setColumnWidth(0,15,20);
+        table.setColumnWidth(1,15,20);
+        table.setColumnWidth(2,15,20);
+
+        table.addCell(" ".repeat(2)+ yellow +"Id");
+        table.addCell(" ".repeat(2)+ yellow +"Item_Id");
+        table.addCell(" ".repeat(2)+ yellow +"Qty_Alert" + reset);
+
+        table.addCell(" ".repeat(2)+blue+"1");
+        table.addCell(" ".repeat(2)+blue+"111");
+        table.addCell(" ".repeat(2)+blue+"10");
+
+        table.addCell(" ".repeat(2)+blue+"2");
+        table.addCell(" ".repeat(2)+blue+"222");
+        table.addCell(" ".repeat(2)+blue+"5");
+
+        table.addCell(" ".repeat(2)+ blue +" ");
+        table.addCell(" ".repeat(2)+ blue +" ");
+        table.addCell(" ".repeat(2)+ blue +" "+reset);
+
+        System.out.println(table.render());
+    }
 
 
     // User

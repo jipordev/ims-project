@@ -285,8 +285,30 @@ public class Main {
 
                                     }while(chooseUser!=3);
                                 }
+
+                                // Report
                                 case 5 ->{
-                                    menuView.reportMenu();
+                                    int optionReport;
+                                    do{
+                                        menuView.reportMenu();
+                                        System.out.print("Please option(1-9): ");
+                                        optionReport = scanner.nextInt();
+                                        switch (optionReport){
+                                            case 1 -> menuViewAdmin.stockCountReport();
+                                            case 2 -> menuViewAdmin.stockInReport();
+                                            case 3 -> menuViewAdmin.stockOutReport();
+                                            case 4 -> menuViewAdmin.invoiceDetail();
+                                            case 5 -> menuViewAdmin.invoideAdjustment();
+                                            case 6 -> menuViewAdmin.itemsPriceHistory();
+                                            case 7 -> menuViewAdmin.stockAlertReport();
+                                            case 8 -> menuViewAdmin.summaryReport();
+                                            case 9 -> System.out.println("Back to Main Menu");
+                                            default -> System.out.println("Invalid option, please try again...!");
+                                        }
+                                        System.out.println("Press Enter key to continue...");
+                                        scanner.nextLine();
+                                        scanner.nextLine();
+                                    }while (optionReport != 9);
                                 }
                                 case 6 ->{
 

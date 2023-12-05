@@ -3,19 +3,19 @@ package co.cstad.dto;
 import java.time.LocalDate;
 
 public class InvoiceDTO {
-    private int invoiceId;
+    private Long invoiceId;
     private String invoiceNo;
     private LocalDate purchaseDate;
-    private double discount;
-    private boolean isCancelled;
-    private boolean status;
-    private boolean isPaid;
+    private Double discount;
+    private Boolean isCancelled;
+    private Boolean status;
+    private Boolean isPaid;
 
-    public int getInvoiceId() {
+    public Long getInvoiceId() {
         return invoiceId;
     }
 
-    public void setInvoiceId(int invoiceId) {
+    public void setInvoiceId(Long invoiceId) {
         this.invoiceId = invoiceId;
     }
 
@@ -35,35 +35,35 @@ public class InvoiceDTO {
         this.purchaseDate = purchaseDate;
     }
 
-    public double getDiscount() {
+    public Double getDiscount() {
         return discount;
     }
 
-    public void setDiscount(double discount) {
+    public void setDiscount(Double discount) {
         this.discount = discount;
     }
 
-    public boolean isCancelled() {
+    public Boolean getCancelled() {
         return isCancelled;
     }
 
-    public void setCancelled(boolean cancelled) {
+    public void setCancelled(Boolean cancelled) {
         isCancelled = cancelled;
     }
 
-    public boolean isStatus() {
+    public Boolean getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(Boolean status) {
         this.status = status;
     }
 
-    public boolean isPaid() {
+    public Boolean getPaid() {
         return isPaid;
     }
 
-    public void setPaid(boolean paid) {
+    public void setPaid(Boolean paid) {
         isPaid = paid;
     }
 }

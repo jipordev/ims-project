@@ -1,4 +1,4 @@
 package co.cstad.service;
 
-public class ItemServiceImpl implements ItemService{
+public class ItemServiceImpl implements Service {
 }

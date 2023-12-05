@@ -13,17 +13,17 @@ public class MenuView implements BoxBorder {
 
     //First Interface (CSTAD)
     public void startInterface() {
-//        for (int i = 0; i <= 100; i+=2) {
-//            int totalBlocks = 50;
-//            int blocksToShow = (i * totalBlocks) / 100;
-//            System.out.print(" ".repeat(20) + " Loading [ " + i + "% ]");
-//            System.out.print(" ".repeat(10) + getProgressBar(blocksToShow, totalBlocks) + "\r");
-//            try {
-//                Thread.sleep(100);
-//            } catch (InterruptedException e) {
-//                throw new RuntimeException(e);
-//            }
-//        }
+        for (int i = 0; i <= 100; i+=2) {
+            int totalBlocks = 50;
+            int blocksToShow = (i * totalBlocks) / 100;
+            System.out.print(" ".repeat(20) + " Loading [ " + i + "% ]");
+            System.out.print(" ".repeat(10) + getProgressBar(blocksToShow, totalBlocks) + "\r");
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
         System.out.println("\n".repeat(5));
         System.out.print(cyan);
         System.out.println(SPACE.repeat(50) + TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(72) + TOP_RIGHT_CORNER);

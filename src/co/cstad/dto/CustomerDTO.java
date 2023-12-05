@@ -1,20 +1,28 @@
 package co.cstad.dto;
 
 public class CustomerDTO {
-    private int customersId;
+    private Long customersId;
     private String customerName;
     private String address;
     private String contact1;
     private String contact2;
-    private boolean status;
+    private Boolean status;
     private String customerType;
 
-    public int getCustomersId() {
+    public Long getCustomersId() {
         return customersId;
     }
 
-    public void setCustomersId(int customersId) {
+    public void setCustomersId(Long customersId) {
         this.customersId = customersId;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 
     public String getCustomerName() {

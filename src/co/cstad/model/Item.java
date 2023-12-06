@@ -2,7 +2,7 @@ package co.cstad.model;
 
 public class Item {
 
-    private Integer id;
+    private Long id;
     private String code;
     private String description;
     private String unit;
@@ -16,7 +16,7 @@ public class Item {
 
     }
 
-    public Item(Integer id, String code, String description, String unit, Integer qty, Double price_A, Double price_B, Double price_C, Boolean status) {
+    public Item(Long id, String code, String description, String unit, Integer qty, Double price_A, Double price_B, Double price_C, Boolean status) {
         this.id = id;
         this.code = code;
         this.description = description;
@@ -28,11 +28,11 @@ public class Item {
         this.status = status;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

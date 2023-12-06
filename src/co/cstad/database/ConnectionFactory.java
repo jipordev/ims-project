@@ -22,7 +22,7 @@ public class ConnectionFactory {
     public Connection getConnection() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con=DriverManager.getConnection("jdbc:mysql://localhost/ims?user=root&password=root");
+            con=DriverManager.getConnection("jdbc:mysql://localhost/ims?user=postgres&password=kheang");
         } catch (Exception e) {
             e.printStackTrace();
         }

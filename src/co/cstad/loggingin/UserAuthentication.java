@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 public class UserAuthentication {
     private static final Logger logger = Logger.getLogger(UserAuthentication.class.getName());
 
-    private static final String URL = "jdbc:postgresql://localhost:5432/imsdb";
+    private static final String URL = "jdbc:postgresql://localhost:5432/postgres";
     private static final String USER = "postgres";
     private static final String PASSWORD = "jipor206";
 

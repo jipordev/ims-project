@@ -1,4 +1,4 @@
-package co.cstad.dto;
+package co.cstad.model;
 
 import java.util.Date;
 

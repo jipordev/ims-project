@@ -1,6 +1,6 @@
 package co.cstad.service;
 
-import co.cstad.dto.CustomerDTO;
+import co.cstad.model.CustomerDTO;
 
 import java.util.List;
 

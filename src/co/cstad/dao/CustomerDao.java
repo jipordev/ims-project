@@ -1,7 +1,6 @@
 package co.cstad.dao;
 
-import co.cstad.dto.CustomerDTO;
-import co.cstad.model.Item;
+import co.cstad.model.CustomerDTO;
 
 import java.util.List;
 import java.util.Optional;

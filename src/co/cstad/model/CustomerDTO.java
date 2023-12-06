@@ -1,4 +1,4 @@
-package co.cstad.dto;
+package co.cstad.model;
 
 public class CustomerDTO {
     private Long customersId;

@@ -1,3 +1,4 @@
+// UserAuthentication.java
 package co.cstad.loggingin;
 
 import java.sql.Connection;
@@ -37,6 +38,23 @@ public class UserAuthentication {
             System.out.println(e.getMessage());
         }
         return false;
+    }
+
+    public static String getUserRole(String username) {
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
+            String query = "SELECT r.rolename FROM roles r JOIN users u ON r.id = u.role_id WHERE u.username = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setString(1, username);
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    if (resultSet.next()) {
+                        return resultSet.getString("rolename");
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "Error getting user role", e);
+        }
+        return null;
     }
 
     private static String hashPassword(String password) {

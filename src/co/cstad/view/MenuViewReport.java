@@ -1,7 +1,7 @@
 package co.cstad.view;
 
 public class MenuViewReport implements BoxBorder {
-    public void mainMenuReport(){
+    public static void mainMenuReport(){
         int option;
         System.out.print(cyan);
         System.out.println(TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(62) + TOP_RIGHT_CORNER);

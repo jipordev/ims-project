@@ -13,7 +13,7 @@ public class MenuViewAdmin implements BoxBorder {
 
 
     // Main Menu Admin
-    public void mainMenuAdmin() {
+    public static void mainMenuAdmin() {
         System.out.print(cyan);
         System.out.println(TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(62) + TOP_RIGHT_CORNER);
         System.out.print(VERTICAL_BORDER + SPACE + TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(28) + TOP_RIGHT_CORNER);

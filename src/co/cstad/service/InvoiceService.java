@@ -2,7 +2,6 @@ package co.cstad.service;
 
 import co.cstad.model.Invoice;
 import co.cstad.model.Item;
-import org.postgresql.ssl.SingleCertValidatingFactory;
 
 import java.util.List;
 

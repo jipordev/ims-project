@@ -15,7 +15,7 @@ public class UserAuthentication {
 
     private static final String URL = "jdbc:postgresql://localhost:5432/postgres";
     private static final String USER = "postgres";
-    private static final String PASSWORD = "jipor206";
+    private static final String PASSWORD = "24sep2002";
 
     static {
         // Configure the logger

@@ -21,13 +21,14 @@ public class ConnectionFactory {
     }
     public Connection getConnection() {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            con=DriverManager.getConnection("jdbc:mysql://localhost/ims?user=postgres&password=kheang");
+            Class.forName("org.postgresql.Driver");
+            con = DriverManager.getConnection("jdbc:postgresql://localhost/dbinventorymanagement?user=postgres&password=kheang");
         } catch (Exception e) {
             e.printStackTrace();
         }
         return con;
     }
+
     public boolean checkLogin(String username, String password, String user) {
         String query="SELECT * FROM users WHERE username='"+username+"' AND password='"+password+"' AND category='ADMINISTRATOR' LIMIT 1";
         try {

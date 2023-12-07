@@ -5,6 +5,8 @@ import co.cstad.view.MenuViewAdmin;
 import co.cstad.view.MenuViewManager;
 import co.cstad.view.MenuViewReport;
 
+import java.awt.*;
+import java.net.URI;
 import java.sql.SQLOutput;
 import java.util.Scanner;
 
@@ -23,15 +25,12 @@ public class Main {
     public static void main(String[] args) {
         boolean check = false;
         menuView.startInterface();
-//        try {
-//            Thread.sleep(2000);
-//            System.out.println("\n".repeat(10));
-//        } catch (InterruptedException e) {
-//            throw new RuntimeException(e);
-//        }
-
-
-
+        try {
+            Thread.sleep(2000);
+            System.out.println("\n".repeat(10));
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         do{
 
             menuView.menuLogin();
@@ -552,6 +551,15 @@ public class Main {
                     System.out.println("\n".repeat(20));
                     menuView.menuAboutUs();
 
+                    try {
+                        Thread.sleep(2000);
+                        System.out.println("\n".repeat(10));
+                        Desktop desktop = java.awt.Desktop.getDesktop();
+                        URI oURL = new URI("http://192.168.1.222:5501/src/aboutUs.html");
+                        desktop.browse(oURL);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
 
                 // Case 3 : Exit Program
@@ -564,10 +572,6 @@ public class Main {
                             " ".repeat(60) + "╚═════╝    ╚═╝   ╚══════╝    ╚═════╝    ╚═╝   ╚══════╝");
                     System.exit(0);
                 }
-
-
-
-
                 default -> {
                     System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
                     System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 3 .");                }

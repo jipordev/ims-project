@@ -1,6 +1,8 @@
 // UserAuthentication.java
 package co.cstad.loggingin;
 
+import co.cstad.database.ConnectionFactory;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -35,19 +37,34 @@ public class UserAuthentication {
                 }
             }
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Error during user authentication", e);
+            System.out.println(e.getMessage());
         }
         return false;
     }
-
+//    public static boolean authenticateUser(String username, String password) {
+//        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
+//            String query = "SELECT * FROM users WHERE username = ? AND password = ?";
+//            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+//                preparedStatement.setString(1, username);
+//                preparedStatement.setString(2, hashPassword(password));
+//                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+//                    return resultSet.next();
+//                }
+//            }
+//        } catch (SQLException e) {
+//            System.out.println(e.getMessage());
+//        }
+//        return false;
+//    }
+//
     public static String getUserRole(String username) {
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
-            String query = "SELECT r.rolename FROM roles r JOIN users u ON r.id = u.role_id WHERE u.username = ?";
+        try (Connection connection = ConnectionFactory.getConnection()) {
+            String query = "SELECT r.name FROM roles r JOIN users u ON r.id = u.role_id WHERE u.username = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setString(1, username);
                 try (ResultSet resultSet = preparedStatement.executeQuery()) {
                     if (resultSet.next()) {
-                        return resultSet.getString("rolename");
+                        return resultSet.getString("name");
                     }
                 }
             }

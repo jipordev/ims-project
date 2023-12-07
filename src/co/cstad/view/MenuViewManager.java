@@ -1,7 +1,7 @@
 package co.cstad.view;
 
 public class MenuViewManager extends MenuViewAdmin {
-    public void mainMenuManager() {
+    public static void mainMenuManager() {
         System.out.print(cyan);
         System.out.println(TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(62) + TOP_RIGHT_CORNER);
 

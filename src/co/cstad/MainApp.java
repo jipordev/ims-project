@@ -1,6 +1,10 @@
+// MainApp.java
 package co.cstad;
 
 import co.cstad.loggingin.UserAuthentication;
+import co.cstad.view.MenuViewAdmin;
+import co.cstad.view.MenuViewManager;
+import co.cstad.view.MenuViewReport;
 
 import java.util.Scanner;
 
@@ -20,12 +24,28 @@ public class MainApp {
         String password = scanner.nextLine();
 
         if (UserAuthentication.authenticateUser(username, password)) {
+            String role = UserAuthentication.getUserRole(username);
             System.out.println("User authenticated successfully.");
+            if (role != null) {
+                switch (role.toLowerCase()) {
+                    case "admin":
+                        MenuViewAdmin.mainMenuAdmin();
+                        break;
+                    case "manager":
+                        MenuViewManager.mainMenuManager();
+                        break;
+                    case "report":
+                        MenuViewReport.mainMenuReport();
+                        break;
+                    default:
+                        System.out.println("Unknown role");
+                }
+            }
         } else {
             System.out.println("Invalid username or password.");
         }
 
-        // Close the scanner to avoid resource leaks
+        // Close resources to avoid leaks
         scanner.close();
     }
 }

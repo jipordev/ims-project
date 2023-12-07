@@ -17,10 +17,12 @@ public class Main {
     static MenuViewReport menuViewReport = new MenuViewReport();
 
     // scanner
-    public static Scanner scanner = new Scanner(System.in);
+    private static Scanner scanner;
+    public Main() {
+        scanner = new Scanner(System.in);
+    }
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
         boolean check = false;
         menuView.startInterface();
 //        try {

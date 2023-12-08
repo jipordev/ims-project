@@ -1,7 +1,9 @@
 // MainApp.java
 package co.cstad;
 
+import co.cstad.controller.ItemController;
 import co.cstad.loggingin.UserAuthentication;
+import co.cstad.util.Singleton;
 import co.cstad.view.MenuView;
 import co.cstad.view.MenuViewAdmin;
 import co.cstad.view.MenuViewManager;
@@ -15,11 +17,13 @@ public class MainApp {
     private static Scanner scanner;
     private static UserAuthentication userAuthentication;
     private static MenuView menuView;
+    private static final ItemController itemController;
 
     static {
         menuView = new MenuView();
         scanner = new Scanner(System.in);
         userAuthentication = new UserAuthentication();
+        itemController = Singleton.itemController();
     }
 
     public static void main(String[] args) {
@@ -39,6 +43,18 @@ public class MainApp {
                         switch (role.toLowerCase()) {
                             case "admin":
                                 MenuViewAdmin.mainMenuAdmin();
+                                System.out.print("choose -> ");
+                                int op = Integer.parseInt(scanner.nextLine());
+                                switch (op) {
+                                    case 1 -> {
+                                        menuView.itemMenu();
+                                        System.out.print("choose -> ");
+                                        int op2 = Integer.parseInt(scanner.nextLine());
+                                        switch (op2) {
+                                            case 4 -> itemController.index();
+                                        }
+                                    }
+                                }
                                 break;
                             case "manager":
                                 MenuViewManager.mainMenuManager();

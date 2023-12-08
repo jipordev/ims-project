@@ -1,37 +1,43 @@
 package co.cstad.service;
 
-import co.cstad.model.Item;
+import co.cstad.dao.ItemDaoImpl;
+import co.cstad.model.ItemDTO;
 
 import java.util.List;
 
 public class ItemServiceImpl implements ItemService{
+    private static ItemDaoImpl itemDao;
+    public ItemServiceImpl() {
+        itemDao = new ItemDaoImpl();
+    }
+
     @Override
-    public Item insert(Item item) {
+    public ItemDTO insert(ItemDTO item) {
         return null;
     }
 
     @Override
-    public List<Item> select() {
+    public List<ItemDTO> select() {
+        return itemDao.select();
+    }
+
+    @Override
+    public ItemDTO selectById(Long id) {
         return null;
     }
 
     @Override
-    public Item selectById(Long id) {
+    public ItemDTO updateById(ItemDTO item) {
         return null;
     }
 
     @Override
-    public Item updateById(Item item) {
+    public ItemDTO deleteById(Long id) {
         return null;
     }
 
     @Override
-    public Item deleteById(Long id) {
-        return null;
-    }
-
-    @Override
-    public List<Item> selectByName(String name) {
+    public List<ItemDTO> selectByName(String name) {
         return null;
     }
 }

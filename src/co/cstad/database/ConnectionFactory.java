@@ -6,9 +6,9 @@ import java.sql.Statement;
 
 public class ConnectionFactory {
     static final String driverClassName = "org.postgresql.Driver";
-    static final String connectionUrl = "jdbc:postgresql://localhost/dbinventorymanagement?user=postgres&password=kheang";
+    static final String connectionUrl = "jdbc:postgresql://localhost:5432/postgres";
     static final String username = "postgres";
-    static final String password = "123";
+    static final String password = "24sep2002";
     static Connection con = null;
     public static Connection getConnection() {
         try {

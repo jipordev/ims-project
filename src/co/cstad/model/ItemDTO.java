@@ -1,5 +1,6 @@
 package co.cstad.model;
 
+import java.math.BigDecimal;
 import java.time.Duration;
 
 public class ItemDTO {
@@ -7,9 +8,9 @@ public class ItemDTO {
     private String itemCode;
     private String itemDescription;
     private String itemUnit;
-    private Double itemPrice_out_a;
-    private Double itemPrice_out_b;
-    private Double itemPrice_out_c;
+    private BigDecimal itemPrice_out_a;
+    private BigDecimal itemPrice_out_b;
+    private BigDecimal itemPrice_out_c;
     private Integer qty;
     private Boolean status;
 
@@ -45,27 +46,27 @@ public class ItemDTO {
         this.itemUnit = itemUnit;
     }
 
-    public Double getItemPrice_out_a() {
+    public BigDecimal getItemPrice_out_a() {
         return itemPrice_out_a;
     }
 
-    public void setItemPrice_out_a(Double itemPrice_out_a) {
+    public void setItemPrice_out_a(BigDecimal itemPrice_out_a) {
         this.itemPrice_out_a = itemPrice_out_a;
     }
 
-    public Double getItemPrice_out_b() {
+    public BigDecimal getItemPrice_out_b() {
         return itemPrice_out_b;
     }
 
-    public void setItemPrice_out_b(Double itemPrice_out_b) {
+    public void setItemPrice_out_b(BigDecimal itemPrice_out_b) {
         this.itemPrice_out_b = itemPrice_out_b;
     }
 
-    public Double getItemPrice_out_c() {
+    public BigDecimal getItemPrice_out_c() {
         return itemPrice_out_c;
     }
 
-    public void setItemPrice_out_c(Double itemPrice_out_c) {
+    public void setItemPrice_out_c(BigDecimal itemPrice_out_c) {
         this.itemPrice_out_c = itemPrice_out_c;
     }
 
@@ -83,5 +84,8 @@ public class ItemDTO {
 
     public void setStatus(Boolean status) {
         this.status = status;
+    }
+    public Boolean isStatus() {
+        return status;
     }
 }

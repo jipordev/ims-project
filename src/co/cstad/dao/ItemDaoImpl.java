@@ -96,6 +96,16 @@ public class ItemDaoImpl implements ItemDao{
             if (resultSet.next()) {
                 ItemDTO itemDTO = new ItemDTO();
                 // Populate itemDTO fields from resultSet
+                itemDTO.setItemId(resultSet.getLong("item_id"));
+                itemDTO.setItemCode(resultSet.getString("item_code"));
+                itemDTO.setItemDescription(resultSet.getString("description"));
+                itemDTO.setItemUnit(resultSet.getString("unit"));
+                itemDTO.setQty(resultSet.getInt("qty"));
+                itemDTO.setItemPrice_out_a(resultSet.getBigDecimal("price_a"));
+                itemDTO.setItemPrice_out_b(resultSet.getBigDecimal("price_b"));
+                itemDTO.setItemPrice_out_c(resultSet.getBigDecimal("price_c"));
+                itemDTO.setStatus(resultSet.getBoolean("status"));
+
                 return Optional.of(itemDTO);
             }
         } catch (SQLException e) {
@@ -106,8 +116,46 @@ public class ItemDaoImpl implements ItemDao{
 
     @Override
     public ItemDTO updateById(ItemDTO itemDTO) {
+        String sql = "UPDATE item SET item_code = ?, description = ?, unit = ?, qty = ?, price_a = ?, price_b = ?, price_c = ?, status = ? WHERE item_id = ?";
+
+        try {
+            connection.setAutoCommit(false);  // Disable auto-commit
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, itemDTO.getItemCode());
+            preparedStatement.setString(2, itemDTO.getItemDescription());
+            preparedStatement.setString(3, itemDTO.getItemUnit());
+            preparedStatement.setInt(4, itemDTO.getQty());
+            preparedStatement.setBigDecimal(5, itemDTO.getItemPrice_out_a());
+            preparedStatement.setBigDecimal(6, itemDTO.getItemPrice_out_b());
+            preparedStatement.setBigDecimal(7, itemDTO.getItemPrice_out_c());
+            preparedStatement.setBoolean(8, itemDTO.isStatus());
+            preparedStatement.setLong(9, itemDTO.getItemId());
+
+            int affectedRows = preparedStatement.executeUpdate();
+
+            if (affectedRows > 0) {
+                connection.commit();  // Commit the transaction
+                return itemDTO;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            try {
+                connection.rollback();  // Rollback in case of an exception
+            } catch (SQLException rollbackException) {
+                System.out.println(rollbackException.getMessage());
+            }
+        } finally {
+            try {
+                connection.setAutoCommit(true);  // Restore auto-commit mode
+            } catch (SQLException setAutoCommitException) {
+                System.out.println(setAutoCommitException.getMessage());
+            }
+        }
+
         return null;
     }
+
 
 
 

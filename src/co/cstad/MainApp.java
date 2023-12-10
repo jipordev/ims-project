@@ -77,6 +77,10 @@ public class MainApp {
                 case 3 -> menuView.invoiceMenu();
                 case 4 -> menuViewAdmin.userMenu();
                 case 5 -> menuView.reportMenu();
+                case 6 -> {
+                    menuView.menuLogin();
+                    return;
+                }
             }
         } while (op != 0);
     }
@@ -111,7 +115,6 @@ public class MainApp {
         } while (op2 != 0);
     }
 
-
     private static void handleMenuItemUpdate() {
         int updateOp;
         do {
@@ -120,6 +123,14 @@ public class MainApp {
             updateOp = Integer.parseInt(scanner.nextLine());
             // Handle update options here...
             switch (updateOp) {
+                case 1 -> itemController.updateAll();
+                case 2 -> itemController.updateItemDescription();
+                case 3 -> itemController.updateItemUnit();
+                case 4 -> itemController.updateItemQty();
+                case 5 -> itemController.updateItemPriceA();
+                case 6 -> itemController.updateItemPriceB();
+                case 7 -> itemController.updateItemPriceC();
+                case 8 -> itemController.updateItemStatus();
                 case 9 -> {
                     return;
                 }

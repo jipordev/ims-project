@@ -119,6 +119,11 @@ public class MainApp {
             System.out.print("choose -> ");
             updateOp = Integer.parseInt(scanner.nextLine());
             // Handle update options here...
+            switch (updateOp) {
+                case 9 -> {
+                    return;
+                }
+            }
         } while (updateOp != 0);
     }
 }

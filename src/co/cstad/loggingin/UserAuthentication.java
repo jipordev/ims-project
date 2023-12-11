@@ -2,7 +2,6 @@
 package co.cstad.loggingin;
 
 import co.cstad.database.ConnectionFactory;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -36,22 +35,6 @@ public class UserAuthentication {
         }
         return false;
     }
-//    public static boolean authenticateUser(String username, String password) {
-//        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
-//            String query = "SELECT * FROM users WHERE username = ? AND password = ?";
-//            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-//                preparedStatement.setString(1, username);
-//                preparedStatement.setString(2, hashPassword(password));
-//                try (ResultSet resultSet = preparedStatement.executeQuery()) {
-//                    return resultSet.next();
-//                }
-//            }
-//        } catch (SQLException e) {
-//            System.out.println(e.getMessage());
-//        }
-//        return false;
-//    }
-//
     public static String getUserRole(String username) {
         try (Connection connection = ConnectionFactory.getConnection()) {
             String query = "SELECT r.name FROM roles r JOIN users u ON r.id = u.role_id WHERE u.username = ?";
@@ -70,7 +53,6 @@ public class UserAuthentication {
     }
 
     private static String hashPassword(String password) {
-        // Implement password hashing logic (e.g., using bcrypt)
         return password;
     }
 }

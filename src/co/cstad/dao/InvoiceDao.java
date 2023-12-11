@@ -1,15 +1,15 @@
 package co.cstad.dao;
 
-import co.cstad.model.CustomerDTO;
-import co.cstad.model.Invoice;
+import co.cstad.model.InvoiceDTO;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface InvoiceDao {
-    Invoice insert(Invoice invoice);
-    List<Invoice> select();
-    Optional<Invoice> selectById(Long id);
-    Invoice updateById(Invoice invoice);
-    Invoice deleteById(Long id);
+    InvoiceDTO insert(InvoiceDTO invoice);
+    List<InvoiceDTO> select();
+    Optional<InvoiceDTO> selectById(Long id);
+    Optional<InvoiceDTO> selectByNo(String invoiceNo);
+    InvoiceDTO updateById(InvoiceDTO invoice);
+    InvoiceDTO deleteById(Long id);
 }

@@ -3,6 +3,7 @@ package co.cstad.controller;
 import co.cstad.model.ItemDTO;
 import co.cstad.service.ItemService;
 import co.cstad.service.ItemServiceImpl;
+import co.cstad.util.Singleton;
 import co.cstad.view.ItemView;
 import co.cstad.view.MenuViewAdmin;
 
@@ -16,9 +17,9 @@ public class ItemController {
     private final Scanner scanner;
 
     public ItemController() {
-        scanner = new Scanner(System.in);
-        itemService = new ItemServiceImpl();
-        menuViewAdmin = new MenuViewAdmin();
+        scanner = Singleton.scanner();
+        itemService = Singleton.itemService();
+        menuViewAdmin = Singleton.menuViewAdmin();
     }
 
     public void read() {

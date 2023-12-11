@@ -2,6 +2,7 @@ package co.cstad.service;
 
 import co.cstad.dao.ItemDaoImpl;
 import co.cstad.model.ItemDTO;
+import co.cstad.util.Singleton;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ public class ItemServiceImpl implements ItemService {
     private static ItemDaoImpl itemDao;
 
     public ItemServiceImpl() {
-        itemDao = new ItemDaoImpl();
+        itemDao = Singleton.getItemDao();
     }
 
     @Override

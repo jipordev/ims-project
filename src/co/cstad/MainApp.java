@@ -1,8 +1,10 @@
 package co.cstad;
 
 import co.cstad.controller.ItemController;
+import co.cstad.controller.UserController;
 import co.cstad.loggingin.UserAuthentication;
 import co.cstad.model.ItemDTO;
+import co.cstad.model.UserDTO;
 import co.cstad.util.Singleton;
 import co.cstad.view.MenuView;
 import co.cstad.view.MenuViewAdmin;
@@ -17,8 +19,9 @@ public class MainApp {
     private static final Scanner scanner = new Scanner(System.in);
     private static final UserAuthentication userAuthentication = new UserAuthentication();
     private static final MenuView menuView = new MenuView();
-    private static final MenuViewAdmin menuViewAdmin = new MenuViewAdmin();
+    private static final MenuViewAdmin menuViewAdmin = Singleton.menuViewAdmin();
     private static final ItemController itemController = Singleton.itemController();
+    private static final UserController userController = Singleton.userController();
 
     public static void main(String[] args) {
         menuView.startInterface();
@@ -75,14 +78,28 @@ public class MainApp {
                 case 1 -> handleItemMenu();
                 case 2 -> menuViewAdmin.customerMenu();
                 case 3 -> menuView.invoiceMenu();
-                case 4 -> menuViewAdmin.userMenu();
+                case 4 -> handleUserMenu();
                 case 5 -> menuView.reportMenu();
                 case 6 -> {
-                    menuView.menuLogin();
                     return;
                 }
             }
         } while (op != 0);
+    }
+    private static void handleUserMenu(){
+        int opUser;
+        do {
+            menuViewAdmin.userMenu();
+            System.out.print("choose -> ");
+            opUser = Integer.parseInt(scanner.nextLine());
+            switch (opUser) {
+                case 2 -> userController.read();
+                case 3 -> handleMenuUserUpdate();
+                case 5 -> {
+                    return;
+                }
+            }
+        } while (opUser != 0);
     }
 
     private static void handleItemMenu() {
@@ -115,6 +132,19 @@ public class MainApp {
         } while (op2 != 0);
     }
 
+    private static void handleMenuUserUpdate(){
+        int updateOp;
+        do {
+            menuViewAdmin.optionListUser();
+            System.out.print("choose -> ");
+            updateOp = Integer.parseInt(scanner.nextLine());
+            switch (updateOp) {
+                case 9 -> {
+                    return;
+                }
+            }
+        } while (updateOp != 0);
+    }
     private static void handleMenuItemUpdate() {
         int updateOp;
         do {

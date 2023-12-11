@@ -52,7 +52,7 @@ public class MenuViewAdmin implements BoxBorder {
     // 1.Item
     public void itemConfirmation(ItemDTO newItem) {
         System.out.println();
-        Table table = new Table(2, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
+        Table table = new Table(2, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.SURROUND);
         table.setColumnWidth(0, 30, 30);
         table.setColumnWidth(1, 30, 30);
         table.addCell(" ".repeat(3) + yellow + "Description:" + reset);

@@ -39,7 +39,6 @@ public class ItemController {
 
             if (newItem != null) {
                 // Update the existing item with the new information
-                existingItem.setItemCode(newItem.getItemCode());
                 existingItem.setItemDescription(newItem.getItemDescription());
                 existingItem.setItemUnit(newItem.getItemUnit());
                 existingItem.setQty(newItem.getQty());
@@ -271,7 +270,7 @@ public class ItemController {
 
         if (itemToDelete != null) {
             System.out.println("Confirmation before deletion.");
-
+            menuViewAdmin.itemConfirmation(itemToDelete);
             System.out.print("Do you want to proceed with the deletion? (yes/no): ");
             String confirmation = scanner.nextLine().toLowerCase();
 

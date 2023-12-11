@@ -10,7 +10,7 @@ public class InvoiceDTO {
     private Boolean isCancelled;
     private Boolean status;
     private Boolean isPaid;
-    public CustomerDTO customer;
+    public CustomerDTO customer = new CustomerDTO();
 
     public Long getInvoiceId() {
         return invoiceId;

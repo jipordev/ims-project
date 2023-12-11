@@ -1,14 +1,14 @@
 // MainApp.java
 package co.cstad;
 
+import co.cstad.controller.InvoiceController;
 import co.cstad.controller.ItemController;
+import co.cstad.dao.InvoiceDaoImpl;
 import co.cstad.loggingin.UserAuthentication;
 import co.cstad.dao.UserDao;
 import co.cstad.model.InvoiceDTO;
 import co.cstad.util.Singleton;
-import co.cstad.view.*;
 import co.cstad.model.ItemDTO;
-import co.cstad.util.Singleton;
 import co.cstad.view.MenuView;
 import co.cstad.view.MenuViewAdmin;
 import co.cstad.view.MenuViewManager;
@@ -18,26 +18,23 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
-import static co.cstad.Main.menuViewManager;
-
 public class MainApp {
     private static final Scanner scanner = new Scanner(System.in);
     private static final UserAuthentication userAuthentication = new UserAuthentication();
     private static final MenuView menuView = new MenuView();
     private static final MenuViewAdmin menuViewAdmin = new MenuViewAdmin();
-    private static final ItemController itemController = Singleton.itemController();
-    private static final Scanner scanner = new Scanner(System.in);
-    private static final UserAuthentication userAuthentication = new UserAuthentication();
-    private static final MenuView menuView = new MenuView();
+    private static final ItemController itemController = new ItemController();
+    private static final InvoiceController invoiceContoller = new InvoiceController();
     private static final InvoiceDaoImpl invoiceDaoImpl = new InvoiceDaoImpl();
 
     public static void main(String[] args) {
-        menuView.startInterface();
+        //menuView.startInterface();
         menuView.menuLogin();
 
         int option;
         do {
-            option = Integer.parseInt(inputValue("  >> Choose Option Between [ 1 - 3 ] : "));
+            System.out.print(" choose -> ");
+            option = Integer.parseInt(Singleton.getInstance().getScanner().nextLine());
             switch (option) {
                 case 1 -> handleAuthentication();
                 case 2 -> menuView.menuAboutUs();
@@ -85,7 +82,7 @@ public class MainApp {
             switch (op) {
                 case 1 -> handleItemMenu();
                 case 2 -> menuViewAdmin.customerMenu();
-                case 3 -> menuView.invoiceMenu();
+                case 3 -> handleInvoiceMenu();
                 case 4 -> menuViewAdmin.userMenu();
                 case 5 -> menuView.reportMenu();
                 case 6 -> {
@@ -147,5 +144,21 @@ public class MainApp {
                 }
             }
         } while (updateOp != 0);
+    }
+
+    private static void handleInvoiceMenu() {
+        int optInvoice;
+        do {
+            menuView.invoiceMenu();
+            System.out.print("choose -> ");
+            optInvoice = Integer.parseInt(scanner.nextLine());
+            switch (optInvoice) {
+                case 1 -> invoiceContoller.update();
+                case 2 -> invoiceContoller.read();
+                case 3 -> {
+                    return;
+                }
+            }
+        } while (optInvoice != 3);
     }
 }

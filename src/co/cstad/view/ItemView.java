@@ -1,8 +1,12 @@
 package co.cstad.view;
 
 import co.cstad.model.ItemDTO;
+import org.nocrala.tools.texttablefmt.BorderStyle;
+import org.nocrala.tools.texttablefmt.ShownBorders;
+import org.nocrala.tools.texttablefmt.Table;
 
 import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.List;
 import java.util.Scanner;
 
@@ -39,24 +43,35 @@ public class ItemView {
         return newItem;
     }
 
-    public static void printItemDetails(ItemDTO item) {
-        System.out.println("Item details:");
-        System.out.println("Item ID: " + item.getItemId());
-        System.out.println("Item Code: " + item.getItemCode());
-        System.out.println("Description: " + item.getItemDescription());
-        System.out.println("Unit: " + item.getItemUnit());
-        System.out.println("Quantity: " + item.getQty());
-        System.out.println("Price A: " + item.getItemPrice_out_a());
-        System.out.println("Price B: " + item.getItemPrice_out_b());
-        System.out.println("Price C: " + item.getItemPrice_out_c());
-        System.out.println("Status: " + item.getStatus());
+    public static void printItemDetails(Collection<ItemDTO> items) {
+        Table table = new Table(9, BorderStyle.UNICODE_BOX_DOUBLE_BORDER, ShownBorders.ALL);
+        table.addCell("   Item ID   ");
+        table.addCell("   Item Code   ");
+        table.addCell("   Description   ");
+        table.addCell("   Unit   ");
+        table.addCell("   Quantity   ");
+        table.addCell("   Price A   ");
+        table.addCell("   Price B   ");
+        table.addCell("   Price C   ");
+        table.addCell("   Status   ");
+
+        for (ItemDTO item : items) {
+            table.addCell("   " + String.valueOf(item.getItemId()) + "   ");
+            table.addCell("   " + item.getItemCode() + "   ");
+            table.addCell("   " + item.getItemDescription() + "   ");
+            table.addCell("   " + item.getItemUnit() + "   ");
+            table.addCell("   " + String.valueOf(item.getQty()) + "   ");
+            table.addCell("   " + String.valueOf(item.getItemPrice_out_a()) + "   ");
+            table.addCell("   " + String.valueOf(item.getItemPrice_out_b()) + "   ");
+            table.addCell("   " + String.valueOf(item.getItemPrice_out_c()) + "   ");
+            table.addCell("   " + (item.getStatus() ? "Active" : "Inactive") + "   ");
+        }
+
+        System.out.println(table.render());
     }
 
     public static void printItemList(List<ItemDTO> itemList) {
         System.out.println("Item List:");
-        for (ItemDTO item : itemList) {
-            printItemDetails(item);
-            System.out.println("--------------");
-        }
+        printItemDetails(itemList);
     }
 }

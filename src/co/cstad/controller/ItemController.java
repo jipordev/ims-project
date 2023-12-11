@@ -39,6 +39,7 @@ public class ItemController {
 
             if (newItem != null) {
                 // Update the existing item with the new information
+                existingItem.setItemCode(newItem.getItemCode());
                 existingItem.setItemDescription(newItem.getItemDescription());
                 existingItem.setItemUnit(newItem.getItemUnit());
                 existingItem.setQty(newItem.getQty());
@@ -269,8 +270,7 @@ public class ItemController {
         ItemDTO itemToDelete = itemService.selectById(itemId);
 
         if (itemToDelete != null) {
-            System.out.println("Confirmation before deletion:");
-            ItemView.printItemDetails(itemToDelete);
+            System.out.println("Confirmation before deletion.");
 
             System.out.print("Do you want to proceed with the deletion? (yes/no): ");
             String confirmation = scanner.nextLine().toLowerCase();
@@ -302,7 +302,6 @@ public class ItemController {
 
             if (createdItem != null) {
                 System.out.println("Item created successfully:");
-                ItemView.printItemDetails(createdItem);
                 return createdItem;
             } else {
                 System.out.println("Failed to create the item.");

@@ -93,8 +93,20 @@ public class MainApp {
             System.out.print("choose -> ");
             opUser = Integer.parseInt(scanner.nextLine());
             switch (opUser) {
+                case 1 -> {
+                    UserDTO createdUser = userController.create();
+                    if (createdUser != null) {
+                        userController.confirmation(createdUser);
+                    }
+                }
                 case 2 -> userController.read();
                 case 3 -> handleMenuUserUpdate();
+                case 4 -> {
+                    UserDTO deletedUser = userController.delete();
+                    if (deletedUser != null) {
+                        userController.confirmation(deletedUser);
+                    }
+                }
                 case 5 -> {
                     return;
                 }

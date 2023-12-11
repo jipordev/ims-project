@@ -1,6 +1,7 @@
 package co.cstad.view;
 
 import co.cstad.model.ItemDTO;
+import co.cstad.model.UserDTO;
 import org.nocrala.tools.texttablefmt.BorderStyle;
 import org.nocrala.tools.texttablefmt.ShownBorders;
 import org.nocrala.tools.texttablefmt.Table;
@@ -75,9 +76,30 @@ public class MenuViewAdmin implements BoxBorder {
         }
         System.out.println(table.render());
     }
-    public void userConfirmation(){
-
+    public void userConfirmation(UserDTO newUser) {
+        System.out.println();
+        Table table = new Table(2, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.SURROUND);
+        table.setColumnWidth(0, 30, 30);
+        table.setColumnWidth(1, 30, 30);
+        table.addCell(" ".repeat(3) + yellow + "Username:" + reset);
+        table.addCell(" ".repeat(3) + cyan + newUser.getUsername() + reset);
+        table.addCell(" ".repeat(3) + yellow + "Password:" + reset);
+        table.addCell(" ".repeat(3) + cyan + "*****" + reset); // Displaying asterisks for password
+        table.addCell(" ".repeat(3) + yellow + "Email:" + reset);
+        table.addCell(" ".repeat(3) + cyan + newUser.getEmail() + reset);
+        table.addCell(" ".repeat(3) + yellow + "Contact:" + reset);
+        table.addCell(" ".repeat(3) + cyan + newUser.getUserContact() + reset);
+        table.addCell(" ".repeat(3) + yellow + "Address:" + reset);
+        table.addCell(" ".repeat(3) + cyan + newUser.getAddress() + reset);
+        table.addCell(" ".repeat(3) + yellow + "Role ID:" + reset);
+        table.addCell(" ".repeat(3) + cyan + newUser.getRoleId() + reset);
+        if (newUser.getStatus() != null) {
+            table.addCell(" ".repeat(3) + yellow + "Status:" + reset);
+            table.addCell(" ".repeat(3) + cyan + (newUser.getStatus() ? "Active" : "Inactive") + reset);
+        }
+        System.out.println(table.render());
     }
+
 
 
     public void itemStockIn(){

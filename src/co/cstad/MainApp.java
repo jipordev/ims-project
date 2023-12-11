@@ -53,7 +53,71 @@ public class MainApp {
         if (role != null) {
             switch (role.toLowerCase()) {
                 case "admin" -> {
-                    MenuViewAdmin.mainMenuAdmin();
+                    int optionAdmin;
+
+                    do {
+                        MenuViewAdmin.mainMenuAdmin();
+                        optionAdmin = Integer.parseInt(Singleton.inputValue("Choose Option Between [ 1 - 6 ] : "));
+                        switch (optionAdmin) {
+                            case 1 -> {
+
+                            }
+                            case 2 -> {
+
+                            }
+                             case 3 -> {
+                                 menuView.invoiceMenu();
+                                 int option = Integer.parseInt(Singleton.inputValue("Choose Option Between [ 1 - 3 ] : "));
+                                 switch (option) {
+                                     case 1 -> {
+                                         String invoiceCode = Singleton.inputValue("Enter Invoice Code : ");
+                                         Optional<InvoiceDTO> optionalInvoice = invoiceDao.selectByNo(String.valueOf(invoiceCode));
+                                         if (optionalInvoice.isPresent()) {
+                                             InvoiceDTO invoice = optionalInvoice.get();
+                                             System.out.println("Invoice ID: " + invoice.getInvoiceId());
+                                             System.out.println("Invoice No: " + invoice.getInvoiceNo());
+                                             System.out.println("Discount: " + invoice.getDiscount());
+                                             System.out.println("Cancelled: " + invoice.getCancelled());
+                                             System.out.println("Status: " + invoice.getStatus());
+                                             System.out.println("Paid: " + invoice.getPaid());
+                                             System.out.println();
+
+                                             menuView.confirmation();
+                                             String optionConfirmation = Singleton.inputValue("Choose Option Between [ YES / NO ] : ").toLowerCase();
+                                             if (optionConfirmation.equals("yes") || optionConfirmation.equals("y")) {
+                                                 invoiceDao.updateById(invoice);
+                                                 System.out.println("Invoice Returned Successfully !");
+                                             } else {
+                                                 System.out.println("Invoice Cannot be Return !");
+                                             }
+                                         } else {
+                                             System.out.println("Invoice Code Not Found !");
+                                         }
+                                     }
+
+                                     case 2 -> {
+                                         List<InvoiceDTO> invoices = invoiceDao.select();
+                                         for (InvoiceDTO invoice : invoices) {
+                                             System.out.println("Invoice ID: " + invoice.getInvoiceId());
+                                             System.out.println("Invoice No: " + invoice.getInvoiceNo());
+                                             System.out.println("Discount: " + invoice.getDiscount());
+                                             System.out.println("Cancelled: " + invoice.getCancelled());
+                                             System.out.println("Status: " + invoice.getStatus());
+                                             System.out.println("Paid: " + invoice.getPaid());
+                                             System.out.println();
+                                         }
+                                     }
+                                 }
+                             }
+                             case 4 -> {
+
+                             }
+                             case 5 -> {
+
+                             }
+//                             case 6 -> break;
+                        }
+                    } while (true);
                 }
                 case "manager" -> {
                     int optionManager;

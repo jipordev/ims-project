@@ -1,72 +1,72 @@
-package co.cstad.dto;
+package co.cstad.model;
 
 import java.util.Date;
 
 public class PaymentDTO {
-    private int paymentId;
-    private int customerId;
-    private int invoiceId;
-    private int methodId;
-    private double originalAmount;
-    private double paidAmount;
-    private double dueAmount;
+    private Long paymentId;
+    private Long customerId;
+    private Long invoiceId;
+    private Long methodId;
+    private Double originalAmount;
+    private Double paidAmount;
+    private Double dueAmount;
     private Date paidDate;
     private Date dueDate;
-    private boolean status;
+    private Boolean status;
 
-    public int getPaymentId() {
+    public Long getPaymentId() {
         return paymentId;
     }
 
-    public void setPaymentId(int paymentId) {
+    public void setPaymentId(Long paymentId) {
         this.paymentId = paymentId;
     }
 
-    public int getCustomerId() {
+    public Long getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(int customerId) {
+    public void setCustomerId(Long customerId) {
         this.customerId = customerId;
     }
 
-    public int getInvoiceId() {
+    public Long getInvoiceId() {
         return invoiceId;
     }
 
-    public void setInvoiceId(int invoiceId) {
+    public void setInvoiceId(Long invoiceId) {
         this.invoiceId = invoiceId;
     }
 
-    public int getMethodId() {
+    public Long getMethodId() {
         return methodId;
     }
 
-    public void setMethodId(int methodId) {
+    public void setMethodId(Long methodId) {
         this.methodId = methodId;
     }
 
-    public double getOriginalAmount() {
+    public Double getOriginalAmount() {
         return originalAmount;
     }
 
-    public void setOriginalAmount(double originalAmount) {
+    public void setOriginalAmount(Double originalAmount) {
         this.originalAmount = originalAmount;
     }
 
-    public double getPaidAmount() {
+    public Double getPaidAmount() {
         return paidAmount;
     }
 
-    public void setPaidAmount(double paidAmount) {
+    public void setPaidAmount(Double paidAmount) {
         this.paidAmount = paidAmount;
     }
 
-    public double getDueAmount() {
+    public Double getDueAmount() {
         return dueAmount;
     }
 
-    public void setDueAmount(double dueAmount) {
+    public void setDueAmount(Double dueAmount) {
         this.dueAmount = dueAmount;
     }
 
@@ -86,11 +86,11 @@ public class PaymentDTO {
         this.dueDate = dueDate;
     }
 
-    public boolean isStatus() {
+    public Boolean getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(Boolean status) {
         this.status = status;
     }
 }

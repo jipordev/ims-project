@@ -1,22 +1,24 @@
-package co.cstad.dto;
+package co.cstad.model;
+
+import java.math.BigDecimal;
+import java.time.Duration;
 
 public class ItemDTO {
-    private int itemId;
+    private Long itemId;
     private String itemCode;
     private String itemDescription;
     private String itemUnit;
-    private double itemPrice_out_a;
-    private double itemPrice_out_b;
-    private double itemPrice_out_c;
-    private int qty;
-    private int capacity;
-    private boolean status;
+    private BigDecimal itemPrice_out_a;
+    private BigDecimal itemPrice_out_b;
+    private BigDecimal itemPrice_out_c;
+    private Integer qty;
+    private Boolean status;
 
-    public int getItemId() {
+    public Long getItemId() {
         return itemId;
     }
 
-    public void setItemId(int itemId) {
+    public void setItemId(Long itemId) {
         this.itemId = itemId;
     }
 
@@ -44,51 +46,46 @@ public class ItemDTO {
         this.itemUnit = itemUnit;
     }
 
-    public double getItemPrice_out_a() {
+    public BigDecimal getItemPrice_out_a() {
         return itemPrice_out_a;
     }
 
-    public void setItemPrice_out_a(double itemPrice_out_a) {
+    public void setItemPrice_out_a(BigDecimal itemPrice_out_a) {
         this.itemPrice_out_a = itemPrice_out_a;
     }
 
-    public double getItemPrice_out_b() {
+    public BigDecimal getItemPrice_out_b() {
         return itemPrice_out_b;
     }
 
-    public void setItemPrice_out_b(double itemPrice_out_b) {
+    public void setItemPrice_out_b(BigDecimal itemPrice_out_b) {
         this.itemPrice_out_b = itemPrice_out_b;
     }
 
-    public double getItemPrice_out_c() {
+    public BigDecimal getItemPrice_out_c() {
         return itemPrice_out_c;
     }
 
-    public void setItemPrice_out_c(double itemPrice_out_c) {
+    public void setItemPrice_out_c(BigDecimal itemPrice_out_c) {
         this.itemPrice_out_c = itemPrice_out_c;
     }
 
-    public int getQty() {
+    public Integer getQty() {
         return qty;
     }
 
-    public void setQty(int qty) {
+    public void setQty(Integer qty) {
         this.qty = qty;
     }
 
-    public int getCapacity() {
-        return capacity;
-    }
-
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
-    }
-
-    public boolean isStatus() {
+    public Boolean getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(Boolean status) {
         this.status = status;
+    }
+    public Boolean isStatus() {
+        return status;
     }
 }

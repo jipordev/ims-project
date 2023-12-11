@@ -1,5 +1,6 @@
 package co.cstad.view;
 
+import co.cstad.model.ItemDTO;
 import org.nocrala.tools.texttablefmt.BorderStyle;
 import org.nocrala.tools.texttablefmt.ShownBorders;
 import org.nocrala.tools.texttablefmt.Table;
@@ -49,31 +50,32 @@ public class MenuViewAdmin implements BoxBorder {
 
 
     // 1.Item
-    public void itemConfirmation(){
+    public void itemConfirmation(ItemDTO newItem) {
         System.out.println();
         Table table = new Table(2, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
-        table.setColumnWidth(0,30,30);
-        table.setColumnWidth(1,30,30);
-        table.addCell(" ".repeat(3) + yellow + "Description:" +reset);
-        table.addCell(" ".repeat(3) + cyan + "111" + reset);
-        table.addCell(" ".repeat(3)+ yellow + "Code:" + reset);
-        table.addCell(" ".repeat(3)+ cyan + "CSTAD111222" + reset);
-        table.addCell(" ".repeat(3)+ yellow + "Name:" + reset);
-        table.addCell(" ".repeat(3)+ cyan + "Hanuman Beer:"  + reset);
-        table.addCell(" ".repeat(3)+ yellow +"Unit:" + reset);
-        table.addCell(" ".repeat(3)+ cyan +"0.25$" + reset);
-        table.addCell(" ".repeat(3)+ yellow +"Quantity:" + reset);
-        table.addCell(" ".repeat(3)+ cyan +"400" + reset);
-        table.addCell(" ".repeat(3)+ yellow +"Price_A:" + reset);
-        table.addCell(" ".repeat(3)+ cyan +"0.25$" + reset);
-        table.addCell(" ".repeat(3)+ yellow +"Price_B:" + reset);
-        table.addCell(" ".repeat(3)+ cyan +"0.27$" + reset);
-        table.addCell(" ".repeat(3)+ yellow +"Price_C:");
-        table.addCell(" ".repeat(3)+ cyan +"0.30$" + reset);
-        table.addCell(" ".repeat(3)+ yellow +"Status:" + reset);
-        table.addCell(" ".repeat(3)+ cyan +"Active" + reset);
-        System.out.println( table.render());
+        table.setColumnWidth(0, 30, 30);
+        table.setColumnWidth(1, 30, 30);
+        table.addCell(" ".repeat(3) + yellow + "Description:" + reset);
+        table.addCell(" ".repeat(3) + cyan + newItem.getItemDescription() + reset);
+        table.addCell(" ".repeat(3) + yellow + "Code:" + reset);
+        table.addCell(" ".repeat(3) + cyan + newItem.getItemCode() + reset);
+        table.addCell(" ".repeat(3) + yellow + "Unit:" + reset);
+        table.addCell(" ".repeat(3) + cyan + newItem.getItemUnit() + reset);
+        table.addCell(" ".repeat(3) + yellow + "Quantity:" + reset);
+        table.addCell(" ".repeat(3) + cyan + newItem.getQty() + reset);
+        table.addCell(" ".repeat(3) + yellow + "Price_A:" + reset);
+        table.addCell(" ".repeat(3) + cyan + newItem.getItemPrice_out_a() + reset);
+        table.addCell(" ".repeat(3) + yellow + "Price_B:" + reset);
+        table.addCell(" ".repeat(3) + cyan + newItem.getItemPrice_out_b() + reset);
+        table.addCell(" ".repeat(3) + yellow + "Price_C:" + reset);
+        table.addCell(" ".repeat(3) + cyan + newItem.getItemPrice_out_c() + reset);
+        if (newItem.getStatus() != null) {
+            table.addCell(" ".repeat(3) + yellow + "Status:" + reset);
+            table.addCell(" ".repeat(3) + cyan + (newItem.getStatus() ? "Active" : "Inactive") + reset);
+        }
+        System.out.println(table.render());
     }
+
 
     public void itemStockIn(){
         System.out.println("Enter Description:");
@@ -84,10 +86,9 @@ public class MenuViewAdmin implements BoxBorder {
         System.out.println("Enter Price_B:");
         System.out.println("Enter Price_C:");
         System.out.println();
-        itemConfirmation();
     }
 
-    public void menuItemUpdate(){
+    public static void menuItemUpdate(){
         System.out.print("Enter Item id to update: ");
         int idItempUpdate = scanner.nextInt();
         Table table = new Table(6, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
@@ -118,33 +119,27 @@ public class MenuViewAdmin implements BoxBorder {
 
     public void itemUpdateName(){
         System.out.print("Enter New Item Name to Update: ");
-        itemConfirmation();
     }
 
     public void itemUpdateUint(){
         System.out.print("Enter New Item Unit to Update: ");
-        itemConfirmation();
     }
 
     public void itemUpdateQty(){
         System.out.print("Enter New Item Qty to Update: ");
-        itemConfirmation();
     }
 
     public void itemUpdateStatus(){
         System.out.print("Enter New Item Statues to Update: ");
-        itemConfirmation();
     }
 
     public void itemUpdatePrice(){
         System.out.print("Enter New Item Price to Update: ");
-        itemConfirmation();
     }
 
     public void itemDelete(){
         System.out.print("Enter Item id to delete: ");
         int idItemDelete = scanner.nextInt();
-        itemConfirmation();
     }
 
     public void itemRead(){

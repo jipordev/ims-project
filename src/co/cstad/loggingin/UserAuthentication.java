@@ -13,9 +13,9 @@ import java.util.logging.Logger;
 public class UserAuthentication {
     private static final Logger logger = Logger.getLogger(UserAuthentication.class.getName());
 
-    private static final String URL = "jdbc:postgresql://localhost:5432/postgres";
+    private static final String URL = "jdbc:postgresql://localhost:5432/dbims";
     private static final String USER = "postgres";
-    private static final String PASSWORD = "jipor206";
+    private static final String PASSWORD = "78910";
 
     static {
         // Configure the logger
@@ -42,12 +42,12 @@ public class UserAuthentication {
 
     public static String getUserRole(String username) {
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
-            String query = "SELECT r.rolename FROM roles r JOIN users u ON r.id = u.role_id WHERE u.username = ?";
+            String query = "SELECT r.name FROM roles r JOIN users u ON r.id = u.role_id WHERE u.username = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setString(1, username);
                 try (ResultSet resultSet = preparedStatement.executeQuery()) {
                     if (resultSet.next()) {
-                        return resultSet.getString("rolename");
+                        return resultSet.getString("name");
                     }
                 }
             }
@@ -61,4 +61,7 @@ public class UserAuthentication {
         // Implement password hashing logic (e.g., using bcrypt)
         return password;
     }
+
+
+
 }

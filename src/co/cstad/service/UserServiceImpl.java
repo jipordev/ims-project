@@ -15,7 +15,7 @@ public class UserServiceImpl implements UserService{
     }
     @Override
     public UserDTO insert(UserDTO userDTO) {
-        return null;
+        return userDao.insert(userDTO);
     }
 
     @Override
@@ -25,17 +25,18 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public UserDTO selectById(Long id) {
-        return null;
+
+        return userDao.selectById(id).orElse(null);
     }
 
     @Override
     public UserDTO updateById(UserDTO userDTO) {
-        return null;
+        return userDao.updateById(userDTO);
     }
 
     @Override
     public UserDTO deleteById(Long id) {
-        return null;
+        return userDao.deleteById(id);
     }
 
     @Override

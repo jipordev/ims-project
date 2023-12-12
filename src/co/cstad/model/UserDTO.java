@@ -5,7 +5,7 @@ public class UserDTO {
     private String username;
     private String password;
     private String email;
-    private String userContact;
+    private String contact;
     private String address;
     private Boolean status;
     private Long roleId;
@@ -42,12 +42,12 @@ public class UserDTO {
         this.email = email;
     }
 
-    public String getUserContact() {
-        return userContact;
+    public String getContact() {
+        return contact;
     }
 
-    public void setUserContact(String userContact) {
-        this.userContact = userContact;
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 
     public String getAddress() {

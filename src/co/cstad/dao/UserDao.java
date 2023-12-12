@@ -1,19 +1,16 @@
 package co.cstad.dao;
 
-import co.cstad.database.ConnectionFactory;
 import co.cstad.model.UserDTO;
+import co.cstad.util.DbSingleton;
 
-import javax.swing.*;
-import java.awt.color.ICC_ColorSpace;
 import java.sql.*;
-import java.util.logging.Level;
 
 public class UserDao {
     PreparedStatement ps = null;
     Statement stmt = null;
     ResultSet rs = null;
     public void addUserDAO(UserDTO userdto, String user) {
-        try (Connection con = ConnectionFactory.getConnection()) {
+        try (Connection con = DbSingleton.instance()) {
             String query = "SELECT * FROM users WHERE username=? AND password=?";
             ps = con.prepareStatement(query);
             ps.setString(1, userdto.getUserName());

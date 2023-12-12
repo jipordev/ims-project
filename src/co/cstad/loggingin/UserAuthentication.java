@@ -1,7 +1,8 @@
 // UserAuthentication.java
 package co.cstad.loggingin;
 
-import co.cstad.database.ConnectionFactory;
+import co.cstad.util.DbSingleton;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,7 +22,7 @@ public class UserAuthentication {
     }
 
     public static boolean authenticateUser(String username, String password) {
-        try (Connection connection = ConnectionFactory.getConnection()) {
+        try (Connection connection = DbSingleton.instance()) {
             String query = "SELECT * FROM users WHERE username = ? AND password = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setString(1, username);
@@ -36,7 +37,7 @@ public class UserAuthentication {
         return false;
     }
     public static String getUserRole(String username) {
-        try (Connection connection = ConnectionFactory.getConnection()) {
+        try (Connection connection = DbSingleton.instance()) {
             String query = "SELECT r.name FROM roles r JOIN users u ON r.id = u.role_id WHERE u.username = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setString(1, username);
@@ -51,6 +52,7 @@ public class UserAuthentication {
         }
         return null;
     }
+
 
     private static String hashPassword(String password) {
         return password;

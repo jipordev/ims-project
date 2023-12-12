@@ -7,10 +7,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ReportDao {
-    ReportDTO insert(ReportDTO report);
-    List<ReportDTO> select();
-    Optional<ReportDTO> selectByid(Long id);
-    ReportDTO updateById(ReportDTO product);
-    ReportDTO deleteById(Long id);
-    List<ReportDTO> selectByName(String name);
+    List<ReportDTO> selectStockCount();
+    List<ReportDTO> selectStockIn();
+    List<ReportDTO> selectStockOut();
+    List<ReportDTO> selectInvoiceDetail();
+    List<ReportDTO> selectInvoiceAdjustment();
+    List<ReportDTO> selectItemPriceHistory();
+    List<ReportDTO> selectStockAlertReport();
+    List<ReportDTO> selectSummaryReport();
+
 }

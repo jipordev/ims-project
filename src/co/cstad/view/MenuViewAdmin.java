@@ -1023,7 +1023,6 @@ public class MenuViewAdmin implements BoxBorder {
         Table table = new Table(1, BorderStyle.UNICODE_BOX_DOUBLE_BORDER,ShownBorders.SURROUND);
         table.setColumnWidth(0,50,200);
 
-
         System.out.println(green + "_".repeat(50) + reset);
         System.out.println("Enter New User Name : ");
         String des = scanner.nextLine();

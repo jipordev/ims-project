@@ -4,10 +4,30 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class ReportDTO {
-    private Integer stockCountId;
+    private Long stockCountId;
     private Integer stockInId;
+    private Integer stockOutId;
     private Integer itemId;
     private LocalDate stockCountDate;
+    private LocalDate stockOutDate;
+    private BigDecimal priceOut;
+
+    public void setStockOutDate(LocalDate stockOutDate) {
+        this.stockOutDate = stockOutDate;
+    }
+
+    public LocalDate getStockOutDate() {
+        return stockOutDate;
+    }
+
+    public void setPriceOut(BigDecimal priceOut) {
+        this.priceOut = priceOut;
+    }
+
+    public BigDecimal getPriceOut() {
+        return priceOut;
+    }
+
     private Integer qty;
     private LocalDate stockInDate;
     private BigDecimal priceIn;
@@ -20,7 +40,7 @@ public class ReportDTO {
 
     // setter and getter
 
-    public void setStockCountId(Integer stockCountId) {
+    public void setStockCountId(Long stockCountId) {
         this.stockCountId = stockCountId;
     }
 
@@ -34,6 +54,14 @@ public class ReportDTO {
 
     public void setStockCountDate(LocalDate stockCountDate) {
         this.stockCountDate = stockCountDate;
+    }
+
+    public Integer getStockOutId() {
+        return stockOutId;
+    }
+
+    public void setStockOutId(Integer stockOutId) {
+        this.stockOutId = stockOutId;
     }
 
     public void setQty(Integer qty) {
@@ -70,10 +98,6 @@ public class ReportDTO {
 
     public void setReturnedDate(LocalDate returnedDate) {
         this.returnedDate = returnedDate;
-    }
-
-    public Integer getStockCountId() {
-        return stockCountId;
     }
 
     public Integer getStockInId() {
@@ -116,6 +140,10 @@ public class ReportDTO {
         return unitPrice;
     }
 
+    public Long getStockCountId() {
+        return stockCountId;
+    }
+
     public String getInvoiceAdjustment() {
         return invoiceAdjustment;
     }
@@ -123,4 +151,6 @@ public class ReportDTO {
     public LocalDate getReturnedDate() {
         return returnedDate;
     }
+
+
 }

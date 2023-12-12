@@ -5,7 +5,7 @@ import co.cstad.model.ItemDTO;
 import java.util.List;
 
 public interface ItemService {
-    ItemDTO insert(ItemDTO item);
+    ItemDTO insert(ItemDTO itemDTO);
     List<ItemDTO> select();
     ItemDTO selectById(Long id);
     ItemDTO updateById(ItemDTO item);

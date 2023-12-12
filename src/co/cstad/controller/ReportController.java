@@ -1,20 +1,40 @@
-//package co.cstad.controller;
-//
-//import co.cstad.service.UserService;
-//import co.cstad.util.Singleton;
-//import co.cstad.view.MenuViewAdmin;
-//
-//import java.util.Scanner;
-//
-//public class ReportController {
-//    private final MenuViewAdmin menuViewAdmin;
-//    private final
-//    private final Scanner scanner;
-//
-//    public ReportController(UserService userService){
-//        scanner = Singleton.scanner();
-//
-//
-//    }
-//
-//}
+package co.cstad.controller;
+
+import co.cstad.model.ItemDTO;
+import co.cstad.model.ReportDTO;
+import co.cstad.service.ReportService;
+import co.cstad.service.UserService;
+import co.cstad.util.Singleton;
+import co.cstad.view.ItemView;
+import co.cstad.view.MenuViewAdmin;
+import co.cstad.view.ReportView;
+
+import java.util.List;
+import java.util.Scanner;
+
+public class ReportController {
+    private final MenuViewAdmin menuViewAdmin;
+    private final ReportService reportService;
+    private final Scanner scanner;
+
+    public ReportController(){
+        scanner = Singleton.scanner();
+        reportService = Singleton.reportService();
+        menuViewAdmin = Singleton.menuViewAdmin();
+    }
+
+    public void stockCountReport(){
+        List<ReportDTO> reportDTOList = reportService.selectStockCount();
+        ReportView.stockCountReport(reportDTOList);
+    }
+
+    public void stockInReport(){
+        List<ReportDTO> reportDTOList = reportService.selectStockIn();
+        ReportView.stockInReport(reportDTOList);
+    }
+
+    public void StockOutReport(){
+        List<ReportDTO> reportDTOList = reportService.selectStockOut();
+        ReportView.stockOutReport(reportDTOList);
+    }
+}

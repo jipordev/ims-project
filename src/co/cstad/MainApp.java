@@ -1,6 +1,7 @@
 package co.cstad;
 
 import co.cstad.controller.ItemController;
+import co.cstad.controller.ReportController;
 import co.cstad.controller.UserController;
 import co.cstad.loggingin.UserAuthentication;
 import co.cstad.model.ItemDTO;
@@ -22,9 +23,10 @@ public class MainApp {
     private static final MenuViewAdmin menuViewAdmin = Singleton.menuViewAdmin();
     private static final ItemController itemController = Singleton.itemController();
     private static final UserController userController = Singleton.userController();
+    private static final ReportController reportController = Singleton.reportController();
 
     public static void main(String[] args) {
-        menuView.startInterface();
+//        menuView.startInterface();
         menuView.menuLogin();
 
         int option;
@@ -79,7 +81,7 @@ public class MainApp {
                 case 2 -> menuViewAdmin.customerMenu();
                 case 3 -> menuView.invoiceMenu();
                 case 4 -> handleUserMenu();
-                case 5 -> menuView.reportMenu();
+                case 5 -> handleReportMenu();
                 case 6 -> {
                     return;
                 }
@@ -181,5 +183,26 @@ public class MainApp {
                 }
             }
         } while (updateOp != 0);
+    }
+
+    private static void handleReportMenu(){
+        int opReport;
+        do {
+            menuView.reportMenu();
+            System.out.print("Choose option(1-9): ");
+            opReport = Integer.parseInt(scanner.nextLine());
+            switch (opReport){
+                case 1 -> reportController.stockCountReport();
+                case 2 -> reportController.stockInReport();
+                case 3 -> reportController.StockOutReport();
+                case 4 -> System.out.println("");
+                case 5 -> System.out.println("");
+                case 6 -> System.out.println("");
+                case 7 -> System.out.println("");
+                case 8 -> System.out.println("");
+                case 9 -> System.out.println("Back to Main Menu");
+                default -> System.out.println("Invalid option, please try again...!");
+            }
+        }while (opReport != 9);
     }
 }

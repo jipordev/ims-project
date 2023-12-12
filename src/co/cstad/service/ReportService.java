@@ -5,10 +5,13 @@ import co.cstad.model.ReportDTO;
 import java.util.List;
 
 public interface ReportService {
-    ReportDTO insert(ReportDTO report);
-    List<ReportDTO> select();
-    ReportDTO selectById(Long id);
-    ReportDTO updateById(ReportDTO report);
-    ReportDTO deleteById(Long id);
-    List<ReportDTO> selectByName(String name);
+
+    List<ReportDTO> selectStockCount();
+    List<ReportDTO> selectStockIn();
+    List<ReportDTO> selectStockOut();
+    List<ReportDTO> selectInvoiceDetail();
+    List<ReportDTO> selectInvoiceAdjustment();
+    List<ReportDTO> selectItemPriceHistory();
+    List<ReportDTO> selectStockAlertReport();
+    List<ReportDTO> selectSummaryReport();
 }

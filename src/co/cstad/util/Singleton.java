@@ -2,13 +2,12 @@ package co.cstad.util;
 
 import co.cstad.controller.CustomerController;
 import co.cstad.controller.ItemController;
+import co.cstad.controller.ReportController;
 import co.cstad.controller.UserController;
 import co.cstad.dao.ItemDaoImpl;
+import co.cstad.dao.ReportDaoImpl;
 import co.cstad.dao.UserDaoImpl;
-import co.cstad.service.ItemService;
-import co.cstad.service.ItemServiceImpl;
-import co.cstad.service.UserService;
-import co.cstad.service.UserServiceImpl;
+import co.cstad.service.*;
 import co.cstad.view.MenuViewAdmin;
 
 import java.util.Scanner;
@@ -23,6 +22,9 @@ public class Singleton {
     private static UserService userService;
     private static UserDaoImpl userDao;
     private static CustomerController customerController;
+    private static ReportController reportController;
+    private static ReportService reportService;
+    private static ReportDaoImpl reportDao;
     private static MenuViewAdmin menuViewAdmin;
     public static UserController userController(){
         if (userController == null) {
@@ -78,6 +80,27 @@ public class Singleton {
         }
         return itemController;
     }
+
+    public static ReportController reportController() {
+        if (reportController == null) {
+            reportController = new ReportController();
+        }
+        return reportController;
+    }
+    public static ReportDaoImpl getReportDao(){
+        if (reportDao == null) {
+            reportDao = new ReportDaoImpl();
+        }
+        return reportDao;
+    }
+    public static ReportService reportService(){
+        if (reportService == null) {
+            reportService = new ReportServiceImpl();
+        }
+        return reportService;
+    }
+
+
     private Singleton() {
     }
     public static Singleton getInstance() {

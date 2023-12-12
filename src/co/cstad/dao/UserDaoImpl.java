@@ -25,7 +25,7 @@ public class UserDaoImpl implements UserDao{
             preparedStatement.setString(1, userDTO.getUsername());
             preparedStatement.setString(2, userDTO.getPassword());
             preparedStatement.setString(3, userDTO.getEmail());
-            preparedStatement.setString(4, userDTO.getUserContact());
+            preparedStatement.setString(4, userDTO.getContact());
             preparedStatement.setString(5, userDTO.getAddress());
 
             // Set boolean value for the "status" column
@@ -62,7 +62,7 @@ public class UserDaoImpl implements UserDao{
                 userDTO.setUsername(resultSet.getString("username"));
                 userDTO.setPassword(resultSet.getString("password"));
                 userDTO.setEmail(resultSet.getString("email"));
-                userDTO.setUserContact(resultSet.getString("contact"));
+                userDTO.setContact(resultSet.getString("contact"));
                 userDTO.setAddress(resultSet.getString("address"));
                 userDTO.setStatus(resultSet.getBoolean("status"));
                 userDTO.setRoleId(resultSet.getLong("role_id"));
@@ -90,7 +90,7 @@ public class UserDaoImpl implements UserDao{
                 userDTO.setUsername(resultSet.getString("username"));
                 userDTO.setPassword(resultSet.getString("password"));
                 userDTO.setEmail(resultSet.getString("email"));
-                userDTO.setUserContact(resultSet.getString("contact"));
+                userDTO.setContact(resultSet.getString("contact"));
                 userDTO.setAddress(resultSet.getString("address"));
                 userDTO.setStatus(resultSet.getBoolean("status"));
                 userDTO.setRoleId(resultSet.getLong("role_id"));
@@ -105,6 +105,41 @@ public class UserDaoImpl implements UserDao{
 
     @Override
     public UserDTO updateById(UserDTO userDTO) {
+        String sql = "UPDATE users SET username = ?, password = ?, email = ?, contact = ?, address = ?, status = ?, role_id = ? WHERE user_id = ?";
+
+        try {
+            connection.setAutoCommit(false); // Disable auto-commit
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, userDTO.getUsername());
+            preparedStatement.setString(2, userDTO.getPassword());
+            preparedStatement.setString(3, userDTO.getEmail());
+            preparedStatement.setString(4, userDTO.getContact());
+            preparedStatement.setString(5, userDTO.getAddress());
+            preparedStatement.setBoolean(6, userDTO.getStatus());
+            preparedStatement.setLong(7, userDTO.getRoleId());
+            preparedStatement.setLong(8, userDTO.getUserId());
+
+            int affectedRows = preparedStatement.executeUpdate();
+
+            if (affectedRows > 0) {
+                connection.commit();  // Commit the transaction
+                return userDTO;
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            try {
+                connection.rollback();  // Rollback in case of an exception
+            } catch (SQLException rollbackException) {
+                System.out.println(rollbackException.getMessage());
+            }
+        } finally {
+            try {
+                connection.setAutoCommit(true);  // Restore auto-commit mode
+            } catch (SQLException setAutoCommitException) {
+                System.out.println(setAutoCommitException.getMessage());
+            }
+        }
         return null;
     }
 

@@ -151,6 +151,9 @@ public class MainApp {
             System.out.print("choose -> ");
             updateOp = Integer.parseInt(scanner.nextLine());
             switch (updateOp) {
+                case 1 -> userController.updateAll();
+                case 2 -> userController.updateUsername();
+                case 3 -> userController.updatePassword();
                 case 9 -> {
                     return;
                 }

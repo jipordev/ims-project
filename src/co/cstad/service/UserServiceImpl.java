@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public UserDTO updateById(UserDTO userDTO) {
-        return null;
+        return userDao.updateById(userDTO);
     }
 
     @Override

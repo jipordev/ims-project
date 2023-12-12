@@ -28,7 +28,7 @@ public class UserView {
             newUser.setEmail(scanner.nextLine());
 
             System.out.print("Enter user contact:");
-            newUser.setUserContact(scanner.nextLine());
+            newUser.setContact(scanner.nextLine());
 
             System.out.print("Enter user address:");
             newUser.setAddress(scanner.nextLine());
@@ -70,7 +70,7 @@ public class UserView {
             table.addCell("   " + userDTO.getUsername() + "   ");
             table.addCell("   " + userDTO.getPassword()+ "   ");
             table.addCell("   " + userDTO.getEmail() + "   ");
-            table.addCell("   " + userDTO.getUserContact() + "   ");
+            table.addCell("   " + userDTO.getContact() + "   ");
             table.addCell("   " + userDTO.getAddress() + "   ");
             table.addCell("   " + (userDTO.getStatus() ? "Active" : "Inactive") + "   ");
             table.addCell("   " + String.valueOf(userDTO.getRoleId()) + "   ");

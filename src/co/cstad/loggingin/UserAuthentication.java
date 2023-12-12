@@ -1,6 +1,8 @@
 // UserAuthentication.java
 package co.cstad.loggingin;
 
+import co.cstad.util.DbSingleton;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,20 +14,22 @@ import java.util.logging.Logger;
 
 public class UserAuthentication {
     private static final Logger logger = Logger.getLogger(UserAuthentication.class.getName());
+    private static Connection connection;
 
-    private static final String URL = "jdbc:postgresql://localhost:5432/postgres";
-    private static final String USER = "postgres";
-    private static final String PASSWORD = "jipor206";
+    public UserAuthentication() {
+        // No need to explicitly obtain a connection here, let methods use DbSingleton
+        connection = DbSingleton.instance();
+    }
 
     static {
-        // Configure the logger
         ConsoleHandler consoleHandler = new ConsoleHandler();
         consoleHandler.setLevel(Level.ALL); // Set the logging level
         logger.addHandler(consoleHandler);
     }
 
     public static boolean authenticateUser(String username, String password) {
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
+        try {
+            connection = DbSingleton.instance();
             String query = "SELECT * FROM users WHERE username = ? AND password = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setString(1, username);
@@ -41,7 +45,8 @@ public class UserAuthentication {
     }
 
     public static String getUserRole(String username) {
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
+        try {
+            connection = DbSingleton.instance();
             String query = "SELECT r.rolename FROM roles r JOIN users u ON r.id = u.role_id WHERE u.username = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setString(1, username);
@@ -62,3 +67,4 @@ public class UserAuthentication {
         return password;
     }
 }
+

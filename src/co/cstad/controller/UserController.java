@@ -42,7 +42,7 @@ public class UserController {
         return null;
     }
     public UserDTO delete() {
-        System.out.print("Enter the ID of the item to delete: ");
+        System.out.print("Enter the ID of the user to delete: ");
         Long userId = Long.parseLong(scanner.nextLine());
 
         UserDTO userToDelete = userService.selectById(userId);
@@ -106,7 +106,7 @@ public class UserController {
         }
     }
     public void updateUsername(){
-        System.out.print("Enter the ID of the item to update: ");
+        System.out.print("Enter the ID of the user to update: ");
         Long userId = Long.parseLong(scanner.nextLine());
 
         UserDTO existingUser = userService.selectById(userId);
@@ -165,6 +165,146 @@ public class UserController {
                 }
             } else {
                 System.out.println("Incorrect old password. Password update canceled.");
+            }
+        } else {
+            System.out.println("User with ID " + userId + " not found.");
+        }
+    }
+    public void updateEmail(){
+        System.out.print("Enter the ID of the user to update: ");
+        Long userId = Long.parseLong(scanner.nextLine());
+
+        UserDTO existingUser = userService.selectById(userId);
+
+        if (existingUser != null) {
+            System.out.println("Existing User Details:");
+            menuViewAdmin.userConfirmation(existingUser);
+
+            System.out.print("Enter the new email : ");
+            String newEmail = scanner.nextLine();
+
+            existingUser.setEmail(newEmail);
+
+            // Call the service to update the item
+            UserDTO updatedUser = userService.updateById(existingUser);
+
+            if (updatedUser != null) {
+                System.out.println("Email updated successfully :");
+                menuViewAdmin.userConfirmation(updatedUser);
+            } else {
+                System.out.println("Failed to update email.");
+            }
+        } else {
+            System.out.println("User with ID " + userId + " not found.");
+        }
+    }
+    public void updateContact(){
+        System.out.print("Enter the ID of the user to update: ");
+        Long userId = Long.parseLong(scanner.nextLine());
+
+        UserDTO existingUser = userService.selectById(userId);
+
+        if (existingUser != null) {
+            System.out.println("Existing User Details:");
+            menuViewAdmin.userConfirmation(existingUser);
+
+            System.out.print("Enter the new username : ");
+            String newContact = scanner.nextLine();
+
+            existingUser.setContact(newContact);
+
+            // Call the service to update the item
+            UserDTO updatedUser = userService.updateById(existingUser);
+
+            if (updatedUser != null) {
+                System.out.println("Contact updated successfully :");
+                menuViewAdmin.userConfirmation(updatedUser);
+            } else {
+                System.out.println("Failed to update contact.");
+            }
+        } else {
+            System.out.println("User with ID " + userId + " not found.");
+        }
+    }
+    public void updateAddress(){
+        System.out.print("Enter the ID of the user to update: ");
+        Long userId = Long.parseLong(scanner.nextLine());
+
+        UserDTO existingUser = userService.selectById(userId);
+
+        if (existingUser != null) {
+            System.out.println("Existing User Details:");
+            menuViewAdmin.userConfirmation(existingUser);
+
+            System.out.print("Enter the new username : ");
+            String newAddress = scanner.nextLine();
+
+            existingUser.setAddress(newAddress);
+
+            // Call the service to update the item
+            UserDTO updatedUser = userService.updateById(existingUser);
+
+            if (updatedUser != null) {
+                System.out.println("Address updated successfully :");
+                menuViewAdmin.userConfirmation(updatedUser);
+            } else {
+                System.out.println("Failed to update address.");
+            }
+        } else {
+            System.out.println("User with ID " + userId + " not found.");
+        }
+    }
+    public void updateStatus() {
+        System.out.print("Enter the ID of the user to update: ");
+        Long userId = Long.parseLong(scanner.nextLine());
+
+        UserDTO existingUser = userService.selectById(userId);
+
+        if (existingUser != null) {
+            System.out.println("Existing User Details:");
+            menuViewAdmin.userConfirmation(existingUser);
+
+            System.out.print("Enter the new user status (true/false): ");
+            boolean newUserStatus = Boolean.parseBoolean(scanner.nextLine());
+
+            existingUser.setStatus(newUserStatus);
+
+            // Call the service to update the item
+            UserDTO updatedUser = userService.updateById(existingUser);
+
+            if (updatedUser != null) {
+                System.out.println("User status updated successfully:");
+                menuViewAdmin.userConfirmation(updatedUser);
+            } else {
+                System.out.println("Failed to update user status.");
+            }
+        } else {
+            System.out.println("User with ID " + userId + " not found.");
+        }
+    }
+    public void updateRole(){
+        System.out.print("Enter the ID of the user to update: ");
+        Long userId = Long.parseLong(scanner.nextLine());
+
+        UserDTO existingUser = userService.selectById(userId);
+
+        if (existingUser != null) {
+            System.out.println("Existing User Details:");
+            menuViewAdmin.userConfirmation(existingUser);
+
+            System.out.print("Enter the new role(1 for admin, 2 for manager, 3 for report) : ");
+            long newUserRole = Long.parseLong(scanner.nextLine());
+
+            existingUser.setRoleId(newUserRole);
+
+            // Call the service to update the item
+            UserDTO updatedUser = userService.updateById(existingUser);
+
+            if (updatedUser != null) {
+                System.out.println("Role updated successfully :");
+                menuViewAdmin.userConfirmation(updatedUser);
+            } else {
+                System.out.println("Failed to update role.");
             }
         } else {
             System.out.println("User with ID " + userId + " not found.");

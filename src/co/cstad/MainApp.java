@@ -154,6 +154,11 @@ public class MainApp {
                 case 1 -> userController.updateAll();
                 case 2 -> userController.updateUsername();
                 case 3 -> userController.updatePassword();
+                case 4 -> userController.updateEmail();
+                case 5 -> userController.updateContact();
+                case 6 -> userController.updateAddress();
+                case 7 -> userController.updateStatus();
+                case 8 -> userController.updateRole();
                 case 9 -> {
                     return;
                 }

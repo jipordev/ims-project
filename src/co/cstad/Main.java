@@ -53,20 +53,14 @@ public class Main {
 
                         int optionAdmin;
                         do{
-                            menuViewAdmin.mainMenuAdmin();
+                            MenuViewAdmin.mainMenuAdmin();
                             optionAdmin = Integer.parseInt(inputValue("  >> Choose Option Between [ 1 - 6 ] : "));
                             System.out.println("\n".repeat(3));
                             switch (optionAdmin){
 
                                 // Item Menu
                                 case 1 ->{
-                                    System.out.println(
-                                            " ".repeat(50)+"██╗████████╗███████╗███╗   ███╗    ███╗   ███╗███████╗███╗   ██╗██╗   ██╗\n" +
-                                                    " ".repeat(50)+"██║╚══██╔══╝██╔════╝████╗ ████║    ████╗ ████║██╔════╝████╗  ██║██║   ██║\n" +
-                                                    " ".repeat(50)+"██║   ██║   █████╗  ██╔████╔██║    ██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║\n" +
-                                                    " ".repeat(50)+"██║   ██║   ██╔══╝  ██║╚██╔╝██║    ██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║   ██║\n" +
-                                                    " ".repeat(50)+"██║   ██║   ███████╗██║ ╚═╝ ██║    ██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝\n" +
-                                                    " ".repeat(50)+"╚═╝   ╚═╝   ╚══════╝╚═╝     ╚═╝    ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝ \n\n");
+
                                     int optionItem;
                                     do {
                                         menuView.itemMenu();

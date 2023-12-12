@@ -1,36 +1,29 @@
 package co.cstad.model;
 
 public class UserDTO {
-    private int userId;
-    private String roleId;
-    private String userName;
+    private Long userId;
+    private String username;
     private String password;
-    private String address;
     private String email;
-    private String contact;
+    private String userContact;
+    private String address;
+    private Boolean status;
+    private Long roleId;
 
-    public int getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
-    public String getRoleId() {
-        return roleId;
+    public String getUsername() {
+        return username;
     }
 
-    public void setRoleId(String roleId) {
-        this.roleId = roleId;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {

@@ -1,6 +1,7 @@
 package co.cstad.view;
 
 import co.cstad.model.ItemDTO;
+import co.cstad.model.UserDTO;
 import org.nocrala.tools.texttablefmt.BorderStyle;
 import org.nocrala.tools.texttablefmt.ShownBorders;
 import org.nocrala.tools.texttablefmt.Table;
@@ -52,7 +53,7 @@ public class MenuViewAdmin implements BoxBorder {
     // 1.Item
     public void itemConfirmation(ItemDTO newItem) {
         System.out.println();
-        Table table = new Table(2, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
+        Table table = new Table(2, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.SURROUND);
         table.setColumnWidth(0, 30, 30);
         table.setColumnWidth(1, 30, 30);
         table.addCell(" ".repeat(3) + yellow + "Description:" + reset);
@@ -75,6 +76,30 @@ public class MenuViewAdmin implements BoxBorder {
         }
         System.out.println(table.render());
     }
+    public void userConfirmation(UserDTO newUser) {
+        System.out.println();
+        Table table = new Table(2, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.SURROUND);
+        table.setColumnWidth(0, 30, 30);
+        table.setColumnWidth(1, 30, 30);
+        table.addCell(" ".repeat(3) + yellow + "Username:" + reset);
+        table.addCell(" ".repeat(3) + cyan + newUser.getUsername() + reset);
+        table.addCell(" ".repeat(3) + yellow + "Password:" + reset);
+        table.addCell(" ".repeat(3) + cyan + "*****" + reset); // Displaying asterisks for password
+        table.addCell(" ".repeat(3) + yellow + "Email:" + reset);
+        table.addCell(" ".repeat(3) + cyan + newUser.getEmail() + reset);
+        table.addCell(" ".repeat(3) + yellow + "Contact:" + reset);
+        table.addCell(" ".repeat(3) + cyan + newUser.getUserContact() + reset);
+        table.addCell(" ".repeat(3) + yellow + "Address:" + reset);
+        table.addCell(" ".repeat(3) + cyan + newUser.getAddress() + reset);
+        table.addCell(" ".repeat(3) + yellow + "Role ID:" + reset);
+        table.addCell(" ".repeat(3) + cyan + newUser.getRoleId() + reset);
+        if (newUser.getStatus() != null) {
+            table.addCell(" ".repeat(3) + yellow + "Status:" + reset);
+            table.addCell(" ".repeat(3) + cyan + (newUser.getStatus() ? "Active" : "Inactive") + reset);
+        }
+        System.out.println(table.render());
+    }
+
 
 
     public void itemStockIn(){
@@ -877,10 +902,15 @@ public class MenuViewAdmin implements BoxBorder {
         table.setColumnWidth(2,20,20);
         table.setColumnWidth(3,20,20);
 
-        table.addCell(yellow +"  1 > Admin " + reset  );
-        table.addCell(yellow +"  2 > Manager " + reset  );
-        table.addCell(yellow +"  3 > Report " + reset  );
-        table.addCell(yellow +"  4 > Back  " + reset  );
+        table.addCell(yellow +"  1 > All " + reset  );
+        table.addCell(yellow +"  2 > Username " + reset  );
+        table.addCell(yellow +"  3 > Password " + reset  );
+        table.addCell(yellow +"  4 > Email  " + reset  );
+        table.addCell(yellow +"  5 > Contact  " + reset  );
+        table.addCell(yellow +"  6 > Address  " + reset  );
+        table.addCell(yellow +"  7 > Status  " + reset  );
+        table.addCell(yellow +"  8 > Role  " + reset  );
+        table.addCell(yellow +"  9 > Back to menu  " + reset  );
         System.out.print(table.render());
         System.out.println("\n");
 

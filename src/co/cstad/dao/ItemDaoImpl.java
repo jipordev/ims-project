@@ -18,10 +18,6 @@ public class ItemDaoImpl implements ItemDao{
         connection = DbSingleton.instance();
     }
 
-//    @Override
-//    public ItemDTO insert(ItemDTO itemDTO) {
-//        return null;
-//    }
     @Override
     public ItemDTO insert(ItemDTO itemDTO) {
         String sql = "INSERT INTO item (item_code, description, unit, qty, price_a, price_b, price_c, status) " +

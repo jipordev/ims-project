@@ -3,6 +3,7 @@ package co.cstad.controller;
 import co.cstad.model.ItemDTO;
 import co.cstad.service.ItemService;
 import co.cstad.service.ItemServiceImpl;
+import co.cstad.util.Singleton;
 import co.cstad.view.ItemView;
 import co.cstad.view.MenuViewAdmin;
 
@@ -16,9 +17,9 @@ public class ItemController {
     private final Scanner scanner;
 
     public ItemController() {
-        scanner = new Scanner(System.in);
-        itemService = new ItemServiceImpl();
-        menuViewAdmin = new MenuViewAdmin();
+        scanner = Singleton.scanner();
+        itemService = Singleton.itemService();
+        menuViewAdmin = Singleton.menuViewAdmin();
     }
 
     public void read() {
@@ -39,7 +40,6 @@ public class ItemController {
 
             if (newItem != null) {
                 // Update the existing item with the new information
-                existingItem.setItemCode(newItem.getItemCode());
                 existingItem.setItemDescription(newItem.getItemDescription());
                 existingItem.setItemUnit(newItem.getItemUnit());
                 existingItem.setQty(newItem.getQty());
@@ -271,7 +271,7 @@ public class ItemController {
 
         if (itemToDelete != null) {
             System.out.println("Confirmation before deletion.");
-
+            menuViewAdmin.itemConfirmation(itemToDelete);
             System.out.print("Do you want to proceed with the deletion? (yes/no): ");
             String confirmation = scanner.nextLine().toLowerCase();
 

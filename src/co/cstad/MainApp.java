@@ -1,10 +1,11 @@
-// MainApp.java
 package co.cstad;
 
-import co.cstad.controller.InvoiceController;
 import co.cstad.controller.ItemController;
+import co.cstad.controller.UserController;
 import co.cstad.dao.InvoiceDaoImpl;
 import co.cstad.loggingin.UserAuthentication;
+import co.cstad.model.ItemDTO;
+import co.cstad.model.UserDTO;
 import co.cstad.dao.UserDao;
 import co.cstad.model.InvoiceDTO;
 import co.cstad.util.Singleton;
@@ -18,10 +19,15 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
+import static co.cstad.Main.inputValue;
+
 public class MainApp {
     private static final Scanner scanner = new Scanner(System.in);
     private static final UserAuthentication userAuthentication = new UserAuthentication();
     private static final MenuView menuView = new MenuView();
+    private static final MenuViewAdmin menuViewAdmin = Singleton.menuViewAdmin();
+    private static final ItemController itemController = Singleton.itemController();
+    private static final UserController userController = Singleton.userController();
     private static final MenuViewAdmin menuViewAdmin = new MenuViewAdmin();
     private static final ItemController itemController = new ItemController();
     private static final InvoiceController invoiceContoller = new InvoiceController();
@@ -84,6 +90,8 @@ public class MainApp {
                 case 2 -> menuViewAdmin.customerMenu();
                 case 3 -> handleInvoiceMenu();
                 case 4 -> menuViewAdmin.userMenu();
+                case 3 -> menuView.invoiceMenu();
+                case 4 -> handleUserMenu();
                 case 5 -> menuView.reportMenu();
                 case 6 -> {
                     menuView.menuLogin();
@@ -91,6 +99,33 @@ public class MainApp {
                 }
             }
         } while (op != 0);
+    }
+    private static void handleUserMenu(){
+        int opUser;
+        do {
+            menuViewAdmin.userMenu();
+            System.out.print("choose -> ");
+            opUser = Integer.parseInt(scanner.nextLine());
+            switch (opUser) {
+                case 1 -> {
+                    UserDTO createdUser = userController.create();
+                    if (createdUser != null) {
+                        userController.confirmation(createdUser);
+                    }
+                }
+                case 2 -> userController.read();
+                case 3 -> handleMenuUserUpdate();
+                case 4 -> {
+                    UserDTO deletedUser = userController.delete();
+                    if (deletedUser != null) {
+                        userController.confirmation(deletedUser);
+                    }
+                }
+                case 5 -> {
+                    return;
+                }
+            }
+        } while (opUser != 0);
     }
 
     private static void handleItemMenu() {
@@ -123,6 +158,19 @@ public class MainApp {
         } while (op2 != 0);
     }
 
+    private static void handleMenuUserUpdate(){
+        int updateOp;
+        do {
+            menuViewAdmin.optionListUser();
+            System.out.print("choose -> ");
+            updateOp = Integer.parseInt(scanner.nextLine());
+            switch (updateOp) {
+                case 9 -> {
+                    return;
+                }
+            }
+        } while (updateOp != 0);
+    }
     private static void handleMenuItemUpdate() {
         int updateOp;
         do {

@@ -1,14 +1,14 @@
 package co.cstad.service;
 
-import co.cstad.model.Item;
+import co.cstad.model.ItemDTO;
 
 import java.util.List;
 
 public interface ItemService {
-    Item insert(Item item);
-    List<Item> select();
-    Item selectById(Long id);
-    Item updateById(Item item);
-    Item deleteById(Long id);
-    List<Item> selectByName(String name);
+    ItemDTO insert(ItemDTO item);
+    List<ItemDTO> select();
+    ItemDTO selectById(Long id);
+    ItemDTO updateById(ItemDTO item);
+    ItemDTO deleteById(Long id);
+    List<ItemDTO> selectByName(String name);
 }

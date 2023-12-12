@@ -1,7 +1,10 @@
 // UserAuthentication.java
 package co.cstad.loggingin;
+
 import co.cstad.util.DbSingleton;
+
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,6 +23,7 @@ public class UserAuthentication {
     }
 
     static {
+        // Configure the logger
         ConsoleHandler consoleHandler = new ConsoleHandler();
         consoleHandler.setLevel(Level.ALL); // Set the logging level
         logger.addHandler(consoleHandler);

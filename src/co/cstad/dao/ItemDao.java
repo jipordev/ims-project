@@ -1,15 +1,15 @@
 package co.cstad.dao;
 
-import co.cstad.model.Item;
+import co.cstad.model.ItemDTO;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface ItemDao {
-    Item insert(Item item);
-    List<Item> select();
-    Optional<Item> selectById(Long id);
-    Item updateById(Item product);
-    Item deleteById(Long id);
-    List<Item> selectByName(String name);
+    ItemDTO insert(ItemDTO item);
+    List<ItemDTO> select();
+    Optional<ItemDTO> selectById(Long id);
+    ItemDTO updateById(ItemDTO product);
+    ItemDTO deleteById(Long id);
+    List<ItemDTO> selectByName(String name);
 }

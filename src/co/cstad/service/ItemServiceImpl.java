@@ -1,37 +1,49 @@
 package co.cstad.service;
 
-import co.cstad.model.Item;
+import co.cstad.dao.ItemDaoImpl;
+import co.cstad.model.ItemDTO;
+import co.cstad.util.Singleton;
 
 import java.util.List;
 
-public class ItemServiceImpl implements ItemService{
-    @Override
-    public Item insert(Item item) {
-        return null;
+public class ItemServiceImpl implements ItemService {
+    private static ItemDaoImpl itemDao;
+
+    public ItemServiceImpl() {
+        itemDao = Singleton.getItemDao();
     }
 
     @Override
-    public List<Item> select() {
-        return null;
+    public ItemDTO insert(ItemDTO item) {
+        return itemDao.insert(item);
     }
 
     @Override
-    public Item selectById(Long id) {
-        return null;
+    public List<ItemDTO> select() {
+        return itemDao.select();
     }
 
     @Override
-    public Item updateById(Item item) {
-        return null;
+    public ItemDTO selectById(Long id) {
+        // Implement this method to retrieve an item by ID from the DAO
+        return itemDao.selectById(id).orElse(null);
     }
 
     @Override
-    public Item deleteById(Long id) {
-        return null;
+    public ItemDTO updateById(ItemDTO item) {
+        // Implement this method to update an item by ID in the DAO
+        return itemDao.updateById(item);
     }
 
     @Override
-    public List<Item> selectByName(String name) {
-        return null;
+    public ItemDTO deleteById(Long id) {
+        // Implement this method to delete an item by ID in the DAO
+        return itemDao.deleteById(id);
+    }
+
+    @Override
+    public List<ItemDTO> selectByName(String name) {
+        // Implement this method to retrieve items by name from the DAO
+        return itemDao.selectByName(name);
     }
 }

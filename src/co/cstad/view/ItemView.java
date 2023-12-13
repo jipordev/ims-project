@@ -1,6 +1,9 @@
 package co.cstad.view;
 
 import co.cstad.model.ItemDTO;
+import co.cstad.model.StockInDTO;
+import co.cstad.service.ItemService;
+import co.cstad.util.Singleton;
 import org.nocrala.tools.texttablefmt.BorderStyle;
 import org.nocrala.tools.texttablefmt.ShownBorders;
 import org.nocrala.tools.texttablefmt.Table;
@@ -12,6 +15,31 @@ import java.util.Scanner;
 
 public class ItemView {
     private static Scanner scanner = new Scanner(System.in);
+    private static ItemService itemService;
+    public ItemView(){
+        itemService = Singleton.itemService();
+    }
+    public static StockInDTO viewCreateStock(){
+        StockInDTO stockInDTO = new StockInDTO();
+
+        System.out.print("  Enter Item ID : ");
+
+        Long itemId = Long.parseLong(scanner.nextLine());
+        ItemDTO existingItem = itemService.selectById(itemId);
+
+        if (existingItem != null ){
+            stockInDTO.setItemId(Long.parseLong(scanner.nextLine()));
+        } else {
+            System.out.println("Item with id : "+ itemId + " doesn't exist.");
+        }
+
+        System.out.print("  Enter Price : ");
+        stockInDTO.setPriceIn(new BigDecimal(scanner.nextLine()));
+        System.out.print("  Enter Qty : ");
+        stockInDTO.setQtyIn(Integer.parseInt(scanner.nextLine()));
+
+        return stockInDTO;
+    }
 
     public static ItemDTO collectNewItemInformation() {
         ItemDTO newItem = new ItemDTO();

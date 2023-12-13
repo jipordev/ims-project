@@ -4,6 +4,7 @@ import co.cstad.controller.ItemController;
 import co.cstad.controller.UserController;
 import co.cstad.loggingin.UserAuthentication;
 import co.cstad.model.ItemDTO;
+import co.cstad.model.StockInDTO;
 import co.cstad.model.UserDTO;
 import co.cstad.util.Singleton;
 import co.cstad.view.MenuView;
@@ -136,7 +137,8 @@ public class MainApp {
                     }
                 }
                 case 4 -> itemController.read();
-                case 5 -> {
+                case 5 -> itemController.stockIn();
+                case 6 -> {
                     menuView.menuLogin();
                     return;
                 }

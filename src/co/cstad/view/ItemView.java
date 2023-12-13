@@ -16,22 +16,28 @@ import java.util.Scanner;
 public class ItemView {
     private static Scanner scanner = new Scanner(System.in);
     private static ItemService itemService;
-    public ItemView(){
+    static {
         itemService = Singleton.itemService();
     }
     public static StockInDTO viewCreateStock(){
         StockInDTO stockInDTO = new StockInDTO();
 
-        System.out.print("  Enter Item ID : ");
+        do {
+            System.out.print("  Enter Item ID : ");
+            try {
+                Long itemId = Long.parseLong(scanner.nextLine());
+                ItemDTO existingItem = itemService.selectById(itemId);
 
-        Long itemId = Long.parseLong(scanner.nextLine());
-        ItemDTO existingItem = itemService.selectById(itemId);
-
-        if (existingItem != null ){
-            stockInDTO.setItemId(Long.parseLong(scanner.nextLine()));
-        } else {
-            System.out.println("Item with id : "+ itemId + " doesn't exist.");
-        }
+                if (existingItem != null ){
+                    stockInDTO.setItemId(itemId);
+                    break;
+                } else {
+                    System.out.println("Item with id : "+ itemId + " doesn't exist.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println(e.getMessage());
+            }
+        } while (true);
 
         System.out.print("  Enter Price : ");
         stockInDTO.setPriceIn(new BigDecimal(scanner.nextLine()));

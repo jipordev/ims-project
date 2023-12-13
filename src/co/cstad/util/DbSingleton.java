@@ -3,28 +3,26 @@ package co.cstad.util;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DbSingleton {
-    private static final String DRIVER_CLASS_NAME = "org.postgresql.Driver";
-    private static final String CONNECTION_URL = "jdbc:postgresql://localhost/dbinventorymanagement";
-    private static final String USERNAME = "postgres";
-    private static final String PASSWORD = "kheang";
+    private static final Logger logger = Logger.getLogger(DbSingleton.class.getName());
+    private static final String driverClassName = "org.postgresql.Driver";
+    private static final String url = "jdbc:postgresql://localhost/dbinventorymanagement";
+    private static final String username = "postgres";
+    private static final String password = "kheang";
+    private static Connection connection = null;
 
-    private static volatile Connection connection;
-
-    private DbSingleton() {
-        // Prevent instantiation
-    }
+    private DbSingleton() {}
 
     public static Connection instance() {
         if (connection == null) {
             try {
-                Class.forName(DRIVER_CLASS_NAME);
-                connection = DriverManager.getConnection(CONNECTION_URL, USERNAME, PASSWORD);
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            } catch (ClassNotFoundException e) {
-                throw new RuntimeException(e);
+                Class.forName(driverClassName);
+                connection = DriverManager.getConnection(url, username, password);
+            } catch (ClassNotFoundException | SQLException e) {
+                logger.log(Level.SEVERE, "Error creating database connection", e);
             }
         }
         return connection;

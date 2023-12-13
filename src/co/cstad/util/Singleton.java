@@ -14,14 +14,7 @@ import co.cstad.view.MenuViewAdmin;
 
 import java.util.Scanner;
 
-import java.util.Scanner;
-
 public class Singleton {
-    private static Singleton instance;
-    private ItemController itemController;
-    private InvoiceController invoiceController;
-    private Scanner scanner;
-
     private static Singleton instance = null;
     private static Scanner scanner;
     private static ItemController itemController;
@@ -29,6 +22,7 @@ public class Singleton {
     private static ItemDaoImpl itemDao;
     private static UserController userController;
     private static UserService userService;
+    private static InvoiceController invoiceController;
     private static UserDaoImpl userDao;
     private static CustomerController customerController;
     private static MenuViewAdmin menuViewAdmin;
@@ -86,28 +80,18 @@ public class Singleton {
         }
         return itemController;
     }
+    public static InvoiceController invoiceController() {
+        if (invoiceController == null) {
+            invoiceController = new InvoiceController();
+        }
+        return invoiceController;
+    }
     private Singleton() {
-        // Private constructor to prevent instantiation outside the class.
-        itemController = new ItemController();
-        invoiceController = new InvoiceController();
-        scanner = new Scanner(System.in);
     }
     public static Singleton getInstance() {
         if(instance == null) {
             instance = new Singleton();
         }
         return instance;
-    }
-
-    public ItemController getItemController() {
-        return itemController;
-    }
-
-    public InvoiceController getInvoiceController() {
-        return invoiceController;
-    }
-
-    public Scanner getScanner() {
-        return scanner;
     }
 }

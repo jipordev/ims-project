@@ -88,7 +88,7 @@ public class MenuViewAdmin implements BoxBorder {
         table.addCell(" ".repeat(3) + yellow + "Email:" + reset);
         table.addCell(" ".repeat(3) + cyan + newUser.getEmail() + reset);
         table.addCell(" ".repeat(3) + yellow + "Contact:" + reset);
-        table.addCell(" ".repeat(3) + cyan + newUser.getUserContact() + reset);
+        table.addCell(" ".repeat(3) + cyan + newUser.getContact() + reset);
         table.addCell(" ".repeat(3) + yellow + "Address:" + reset);
         table.addCell(" ".repeat(3) + cyan + newUser.getAddress() + reset);
         table.addCell(" ".repeat(3) + yellow + "Role ID:" + reset);

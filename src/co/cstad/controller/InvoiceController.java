@@ -29,7 +29,7 @@ public class InvoiceController {
     }
     public void update() {
         System.out.print("Enter Invoice No: ");
-        String no = Singleton.getInstance().getScanner().nextLine();
+        String no = Singleton.getInstance().scanner().nextLine();
         InvoiceDTO invoiceDTO = invoiceService.selectByNo(no);
 
         if (invoiceDTO != null) {

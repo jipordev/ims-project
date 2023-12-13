@@ -1,22 +1,17 @@
 package co.cstad;
 
+import co.cstad.controller.InvoiceController;
 import co.cstad.controller.ItemController;
 import co.cstad.controller.UserController;
-import co.cstad.dao.InvoiceDaoImpl;
 import co.cstad.loggingin.UserAuthentication;
 import co.cstad.model.ItemDTO;
 import co.cstad.model.UserDTO;
-import co.cstad.dao.UserDao;
-import co.cstad.model.InvoiceDTO;
 import co.cstad.util.Singleton;
-import co.cstad.model.ItemDTO;
 import co.cstad.view.MenuView;
 import co.cstad.view.MenuViewAdmin;
 import co.cstad.view.MenuViewManager;
 import co.cstad.view.MenuViewReport;
 
-import java.util.List;
-import java.util.Optional;
 import java.util.Scanner;
 
 import static co.cstad.Main.inputValue;
@@ -28,10 +23,7 @@ public class MainApp {
     private static final MenuViewAdmin menuViewAdmin = Singleton.menuViewAdmin();
     private static final ItemController itemController = Singleton.itemController();
     private static final UserController userController = Singleton.userController();
-    private static final MenuViewAdmin menuViewAdmin = new MenuViewAdmin();
-    private static final ItemController itemController = new ItemController();
-    private static final InvoiceController invoiceContoller = new InvoiceController();
-    private static final InvoiceDaoImpl invoiceDaoImpl = new InvoiceDaoImpl();
+    private static final InvoiceController invoiceContoller = Singleton.invoiceController();
 
     public static void main(String[] args) {
         //menuView.startInterface();
@@ -39,8 +31,7 @@ public class MainApp {
 
         int option;
         do {
-            System.out.print(" choose -> ");
-            option = Integer.parseInt(Singleton.getInstance().getScanner().nextLine());
+            option = Integer.parseInt(inputValue("  >> Choose Option Between [ 1 - 3 ] : "));
             switch (option) {
                 case 1 -> handleAuthentication();
                 case 2 -> menuView.menuAboutUs();
@@ -57,8 +48,7 @@ public class MainApp {
 
         if (userAuthentication.authenticateUser(username, password)) {
             String role = userAuthentication.getUserRole(username);
-            System.out.println("User authenticated successfully.");
-
+            System.out.println(role);
             if (role != null) {
                 handleRole(role);
             }
@@ -78,6 +68,7 @@ public class MainApp {
         } while (true);
     }
 
+    // Handle Role Menu
     private static void handleAdminMenu() {
         int op;
         do {
@@ -89,17 +80,46 @@ public class MainApp {
                 case 1 -> handleItemMenu();
                 case 2 -> menuViewAdmin.customerMenu();
                 case 3 -> handleInvoiceMenu();
-                case 4 -> menuViewAdmin.userMenu();
-                case 3 -> menuView.invoiceMenu();
                 case 4 -> handleUserMenu();
                 case 5 -> menuView.reportMenu();
                 case 6 -> {
-                    menuView.menuLogin();
                     return;
                 }
             }
         } while (op != 0);
     }
+    private static void handleManagerMenu() {
+        int op;
+        do {
+            MenuViewManager.mainMenuManager();
+            System.out.print("choose -> ");
+            op = Integer.parseInt(scanner.nextLine());
+
+            switch (op) {
+                case 1 -> handleItemMenu();
+                case 2 -> menuView.invoiceMenu();
+                case 3 -> {
+                    return;
+                }
+            }
+        } while (op != 0);
+    }
+    private static void handleReportMenu() {
+        int op;
+        do {
+            MenuViewReport.mainMenuReport();
+            System.out.print("choose -> ");
+            op = Integer.parseInt(scanner.nextLine());
+
+            switch (op) {
+                case 1 -> handleItemMenu();
+                case 2 -> {
+                    return;
+                }
+            }
+        } while (op != 2);
+    }
+
     private static void handleUserMenu(){
         int opUser;
         do {
@@ -193,7 +213,6 @@ public class MainApp {
             }
         } while (updateOp != 0);
     }
-
     private static void handleInvoiceMenu() {
         int optInvoice;
         do {

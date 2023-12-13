@@ -3,8 +3,10 @@ package co.cstad;
 
 import co.cstad.controller.CustomerController;
 import co.cstad.controller.ItemController;
+import co.cstad.controller.StockInController;
 import co.cstad.controller.UserController;
 import co.cstad.loggingin.UserAuthentication;
+import co.cstad.model.CustomerDTO;
 import co.cstad.util.Singleton;
 import co.cstad.view.*;
 import co.cstad.model.ItemDTO;
@@ -20,15 +22,17 @@ import java.util.Scanner;
 import static co.cstad.util.Singleton.inputValue;
 
 public class MainApp {
-    private static final Scanner scanner = new Scanner(System.in);
-    private static final UserAuthentication userAuthentication = new UserAuthentication();
-    private static final MenuView menuView = new MenuView();
+
     private static final MenuViewAdmin menuViewAdmin = Singleton.menuViewAdmin();
     private static final ItemController itemController = Singleton.itemController();
     private static final UserController userController = Singleton.userController();
     static MenuViewManager menuViewManager = new MenuViewManager();
     static MenuViewReport menuViewReport = new MenuViewReport();
     static CustomerController customerController = new CustomerController();
+    private static final Scanner scanner = new Scanner(System.in);
+    private static final UserAuthentication userAuthentication = new UserAuthentication();
+    private static final MenuView menuView = new MenuView();
+    private static final StockInController stockInController = new StockInController();
 
     public static void main(String[] args) {
         menuView.startInterface();
@@ -83,7 +87,7 @@ public class MainApp {
 
             switch (op) {
                 case 1 -> handleItemMenu();
-                case 2 -> menuViewAdmin.customerMenu();
+                case 2 -> handleCustomerMenu();
                 case 3 -> menuView.invoiceMenu();
                 case 4 -> handleUserMenu();
                 case 5 -> menuView.reportMenu();
@@ -150,6 +154,30 @@ public class MainApp {
             }
         } while (op2 != 0);
     }
+    private static void handleCustomerMenu(){
+        int opCus;
+        do {
+            menuViewAdmin.customerMenu();
+            System.out.print("choose -> ");
+            opCus = Integer.parseInt(scanner.nextLine());
+            switch (opCus) {
+                case 1 -> {
+                    customerController.newCustomer();
+                }
+                case 2 -> customerController.read();
+                case 3 -> handleMenuCustomerUpdate();
+                case 4 -> {
+                    CustomerDTO delete = customerController.delete();
+                    if (delete != null) {
+                        customerController.delete();
+                    }
+                }
+                case 5 -> {
+                    return;
+                }
+            }
+        } while (opCus != 0);
+    }
 
     private static void handleMenuUserUpdate(){
         int updateOp;
@@ -161,11 +189,14 @@ public class MainApp {
                 case 1 -> userController.updateAll();
                 case 2 -> userController.updateUsername();
                 case 3 -> userController.updatePassword();
-                case 9 -> {
+                case 4 -> {
                     return;
+                }default -> {
+                    System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
+                    System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 5 .");
                 }
             }
-        } while (updateOp != 0);
+        } while (updateOp != 4);
     }
     private static void handleMenuItemUpdate() {
         int updateOp;
@@ -186,7 +217,36 @@ public class MainApp {
                 case 9 -> {
                     return;
                 }
+                default -> {
+                    System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
+                    System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 5 .");
+                }
             }
         } while (updateOp != 0);
+    }
+    private static void handleMenuCustomerUpdate() {
+        int updateOp;
+        do {
+            menuViewAdmin.optionListUp();
+            System.out.print("choose -> ");
+            updateOp = Integer.parseInt(scanner.nextLine());
+            // Handle update options here...
+            switch (updateOp) {
+                case 1 -> customerController.updateAll();
+                case 2 -> customerController.updateCustomerName();
+                case 3 -> customerController.updateCustomerAddress();
+                case 4 -> customerController.updateCustomerContact1();
+                case 5 -> customerController.updateCustomerContact2();
+                case 6 -> customerController.updateCustomerType();
+                case 7 -> customerController.updateCustomerStatus();
+                case 8 -> {
+                    return;
+                }
+                default -> {
+                    System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
+                    System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 5 .");
+                }
+            }
+        } while (true);
     }
 }

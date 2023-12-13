@@ -145,7 +145,7 @@ public class CustomerDaoImpl implements CustomerDao , BoxBorder {
 
     @Override
     public CustomerDTO deleteById(Long id) {
-        String sql = "DELETE FROM customer WHERE item_id = ?";
+        String sql = "DELETE FROM customer WHERE customer_id = ?";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);

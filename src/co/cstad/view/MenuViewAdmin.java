@@ -51,6 +51,57 @@ public class MenuViewAdmin implements BoxBorder {
 
 
 
+    // 1.Item
+    public void itemConfirmation(ItemDTO newItem) {
+        System.out.println();
+        Table table = new Table(2, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.SURROUND);
+        table.setColumnWidth(0, 30, 30);
+        table.setColumnWidth(1, 30, 30);
+        table.addCell(" ".repeat(3) + yellow + "Description:" + reset);
+        table.addCell(" ".repeat(3) + cyan + newItem.getItemDescription() + reset);
+        table.addCell(" ".repeat(3) + yellow + "Code:" + reset);
+        table.addCell(" ".repeat(3) + cyan + newItem.getItemCode() + reset);
+        table.addCell(" ".repeat(3) + yellow + "Unit:" + reset);
+        table.addCell(" ".repeat(3) + cyan + newItem.getItemUnit() + reset);
+        table.addCell(" ".repeat(3) + yellow + "Quantity:" + reset);
+        table.addCell(" ".repeat(3) + cyan + newItem.getQty() + reset);
+        table.addCell(" ".repeat(3) + yellow + "Price_A:" + reset);
+        table.addCell(" ".repeat(3) + cyan + newItem.getItemPrice_out_a() + reset);
+        table.addCell(" ".repeat(3) + yellow + "Price_B:" + reset);
+        table.addCell(" ".repeat(3) + cyan + newItem.getItemPrice_out_b() + reset);
+        table.addCell(" ".repeat(3) + yellow + "Price_C:" + reset);
+        table.addCell(" ".repeat(3) + cyan + newItem.getItemPrice_out_c() + reset);
+        if (newItem.getStatus() != null) {
+            table.addCell(" ".repeat(3) + yellow + "Status:" + reset);
+            table.addCell(" ".repeat(3) + cyan + (newItem.getStatus() ? "Active" : "Inactive") + reset);
+        }
+        System.out.println(table.render());
+    }
+
+
+    public void userConfirmation(UserDTO newUser) {
+        System.out.println();
+        Table table = new Table(2, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.SURROUND);
+        table.setColumnWidth(0, 30, 30);
+        table.setColumnWidth(1, 30, 30);
+        table.addCell(" ".repeat(3) + yellow + "Username:" + reset);
+        table.addCell(" ".repeat(3) + cyan + newUser.getUsername() + reset);
+        table.addCell(" ".repeat(3) + yellow + "Password:" + reset);
+        table.addCell(" ".repeat(3) + cyan + "*****" + reset); // Displaying asterisks for password
+        table.addCell(" ".repeat(3) + yellow + "Email:" + reset);
+        table.addCell(" ".repeat(3) + cyan + newUser.getEmail() + reset);
+        table.addCell(" ".repeat(3) + yellow + "Contact:" + reset);
+        table.addCell(" ".repeat(3) + cyan + newUser.getContact() + reset);
+        table.addCell(" ".repeat(3) + yellow + "Address:" + reset);
+        table.addCell(" ".repeat(3) + cyan + newUser.getAddress() + reset);
+        table.addCell(" ".repeat(3) + yellow + "Role ID:" + reset);
+        table.addCell(" ".repeat(3) + cyan + newUser.getRoleId() + reset);
+        if (newUser.getStatus() != null) {
+            table.addCell(" ".repeat(3) + yellow + "Status:" + reset);
+            table.addCell(" ".repeat(3) + cyan + (newUser.getStatus() ? "Active" : "Inactive") + reset);
+        }
+        System.out.println(table.render());
+    }
 
 
     // Customer

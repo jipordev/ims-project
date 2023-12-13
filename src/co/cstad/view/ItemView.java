@@ -4,7 +4,6 @@ import co.cstad.model.ItemDTO;
 import org.nocrala.tools.texttablefmt.BorderStyle;
 import org.nocrala.tools.texttablefmt.ShownBorders;
 import org.nocrala.tools.texttablefmt.Table;
-
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;

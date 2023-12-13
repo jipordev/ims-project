@@ -50,7 +50,6 @@ public class UserDaoImpl implements UserDao{
         }
         return null;
     }
-
     public List<UserDTO> select() {
         String sql = "SELECT * FROM users";
         try {
@@ -76,7 +75,6 @@ public class UserDaoImpl implements UserDao{
         }
         return null;
     }
-
     @Override
     public Optional<UserDTO> selectById(Long id) {
         String sql = "SELECT * FROM users WHERE user_id = ?";

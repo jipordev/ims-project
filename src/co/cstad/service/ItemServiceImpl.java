@@ -2,6 +2,7 @@ package co.cstad.service;
 
 import co.cstad.dao.ItemDaoImpl;
 import co.cstad.model.ItemDTO;
+import co.cstad.model.StockInDTO;
 import co.cstad.util.Singleton;
 
 import java.util.List;
@@ -16,6 +17,11 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public ItemDTO insert(ItemDTO item) {
         return itemDao.insert(item);
+    }
+
+    @Override
+    public StockInDTO stockIn(StockInDTO stockInDTO) {
+        return itemDao.stockIn(stockInDTO);
     }
 
     @Override

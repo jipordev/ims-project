@@ -1,4 +1,3 @@
-// MainApp.java
 package co.cstad;
 
 import co.cstad.controller.CustomerController;
@@ -10,6 +9,7 @@ import co.cstad.model.CustomerDTO;
 import co.cstad.util.Singleton;
 import co.cstad.view.*;
 import co.cstad.model.ItemDTO;
+import co.cstad.model.StockInDTO;
 import co.cstad.model.UserDTO;
 import co.cstad.util.Singleton;
 import co.cstad.view.MenuView;
@@ -19,20 +19,17 @@ import co.cstad.view.MenuViewReport;
 
 import java.util.Scanner;
 
-import static co.cstad.util.Singleton.inputValue;
+import static co.cstad.Main.inputValue;
 
 public class MainApp {
 
-    private static final MenuViewAdmin menuViewAdmin = Singleton.menuViewAdmin();
-    private static final ItemController itemController = Singleton.itemController();
-    private static final UserController userController = Singleton.userController();
-    static MenuViewManager menuViewManager = new MenuViewManager();
-    static MenuViewReport menuViewReport = new MenuViewReport();
-    static CustomerController customerController = new CustomerController();
     private static final Scanner scanner = new Scanner(System.in);
     private static final UserAuthentication userAuthentication = new UserAuthentication();
     private static final MenuView menuView = new MenuView();
-    private static final StockInController stockInController = new StockInController();
+    private static final MenuViewAdmin menuViewAdmin = Singleton.menuViewAdmin();
+    private static final ItemController itemController = Singleton.itemController();
+    private static final UserController userController = Singleton.userController();
+    private static final CustomerController customerController = new CustomerController();
 
     public static void main(String[] args) {
         menuView.startInterface();
@@ -147,7 +144,8 @@ public class MainApp {
                     }
                 }
                 case 4 -> itemController.read();
-                case 5 -> {
+                case 5 -> itemController.stockIn();
+                case 6 -> {
                     menuView.menuLogin();
                     return;
                 }
@@ -189,7 +187,12 @@ public class MainApp {
                 case 1 -> userController.updateAll();
                 case 2 -> userController.updateUsername();
                 case 3 -> userController.updatePassword();
-                case 4 -> {
+                case 4 -> userController.updateEmail();
+                case 5 -> userController.updateContact();
+                case 6 -> userController.updateAddress();
+                case 7 -> userController.updateStatus();
+                case 8 -> userController.updateRole();
+                case 9 -> {
                     return;
                 }default -> {
                     System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");

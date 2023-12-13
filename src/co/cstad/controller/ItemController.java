@@ -1,6 +1,7 @@
 package co.cstad.controller;
 
 import co.cstad.model.ItemDTO;
+import co.cstad.model.StockInDTO;
 import co.cstad.service.ItemService;
 import co.cstad.service.ItemServiceImpl;
 import co.cstad.util.Singleton;
@@ -25,6 +26,40 @@ public class ItemController {
     public void read() {
         List<ItemDTO> itemDTOList = itemService.select();
         ItemView.printItemList(itemDTOList);
+    }
+    public StockInDTO stockIn(){
+        StockInDTO newStockIn = ItemView.viewCreateStock();
+
+        if (newStockIn != null) {
+            StockInDTO stockIn = itemService.stockIn(newStockIn);
+
+            if (stockIn != null){
+                System.out.println("Restock successfully");
+                return stockIn;
+            } else {
+                System.out.println("Failed to restock");
+            }
+        } else {
+            System.out.println("Invalid input for restock the item.");
+        }
+        return null;
+    }
+    public ItemDTO create() {
+        ItemDTO newItem = ItemView.collectNewItemInformation();
+
+        if (newItem != null) {
+            ItemDTO createdItem = itemService.insert(newItem);
+
+            if (createdItem != null) {
+                System.out.println("Item created successfully:");
+                return createdItem;
+            } else {
+                System.out.println("Failed to create the item.");
+            }
+        } else {
+            System.out.println("Invalid input for creating a new item.");
+        }
+        return null;
     }
     public void updateAll() {
         System.out.print("Enter the ID of the item to update: ");
@@ -260,9 +295,6 @@ public class ItemController {
             System.out.println("Item with ID " + itemId + " not found.");
         }
     }
-
-
-
     public ItemDTO delete() {
         System.out.print("Enter the ID of the item to delete: ");
         Long itemId = Long.parseLong(scanner.nextLine());
@@ -293,29 +325,9 @@ public class ItemController {
 
         return null;
     }
-
-    public ItemDTO create() {
-        ItemDTO newItem = ItemView.collectNewItemInformation();
-
-        if (newItem != null) {
-            ItemDTO createdItem = itemService.insert(newItem);
-
-            if (createdItem != null) {
-                System.out.println("Item created successfully:");
-                return createdItem;
-            } else {
-                System.out.println("Failed to create the item.");
-            }
-        } else {
-            System.out.println("Invalid input for creating a new item.");
-        }
-        return null;
-    }
-
     public void confirmation(ItemDTO createdItem) {
         menuViewAdmin.itemConfirmation(createdItem);
     }
-
     public void closeScanner() {
         scanner.close();
     }

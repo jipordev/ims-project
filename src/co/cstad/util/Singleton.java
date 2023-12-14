@@ -3,14 +3,12 @@ package co.cstad.util;
 import co.cstad.controller.CustomerController;
 import co.cstad.controller.InvoiceController;
 import co.cstad.controller.ItemController;
-import co.cstad.controller.ReportController;
 import co.cstad.controller.UserController;
 import co.cstad.dao.ItemDaoImpl;
 import co.cstad.dao.ReportDaoImpl;
 import co.cstad.dao.UserDaoImpl;
 import co.cstad.service.*;
 import co.cstad.view.MenuViewAdmin;
-
 import java.util.Scanner;
 
 import java.util.Scanner;
@@ -28,7 +26,14 @@ public class Singleton {
     private static ReportController reportController;
     private static ReportService reportService;
     private static ReportDaoImpl reportDao;
+    private static InvoiceController invoiceController;
     private static MenuViewAdmin menuViewAdmin;
+    public static InvoiceController invoiceController(){
+        if (invoiceController == null) {
+            invoiceController = new InvoiceController();
+        }
+        return invoiceController;
+    }
     public static UserController userController(){
         if (userController == null) {
             userController = new UserController();
@@ -104,7 +109,6 @@ public class Singleton {
     }
 
 
-    private InvoiceController invoiceController;
 
     private Singleton() {
         // Private constructor to prevent instantiation outside the class.

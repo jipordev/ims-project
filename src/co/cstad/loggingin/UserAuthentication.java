@@ -9,14 +9,11 @@ import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
-
 public class UserAuthentication {
     private static final Logger logger = Logger.getLogger(UserAuthentication.class.getName());
     private static Connection connection;
 
     public UserAuthentication() {
-        // No need to explicitly obtain a connection here, let methods use DbSingleton
         connection = DbSingleton.instance();
     }
 
@@ -47,12 +44,12 @@ public class UserAuthentication {
     public static String getUserRole(String username) {
         try {
             connection = DbSingleton.instance();
-            String query = "SELECT r.name FROM roles r JOIN users u ON r.id = u.id WHERE u.username = ?";
+            String query = "SELECT r.rolename FROM roles r JOIN users u ON r.id = u.role_id WHERE u.username = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setString(1, username);
                 try (ResultSet resultSet = preparedStatement.executeQuery()) {
                     if (resultSet.next()) {
-                        return resultSet.getString("name");
+                        return resultSet.getString("rolename");
                     }
                 }
             }
@@ -63,6 +60,7 @@ public class UserAuthentication {
     }
 
     private static String hashPassword(String password) {
+        // Implement password hashing logic (e.g., using bcrypt)
         return password;
     }
 }

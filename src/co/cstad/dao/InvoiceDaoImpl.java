@@ -17,12 +17,12 @@ public class InvoiceDaoImpl implements InvoiceDao{
     public InvoiceDaoImpl(){
         connection = DbSingleton.instance();
     }
+
     @Override
     public InvoiceDTO insert(InvoiceDTO invoice) {
 
             String sql = "INSERT INTO invoice (invoice_no, purchase_date, discount, is_cancelled, status, is_paid) VALUES (?, ?, ?, ?, ?, ?)";
-            try {
-                PreparedStatement pst = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            try (PreparedStatement pst = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                 pst.setString(1, invoice.getInvoiceNo());
                 pst.setDate(2, java.sql.Date.valueOf(invoice.getPurchaseDate()));
                 pst.setDouble(3, invoice.getDiscount());
@@ -30,37 +30,43 @@ public class InvoiceDaoImpl implements InvoiceDao{
                 pst.setBoolean(5, invoice.getStatus());
                 pst.setBoolean(6, invoice.getPaid());
 
-                int affectedRows = pst.executeUpdate();
+            int affectedRows = pst.executeUpdate();
 
-                if (affectedRows > 0) {
-                    try (ResultSet generatedKeys = pst.getGeneratedKeys()) {
-                        if (generatedKeys.next()) {
-                            invoice.setInvoiceId(generatedKeys.getLong(1));
-                        }
-                    }
+            if (affectedRows > 0) {
+                ResultSet generatedKeys = pst.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    invoice.setInvoiceId(generatedKeys.getLong(1));
                 }
-            }catch (SQLException e){
-                throw new RuntimeException();
+                generatedKeys.close();
             }
-        return null;
+
+            pst.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return invoice;
     }
 
     @Override
     public List<InvoiceDTO> select() {
         List<InvoiceDTO> invoices = new ArrayList<>();
-        String sql = "SELECT * FROM invoice";
 
+        try {
+            String sql = "SELECT * FROM invoice";
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
 
-            try {
-                Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery(sql);
-                while (rs.next()) {
-                    InvoiceDTO invoice = mapResultSetToInvoice(rs);
-                    invoices.add(invoice);
-                }
-            }catch (SQLException e){
-                throw new RuntimeException();
+            while (rs.next()) {
+                InvoiceDTO invoice = mapResultSetToInvoice(rs);
+                invoices.add(invoice);
             }
+
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         return invoices;
     }
@@ -70,41 +76,47 @@ public class InvoiceDaoImpl implements InvoiceDao{
         return Optional.empty();
     }
 
-
     @Override
     public Optional<InvoiceDTO> selectByNo(String invoiceNo) {
+        try {
             String sql = "SELECT * FROM invoice WHERE invoice_no = ? AND is_cancelled = false AND status = true";
-            try {
-                PreparedStatement pst = connection.prepareStatement(sql);
-                pst.setString(1, invoiceNo);
-                try (ResultSet rs = pst.executeQuery()) {
-                    if (rs.next()) {
-                        return Optional.of(mapResultSetToInvoice(rs));
-                    }
-                }
-            }catch (SQLException e ){
-                throw new RuntimeException();
+            PreparedStatement pst = connection.prepareStatement(sql);
+
+            pst.setString(1, invoiceNo);
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                return Optional.of(mapResultSetToInvoice(rs));
             }
+
+            rs.close();
+            pst.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         return Optional.empty();
     }
 
     @Override
     public InvoiceDTO updateById(InvoiceDTO invoice) {
+        try {
             String sql = "UPDATE invoice SET is_cancelled = ?, status = ? WHERE invoice_id = ?";
-            try {
-                PreparedStatement pst = connection.prepareStatement(sql);
-                pst.setBoolean(1, true);
-                pst.setBoolean(2, false);
-                pst.setLong(3, invoice.getInvoiceId());
-                int affectedRows = pst.executeUpdate();
+            PreparedStatement pst = connection.prepareStatement(sql);
 
-                if (affectedRows > 0) {
-                    return invoice;
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
+            pst.setBoolean(1, true);
+            pst.setBoolean(2, false);
+            pst.setLong(3, invoice.getInvoiceId());
+            int affectedRows = pst.executeUpdate();
+
+            if (affectedRows > 0) {
+                return invoice;
             }
+
+            pst.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 

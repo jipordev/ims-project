@@ -1,3 +1,4 @@
+// MainApp.java
 package co.cstad;
 
 import co.cstad.controller.CustomerController;
@@ -6,6 +7,7 @@ import co.cstad.controller.ReportController;
 import co.cstad.controller.UserController;
 import co.cstad.dao.InvoiceDaoImpl;
 import co.cstad.loggingin.UserAuthentication;
+import co.cstad.model.*;
 import co.cstad.model.CustomerDTO;
 import co.cstad.dao.UserDao;
 import co.cstad.model.InvoiceDTO;
@@ -17,25 +19,19 @@ import co.cstad.view.MenuView;
 import co.cstad.view.MenuViewAdmin;
 import co.cstad.view.MenuViewManager;
 import co.cstad.view.MenuViewReport;
-
-import java.util.List;
-import java.util.Optional;
 import java.util.Scanner;
 
 import static co.cstad.Main.inputValue;
 
 public class MainApp {
-
     private static final Scanner scanner = new Scanner(System.in);
     private static final UserAuthentication userAuthentication = new UserAuthentication();
     private static final MenuView menuView = new MenuView();
     private static final MenuViewAdmin menuViewAdmin = new MenuViewAdmin();
     private static final ItemController itemController = new ItemController();
-    private static final InvoiceController invoiceContoller = new InvoiceController();
     private static final InvoiceDaoImpl invoiceDaoImpl = new InvoiceDaoImpl();
-    private static final MenuViewAdmin menuViewAdmin = Singleton.menuViewAdmin();
-    private static final ItemController itemController = Singleton.itemController();
     private static final UserController userController = Singleton.userController();
+    private static final InvoiceController invoiceController = new InvoiceController();
     private static final CustomerController customerController = new CustomerController();
     private static final ReportController reportController = new ReportController();
 
@@ -98,7 +94,6 @@ public class MainApp {
                 case 4 -> handleUserMenu();
                 case 5 -> handleReportMenu();
                 case 6 -> {
-                    menuView.menuLogin();
                     return;
                 }
             }
@@ -155,7 +150,7 @@ public class MainApp {
                 }
                 case 4 -> itemController.read();
                 case 5 -> itemController.stockIn();
-                case 6 ->itemController.stockOut();
+                case 6 -> itemController.stockOut();
                 case 7 -> {
                     return;
                 }
@@ -218,7 +213,7 @@ public class MainApp {
                     System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 5 .");
                 }
             }
-        } while (updateOp != 4);
+        } while (updateOp != 0);
     }
 
     private static void handleMenuItemUpdate() {

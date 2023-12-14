@@ -1,10 +1,6 @@
-// UserAuthentication.java
 package co.cstad.loggingin;
-
 import co.cstad.util.DbSingleton;
-
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,7 +13,6 @@ import java.util.logging.Logger;
 public class UserAuthentication {
     private static final Logger logger = Logger.getLogger(UserAuthentication.class.getName());
     private static Connection connection;
-    private static final Logger logger = Logger.getLogger(UserAuthentication.class.getName());
 
     public UserAuthentication() {
         // No need to explicitly obtain a connection here, let methods use DbSingleton

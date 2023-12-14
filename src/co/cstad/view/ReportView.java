@@ -58,6 +58,9 @@ public class ReportView implements BoxBorder {
         System.out.println(table.render());
     }
 
+
+
+
     public static void stockOutReport(Collection<ReportDTO> reports){
         System.out.println(yellow + "\t\tStock Out Report"+reset);
         Table table = new Table(5, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);

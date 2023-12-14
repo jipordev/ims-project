@@ -28,6 +28,7 @@ public class MainApp {
     private static final ItemController itemController = Singleton.itemController();
     private static final UserController userController = Singleton.userController();
     private static final CustomerController customerController = new CustomerController();
+    private static final ReportController reportController = new ReportController();
 
     public static void main(String[] args) {
         menuView.startInterface();
@@ -145,7 +146,6 @@ public class MainApp {
                 case 5 -> itemController.stockIn();
                 case 6 ->itemController.stockOut();
                 case 7 -> {
-                    menuView.menuLogin();
                     return;
                 }
                 default -> {
@@ -243,7 +243,7 @@ public class MainApp {
             System.out.print("Choose option(1-9): ");
             opReport = Integer.parseInt(scanner.nextLine());
             switch (opReport){
-                case 1 -> System.out.println();
+                case 1 -> reportController.stockCountReport();
                 case 2 -> System.out.println();
                 case 3 -> System.out.println();
                 case 4 -> reportController.invoiceDetail();

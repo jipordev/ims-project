@@ -150,8 +150,44 @@ public class ItemView {
         System.out.println(table.render());
     }
 
+
+    public static void printItemCount(Collection<ItemDTO> items) {
+        if (items != null) {
+            Table table = new Table(9, BorderStyle.UNICODE_BOX_DOUBLE_BORDER, ShownBorders.ALL);
+            table.addCell("   Item ID   ");
+            table.addCell("   Item Code   ");
+            table.addCell("   Description   ");
+            table.addCell("   Unit   ");
+            table.addCell("   Quantity   ");
+            table.addCell("   Price A   ");
+            table.addCell("   Price B   ");
+            table.addCell("   Price C   ");
+            table.addCell("   Status   ");
+
+            for (ItemDTO item : items) {
+                // Check if the status is "Active" before adding the row
+                if (item.getStatus() != null && item.getStatus()) {
+                    table.addCell("   " + String.valueOf(item.getItemId()) + "   ");
+                    table.addCell("   " + item.getItemCode() + "   ");
+                    table.addCell("   " + item.getItemDescription() + "   ");
+                    table.addCell("   " + item.getItemUnit() + "   ");
+                    table.addCell("   " + String.valueOf(item.getQty()) + "   ");
+                    table.addCell("   " + String.valueOf(item.getItemPrice_out_a()) + "   ");
+                    table.addCell("   " + String.valueOf(item.getItemPrice_out_b()) + "   ");
+                    table.addCell("   " + String.valueOf(item.getItemPrice_out_c()) + "   ");
+                    table.addCell("   " + "Active" + "   ");
+                }
+            }
+
+            System.out.println(table.render());
+        }
+    }
+
+
     public static void printItemList(List<ItemDTO> itemList) {
         System.out.println("Item List:");
         printItemDetails(itemList);
     }
 }
+
+

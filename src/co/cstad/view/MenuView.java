@@ -59,9 +59,9 @@ public class MenuView implements BoxBorder {
         System.out.println(cyan + "│"+" ".repeat(6)+yellow + "██╔════╝ ╚════██╗"+ reset + " ".repeat(5) +cyan + "│ │");
         System.out.print(cyan + "│ │"+" ".repeat(28)+"│");
         System.out.println(cyan + "│"+" ".repeat(6)+yellow + "██║  ███╗ █████╔╝" +reset + " ".repeat(5)  +cyan + "│ │");
-        System.out.print(cyan + "│ │"+yellow + "  1 > LOGIN " + " ".repeat(16) +cyan + "│");
+        System.out.print(cyan + "│ │"+yellow + "  1 ↪\uFE0F LOGIN " + " ".repeat(15) +cyan + "│");
         System.out.println(cyan + "│"+" ".repeat(6)+yellow + "██║   ██║ ╚═══██╗" +reset + " ".repeat(5)  +cyan + "│ │");
-        System.out.print(cyan + "│ │"+ yellow + "  2 > ABOUT US " + " ".repeat(13) + cyan + "│");
+        System.out.print(cyan + "│ │"+ yellow + "  2 \uD83D\uDC64 ABOUT US " + " ".repeat(12) + cyan + "│");
         System.out.println(cyan + "│"+" ".repeat(6)+yellow + "╚██████╔╝██████╔╝" +reset + " ".repeat(5)  +cyan +  "│ │");
         System.out.print(cyan + "│ │"+ yellow + "  3 ↩\uFE0F EXIT PROGRAM" + " ".repeat(8) + cyan + "│");
         System.out.println("│"+" ".repeat(6)+yellow + "╚═════╝ ╚═════╝" +reset + " ".repeat(7)  +cyan + "│ │");

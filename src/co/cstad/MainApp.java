@@ -192,12 +192,12 @@ public class MainApp {
             System.out.print("Choose option(1-9): ");
             opReport = Integer.parseInt(scanner.nextLine());
             switch (opReport){
-                case 1 -> reportController.stockCountReport();
-                case 2 -> reportController.stockInReport();
-                case 3 -> reportController.StockOutReport();
-                case 4 -> System.out.println("");
-                case 5 -> System.out.println("");
-                case 6 -> System.out.println("");
+                case 1 -> System.out.println();
+                case 2 -> System.out.println();
+                case 3 -> System.out.println();
+                case 4 -> reportController.invoiceDetail();
+                case 5 -> reportController.invoiceAdjustment();
+                case 6 -> reportController.itemPriceHistory();
                 case 7 -> System.out.println("");
                 case 8 -> System.out.println("");
                 case 9 -> System.out.println("Back to Main Menu");

@@ -82,4 +82,79 @@ public class ReportView implements BoxBorder {
         }
         System.out.println(table.render());
     }
+
+    public static void InvoiceDetail(Collection<ReportDTO> reports){
+        System.out.println(yellow + "\t\tInvoice Details"+reset);
+        Table table = new Table(5, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
+        table.setColumnWidth(0,15,20);
+        table.setColumnWidth(1,15,20);
+        table.setColumnWidth(2,15,20);
+        table.setColumnWidth(3,15,20);
+        table.setColumnWidth(4,15,20);
+
+        table.addCell(" ".repeat(2)+ yellow + "Invoice_Detail_Id");
+        table.addCell(" ".repeat(2)+ yellow +"Qty");
+        table.addCell(" ".repeat(2)+ yellow +"Unit_Price");
+        table.addCell(" ".repeat(2)+ yellow +"Item_Id");
+        table.addCell(" ".repeat(2)+ yellow +"Invoice_Id" + reset);
+
+        for (ReportDTO report : reports) {
+            table.addCell("   " + report.getInvoiceDetailId() + "   ");
+            table.addCell("   " + report.getQty() + "   ");
+            table.addCell("   " + report.getUnitPrice()+ "   ");
+            table.addCell("   " + report.getItemId() + "   ");
+            table.addCell("   " + report.getInvoiceId()+ "   ");
+        }
+        System.out.println(table.render());
+    }
+
+    public static void InvoiceAdjustment(Collection<ReportDTO> reports){
+        System.out.println(yellow + "\t\tInvoice Adjustment"+reset);
+        Table table = new Table(6, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
+        table.setColumnWidth(0,15,20);
+        table.setColumnWidth(1,15,20);
+        table.setColumnWidth(2,15,20);
+        table.setColumnWidth(3,15,20);
+        table.setColumnWidth(4,15,20);
+        table.setColumnWidth(5,15,20);
+
+        table.addCell(" ".repeat(2)+ yellow + "Invoice_Adj_Id");
+        table.addCell(" ".repeat(2)+ yellow +"Qty");
+        table.addCell(" ".repeat(2)+ yellow +"Unit_Price");
+        table.addCell(" ".repeat(2)+ yellow +"Return_Date");
+        table.addCell(" ".repeat(2)+ yellow +"Item_Id");
+        table.addCell(" ".repeat(2)+ yellow +"Invoice_Id" + reset);
+
+        for (ReportDTO report : reports) {
+            table.addCell("   " + report.getInvoiceAdjustmentId() + "   ");
+            table.addCell("   " + report.getQty() + "   ");
+            table.addCell("   " + report.getUnitPrice()+ "   ");
+            table.addCell("   " + report.getReturnedDate()+ "   ");
+            table.addCell("   " + report.getItemId() + "   ");
+            table.addCell("   " + report.getInvoiceId()+ "   ");
+        }
+        System.out.println(table.render());
+    }
+
+    public static void itemPriceHistory(Collection<ReportDTO> reports){
+        System.out.println(yellow + "\t\tInvoice Adjustment"+reset);
+        Table table = new Table(4, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
+        table.setColumnWidth(0,15,20);
+        table.setColumnWidth(1,15,20);
+        table.setColumnWidth(2,15,20);
+        table.setColumnWidth(3,15,20);
+
+        table.addCell(" ".repeat(2)+ yellow + "Item_History_Id");
+        table.addCell(" ".repeat(2)+ yellow +"Price");
+        table.addCell(" ".repeat(2)+ yellow +"Updated_at");
+        table.addCell(" ".repeat(2)+ yellow +"Item_Id");
+
+        for (ReportDTO report : reports) {
+            table.addCell("   " + report.getItemHistoryId() + "   ");
+            table.addCell("   " + report.getPrice()+ "   ");
+            table.addCell("   " + report.getUpdatedAt()+ "   ");
+            table.addCell("   " + report.getItemId() + "   ");
+        }
+        System.out.println(table.render());
+    }
 }

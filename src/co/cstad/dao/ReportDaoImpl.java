@@ -19,7 +19,7 @@ public class ReportDaoImpl implements ReportDao{
         connection = DbSingleton.instance();
     }
 
-    @Override
+    /*@Override
     public List<ReportDTO> selectStockCount() {
         String sql = "SELECT * FROM stock_count";
         try {
@@ -39,9 +39,9 @@ public class ReportDaoImpl implements ReportDao{
             System.out.println(e.getMessage());
         }
         return null;
-    }
+    }*/
 
-    @Override
+    /*@Override
     public List<ReportDTO> selectStockIn() {
         String sql = "SELECT * FROM stock_in";
         try {
@@ -62,9 +62,9 @@ public class ReportDaoImpl implements ReportDao{
             System.out.println(e.getMessage());
         }
         return null;
-    }
+    }*/
 
-    @Override
+    /*@Override
     public List<ReportDTO> selectStockOut() {
         String sql = "SELECT * FROM stock_out";
         try {
@@ -85,20 +85,73 @@ public class ReportDaoImpl implements ReportDao{
             System.out.println(e.getMessage());
         }
         return null;
-    }
+    }*/
 
     @Override
     public List<ReportDTO> selectInvoiceDetail() {
+        String sql = "SELECT * FROM invoice_detail";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<ReportDTO> reportDTOS = new ArrayList<>();
+            while (resultSet.next()) {
+                ReportDTO reportDTO = new ReportDTO();
+                reportDTO.setInvoiceDetailId(resultSet.getInt("invoice_detail_id"));
+                reportDTO.setQty(resultSet.getInt("qty"));
+                reportDTO.setUnitPrice(resultSet.getBigDecimal("unit_price"));
+                reportDTO.setItemId(resultSet.getInt("item_id"));
+                reportDTO.setInvoiceId(resultSet.getInt("invoice_id"));
+                reportDTOS.add(reportDTO);
+            }
+            return reportDTOS;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
         return null;
     }
 
     @Override
     public List<ReportDTO> selectInvoiceAdjustment() {
+        String sql = "SELECT * FROM invoice_adjustment";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<ReportDTO> reportDTOS = new ArrayList<>();
+            while (resultSet.next()) {
+                ReportDTO reportDTO = new ReportDTO();
+                reportDTO.setInvoiceAdjustmentId(resultSet.getInt("invoice_adj_id"));
+                reportDTO.setQty(resultSet.getInt("qty"));
+                reportDTO.setUnitPrice(resultSet.getBigDecimal("unit_price"));
+                reportDTO.setReturnedDate(resultSet.getDate("return_date").toLocalDate());
+                reportDTO.setItemId(resultSet.getInt("item_id"));
+                reportDTO.setInvoiceId(resultSet.getInt("invoice_id"));
+                reportDTOS.add(reportDTO);
+            }
+            return reportDTOS;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
         return null;
     }
 
     @Override
     public List<ReportDTO> selectItemPriceHistory() {
+        String sql = "SELECT * FROM item_price_history";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<ReportDTO> reportDTOS = new ArrayList<>();
+            while (resultSet.next()) {
+                ReportDTO reportDTO = new ReportDTO();
+                reportDTO.setItemHistoryId(resultSet.getInt("item_history_id)"));
+                reportDTO.setPrice(resultSet.getBigDecimal("price"));
+                reportDTO.setUpdatedAt(resultSet.getDate("updated_at").toLocalDate());
+                reportDTO.setItemId(resultSet.getInt("item_id"));
+            }
+            return reportDTOS;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
         return null;
     }
 

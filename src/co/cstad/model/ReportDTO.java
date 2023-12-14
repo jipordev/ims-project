@@ -1,6 +1,7 @@
 package co.cstad.model;
 
 import java.math.BigDecimal;
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class ReportDTO {
@@ -11,6 +12,7 @@ public class ReportDTO {
     private LocalDate stockCountDate;
     private LocalDate stockOutDate;
     private BigDecimal priceOut;
+
 
     public void setStockOutDate(LocalDate stockOutDate) {
         this.stockOutDate = stockOutDate;
@@ -35,7 +37,7 @@ public class ReportDTO {
     private Integer invoiceDetailId;
     private Integer invoiceId;
     private BigDecimal unitPrice;
-    private String invoiceAdjustment;
+    private Integer invoiceAdjustmentId;
     private LocalDate returnedDate;
 
     // setter and getter
@@ -92,8 +94,8 @@ public class ReportDTO {
         this.unitPrice = unitPrice;
     }
 
-    public void setInvoiceAdjustment(String invoiceAdjustment) {
-        this.invoiceAdjustment = invoiceAdjustment;
+    public void setInvoiceAdjustmentId(Integer invoiceAdjustmentId) {
+        this.invoiceAdjustmentId=invoiceAdjustmentId;
     }
 
     public void setReturnedDate(LocalDate returnedDate) {
@@ -144,13 +146,43 @@ public class ReportDTO {
         return stockCountId;
     }
 
-    public String getInvoiceAdjustment() {
-        return invoiceAdjustment;
+    public Integer getInvoiceAdjustmentId() {
+        return invoiceAdjustmentId;
     }
 
     public LocalDate getReturnedDate() {
         return returnedDate;
     }
 
+    private Integer itemHistoryId;
+    private LocalDate updatedAt;
+    private BigDecimal price;
 
+    public void setItemPriceId(Integer itemHistoryId) {
+        this.itemHistoryId = itemHistoryId;
+    }
+
+    public void setUpdatedAt(LocalDate updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public Integer getItemHistoryId() {
+        return itemHistoryId;
+    }
+
+    public void setItemHistoryId(Integer itemHistoryId) {
+        this.itemHistoryId = itemHistoryId;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public LocalDate getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
 }

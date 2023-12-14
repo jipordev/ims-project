@@ -1,33 +1,33 @@
 package co.cstad.dao;
 
-import co.cstad.model.Invoice;
+import co.cstad.model.InvoiceDTO;
 
 import java.util.List;
 import java.util.Optional;
 
 public class InvoiceDaoImpl implements InvoiceDao{
     @Override
-    public Invoice insert(Invoice invoice) {
+    public InvoiceDTO insert(InvoiceDTO invoice) {
         return null;
     }
 
     @Override
-    public List<Invoice> select() {
+    public List<InvoiceDTO> select() {
         return null;
     }
 
     @Override
-    public Optional<Invoice> selectById(Long id) {
+    public Optional<InvoiceDTO> selectById(Long id) {
         return Optional.empty();
     }
 
     @Override
-    public Invoice updateById(Invoice invoice) {
+    public InvoiceDTO updateById(InvoiceDTO invoice) {
         return null;
     }
 
     @Override
-    public Invoice deleteById(Long id) {
+    public InvoiceDTO deleteById(Long id) {
         return null;
     }
 }

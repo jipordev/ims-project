@@ -26,7 +26,14 @@ public class Singleton {
     private static UserService userService;
     private static UserDaoImpl userDao;
     private static CustomerController customerController;
+    private static InvoiceController invoiceController;
     private static MenuViewAdmin menuViewAdmin;
+    public static InvoiceController invoiceController(){
+        if (invoiceController == null) {
+            invoiceController = new InvoiceController();
+        }
+        return invoiceController;
+    }
     public static UserController userController(){
         if (userController == null) {
             userController = new UserController();
@@ -81,11 +88,6 @@ public class Singleton {
         }
         return itemController;
     }
-    private static Singleton instance;
-    private ItemController itemController;
-    private InvoiceController invoiceController;
-    private Scanner scanner;
-
     private Singleton() {
         // Private constructor to prevent instantiation outside the class.
         itemController = new ItemController();

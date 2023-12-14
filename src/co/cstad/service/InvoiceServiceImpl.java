@@ -1,9 +1,6 @@
 package co.cstad.service;
 
-import co.cstad.dao.InvoiceDao;
 import co.cstad.dao.InvoiceDaoImpl;
-import co.cstad.dao.ItemDaoImpl;
-import co.cstad.database.ConnectionFactory;
 import co.cstad.model.InvoiceDTO;
 import co.cstad.model.ItemDTO;
 import co.cstad.util.DbSingleton;

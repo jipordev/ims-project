@@ -1,10 +1,13 @@
 package co.cstad.view;
 
 import co.cstad.model.ItemDTO;
+import co.cstad.model.StockInDTO;
+import co.cstad.model.StockOutDTO;
+import co.cstad.service.ItemService;
+import co.cstad.util.Singleton;
 import org.nocrala.tools.texttablefmt.BorderStyle;
 import org.nocrala.tools.texttablefmt.ShownBorders;
 import org.nocrala.tools.texttablefmt.Table;
-
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
@@ -12,6 +15,83 @@ import java.util.Scanner;
 
 public class ItemView {
     private static Scanner scanner = new Scanner(System.in);
+    private static ItemService itemService;
+    static {
+        itemService = Singleton.itemService();
+    }
+    public static StockInDTO viewCreateStock(){
+        StockInDTO stockInDTO = new StockInDTO();
+
+        do {
+            System.out.print("  Enter Item ID : ");
+            try {
+                Long itemId = Long.parseLong(scanner.nextLine());
+                ItemDTO existingItem = itemService.selectById(itemId);
+
+                if (existingItem != null ){
+                    stockInDTO.setItemId(itemId);
+                    break;
+                } else {
+                    System.out.println("Item with id : "+ itemId + " doesn't exist.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println(e.getMessage());
+            }
+        } while (true);
+
+        System.out.print("  Enter Price : ");
+        stockInDTO.setPriceIn(new BigDecimal(scanner.nextLine()));
+        System.out.print("  Enter Qty : ");
+        stockInDTO.setQtyIn(Integer.parseInt(scanner.nextLine()));
+
+        return stockInDTO;
+    }
+
+
+
+    public static StockOutDTO viewCreateStockOut() {
+        StockOutDTO stockOutDTO = new StockOutDTO();
+
+        do {
+            try {
+                System.out.print("  Enter Item ID : ");
+                Long itemId = Long.parseLong(scanner.nextLine());
+
+                // Check if the item with the given item_id exists
+                ItemDTO existingItem = itemService.selectById(itemId);
+
+                if (existingItem != null && existingItem.isStatus()) {
+                    // Check if quantity is greater than 0
+                    if (existingItem.getQty() > 0) {
+                        stockOutDTO.setItemId(itemId);
+                        break;
+                    } else {
+                        System.out.println("Item with ID " + itemId + " has zero quantity.\n Please try again with a different item.\n");
+                    }
+                } else if (existingItem == null) {
+                    System.out.println("Item with ID " + itemId + " doesn't exist. \n Please try again.\n");
+                } else {
+                    System.out.println("Item with ID " + itemId + " has status 'false'. \n Please try again with a different item.\n");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid numeric Item ID.\n");
+            }
+        } while (true);
+
+        try {
+            System.out.print("  Enter Price : ");
+            stockOutDTO.setPriceOut(new BigDecimal(scanner.nextLine()));
+
+            System.out.print("  Enter Qty : ");
+            stockOutDTO.setQtyOut(Integer.parseInt(scanner.nextLine()));
+
+            return stockOutDTO;
+        } catch (NumberFormatException | ArithmeticException e) {
+            System.out.println("Invalid input for price or quantity. \nPlease enter valid numeric values.\n");
+            return null;
+        }
+    }
+
 
     public static ItemDTO collectNewItemInformation() {
         ItemDTO newItem = new ItemDTO();

@@ -10,6 +10,7 @@ public class InvoiceDTO {
     private Boolean isCancelled;
     private Boolean status;
     private Boolean isPaid;
+    public CustomerDTO customer = new CustomerDTO();
 
     public Long getInvoiceId() {
         return invoiceId;
@@ -39,10 +40,14 @@ public class InvoiceDTO {
         return discount;
     }
 
-    public void setDiscount(Double discount) {
-        this.discount = discount;
+    public void setDiscount(String discount) {
+        if (discount != null) {
+            this.discount = Double.parseDouble(discount.replaceAll("[^0-9.]", ""));
+        } else {
+            // Assign a default value when discount is null
+            this.discount = 0.0;
+        }
     }
-
     public Boolean getCancelled() {
         return isCancelled;
     }

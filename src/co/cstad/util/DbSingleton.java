@@ -1,4 +1,3 @@
-// DbSingleton.java
 package co.cstad.util;
 
 import java.sql.Connection;
@@ -11,22 +10,19 @@ public class DbSingleton {
     private static String password = "78910";
     private static Connection connection;
 
+    private DbSingleton() {
+    }
+
     public static Connection instance() {
         if (connection == null) {
             try {
                 Class.forName("org.postgresql.Driver");
-                connection = DriverManager.getConnection(
-                        url,
-                        username,
-                        password
-                );
-            } catch (ClassNotFoundException e) {
-                throw new RuntimeException(e);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+                connection = DriverManager.getConnection(url, username, password);
+            } catch (ClassNotFoundException | SQLException e) {
+                // Log or rethrow the exception for better handling
+                throw new RuntimeException("Error initializing database connection", e);
             }
         }
         return connection;
     }
-
 }

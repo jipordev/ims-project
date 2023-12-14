@@ -2,8 +2,8 @@ package co.cstad.controller;
 
 import co.cstad.model.ItemDTO;
 import co.cstad.model.StockInDTO;
+import co.cstad.model.StockOutDTO;
 import co.cstad.service.ItemService;
-import co.cstad.service.ItemServiceImpl;
 import co.cstad.util.Singleton;
 import co.cstad.view.ItemView;
 import co.cstad.view.MenuViewAdmin;
@@ -27,7 +27,7 @@ public class ItemController {
         List<ItemDTO> itemDTOList = itemService.select();
         ItemView.printItemList(itemDTOList);
     }
-    /*public StockInDTO stockIn(){
+    public StockInDTO stockIn(){
         StockInDTO newStockIn = ItemView.viewCreateStock();
 
         if (newStockIn != null) {
@@ -43,7 +43,9 @@ public class ItemController {
             System.out.println("Invalid input for restock the item.");
         }
         return null;
-    }*/
+    }
+    public void stockOut() {
+    }
     public ItemDTO create() {
         ItemDTO newItem = ItemView.collectNewItemInformation();
 

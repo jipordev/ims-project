@@ -1,16 +1,14 @@
 // MainApp.java
 package co.cstad;
 
+import co.cstad.controller.CustomerController;
 import co.cstad.controller.InvoiceController;
 import co.cstad.controller.ItemController;
 import co.cstad.controller.UserController;
 import co.cstad.dao.InvoiceDaoImpl;
 import co.cstad.loggingin.UserAuthentication;
-import co.cstad.model.ItemDTO;
-import co.cstad.model.StockInDTO;
-import co.cstad.model.UserDTO;
+import co.cstad.model.*;
 import co.cstad.dao.UserDao;
-import co.cstad.model.InvoiceDTO;
 import co.cstad.util.Singleton;
 import co.cstad.model.ItemDTO;
 import co.cstad.view.MenuView;
@@ -30,6 +28,7 @@ public class MainApp {
     private static final ItemController itemController = Singleton.itemController();
     private static final UserController userController = Singleton.userController();
     private static final InvoiceController invoiceController = new InvoiceController();
+    private static final CustomerController customerController = new CustomerController();
     public static void main(String[] args) {
         //menuView.startInterface();
         menuView.menuLogin();
@@ -84,7 +83,7 @@ public class MainApp {
 
             switch (op) {
                 case 1 -> handleItemMenu();
-                case 2 -> menuViewAdmin.customerMenu();
+                case 2 -> handleCustomerMenu();
                 case 3 -> handleInvoiceMenu();
                 case 4 -> handleUserMenu();
                 case 5 -> menuView.reportMenu();
@@ -146,14 +145,40 @@ public class MainApp {
                 }
                 case 4 -> itemController.read();
                 case 5 -> itemController.stockIn();
-                case 6 -> {
-                    menuView.menuLogin();
+                case 7 -> {
                     return;
                 }
             }
         } while (op2 != 0);
     }
-
+    private static void handleCustomerMenu(){
+        int opCus;
+        do {
+            menuViewAdmin.customerMenu();
+            System.out.print("choose -> ");
+            opCus = Integer.parseInt(scanner.nextLine());
+            switch (opCus) {
+                case 1 -> {
+                    customerController.newCustomer();
+                }
+                case 2 -> customerController.read();
+                case 3 -> handleMenuCustomerUpdate();
+                case 4 -> {
+                    CustomerDTO delete = customerController.delete();
+                    if (delete != null) {
+                        customerController.delete();
+                    }
+                }
+                case 5 -> {
+                    return;
+                }
+                default -> {
+                    System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
+                    System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 5 .");
+                }
+            }
+        } while (opCus != 0);
+    }
     private static void handleMenuUserUpdate(){
         int updateOp;
         do {
@@ -212,5 +237,30 @@ public class MainApp {
                 }
             }
         } while (optInvoice != 3);
+    }
+    private static void handleMenuCustomerUpdate() {
+        int updateOp;
+        do {
+            menuViewAdmin.optionListUp();
+            System.out.print("choose -> ");
+            updateOp = Integer.parseInt(scanner.nextLine());
+            // Handle update options here...
+            switch (updateOp) {
+                case 1 -> customerController.updateAll();
+                case 2 -> customerController.updateCustomerName();
+                case 3 -> customerController.updateCustomerAddress();
+                case 4 -> customerController.updateCustomerContact1();
+                case 5 -> customerController.updateCustomerContact2();
+                case 6 -> customerController.updateCustomerType();
+                case 7 -> customerController.updateCustomerStatus();
+                case 8 -> {
+                    return;
+                }
+                default -> {
+                    System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
+                    System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 5 .");
+                }
+            }
+        } while (true);
     }
 }

@@ -39,7 +39,7 @@ public class UserAuthentication {
                 }
             }
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Error during user authentication", e);
+            System.out.println(e.getMessage());
         }
         return false;
     }

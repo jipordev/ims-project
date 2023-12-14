@@ -1,3 +1,4 @@
+// DbSingleton.java
 package co.cstad.util;
 
 import java.sql.Connection;
@@ -29,5 +30,4 @@ public class DbSingleton {
         }
         return connection;
     }
-
 }

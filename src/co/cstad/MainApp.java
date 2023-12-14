@@ -2,12 +2,14 @@ package co.cstad;
 
 import co.cstad.controller.CustomerController;
 import co.cstad.controller.ItemController;
+import co.cstad.controller.ReportController;
 import co.cstad.controller.UserController;
 import co.cstad.loggingin.UserAuthentication;
 import co.cstad.model.CustomerDTO;
 import co.cstad.util.Singleton;
 import co.cstad.model.ItemDTO;
 import co.cstad.model.UserDTO;
+import co.cstad.util.Singleton;
 import co.cstad.view.MenuView;
 import co.cstad.view.MenuViewAdmin;
 import co.cstad.view.MenuViewManager;
@@ -83,7 +85,7 @@ public class MainApp {
                 case 2 -> handleCustomerMenu();
                 case 3 -> menuView.invoiceMenu();
                 case 4 -> handleUserMenu();
-                case 5 -> menuView.reportMenu();
+                case 5 -> handleReportMenu();
                 case 6 -> {
                     return;
                 }
@@ -232,6 +234,27 @@ public class MainApp {
                 }
             }
         } while (updateOp != 0);
+    }
+
+    private static void handleReportMenu(){
+        int opReport;
+        do {
+            menuView.reportMenu();
+            System.out.print("Choose option(1-9): ");
+            opReport = Integer.parseInt(scanner.nextLine());
+            switch (opReport){
+                case 1 -> System.out.println();
+                case 2 -> System.out.println();
+                case 3 -> System.out.println();
+                case 4 -> reportController.invoiceDetail();
+                case 5 -> reportController.invoiceAdjustment();
+                case 6 -> reportController.itemPriceHistory();
+                case 7 -> System.out.println("");
+                case 8 -> System.out.println("");
+                case 9 -> System.out.println("Back to Main Menu");
+                default -> System.out.println("Invalid option, please try again...!");
+            }
+        }while (opReport != 9);
     }
     private static void handleMenuCustomerUpdate() {
         int updateOp;

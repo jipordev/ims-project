@@ -104,10 +104,7 @@ public class Singleton {
     }
 
 
-    private static Singleton instance;
-    private ItemController itemController;
     private InvoiceController invoiceController;
-    private Scanner scanner;
 
     private Singleton() {
         // Private constructor to prevent instantiation outside the class.

@@ -1,6 +1,7 @@
 package co.cstad.dao;
 
 import co.cstad.model.InvoiceDTO;
+import co.cstad.util.DbSingleton;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,13 +13,16 @@ import java.util.List;
 import java.util.Optional;
 
 public class InvoiceDaoImpl implements InvoiceDao{
+    private static Connection connection;
+    public InvoiceDaoImpl(){
+        connection = DbSingleton.instance();
+    }
     @Override
     public InvoiceDTO insert(InvoiceDTO invoice) {
-        return null;
-    public InvoiceDTO insert(InvoiceDTO invoice) {
-        try (Connection con = ConnectionFactory.getConnection()) {
+
             String sql = "INSERT INTO invoice (invoice_no, purchase_date, discount, is_cancelled, status, is_paid) VALUES (?, ?, ?, ?, ?, ?)";
-            try (PreparedStatement pst = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            try {
+                PreparedStatement pst = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 pst.setString(1, invoice.getInvoiceNo());
                 pst.setDate(2, java.sql.Date.valueOf(invoice.getPurchaseDate()));
                 pst.setDouble(3, invoice.getDiscount());
@@ -35,29 +39,28 @@ public class InvoiceDaoImpl implements InvoiceDao{
                         }
                     }
                 }
+            }catch (SQLException e){
+                throw new RuntimeException();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return invoice;
+        return null;
     }
 
     @Override
     public List<InvoiceDTO> select() {
         List<InvoiceDTO> invoices = new ArrayList<>();
+        String sql = "SELECT * FROM invoice";
 
-        try (Connection con = ConnectionFactory.getConnection()) {
-            String sql = "SELECT * FROM invoice";
-            try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
+
+            try {
+                Statement stmt = connection.createStatement();
+             ResultSet rs = stmt.executeQuery(sql);
                 while (rs.next()) {
                     InvoiceDTO invoice = mapResultSetToInvoice(rs);
                     invoices.add(invoice);
                 }
+            }catch (SQLException e){
+                throw new RuntimeException();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
 
         return invoices;
     }
@@ -70,28 +73,27 @@ public class InvoiceDaoImpl implements InvoiceDao{
 
     @Override
     public Optional<InvoiceDTO> selectByNo(String invoiceNo) {
-        try (Connection con = ConnectionFactory.getConnection()) {
             String sql = "SELECT * FROM invoice WHERE invoice_no = ? AND is_cancelled = false AND status = true";
-            try (PreparedStatement pst = con.prepareStatement(sql)) {
+            try {
+                PreparedStatement pst = connection.prepareStatement(sql);
                 pst.setString(1, invoiceNo);
                 try (ResultSet rs = pst.executeQuery()) {
                     if (rs.next()) {
                         return Optional.of(mapResultSetToInvoice(rs));
                     }
                 }
+            }catch (SQLException e ){
+                throw new RuntimeException();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
 
         return Optional.empty();
     }
 
     @Override
     public InvoiceDTO updateById(InvoiceDTO invoice) {
-        try (Connection con = ConnectionFactory.getConnection()) {
             String sql = "UPDATE invoice SET is_cancelled = ?, status = ? WHERE invoice_id = ?";
-            try (PreparedStatement pst = con.prepareStatement(sql)) {
+            try {
+                PreparedStatement pst = connection.prepareStatement(sql);
                 pst.setBoolean(1, true);
                 pst.setBoolean(2, false);
                 pst.setLong(3, invoice.getInvoiceId());
@@ -100,10 +102,9 @@ public class InvoiceDaoImpl implements InvoiceDao{
                 if (affectedRows > 0) {
                     return invoice;
                 }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         return null;
     }
 

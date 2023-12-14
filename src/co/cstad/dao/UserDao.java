@@ -22,7 +22,6 @@ public class UserDao {
     Statement stmt = null;
     ResultSet rs = null;
     public void addUserDAO(UserDTO userdto, String user) {
-        try (Connection con = ConnectionFactory.getConnection()) {
             String query = "SELECT * FROM users WHERE username=? AND password=?";
             ps = con.prepareStatement(query);
             ps.setString(1, userdto.getUserName());

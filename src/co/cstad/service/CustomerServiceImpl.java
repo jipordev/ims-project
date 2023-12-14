@@ -1,33 +1,40 @@
 package co.cstad.service;
 
+import co.cstad.dao.CustomerDao;
+import co.cstad.dao.CustomerDaoImpl;
 import co.cstad.model.CustomerDTO;
 
 import java.util.List;
 
 public class CustomerServiceImpl implements CustomerService{
+    private CustomerDao customerDao;
+    public CustomerServiceImpl() {
+        customerDao = new CustomerDaoImpl();
+    }
+
     @Override
     public CustomerDTO insert(CustomerDTO customerDTO) {
-        return null;
+        return customerDao.insert(customerDTO);
     }
 
     @Override
     public List<CustomerDTO> select() {
-        return null;
+        return customerDao.select();
     }
 
     @Override
     public CustomerDTO selectById(Long id) {
-        return null;
+        return customerDao.selectById(id).orElse(null);
     }
 
     @Override
     public CustomerDTO updateById(CustomerDTO customerDTO) {
-        return null;
+        return customerDao.updateById(customerDTO);
     }
 
     @Override
     public CustomerDTO deleteById(Long id) {
-        return null;
+        return customerDao.deleteById(id);
     }
 
     @Override

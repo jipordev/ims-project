@@ -50,6 +50,7 @@ public class MenuViewAdmin implements BoxBorder {
     }
 
 
+
     // 1.Item
     public void itemConfirmation(ItemDTO newItem) {
         System.out.println();
@@ -76,6 +77,8 @@ public class MenuViewAdmin implements BoxBorder {
         }
         System.out.println(table.render());
     }
+
+
     public void userConfirmation(UserDTO newUser) {
         System.out.println();
         Table table = new Table(2, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.SURROUND);
@@ -99,129 +102,6 @@ public class MenuViewAdmin implements BoxBorder {
         }
         System.out.println(table.render());
     }
-
-
-
-    public void itemStockIn(){
-        System.out.println("Enter Description:");
-        System.out.println("Enter Unit:");
-        System.out.println("Enter Quantity:");
-        System.out.println("Enter Capacity:");
-        System.out.println("Enter Price_A:");
-        System.out.println("Enter Price_B:");
-        System.out.println("Enter Price_C:");
-        System.out.println();
-    }
-
-    public static void menuItemUpdate(){
-        System.out.print("Enter Item id to update: ");
-        int idItempUpdate = scanner.nextInt();
-        Table table = new Table(6, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
-        table.setColumnWidth(0,15,30);
-        table.setColumnWidth(1,15,30);
-        table.setColumnWidth(2,15,30);
-        table.setColumnWidth(3,15,30);
-        table.setColumnWidth(4,15,30);
-        table.setColumnWidth(5,15,30);
-        table.addCell(" ".repeat(3)+"1.All");
-        table.addCell(" ".repeat(3)+"2.Name");
-        table.addCell(" ".repeat(3)+"3.Uit");
-        table.addCell(" ".repeat(3)+"4.Qty");
-        table.addCell(" ".repeat(3)+"5.Status");
-        table.addCell(" ".repeat(3)+"6.Price");
-        System.out.println(table.render());
-    }
-
-    public void itemUpdateAll(){
-        System.out.println("Enter New Description:");
-        System.out.println("Enter New Unit:");
-        System.out.println("Enter New Quantity:");
-        System.out.println("Enter New Capacity:");
-        System.out.println("Enter New Price_A:");
-        System.out.println("Enter New Price_B:");
-        System.out.println("Enter New Price_C:");
-    }
-
-    public void itemUpdateName(){
-        System.out.print("Enter New Item Name to Update: ");
-    }
-
-    public void itemUpdateUint(){
-        System.out.print("Enter New Item Unit to Update: ");
-    }
-
-    public void itemUpdateQty(){
-        System.out.print("Enter New Item Qty to Update: ");
-    }
-
-    public void itemUpdateStatus(){
-        System.out.print("Enter New Item Statues to Update: ");
-    }
-
-    public void itemUpdatePrice(){
-        System.out.print("Enter New Item Price to Update: ");
-    }
-
-    public void itemDelete(){
-        System.out.print("Enter Item id to delete: ");
-        int idItemDelete = scanner.nextInt();
-    }
-
-    public void itemRead(){
-        Table table = new Table(9, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
-        table.setColumnWidth(0,15,20);
-        table.setColumnWidth(1,15,20);
-        table.setColumnWidth(2,15,20);
-        table.setColumnWidth(3,15,20);
-        table.setColumnWidth(4,15,20);
-        table.setColumnWidth(5,15,20);
-        table.setColumnWidth(6,15,20);
-        table.setColumnWidth(7,15,20);
-        table.setColumnWidth(8,15,20);
-
-        table.addCell(" ".repeat(2)+ yellow + "ID");
-        table.addCell(" ".repeat(2)+ yellow +"CODE");
-        table.addCell(" ".repeat(2)+ yellow +"Name");
-        table.addCell(" ".repeat(2)+ yellow +"Unit");
-        table.addCell(" ".repeat(2)+ yellow +"Qty");
-        table.addCell(" ".repeat(2)+ yellow +"Price_A");
-        table.addCell(" ".repeat(2)+ yellow +"Price_B");
-        table.addCell(" ".repeat(2)+ yellow +"Price_C");
-        table.addCell(" ".repeat(2)+ yellow +"Status");
-
-        table.addCell(" ".repeat(2)+blue+"111");
-        table.addCell(" ".repeat(2)+blue+"CSTAD1123");
-        table.addCell(" ".repeat(2)+blue+"Sting");
-        table.addCell(" ".repeat(2)+blue+"000");
-        table.addCell(" ".repeat(2)+blue+"000");
-        table.addCell(" ".repeat(2)+blue+"1.02$");
-        table.addCell(" ".repeat(2)+blue+"1.0$");
-        table.addCell(" ".repeat(2)+blue+"0.99S");
-        table.addCell(" ".repeat(2)+blue+"Active");
-
-        table.addCell(" ".repeat(2)+blue+"222");
-        table.addCell(" ".repeat(2)+blue+"CSTAD1124");
-        table.addCell(" ".repeat(2)+blue+"Hanuman");
-        table.addCell(" ".repeat(2)+blue+"000");
-        table.addCell(" ".repeat(2)+blue+"000");
-        table.addCell(" ".repeat(2)+blue+"1.02$");
-        table.addCell(" ".repeat(2)+blue+"1.0$");
-        table.addCell(" ".repeat(2)+blue+"0.99S");
-        table.addCell(" ".repeat(2)+blue+"Active");
-
-        table.addCell(" ".repeat(2)+ blue +" ");
-        table.addCell(" ".repeat(2)+ blue +" ");
-        table.addCell(" ".repeat(2)+ blue +" ");
-        table.addCell(" ".repeat(2)+ blue +" ");
-        table.addCell(" ".repeat(2)+ blue +" ");
-        table.addCell(" ".repeat(2)+ blue +" ");
-        table.addCell(" ".repeat(2)+ blue +" ");
-        table.addCell(" ".repeat(2)+ blue +" ");
-        table.addCell(" ".repeat(2)+ blue +" ");
-
-        System.out.println(table.render());
-    }
-
 
 
     // Customer
@@ -902,15 +782,10 @@ public class MenuViewAdmin implements BoxBorder {
         table.setColumnWidth(2,20,20);
         table.setColumnWidth(3,20,20);
 
-        table.addCell(yellow +"  1 > All " + reset  );
-        table.addCell(yellow +"  2 > Username " + reset  );
-        table.addCell(yellow +"  3 > Password " + reset  );
-        table.addCell(yellow +"  4 > Email  " + reset  );
-        table.addCell(yellow +"  5 > Contact  " + reset  );
-        table.addCell(yellow +"  6 > Address  " + reset  );
-        table.addCell(yellow +"  7 > Status  " + reset  );
-        table.addCell(yellow +"  8 > Role  " + reset  );
-        table.addCell(yellow +"  9 > Back to menu  " + reset  );
+        table.addCell(yellow +"  1 > Admin " + reset  );
+        table.addCell(yellow +"  2 > Manager " + reset  );
+        table.addCell(yellow +"  3 > Report " + reset  );
+        table.addCell(yellow +"  4 > Back  " + reset  );
         System.out.print(table.render());
         System.out.println("\n");
 

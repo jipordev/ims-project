@@ -17,14 +17,6 @@ public class CustomerDTO {
         this.customersId = customersId;
     }
 
-    public Boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(Boolean status) {
-        this.status = status;
-    }
-
     public String getCustomerName() {
         return customerName;
     }
@@ -57,11 +49,11 @@ public class CustomerDTO {
         this.contact2 = contact2;
     }
 
-    public boolean isStatus() {
+    public Boolean getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(Boolean status) {
         this.status = status;
     }
 
@@ -69,7 +61,24 @@ public class CustomerDTO {
         return customerType;
     }
 
+
+
+
     public void setCustomerType(String customerType) {
         this.customerType = customerType;
+    }
+
+
+    @Override
+    public String toString() {
+        return "CustomerDTO{" +
+                "customersId=" + customersId +
+                ", customerName='" + customerName + '\'' +
+                ", address='" + address + '\'' +
+                ", contact1='" + contact1 + '\'' +
+                ", contact2='" + contact2 + '\'' +
+                ", status=" + status +
+                ", customerType='" + customerType + '\'' +
+                '}';
     }
 }

@@ -27,7 +27,7 @@ public class ItemController {
         List<ItemDTO> itemDTOList = itemService.select();
         ItemView.printItemList(itemDTOList);
     }
-    public StockInDTO stockIn(){
+    /*public StockInDTO stockIn(){
         StockInDTO newStockIn = ItemView.viewCreateStock();
 
         if (newStockIn != null) {
@@ -43,7 +43,7 @@ public class ItemController {
             System.out.println("Invalid input for restock the item.");
         }
         return null;
-    }
+    }*/
     public ItemDTO create() {
         ItemDTO newItem = ItemView.collectNewItemInformation();
 

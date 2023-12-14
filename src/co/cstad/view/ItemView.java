@@ -2,6 +2,7 @@ package co.cstad.view;
 
 import co.cstad.model.ItemDTO;
 import co.cstad.model.StockInDTO;
+import co.cstad.model.StockOutDTO;
 import co.cstad.service.ItemService;
 import co.cstad.util.Singleton;
 import org.nocrala.tools.texttablefmt.BorderStyle;
@@ -45,6 +46,52 @@ public class ItemView {
 
         return stockInDTO;
     }
+
+
+
+    public static StockOutDTO viewCreateStockOut() {
+        StockOutDTO stockOutDTO = new StockOutDTO();
+
+        do {
+            try {
+                System.out.print("  Enter Item ID : ");
+                Long itemId = Long.parseLong(scanner.nextLine());
+
+                // Check if the item with the given item_id exists
+                ItemDTO existingItem = itemService.selectById(itemId);
+
+                if (existingItem != null && existingItem.isStatus()) {
+                    // Check if quantity is greater than 0
+                    if (existingItem.getQty() > 0) {
+                        stockOutDTO.setItemId(itemId);
+                        break;
+                    } else {
+                        System.out.println("Item with ID " + itemId + " has zero quantity.\n Please try again with a different item.\n");
+                    }
+                } else if (existingItem == null) {
+                    System.out.println("Item with ID " + itemId + " doesn't exist. \n Please try again.\n");
+                } else {
+                    System.out.println("Item with ID " + itemId + " has status 'false'. \n Please try again with a different item.\n");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid numeric Item ID.\n");
+            }
+        } while (true);
+
+        try {
+            System.out.print("  Enter Price : ");
+            stockOutDTO.setPriceOut(new BigDecimal(scanner.nextLine()));
+
+            System.out.print("  Enter Qty : ");
+            stockOutDTO.setQtyOut(Integer.parseInt(scanner.nextLine()));
+
+            return stockOutDTO;
+        } catch (NumberFormatException | ArithmeticException e) {
+            System.out.println("Invalid input for price or quantity. \nPlease enter valid numeric values.\n");
+            return null;
+        }
+    }
+
 
     public static ItemDTO collectNewItemInformation() {
         ItemDTO newItem = new ItemDTO();

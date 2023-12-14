@@ -2,16 +2,12 @@ package co.cstad;
 
 import co.cstad.controller.CustomerController;
 import co.cstad.controller.ItemController;
-import co.cstad.controller.StockInController;
 import co.cstad.controller.UserController;
 import co.cstad.loggingin.UserAuthentication;
 import co.cstad.model.CustomerDTO;
 import co.cstad.util.Singleton;
-import co.cstad.view.*;
 import co.cstad.model.ItemDTO;
-import co.cstad.model.StockInDTO;
 import co.cstad.model.UserDTO;
-import co.cstad.util.Singleton;
 import co.cstad.view.MenuView;
 import co.cstad.view.MenuViewAdmin;
 import co.cstad.view.MenuViewManager;
@@ -145,9 +141,14 @@ public class MainApp {
                 }
                 case 4 -> itemController.read();
                 case 5 -> itemController.stockIn();
-                case 6 -> {
+                case 6 ->itemController.stockOut();
+                case 7 -> {
                     menuView.menuLogin();
                     return;
+                }
+                default -> {
+                    System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
+                    System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 5 .");
                 }
             }
         } while (op2 != 0);
@@ -173,6 +174,10 @@ public class MainApp {
                 case 5 -> {
                     return;
                 }
+                default -> {
+                    System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
+                    System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 5 .");
+                }
             }
         } while (opCus != 0);
     }
@@ -194,7 +199,8 @@ public class MainApp {
                 case 8 -> userController.updateRole();
                 case 9 -> {
                     return;
-                }default -> {
+                }
+                default -> {
                     System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
                     System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 5 .");
                 }

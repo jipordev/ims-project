@@ -1,3 +1,4 @@
+// UserAuthentication.java
 package co.cstad.loggingin;
 import co.cstad.util.DbSingleton;
 import java.sql.Connection;
@@ -38,7 +39,7 @@ public class UserAuthentication {
                 }
             }
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Error during user authentication", e);
+            System.out.println(e.getMessage());
         }
         return false;
     }
@@ -62,7 +63,6 @@ public class UserAuthentication {
     }
 
     private static String hashPassword(String password) {
-        // Implement password hashing logic (e.g., using bcrypt)
         return password;
     }
 }

@@ -1,29 +1,36 @@
 package co.cstad.model;
 
 public class UserDTO {
-    private Long userId;
-    private String username;
+    private int userId;
+    private String roleId;
+    private String userName;
     private String password;
+    private String address;
     private String email;
     private String contact;
-    private String address;
-    private Boolean status;
-    private Long roleId;
 
-    public Long getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
-    public String getUsername() {
-        return username;
+    public String getRoleId() {
+        return roleId;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setRoleId(String roleId) {
+        this.roleId = roleId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
@@ -32,6 +39,14 @@ public class UserDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getEmail() {
@@ -48,29 +63,5 @@ public class UserDTO {
 
     public void setContact(String contact) {
         this.contact = contact;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public Boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(Boolean status) {
-        this.status = status;
-    }
-
-    public Long getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
     }
 }

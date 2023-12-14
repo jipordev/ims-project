@@ -4,8 +4,11 @@ import co.cstad.controller.CustomerController;
 import co.cstad.controller.ItemController;
 import co.cstad.controller.ReportController;
 import co.cstad.controller.UserController;
+import co.cstad.dao.InvoiceDaoImpl;
 import co.cstad.loggingin.UserAuthentication;
 import co.cstad.model.CustomerDTO;
+import co.cstad.dao.UserDao;
+import co.cstad.model.InvoiceDTO;
 import co.cstad.util.Singleton;
 import co.cstad.model.ItemDTO;
 import co.cstad.model.UserDTO;
@@ -15,6 +18,8 @@ import co.cstad.view.MenuViewAdmin;
 import co.cstad.view.MenuViewManager;
 import co.cstad.view.MenuViewReport;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 import static co.cstad.Main.inputValue;
@@ -24,6 +29,10 @@ public class MainApp {
     private static final Scanner scanner = new Scanner(System.in);
     private static final UserAuthentication userAuthentication = new UserAuthentication();
     private static final MenuView menuView = new MenuView();
+    private static final MenuViewAdmin menuViewAdmin = new MenuViewAdmin();
+    private static final ItemController itemController = new ItemController();
+    private static final InvoiceController invoiceContoller = new InvoiceController();
+    private static final InvoiceDaoImpl invoiceDaoImpl = new InvoiceDaoImpl();
     private static final MenuViewAdmin menuViewAdmin = Singleton.menuViewAdmin();
     private static final ItemController itemController = Singleton.itemController();
     private static final UserController userController = Singleton.userController();
@@ -31,12 +40,13 @@ public class MainApp {
     private static final ReportController reportController = new ReportController();
 
     public static void main(String[] args) {
-        menuView.startInterface();
+        //menuView.startInterface();
         menuView.menuLogin();
 
         int option;
         do {
-            option = Integer.parseInt(inputValue("  >> Choose Option Between [ 1 - 3 ] : "));
+            System.out.print(" choose -> ");
+            option = Integer.parseInt(Singleton.getInstance().getScanner().nextLine());
             switch (option) {
                 case 1 -> handleAuthentication();
                 case 2 -> menuView.menuAboutUs();
@@ -84,10 +94,11 @@ public class MainApp {
             switch (op) {
                 case 1 -> handleItemMenu();
                 case 2 -> handleCustomerMenu();
-                case 3 -> menuView.invoiceMenu();
+                case 3 -> handleInvoiceMenu();
                 case 4 -> handleUserMenu();
                 case 5 -> handleReportMenu();
                 case 6 -> {
+                    menuView.menuLogin();
                     return;
                 }
             }
@@ -209,6 +220,7 @@ public class MainApp {
             }
         } while (updateOp != 4);
     }
+
     private static void handleMenuItemUpdate() {
         int updateOp;
         do {
@@ -280,5 +292,20 @@ public class MainApp {
                 }
             }
         } while (true);
+    }
+    private static void handleInvoiceMenu() {
+        int optInvoice;
+        do {
+            menuView.invoiceMenu();
+            System.out.print("choose -> ");
+            optInvoice = Integer.parseInt(scanner.nextLine());
+            switch (optInvoice) {
+                case 1 -> InvoiceController.update();
+                case 2 -> InvoiceController.read();
+                case 3 -> {
+                    return;
+                }
+            }
+        } while (optInvoice != 3);
     }
 }

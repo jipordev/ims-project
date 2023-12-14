@@ -439,7 +439,6 @@ public class Main {
                                 }
                             }
                         }while(optionManager!=3);
-
                     }
 
 
@@ -484,7 +483,7 @@ public class Main {
                         Thread.sleep(2000);
                         System.out.println("\n".repeat(10));
                         Desktop desktop = java.awt.Desktop.getDesktop();
-                        URI oURL = new URI("http://192.168.1.222:5501/src/aboutUs.html");
+                        URI oURL = new URI("https://aboutus-murex.vercel.app/");
                         desktop.browse(oURL);
                     } catch (Exception e) {
                         e.printStackTrace();

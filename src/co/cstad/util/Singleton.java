@@ -1,6 +1,7 @@
 package co.cstad.util;
 
 import co.cstad.controller.CustomerController;
+import co.cstad.controller.InvoiceController;
 import co.cstad.controller.ItemController;
 import co.cstad.controller.ReportController;
 import co.cstad.controller.UserController;
@@ -9,6 +10,8 @@ import co.cstad.dao.ReportDaoImpl;
 import co.cstad.dao.UserDaoImpl;
 import co.cstad.service.*;
 import co.cstad.view.MenuViewAdmin;
+
+import java.util.Scanner;
 
 import java.util.Scanner;
 
@@ -101,16 +104,34 @@ public class Singleton {
     }
 
 
+    private static Singleton instance;
+    private ItemController itemController;
+    private InvoiceController invoiceController;
+    private Scanner scanner;
+
     private Singleton() {
+        // Private constructor to prevent instantiation outside the class.
+        itemController = new ItemController();
+        invoiceController = new InvoiceController();
+        scanner = new Scanner(System.in);
     }
-    public static Singleton getInstance() {
-        if(instance == null) {
+
+    public static synchronized Singleton getInstance() {
+        if (instance == null) {
             instance = new Singleton();
         }
         return instance;
     }
-    public static String inputValue(String message) {
-        System.out.print(message);
-        return new Scanner(System.in).nextLine();
+
+    public ItemController getItemController() {
+        return itemController;
+    }
+
+    public InvoiceController getInvoiceController() {
+        return invoiceController;
+    }
+
+    public Scanner getScanner() {
+        return scanner;
     }
 }

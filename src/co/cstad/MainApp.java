@@ -48,13 +48,13 @@ public class MainApp {
 
         if (userAuthentication.authenticateUser(username, password)) {
             String role = userAuthentication.getUserRole(username);
-            System.out.println("User authenticated successfully.");
+            System.out.println("✅ User authenticated successfully.");
 
             if (role != null) {
                 handleRole(role);
             }
         } else {
-            System.out.println("Invalid username or password.");
+            System.out.println("❌ Invalid username or password.");
         }
     }
 
@@ -138,7 +138,7 @@ public class MainApp {
                     }
                 }
                 case 4 -> itemController.read();
-                case 5 -> itemController.stockIn();
+                case 5 -> /*itemController.stockIn();*/ System.out.println();
                 case 6 -> {
                     menuView.menuLogin();
                     return;

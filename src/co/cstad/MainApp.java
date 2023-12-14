@@ -145,6 +145,7 @@ public class MainApp {
                 }
                 case 4 -> itemController.read();
                 case 5 -> itemController.stockIn();
+                case 6 -> itemController.stockOut();
                 case 7 -> {
                     return;
                 }

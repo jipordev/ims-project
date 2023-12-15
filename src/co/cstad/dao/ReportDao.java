@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ReportDao {
-    /*List<ReportDTO> selectStockCount();
+    List<ReportDTO> selectStockCount();
     List<ReportDTO> selectStockIn();
-    List<ReportDTO> selectStockOut();*/
+    List<ReportDTO> selectStockOut();
     List<ReportDTO> selectInvoiceDetail();
     List<ReportDTO> selectInvoiceAdjustment();
     List<ReportDTO> selectItemPriceHistory();

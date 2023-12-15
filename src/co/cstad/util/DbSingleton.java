@@ -26,5 +26,4 @@ public class DbSingleton {
         }
         return connection;
     }
-
 }

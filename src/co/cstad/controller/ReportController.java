@@ -44,6 +44,10 @@ public class ReportController {
         ItemView.printItemCount(itemDTOList);
     }
 
+    public void StockOutReport(){
+        List<ReportDTO> reportDTOList = reportService.selectStockOut();
+        ReportView.stockOutReport(reportDTOList);
+    }
 
     public void invoiceDetail(){
         List<ReportDTO> reportDTOList = reportService.selectInvoiceDetail();

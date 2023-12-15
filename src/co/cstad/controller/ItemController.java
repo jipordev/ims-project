@@ -70,10 +70,6 @@ public class ItemController {
             }
         }
     }
-
-
-
-
     public ItemDTO create() {
         ItemDTO newItem = ItemView.collectNewItemInformation();
 

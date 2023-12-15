@@ -59,11 +59,11 @@ public class MenuView implements BoxBorder {
         System.out.println(cyan + "│"+" ".repeat(6)+yellow + "██╔════╝ ╚════██╗"+ reset + " ".repeat(5) +cyan + "│ │");
         System.out.print(cyan + "│ │"+" ".repeat(28)+"│");
         System.out.println(cyan + "│"+" ".repeat(6)+yellow + "██║  ███╗ █████╔╝" +reset + " ".repeat(5)  +cyan + "│ │");
-        System.out.print(cyan + "│ │"+yellow + "  1 ↪\uFE0F LOGIN " + " ".repeat(15) +cyan + "│");
+        System.out.print(cyan + "│ │"+yellow + " 1\uFE0F⃣ \uD83D\uDD10 LOGIN ㅤㅤㅤㅤㅤ" + " ".repeat(6) +cyan + "│");
         System.out.println(cyan + "│"+" ".repeat(6)+yellow + "██║   ██║ ╚═══██╗" +reset + " ".repeat(5)  +cyan + "│ │");
-        System.out.print(cyan + "│ │"+ yellow + "  2 \uD83D\uDC64 ABOUT US " + " ".repeat(12) + cyan + "│");
+        System.out.print(cyan + "│ │"+ yellow + " 1\uFE0F⃣ \uD83D\uDC64 ABOUT US ㅤㅤㅤㅤㅤ" + " ".repeat(3) + cyan + "│");
         System.out.println(cyan + "│"+" ".repeat(6)+yellow + "╚██████╔╝██████╔╝" +reset + " ".repeat(5)  +cyan +  "│ │");
-        System.out.print(cyan + "│ │"+ yellow + "  3 ↩\uFE0F EXIT PROGRAM" + " ".repeat(8) + cyan + "│");
+        System.out.print(cyan + "│ │"+ yellow + " 3\uFE0F⃣ ↩\uFE0F EXIT PROGRAMㅤㅤㅤㅤㅤ" + cyan + "│");
         System.out.println("│"+" ".repeat(6)+yellow + "╚═════╝ ╚═════╝" +reset + " ".repeat(7)  +cyan + "│ │");
         System.out.print("│ └" + "─".repeat(28) + "┘");
         System.out.println("└" + "─".repeat(28) + "┘ │");
@@ -122,9 +122,9 @@ public class MenuView implements BoxBorder {
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(28) + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
         System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + " ".repeat(28) + cyan + VERTICAL_BORDER);
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(6) + yellow + " ██████╗ ██████╗ " + reset + " ".repeat(5) + cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
-        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  1 > NEW ITEM  " + " ".repeat(12) + cyan + VERTICAL_BORDER);
+        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  1 > NEW ITEM "+ " ".repeat(13) + cyan + VERTICAL_BORDER);
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(6) + yellow + "██╔════╝ ╚════██╗" + reset + " ".repeat(5) + cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
-        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  2 > UPDATE ITEM " + " ".repeat(10) + cyan + VERTICAL_BORDER);
+        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  2 > UPDATE ITEM " +" ".repeat(10) + cyan + VERTICAL_BORDER);
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(6) + yellow + "██║  ███╗ █████╔╝" + reset + " ".repeat(5) + cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
         System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  3 > DELETE ITEM " + " ".repeat(10) + cyan + VERTICAL_BORDER);
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(6) + yellow + "██║   ██║ ╚═══██╗" + reset + " ".repeat(5) + cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
@@ -146,8 +146,6 @@ public class MenuView implements BoxBorder {
         System.out.println(BOTTOM_LEFT_CORNER + HORIZONTAL_BORDER.repeat(62) + BOTTOM_RIGHT_CORNER);
         System.out.print(reset);
     }
-
-
 
     // Invoice
     public void invoiceMenu(){

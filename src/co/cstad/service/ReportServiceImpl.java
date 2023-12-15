@@ -15,7 +15,7 @@ public class ReportServiceImpl implements ReportService {
         reportDao = Singleton.getReportDao();
     }
 
-    /*@Override
+    @Override
     public List<ReportDTO> selectStockCount() {
         return reportDao.selectStockCount();
     }
@@ -28,7 +28,7 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public List<ReportDTO> selectStockOut() {
         return reportDao.selectStockOut();
-    }*/
+    }
 
     @Override
     public List<ReportDTO> selectInvoiceDetail() {

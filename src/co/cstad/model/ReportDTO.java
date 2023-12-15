@@ -12,6 +12,15 @@ public class ReportDTO {
     private LocalDate stockCountDate;
     private LocalDate stockOutDate;
     private BigDecimal priceOut;
+    private ItemDTO item;
+
+    public ItemDTO getItem() {
+        return item;
+    }
+
+    public void setItem(ItemDTO item) {
+        this.item = item;
+    }
 
     public Long getStockInId() {
         return stockInId;

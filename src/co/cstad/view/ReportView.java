@@ -157,22 +157,36 @@ public class ReportView implements BoxBorder {
         }
         System.out.println(table.render());
     }
-    public static void stockAlert(Collection<ReportDTO> reports){
+    public static void stockAlert(Collection<ReportDTO> reports) {
+        if (reports == null) {
+            System.out.println("Reports collection is null.");
+            return;
+        }
+
         System.out.println(yellow + "\t\tStock Alert Report" + reset);
-        Table table = new Table(3, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
+        Table table = new Table(4, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
         table.setColumnWidth(0, 15, 20);
         table.setColumnWidth(1, 15, 20);
         table.setColumnWidth(2, 15, 20);
 
         table.addCell(" ".repeat(2) + yellow + "Alert_Id");
         table.addCell(" ".repeat(2) + yellow + "Name");
-        table.addCell(" ".repeat(2) + yellow + "Qty_Alert" + reset);
+        table.addCell(" ".repeat(2) + yellow + "Qty_Alert");
+        table.addCell(" ".repeat(2) + yellow + "Item_ID"+reset);
 
         for (ReportDTO report : reports) {
-            table.addCell("   " + report.getAlertId() + "   ");
-            table.addCell("   " + report.getName() + "   ");
-            table.addCell("   " + report.getQytAlert() + "   ");
+            if (report != null && report.getQytAlert() != null && report.getItem() != null) {
+                if (report.getQytAlert() < 20) {
+                    table.addCell("   " + report.getAlertId() + "   ");
+                    table.addCell("   " + report.getItem().getItemDescription() + "   ");
+                    table.addCell("   " + report.getQytAlert() + "   ");
+                    table.addCell("   " + report.getItem().getItemId() + "   ");
+                }
+            } else {
+                System.out.println("One or more reports have null values.");
+            }
         }
+
         System.out.println(table.render());
     }
 

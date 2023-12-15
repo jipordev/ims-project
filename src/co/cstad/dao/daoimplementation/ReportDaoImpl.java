@@ -159,7 +159,11 @@ public class ReportDaoImpl implements ReportDao {
 
     @Override
     public List<ReportDTO> selectStockAlertReport() {
-        String sql = "SELECT * FROM group_alert WHERE qty_alert > 0"; // Assuming qty_alert is the threshold for stock alert
+        String sql = "SELECT ga.alert_id, ga.qty_alert, ga.name, ga.item_id, " +
+                "i.item_id AS item_id, i.description AS name " +
+                "FROM group_alert ga " +
+                "INNER JOIN item i ON ga.item_id = i.item_id " +
+                "WHERE ga.qty_alert > 0";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -169,8 +173,17 @@ public class ReportDaoImpl implements ReportDao {
             while (resultSet.next()) {
                 ReportDTO reportDTO = new ReportDTO();
                 reportDTO.setAlertId(resultSet.getLong("alert_id"));
-                reportDTO.setName(resultSet.getString("name"));
                 reportDTO.setQytAlert(resultSet.getInt("qty_alert"));
+                reportDTO.setName(resultSet.getString("name"));
+
+                // Create an ItemDTO and set its properties
+                ItemDTO itemDTO = new ItemDTO();
+                itemDTO.setItemId(resultSet.getLong("item_id"));
+                itemDTO.setItemDescription(resultSet.getString("name"));
+
+                // Set the ItemDTO in the ReportDTO
+                reportDTO.setItem(itemDTO);
+
                 // Add other necessary fields from group_alert table
                 reportDTOS.add(reportDTO);
             }
@@ -182,7 +195,6 @@ public class ReportDaoImpl implements ReportDao {
 
         return null;
     }
-
 
     @Override
     public List<ReportDTO> selectSummaryReport() {

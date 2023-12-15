@@ -1,5 +1,6 @@
 package co.cstad.dao;
 
+import co.cstad.model.CustomerDTO;
 import co.cstad.model.ItemDTO;
 import co.cstad.model.StockInDTO;
 import co.cstad.model.StockOutDTO;
@@ -22,8 +23,8 @@ public class ItemDaoImpl implements ItemDao{
 
     @Override
     public ItemDTO insert(ItemDTO itemDTO) {
-        String sql = "INSERT INTO item (item_code, description, unit, qty, price_a, price_b, price_c, status) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO item (item_code, description, unit, qty, status) " +
+                "VALUES (?, ?, ?, ?, ?)";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -31,10 +32,7 @@ public class ItemDaoImpl implements ItemDao{
             preparedStatement.setString(2, itemDTO.getItemDescription());
             preparedStatement.setString(3, itemDTO.getItemUnit());
             preparedStatement.setInt(4, itemDTO.getQty());
-            preparedStatement.setBigDecimal(5, itemDTO.getItemPrice_out_a());
-            preparedStatement.setBigDecimal(6, itemDTO.getItemPrice_out_b());
-            preparedStatement.setBigDecimal(7, itemDTO.getItemPrice_out_c());
-            preparedStatement.setBoolean(8, itemDTO.isStatus());
+            preparedStatement.setBoolean(5, itemDTO.isStatus());
 
             // Execute the query
             int affectedRows = preparedStatement.executeUpdate();
@@ -97,7 +95,7 @@ public class ItemDaoImpl implements ItemDao{
     }
 
     @Override
-    public StockOutDTO stockout(StockOutDTO stockOutDTO)  {
+    public StockOutDTO stockOut(StockOutDTO stockOutDTO)  {
         String insertStockInSql = "INSERT INTO stock_out (item_id, qty, price_out, stock_out_date) " +
                 "VALUES (?, ?, ?, CURRENT_DATE)";
         String updateItemQtySql = "UPDATE item SET qty = qty - ? WHERE item_id = ?";
@@ -137,6 +135,63 @@ public class ItemDaoImpl implements ItemDao{
         return null;
     }
 
+    @Override
+    public List<StockInDTO> selectStockIn() {
+        String sql = "SELECT * FROM stock_in";
+        try {
+
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<StockInDTO> stockInDTOS = new ArrayList<>();
+
+
+            while (resultSet.next()) {
+                StockInDTO stockInDTO = new StockInDTO();
+                stockInDTO.setItemId(resultSet.getLong("item_id"));
+                stockInDTO.setQtyIn(resultSet.getInt("qty"));
+                stockInDTO.setPriceIn(resultSet.getBigDecimal("price_in"));
+                stockInDTO.setStockInDate(resultSet.getDate("stock_in_date"));
+                stockInDTOS.add(stockInDTO);
+            }
+            return stockInDTOS;
+
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return null;
+    }
+
+    @Override
+    public List<StockOutDTO> selectStockOut() {
+        String sql = "SELECT * FROM stock_out";
+        try {
+
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<StockOutDTO> stockOutDTOS = new ArrayList<>();
+
+
+            while (resultSet.next()) {
+                StockOutDTO stockOutDTO = new StockOutDTO();
+                stockOutDTO.setItemId(resultSet.getLong("item_id"));
+                stockOutDTO.setQtyOut(resultSet.getInt("qty"));
+                stockOutDTO.setPriceOut(resultSet.getBigDecimal("price_out"));
+                stockOutDTO.setStockOutDate(resultSet.getDate("stock_out_date"));
+                stockOutDTOS.add(stockOutDTO);
+            }
+            return stockOutDTOS;
+
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return null;
+    }
 
 
     @Override
@@ -153,6 +208,7 @@ public class ItemDaoImpl implements ItemDao{
                 itemDTO.setItemDescription(resultSet.getString("description"));
                 itemDTO.setItemUnit(resultSet.getString("unit"));
                 itemDTO.setQty(resultSet.getInt("qty"));
+//                itemDTO.setItemPrice(resultSet.getBigDecimal("price_in"));
                 itemDTO.setItemPrice_out_a(resultSet.getBigDecimal("price_a"));
                 itemDTO.setItemPrice_out_b(resultSet.getBigDecimal("price_b"));
                 itemDTO.setItemPrice_out_c(resultSet.getBigDecimal("price_c"));

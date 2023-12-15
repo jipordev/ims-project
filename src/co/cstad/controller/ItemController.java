@@ -50,7 +50,7 @@ public class ItemController {
             StockOutDTO newStockOut = ItemView.viewCreateStockOut();
 
             if (newStockOut != null) {
-                StockOutDTO stockOutResult = itemService.stockout(newStockOut);
+                StockOutDTO stockOutResult = itemService.stockOut(newStockOut);
 
                 if (stockOutResult != null) {
                     System.out.println("Restock successfully");

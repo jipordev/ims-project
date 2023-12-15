@@ -146,6 +146,13 @@ public class ItemView {
             table.addCell("   " + String.valueOf(item.getItemPrice_out_c()) + "   ");
             table.addCell("   " + (item.getStatus() ? "Active" : "Inactive") + "   ");
         }
+
+        System.out.println(table.render());
+    }
+
+    public static void printItemList(List<ItemDTO> itemList) {
+        System.out.println("Item List:");
+        printItemDetails(itemList);
     }
 
 
@@ -182,10 +189,7 @@ public class ItemView {
     }
 
 
-    public static void printItemList(List<ItemDTO> itemList) {
-        System.out.println("Item List:");
-        printItemDetails(itemList);
-    }
+
 }
 
 

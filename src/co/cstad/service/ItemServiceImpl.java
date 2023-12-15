@@ -26,8 +26,18 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public StockOutDTO stockout(StockOutDTO stockOutDTO) {
-        return itemDao.stockout(stockOutDTO);
+    public StockOutDTO stockOut(StockOutDTO stockOutDTO) {
+        return itemDao.stockOut(stockOutDTO);
+    }
+
+    @Override
+    public List<StockInDTO> selectStockIn() {
+        return itemDao.selectStockIn();
+    }
+
+    @Override
+    public List<StockOutDTO> selectStockOut() {
+        return itemDao.selectStockOut();
     }
 
     @Override

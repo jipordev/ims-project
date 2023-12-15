@@ -10,7 +10,9 @@ import java.util.List;
 public interface ItemService {
     ItemDTO insert(ItemDTO item);
     StockInDTO stockIn(StockInDTO stockInDTO);
-    StockOutDTO stockout(StockOutDTO stockOutDTO);
+    StockOutDTO stockOut(StockOutDTO stockOutDTO);
+    List<StockInDTO> selectStockIn();
+    List<StockOutDTO> selectStockOut();
     List<ItemDTO> select();
     ItemDTO selectById(Long id);
     ItemDTO updateById(ItemDTO item);

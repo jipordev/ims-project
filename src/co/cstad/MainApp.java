@@ -236,7 +236,7 @@ public class MainApp {
             System.out.print("Choose ➡\uFE0F ");
             opReport = Integer.parseInt(scanner.nextLine());
             switch (opReport){
-                case 1 -> System.out.println();
+                case 1 -> reportController.stockCountReport();
                 case 2 -> System.out.println();
                 case 3 -> System.out.println();
                 case 4 -> reportController.invoiceDetail();

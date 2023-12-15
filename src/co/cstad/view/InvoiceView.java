@@ -16,7 +16,6 @@ public class InvoiceView {
 
     public static InvoiceDTO collectNewInvoiceInformation(Long id) {
         InvoiceDTO newInvoice = new InvoiceDTO();
-
         newInvoice.setInvoiceId(id);
         newInvoice.setInvoiceNo("CSTAD" + id.toString());
         newInvoice.setCancelled(false);

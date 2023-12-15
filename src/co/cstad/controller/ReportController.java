@@ -23,7 +23,7 @@ public class ReportController {
         menuViewAdmin = Singleton.menuViewAdmin();
     }
 
-    /*public void stockCountReport(){
+    public void stockCountReport(){
         List<ReportDTO> reportDTOList = reportService.selectStockCount();
         ReportView.stockCountReport(reportDTOList);
     }
@@ -36,7 +36,7 @@ public class ReportController {
     public void StockOutReport(){
         List<ReportDTO> reportDTOList = reportService.selectStockOut();
         ReportView.stockOutReport(reportDTOList);
-    }*/
+    }
 
     public void invoiceDetail(){
         List<ReportDTO> reportDTOList = reportService.selectInvoiceDetail();

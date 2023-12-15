@@ -173,7 +173,7 @@ public class MainApp {
                 case 4 -> {
                     CustomerDTO delete = customerController.delete();
                     if (delete != null) {
-                        customerController.delete();
+                        System.out.println(" Suceesfully ");
                     }
                 }
                 case 5 -> {

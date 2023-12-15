@@ -37,6 +37,10 @@ public class MainApp {
                 case 1 -> handleAuthentication();
                 case 2 -> menuView.menuAboutUs();
                 case 3 -> System.exit(0);
+                default -> {
+                    System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
+                    System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 3 .");
+                }
             }
         } while (true);
     }
@@ -84,8 +88,12 @@ public class MainApp {
                 case 4 -> handleUserMenu();
                 case 5 -> menuView.reportMenu();
                 case 6 -> {
-                    menuView.menuLogin();
+                    handleAuthentication();
                     return;
+                }
+                default -> {
+                    System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
+                    System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 7 .");
                 }
             }
         } while (op != 0);
@@ -113,6 +121,10 @@ public class MainApp {
                 }
                 case 5 -> {
                     return;
+                }
+                default -> {
+                    System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
+                    System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 5 .");
                 }
             }
         } while (opUser != 0);
@@ -145,6 +157,10 @@ public class MainApp {
                 case 7 -> {
                     return;
                 }
+                default -> {
+                    System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
+                    System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 7 .");
+                }
             }
         } while (op2 != 0);
     }
@@ -163,7 +179,7 @@ public class MainApp {
                 case 4 -> {
                     CustomerDTO delete = customerController.delete();
                     if (delete != null) {
-                        customerController.delete();
+                        customerController.confirmation(delete);
                     }
                 }
                 case 5 -> {
@@ -220,6 +236,10 @@ public class MainApp {
                 case 9 -> {
                     return;
                 }
+                default -> {
+                    System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
+                    System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 9 .");
+                }
             }
         } while (updateOp != 0);
     }
@@ -235,6 +255,10 @@ public class MainApp {
                 case 2 -> invoiceController.read();
                 case 3 -> {
                     return;
+                }
+                default -> {
+                    System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
+                    System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 4 .");
                 }
             }
         } while (optInvoice != 3);
@@ -259,9 +283,12 @@ public class MainApp {
                 }
                 default -> {
                     System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
-                    System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 5 .");
+                    System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 6 .");
                 }
             }
         } while (true);
+    }
+    private static void handleReportMenu(){
+
     }
 }

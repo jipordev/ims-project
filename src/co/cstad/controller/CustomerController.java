@@ -1,6 +1,7 @@
 package co.cstad.controller;
 
 import co.cstad.model.CustomerDTO;
+import co.cstad.model.ItemDTO;
 import co.cstad.service.CustomerService;
 import co.cstad.service.serviceimplementation.CustomerServiceImpl;
 import co.cstad.view.CustomerView;
@@ -268,5 +269,8 @@ public class CustomerController {
         }
 
         return null;
+    }
+    public void confirmation(CustomerDTO createdCustomer) {
+        CustomerView.readOneCustomer(createdCustomer);
     }
 }

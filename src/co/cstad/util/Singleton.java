@@ -5,16 +5,17 @@ import co.cstad.controller.InvoiceController;
 import co.cstad.controller.ItemController;
 import co.cstad.controller.ReportController;
 import co.cstad.controller.UserController;
-import co.cstad.dao.ReportDaoImpl;
+import co.cstad.dao.daoimplementation.ReportDaoImpl;
 import co.cstad.dao.daoimplementation.ItemDaoImpl;
 import co.cstad.dao.daoimplementation.UserDaoImpl;
 import co.cstad.service.ItemService;
 import co.cstad.service.ReportService;
-import co.cstad.service.ReportServiceImpl;
+import co.cstad.service.serviceimplementation.ReportServiceImpl;
 import co.cstad.service.serviceimplementation.ItemServiceImpl;
 import co.cstad.service.UserService;
 import co.cstad.service.serviceimplementation.UserServiceImpl;
 import co.cstad.view.MenuViewAdmin;
+import co.cstad.view.ReportView;
 
 import java.util.Scanner;
 
@@ -33,6 +34,13 @@ public class Singleton {
     private static ReportDaoImpl reportDao;
     private static InvoiceController invoiceController;
     private static MenuViewAdmin menuViewAdmin;
+    private static ReportView reportView;
+    public static ReportView reportView(){
+        if (reportView == null) {
+            reportView = new ReportView();
+        }
+        return reportView;
+    }
     public static InvoiceController invoiceController(){
         if (invoiceController == null) {
             invoiceController = new InvoiceController();

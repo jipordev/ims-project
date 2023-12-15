@@ -6,13 +6,40 @@ import java.time.LocalDate;
 
 public class ReportDTO {
     private Long stockCountId;
-    private Integer stockInId;
-    private Integer stockOutId;
-    private Integer itemId;
+    private Long stockInId;
+    private Long stockOutId;
+    private Long itemId;
     private LocalDate stockCountDate;
     private LocalDate stockOutDate;
     private BigDecimal priceOut;
 
+    public Long getStockInId() {
+        return stockInId;
+    }
+
+    public void setStockInId(Long stockInId) {
+        this.stockInId = stockInId;
+    }
+
+    public Long getStockOutId() {
+        return stockOutId;
+    }
+
+    public void setStockOutId(Long stockOutId) {
+        this.stockOutId = stockOutId;
+    }
+
+    public Long getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(Long itemId) {
+        this.itemId = itemId;
+    }
+
+    public void setStockCountDate(LocalDate stockCountDate) {
+        this.stockCountDate = stockCountDate;
+    }
 
     public void setStockOutDate(LocalDate stockOutDate) {
         this.stockOutDate = stockOutDate;
@@ -46,25 +73,6 @@ public class ReportDTO {
         this.stockCountId = stockCountId;
     }
 
-    public void setStockInId(Integer stockInId) {
-        this.stockInId = stockInId;
-    }
-
-    public void setItemId(Integer itemId) {
-        this.itemId = itemId;
-    }
-
-    public void setStockCountDate(LocalDate stockCountDate) {
-        this.stockCountDate = stockCountDate;
-    }
-
-    public Integer getStockOutId() {
-        return stockOutId;
-    }
-
-    public void setStockOutId(Integer stockOutId) {
-        this.stockOutId = stockOutId;
-    }
 
     public void setQty(Integer qty) {
         this.qty = qty;
@@ -102,13 +110,6 @@ public class ReportDTO {
         this.returnedDate = returnedDate;
     }
 
-    public Integer getStockInId() {
-        return stockInId;
-    }
-
-    public Integer getItemId() {
-        return itemId;
-    }
 
     public LocalDate getStockCountDate() {
         return stockCountDate;
@@ -154,24 +155,20 @@ public class ReportDTO {
         return returnedDate;
     }
 
-    private Integer itemHistoryId;
+    private Long itemHistoryId;
     private LocalDate updatedAt;
     private BigDecimal price;
 
-    public void setItemPriceId(Integer itemHistoryId) {
+    public Long getItemHistoryId() {
+        return itemHistoryId;
+    }
+
+    public void setItemHistoryId(Long itemHistoryId) {
         this.itemHistoryId = itemHistoryId;
     }
 
     public void setUpdatedAt(LocalDate updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    public Integer getItemHistoryId() {
-        return itemHistoryId;
-    }
-
-    public void setItemHistoryId(Integer itemHistoryId) {
-        this.itemHistoryId = itemHistoryId;
     }
 
     public void setPrice(BigDecimal price) {
@@ -184,5 +181,32 @@ public class ReportDTO {
 
     public BigDecimal getPrice() {
         return price;
+    }
+    private Long alertId;
+    private Integer qytAlert;
+    private String name;
+
+    public Long getAlertId() {
+        return alertId;
+    }
+
+    public void setAlertId(Long alertId) {
+        this.alertId = alertId;
+    }
+
+    public Integer getQytAlert() {
+        return qytAlert;
+    }
+
+    public void setQytAlert(Integer qytAlert) {
+        this.qytAlert = qytAlert;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

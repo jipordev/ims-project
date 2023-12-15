@@ -157,4 +157,23 @@ public class ReportView implements BoxBorder {
         }
         System.out.println(table.render());
     }
+    public static void stockAlert(Collection<ReportDTO> reports){
+        System.out.println(yellow + "\t\tStock Alert Report" + reset);
+        Table table = new Table(3, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
+        table.setColumnWidth(0, 15, 20);
+        table.setColumnWidth(1, 15, 20);
+        table.setColumnWidth(2, 15, 20);
+
+        table.addCell(" ".repeat(2) + yellow + "Alert_Id");
+        table.addCell(" ".repeat(2) + yellow + "Name");
+        table.addCell(" ".repeat(2) + yellow + "Qty_Alert" + reset);
+
+        for (ReportDTO report : reports) {
+            table.addCell("   " + report.getAlertId() + "   ");
+            table.addCell("   " + report.getName() + "   ");
+            table.addCell("   " + report.getQytAlert() + "   ");
+        }
+        System.out.println(table.render());
+    }
+
 }

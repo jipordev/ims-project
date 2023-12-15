@@ -23,8 +23,8 @@ public class MainApp {
     private static final ReportController reportController = Singleton.reportController();
     private static final ItemController itemController = Singleton.itemController();
     private static final UserController userController = Singleton.userController();
-    private static final InvoiceController invoiceController = new InvoiceController();
-    private static final CustomerController customerController = new CustomerController();
+    private static final InvoiceController invoiceController = Singleton.invoiceController();
+    private static final CustomerController customerController = Singleton.customerController();
     public static void main(String[] args) {
         //menuView.startInterface();
         menuView.menuLogin();
@@ -301,7 +301,7 @@ public class MainApp {
                 case 4 -> reportController.invoiceDetail();
                 case 5 -> reportController.invoiceAdjustment();
                 case 6 -> reportController.itemPriceHistory();
-                case 7 -> System.out.println("");
+                case 7 -> reportController.stockAlert();
                 case 8 -> System.out.println("");
                 case 9 -> {
                     return;

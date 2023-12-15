@@ -8,6 +8,7 @@ public class ItemDTO {
     private String itemCode;
     private String itemDescription;
     private String itemUnit;
+    private BigDecimal itemPrice;
     private BigDecimal itemPrice_out_a;
     private BigDecimal itemPrice_out_b;
     private BigDecimal itemPrice_out_c;
@@ -44,6 +45,14 @@ public class ItemDTO {
 
     public void setItemUnit(String itemUnit) {
         this.itemUnit = itemUnit;
+    }
+
+    public BigDecimal getItemPrice() {
+        return itemPrice;
+    }
+
+    public void setItemPrice(BigDecimal itemPrice) {
+        this.itemPrice = itemPrice;
     }
 
     public BigDecimal getItemPrice_out_a() {

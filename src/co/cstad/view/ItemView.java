@@ -146,8 +146,6 @@ public class ItemView {
             table.addCell("   " + String.valueOf(item.getItemPrice_out_c()) + "   ");
             table.addCell("   " + (item.getStatus() ? "Active" : "Inactive") + "   ");
         }
-
-        System.out.println(table.render());
     }
 
 

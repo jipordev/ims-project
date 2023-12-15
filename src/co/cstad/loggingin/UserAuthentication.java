@@ -44,12 +44,12 @@ public class UserAuthentication {
     public static String getUserRole(String username) {
         try {
             connection = DbSingleton.instance();
-            String query = "SELECT r.rolename FROM roles r JOIN users u ON r.id = u.role_id WHERE u.username = ?";
+            String query = "SELECT r.name FROM roles r JOIN users u ON r.id = u.id WHERE u.username = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setString(1, username);
                 try (ResultSet resultSet = preparedStatement.executeQuery()) {
                     if (resultSet.next()) {
-                        return resultSet.getString("rolename");
+                        return resultSet.getString("name");
                     }
                 }
             }

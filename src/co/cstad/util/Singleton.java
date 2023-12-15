@@ -1,9 +1,6 @@
 package co.cstad.util;
 
-import co.cstad.controller.CustomerController;
-import co.cstad.controller.InvoiceController;
-import co.cstad.controller.ItemController;
-import co.cstad.controller.UserController;
+import co.cstad.controller.*;
 import co.cstad.dao.ItemDaoImpl;
 import co.cstad.dao.ReportDaoImpl;
 import co.cstad.dao.UserDaoImpl;

@@ -1,10 +1,7 @@
 // MainApp.java
 package co.cstad;
 
-import co.cstad.controller.CustomerController;
-import co.cstad.controller.ItemController;
-import co.cstad.controller.ReportController;
-import co.cstad.controller.UserController;
+import co.cstad.controller.*;
 import co.cstad.dao.InvoiceDaoImpl;
 import co.cstad.loggingin.UserAuthentication;
 import co.cstad.model.*;
@@ -36,7 +33,7 @@ public class MainApp {
     private static final ReportController reportController = new ReportController();
 
     public static void main(String[] args) {
-        //menuView.startInterface();
+        menuView.startInterface();
         menuView.menuLogin();
 
         int option;
@@ -295,8 +292,8 @@ public class MainApp {
             System.out.print("choose -> ");
             optInvoice = Integer.parseInt(scanner.nextLine());
             switch (optInvoice) {
-                case 1 -> InvoiceController.update();
-                case 2 -> InvoiceController.read();
+                case 1 -> invoiceController.update();
+                case 2 -> invoiceController.read();
                 case 3 -> {
                     return;
                 }

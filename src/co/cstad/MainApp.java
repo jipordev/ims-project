@@ -5,10 +5,8 @@ import co.cstad.controller.CustomerController;
 import co.cstad.controller.InvoiceController;
 import co.cstad.controller.ItemController;
 import co.cstad.controller.UserController;
-import co.cstad.dao.InvoiceDaoImpl;
-import co.cstad.loggingin.UserAuthentication;
+import co.cstad.service.userservice.UserAuthentication;
 import co.cstad.model.*;
-import co.cstad.dao.UserDao;
 import co.cstad.util.Singleton;
 import co.cstad.model.ItemDTO;
 import co.cstad.view.MenuView;
@@ -17,8 +15,6 @@ import co.cstad.view.MenuViewManager;
 import co.cstad.view.MenuViewReport;
 
 import java.util.Scanner;
-
-import static co.cstad.Main.inputValue;
 
 public class MainApp {
     private static final Scanner scanner = new Scanner(System.in);
@@ -197,6 +193,10 @@ public class MainApp {
                 case 8 -> userController.updateRole();
                 case 9 -> {
                     return;
+                }
+                default -> {
+                    System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
+                    System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 9 .");
                 }
             }
         } while (updateOp != 0);

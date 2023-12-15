@@ -4,15 +4,13 @@ import co.cstad.controller.CustomerController;
 import co.cstad.controller.InvoiceController;
 import co.cstad.controller.ItemController;
 import co.cstad.controller.UserController;
-import co.cstad.dao.ItemDaoImpl;
-import co.cstad.dao.UserDaoImpl;
+import co.cstad.dao.daoimplementation.ItemDaoImpl;
+import co.cstad.dao.daoimplementation.UserDaoImpl;
 import co.cstad.service.ItemService;
-import co.cstad.service.ItemServiceImpl;
+import co.cstad.service.serviceimplementation.ItemServiceImpl;
 import co.cstad.service.UserService;
-import co.cstad.service.UserServiceImpl;
+import co.cstad.service.serviceimplementation.UserServiceImpl;
 import co.cstad.view.MenuViewAdmin;
-
-import java.util.Scanner;
 
 import java.util.Scanner;
 

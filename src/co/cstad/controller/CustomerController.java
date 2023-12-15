@@ -2,7 +2,7 @@ package co.cstad.controller;
 
 import co.cstad.model.CustomerDTO;
 import co.cstad.service.CustomerService;
-import co.cstad.service.CustomerServiceImpl;
+import co.cstad.service.serviceimplementation.CustomerServiceImpl;
 import co.cstad.view.CustomerView;
 
 import java.util.List;

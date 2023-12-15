@@ -1,5 +1,6 @@
-package co.cstad.dao;
+package co.cstad.dao.daoimplementation;
 
+import co.cstad.dao.CustomerDao;
 import co.cstad.model.CustomerDTO;
 import co.cstad.util.DbSingleton;
 import co.cstad.view.BoxBorder;
@@ -17,7 +18,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-public class CustomerDaoImpl implements CustomerDao , BoxBorder {
+public class CustomerDaoImpl implements CustomerDao, BoxBorder {
     private final Connection connection;
 
     public CustomerDaoImpl() {

@@ -3,6 +3,7 @@ package co.cstad.util;
 import co.cstad.controller.CustomerController;
 import co.cstad.controller.InvoiceController;
 import co.cstad.controller.ItemController;
+import co.cstad.controller.ReportController;
 import co.cstad.controller.UserController;
 import co.cstad.dao.daoimplementation.ItemDaoImpl;
 import co.cstad.dao.daoimplementation.UserDaoImpl;
@@ -24,6 +25,9 @@ public class Singleton {
     private static UserService userService;
     private static UserDaoImpl userDao;
     private static CustomerController customerController;
+    private static ReportController reportController;
+    private static ReportService reportService;
+    private static ReportDaoImpl reportDao;
     private static InvoiceController invoiceController;
     private static MenuViewAdmin menuViewAdmin;
     public static InvoiceController invoiceController(){
@@ -86,6 +90,27 @@ public class Singleton {
         }
         return itemController;
     }
+
+    public static ReportController reportController() {
+        if (reportController == null) {
+            reportController = new ReportController();
+        }
+        return reportController;
+    }
+    public static ReportDaoImpl getReportDao(){
+        if (reportDao == null) {
+            reportDao = new ReportDaoImpl();
+        }
+        return reportDao;
+    }
+    public static ReportService reportService(){
+        if (reportService == null) {
+            reportService = new ReportServiceImpl();
+        }
+        return reportService;
+    }
+
+
     private Singleton() {
         // Private constructor to prevent instantiation outside the class.
         itemController = new ItemController();

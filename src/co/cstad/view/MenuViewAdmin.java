@@ -26,17 +26,17 @@ public class MenuViewAdmin implements BoxBorder {
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(28) + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
         System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + " ".repeat(28) + cyan + VERTICAL_BORDER);
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(6) + yellow + " ██████╗ ██████╗ " + reset + " ".repeat(5) + cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
-        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  1 > ITEM  " + " ".repeat(16) + cyan + VERTICAL_BORDER);
+        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  1\uFE0F⃣ > ITEM ㅤㅤㅤㅤㅤㅤㅤ" + " ".repeat(4) + cyan + VERTICAL_BORDER);
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(6) + yellow + "██╔════╝ ╚════██╗" + reset + " ".repeat(5) + cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
-        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  2 > CUSTOMER " + " ".repeat(13) + cyan + VERTICAL_BORDER);
+        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  2\uFE0F⃣ > CUSTOMER ㅤㅤㅤㅤㅤㅤㅤ" + " ".repeat(0) + cyan + VERTICAL_BORDER);
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(6) + yellow + "██║  ███╗ █████╔╝" + reset + " ".repeat(5) + cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
-        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  3 > INVOICE " + " ".repeat(14) + cyan + VERTICAL_BORDER);
+        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  3\uFE0F⃣ > INVOICE ㅤㅤㅤㅤㅤㅤㅤ" + " ".repeat(1) + cyan + VERTICAL_BORDER);
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(6) + yellow + "██║   ██║ ╚═══██╗" + reset + " ".repeat(5) + cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
-        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  4 > USER " + " ".repeat(17) + cyan + VERTICAL_BORDER);
+        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  4\uFE0F⃣ > USER  ㅤㅤㅤㅤㅤㅤㅤ" + " ".repeat(3) + cyan + VERTICAL_BORDER);
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(6) + yellow + "╚██████╔╝██████╔╝" + reset + " ".repeat(5) + cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
-        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  5 > REPORT " + " ".repeat(15) + cyan + VERTICAL_BORDER);
+        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  5\uFE0F⃣ > REPORT ㅤㅤㅤㅤㅤㅤㅤ" + " ".repeat(2) + cyan + VERTICAL_BORDER);
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(6) + yellow + "╚═════╝ ╚═════╝" + reset + " ".repeat(7) + cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
-        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  6 > SIGN OUT " + " ".repeat(13) + cyan + VERTICAL_BORDER);
+        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  6\uFE0F⃣ > SIGN OUT ㅤㅤㅤㅤㅤㅤㅤ" + " ".repeat(0) + cyan + VERTICAL_BORDER);
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(28)  + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
         System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + " ".repeat(28) + cyan + VERTICAL_BORDER);
         System.out.println(VERTICAL_BORDER + " ".repeat(28) + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
@@ -902,7 +902,6 @@ public class MenuViewAdmin implements BoxBorder {
     public void userUpdateAll(){
         Table table = new Table(1, BorderStyle.UNICODE_BOX_DOUBLE_BORDER,ShownBorders.SURROUND);
         table.setColumnWidth(0,50,200);
-
 
         System.out.println(green + "_".repeat(50) + reset);
         System.out.println("Enter New User Name : ");

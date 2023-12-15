@@ -130,6 +130,7 @@ public class ItemView {
         table.addCell("   Description   ");
         table.addCell("   Unit   ");
         table.addCell("   Quantity   ");
+        table.addCell("   Price   ");
         table.addCell("   Price A   ");
         table.addCell("   Price B   ");
         table.addCell("   Price C   ");
@@ -141,6 +142,7 @@ public class ItemView {
             table.addCell("   " + item.getItemDescription() + "   ");
             table.addCell("   " + item.getItemUnit() + "   ");
             table.addCell("   " + String.valueOf(item.getQty()) + "   ");
+//            table.addCell("   " + String.valueOf(item.getPrice()))
             table.addCell("   " + String.valueOf(item.getItemPrice_out_a()) + "   ");
             table.addCell("   " + String.valueOf(item.getItemPrice_out_b()) + "   ");
             table.addCell("   " + String.valueOf(item.getItemPrice_out_c()) + "   ");

@@ -19,7 +19,7 @@ public class ReportDaoImpl implements ReportDao{
         connection = DbSingleton.instance();
     }
 
-    /*@Override
+    @Override
     public List<ReportDTO> selectStockCount() {
         String sql = "SELECT * FROM stock_count";
         try {
@@ -39,9 +39,9 @@ public class ReportDaoImpl implements ReportDao{
             System.out.println(e.getMessage());
         }
         return null;
-    }*/
+    }
 
-    /*@Override
+    @Override
     public List<ReportDTO> selectStockIn() {
         String sql = "SELECT * FROM stock_in";
         try {
@@ -62,9 +62,9 @@ public class ReportDaoImpl implements ReportDao{
             System.out.println(e.getMessage());
         }
         return null;
-    }*/
+    }
 
-    /*@Override
+    @Override
     public List<ReportDTO> selectStockOut() {
         String sql = "SELECT * FROM stock_out";
         try {
@@ -85,7 +85,22 @@ public class ReportDaoImpl implements ReportDao{
             System.out.println(e.getMessage());
         }
         return null;
-    }*/
+    }
+
+//    @Override
+//    public List<ReportDTO> selectStockCount() {
+//        return null;
+//    }
+//
+//    @Override
+//    public List<ReportDTO> selectStockIn() {
+//        return null;
+//    }
+//
+//    @Override
+//    public List<ReportDTO> selectStockOut() {
+//        return null;
+//    }
 
     @Override
     public List<ReportDTO> selectInvoiceDetail() {

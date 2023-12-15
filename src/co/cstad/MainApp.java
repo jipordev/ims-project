@@ -1,10 +1,7 @@
 // MainApp.java
 package co.cstad;
 
-import co.cstad.controller.CustomerController;
-import co.cstad.controller.InvoiceController;
-import co.cstad.controller.ItemController;
-import co.cstad.controller.UserController;
+import co.cstad.controller.*;
 import co.cstad.service.userservice.UserAuthentication;
 import co.cstad.model.*;
 import co.cstad.util.Singleton;
@@ -16,11 +13,14 @@ import co.cstad.view.MenuViewReport;
 
 import java.util.Scanner;
 
+import static co.cstad.util.Singleton.reportController;
+
 public class MainApp {
     private static final Scanner scanner = new Scanner(System.in);
     private static final UserAuthentication userAuthentication = new UserAuthentication();
     private static final MenuView menuView = new MenuView();
     private static final MenuViewAdmin menuViewAdmin = Singleton.menuViewAdmin();
+    private static final ReportController reportController = Singleton.reportController();
     private static final ItemController itemController = Singleton.itemController();
     private static final UserController userController = Singleton.userController();
     private static final InvoiceController invoiceController = new InvoiceController();
@@ -86,7 +86,7 @@ public class MainApp {
                 case 2 -> handleCustomerMenu();
                 case 3 -> handleInvoiceMenu();
                 case 4 -> handleUserMenu();
-                case 5 -> menuView.reportMenu();
+                case 5 -> handleReportMenu();
                 case 6 -> {
                     handleAuthentication();
                     return;
@@ -289,6 +289,28 @@ public class MainApp {
         } while (true);
     }
     private static void handleReportMenu(){
-
+        int opReport;
+        do {
+            menuView.reportMenu();
+            System.out.print("Choose ➡\uFE0F ");
+            opReport = Integer.parseInt(scanner.nextLine());
+            switch (opReport){
+                case 1 -> reportController.stockCountReport();
+                case 2 -> System.out.println();
+                case 3 -> System.out.println();
+                case 4 -> reportController.invoiceDetail();
+                case 5 -> reportController.invoiceAdjustment();
+                case 6 -> reportController.itemPriceHistory();
+                case 7 -> System.out.println("");
+                case 8 -> System.out.println("");
+                case 9 -> {
+                    return;
+                }
+                default -> {
+                    System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
+                    System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 9 .");
+                }
+            }
+        }while (opReport != 9);
     }
 }

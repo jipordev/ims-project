@@ -1,3 +1,4 @@
+// DbSingleton.java
 package co.cstad.util;
 
 import java.sql.Connection;
@@ -5,9 +6,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DbSingleton {
-    private static String url = "jdbc:postgresql://localhost:5432/dbims";
+    private static String url = "jdbc:postgresql://localhost:5432/postgres";
     private static String username = "postgres";
-    private static String password = "78910";
+    private static String password = "jipor206";
     private static Connection connection;
 
     private DbSingleton() {

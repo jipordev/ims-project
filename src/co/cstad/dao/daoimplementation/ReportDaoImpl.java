@@ -198,7 +198,38 @@ public class ReportDaoImpl implements ReportDao {
 
     @Override
     public List<ReportDTO> selectSummaryReport() {
+        String sql = "SELECT item_id, SUM(qty) AS total_qty " +
+                "FROM ( " +
+                "   SELECT item_id, qty FROM stock_count " +
+                "   UNION ALL " +
+                "   SELECT item_id, qty FROM stock_in " +
+                "   UNION ALL " +
+                "   SELECT item_id, -qty AS qty FROM stock_out " +
+                ") AS stock_summary " +
+                "GROUP BY item_id";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<ReportDTO> reportDTOS = new ArrayList<>();
+
+            while (resultSet.next()) {
+                ReportDTO reportDTO = new ReportDTO();
+                reportDTO.setItemId(resultSet.getLong("item_id"));
+                reportDTO.setQty(resultSet.getInt("total_qty"));
+
+                // You may want to fetch additional item details and set them in the reportDTO
+
+                reportDTOS.add(reportDTO);
+            }
+
+            return reportDTOS;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
         return null;
     }
+
 
 }

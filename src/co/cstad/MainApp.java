@@ -302,7 +302,7 @@ public class MainApp {
                 case 5 -> reportController.invoiceAdjustment();
                 case 6 -> reportController.itemPriceHistory();
                 case 7 -> reportController.stockAlert();
-                case 8 -> System.out.println("");
+                case 8 -> reportController.summaryReport();
                 case 9 -> {
                     return;
                 }

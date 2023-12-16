@@ -33,8 +33,11 @@ public class CustomerController {
         System.out.println(" Successfully saved ");
         System.out.println(customerDTO);
     }
-    private boolean validateStringInput(String input) {
-        return input != null && !input.isEmpty();
+    private boolean validateStringInput(String input) throws StringInputException {
+        if (input == null || input.trim().isEmpty()) {
+            throw new StringInputException("Input cannot be null or empty.");
+        }
+        return true;
     }
     public void updateAll() {
         try {

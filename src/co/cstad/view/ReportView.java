@@ -189,5 +189,35 @@ public class ReportView implements BoxBorder {
 
         System.out.println(table.render());
     }
+    public static void summaryReport(Collection<ReportDTO> reports) {
+        if (reports == null) {
+            System.out.println("Reports collection is null.");
+            return;
+        }
 
+        System.out.println(yellow + "\t\tSummary Report" + reset);
+        Table table = new Table(3, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
+        table.setColumnWidth(0, 15, 20);
+        table.setColumnWidth(1, 15, 20);
+        table.setColumnWidth(2, 15, 20);
+
+        table.addCell(" ".repeat(2) + yellow + "Item_ID");
+        table.addCell(" ".repeat(2) + yellow + "Total_Qty");
+        table.addCell(" ".repeat(2) + yellow + "Description" + reset);
+
+        for (ReportDTO report : reports) {
+            if (report != null && report.getQty() != null && report.getItem() != null) {
+                table.addCell("   " + report.getItemId() + "   ");
+                table.addCell("   " + report.getQty() + "   ");
+
+                // Add other relevant fields based on your ReportDTO
+
+                table.addCell("   " + report.getItem().getItemDescription() + "   ");
+            } else {
+                System.out.println("One or more reports have null values.");
+            }
+        }
+
+        System.out.println(table.render());
+    }
 }

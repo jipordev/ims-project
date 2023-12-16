@@ -58,4 +58,14 @@ public class ItemServiceImpl implements ItemService {
         // Implement this method to retrieve items by name from the DAO
         return itemDao.selectByName(name);
     }
+
+    /*public List<StockInDTO> selectStockIn() {
+        return itemDao.selectStockIn();
+    }
+
+    @Override
+    public List<StockOutDTO> selectStockOut() {
+        return itemDao.selectStockOut();
+    }*/
+
 }

@@ -16,4 +16,5 @@ public interface ItemDao {
     ItemDTO updateById(ItemDTO product);
     ItemDTO deleteById(Long id);
     List<ItemDTO> selectByName(String name);
+
 }

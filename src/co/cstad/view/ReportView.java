@@ -93,17 +93,17 @@ public class ReportView implements BoxBorder {
         table.setColumnWidth(4,15,20);
 
         table.addCell(" ".repeat(2)+ yellow + "Invoice_Detail_Id");
-        table.addCell(" ".repeat(2)+ yellow +"Qty");
-        table.addCell(" ".repeat(2)+ yellow +"Unit_Price");
+        table.addCell(" ".repeat(2)+ yellow +"Invoice_Id");
         table.addCell(" ".repeat(2)+ yellow +"Item_Id");
-        table.addCell(" ".repeat(2)+ yellow +"Invoice_Id" + reset);
+        table.addCell(" ".repeat(2)+ yellow +"Unit_Price");
+        table.addCell(" ".repeat(2)+ yellow +"Qty");
 
         for (ReportDTO report : reports) {
             table.addCell("   " + report.getInvoiceDetailId() + "   ");
-            table.addCell("   " + report.getQty() + "   ");
-            table.addCell("   " + report.getUnitPrice()+ "   ");
-            table.addCell("   " + report.getItemId() + "   ");
             table.addCell("   " + report.getInvoiceId()+ "   ");
+            table.addCell("   " + report.getItemId() + "   ");
+            table.addCell("   " + report.getUnitPrice()+ "   ");
+            table.addCell("   " + report.getQty() + "   ");
         }
         System.out.println(table.render());
     }
@@ -119,25 +119,25 @@ public class ReportView implements BoxBorder {
         table.setColumnWidth(5,15,20);
 
         table.addCell(" ".repeat(2)+ yellow + "Invoice_Adj_Id");
-        table.addCell(" ".repeat(2)+ yellow +"Qty");
-        table.addCell(" ".repeat(2)+ yellow +"Unit_Price");
-        table.addCell(" ".repeat(2)+ yellow +"Return_Date");
+        table.addCell(" ".repeat(2)+ yellow +"Invoice_Id");
         table.addCell(" ".repeat(2)+ yellow +"Item_Id");
-        table.addCell(" ".repeat(2)+ yellow +"Invoice_Id" + reset);
+        table.addCell(" ".repeat(2)+ yellow +"Unit_Price");
+        table.addCell(" ".repeat(2)+ yellow +"Qty");
+        table.addCell(" ".repeat(2)+ yellow +"Return_Date");
 
         for (ReportDTO report : reports) {
             table.addCell("   " + report.getInvoiceAdjustmentId() + "   ");
-            table.addCell("   " + report.getQty() + "   ");
-            table.addCell("   " + report.getUnitPrice()+ "   ");
-            table.addCell("   " + report.getReturnedDate()+ "   ");
-            table.addCell("   " + report.getItemId() + "   ");
             table.addCell("   " + report.getInvoiceId()+ "   ");
+            table.addCell("   " + report.getItemId() + "   ");
+            table.addCell("   " + report.getUnitPrice()+ "   ");
+            table.addCell("   " + report.getQty() + "   ");
+            table.addCell("   " + report.getReturnedDate()+ "   ");
         }
         System.out.println(table.render());
     }
 
     public static void itemPriceHistory(Collection<ReportDTO> reports){
-        System.out.println(yellow + "\t\tInvoice Adjustment"+reset);
+        System.out.println(yellow + "\t\tItem Price History"+reset);
         Table table = new Table(4, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
         table.setColumnWidth(0,15,20);
         table.setColumnWidth(1,15,20);
@@ -154,6 +154,25 @@ public class ReportView implements BoxBorder {
             table.addCell("   " + report.getPrice()+ "   ");
             table.addCell("   " + report.getUpdatedAt()+ "   ");
             table.addCell("   " + report.getItemId() + "   ");
+        }
+        System.out.println(table.render());
+    }
+
+    public static void stockAlertReport(Collection<ReportDTO> reports){
+        System.out.println(yellow + "\t\tStock Alert Report"+reset);
+        Table table = new Table(3, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
+        table.setColumnWidth(0,15,20);
+        table.setColumnWidth(1,15,20);
+        table.setColumnWidth(2,15,20);
+
+        table.addCell(" ".repeat(2)+ yellow + "Alert_Id");
+        table.addCell(" ".repeat(2)+ yellow +"Item_Id");
+        table.addCell(" ".repeat(2)+ yellow +"Qty_Alert");
+
+        for (ReportDTO report : reports) {
+            table.addCell("   " + report.getAlertId() + "   ");
+            table.addCell("   " + report.getItemId() + "   ");
+            table.addCell("   " + report.getQty() + "   ");
         }
         System.out.println(table.render());
     }

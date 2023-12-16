@@ -239,6 +239,10 @@ public class CustomerController {
         }
     }
 
+    public void confirmation(CustomerDTO createdCustomer) {
+        CustomerView.readOneCustomer(createdCustomer);
+    }
+
     public CustomerDTO delete() {
         System.out.print("Enter the ID of the item to delete: ");
         Long customerID = Long.parseLong(scanner.nextLine());

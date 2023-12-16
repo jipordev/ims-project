@@ -33,7 +33,7 @@ public class ReportController {
         ReportView.stockInReport(reportDTOList);
     }
 
-    public void StockOutReport(){
+    public void stockOutReport(){
         List<ReportDTO> reportDTOList = reportService.selectStockOut();
         ReportView.stockOutReport(reportDTOList);
     }
@@ -51,5 +51,10 @@ public class ReportController {
     public void itemPriceHistory(){
         List<ReportDTO> reportDTOList = reportService.selectItemPriceHistory();
         ReportView.itemPriceHistory(reportDTOList);
+    }
+
+    public void stockAlertReport(){
+        List<ReportDTO> reportDTOList = reportService.selectStockAlertReport();
+        ReportView.stockAlertReport(reportDTOList);
     }
 }

@@ -39,8 +39,18 @@ public class ReportDTO {
     private BigDecimal unitPrice;
     private Integer invoiceAdjustmentId;
     private LocalDate returnedDate;
+    private Integer alertId;
 
     // setter and getter
+
+
+    public void setAlertId(Integer alertId) {
+        this.alertId = alertId;
+    }
+
+    public Integer getAlertId() {
+        return alertId;
+    }
 
     public void setStockCountId(Long stockCountId) {
         this.stockCountId = stockCountId;
@@ -154,11 +164,11 @@ public class ReportDTO {
         return returnedDate;
     }
 
-    private Integer itemHistoryId;
+    private Long itemHistoryId;
     private LocalDate updatedAt;
     private BigDecimal price;
 
-    public void setItemPriceId(Integer itemHistoryId) {
+    public void setItemPriceId(Long itemHistoryId) {
         this.itemHistoryId = itemHistoryId;
     }
 
@@ -166,11 +176,11 @@ public class ReportDTO {
         this.updatedAt = updatedAt;
     }
 
-    public Integer getItemHistoryId() {
+    public Long getItemHistoryId() {
         return itemHistoryId;
     }
 
-    public void setItemHistoryId(Integer itemHistoryId) {
+    public void setItemHistoryId(Long itemHistoryId) {
         this.itemHistoryId = itemHistoryId;
     }
 

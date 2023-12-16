@@ -50,8 +50,6 @@ public class InvoiceServiceImpl implements InvoiceService {
         return invoices;
     }
 
-
-
     @Override
     public InvoiceDTO selectById(Long id) {
         InvoiceDTO invoice = null;

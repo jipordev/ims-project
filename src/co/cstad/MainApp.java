@@ -172,7 +172,7 @@ public class MainApp {
                 case 4 -> {
                     CustomerDTO delete = customerController.delete();
                     if (delete != null) {
-                        customerController.delete();
+                        customerController.confirmation(delete);
                     }
                 }
                 case 5 -> {
@@ -237,17 +237,19 @@ public class MainApp {
             opReport = Integer.parseInt(scanner.nextLine());
             switch (opReport){
                 case 1 -> reportController.stockCountReport();
-                case 2 -> System.out.println();
-                case 3 -> System.out.println();
+                case 2 -> itemController.stockIn();
+                case 3 -> itemController.stockOut();
                 case 4 -> reportController.invoiceDetail();
                 case 5 -> reportController.invoiceAdjustment();
                 case 6 -> reportController.itemPriceHistory();
-                case 7 -> System.out.println("");
+                case 7 -> reportController.stockAlertReport();
                 case 8 -> System.out.println("");
-                case 9 -> System.out.println("Back to Main Menu");
+                case 9 -> {
+                    return;
+                }
                 default -> System.out.println("Invalid option, please try again...!");
             }
-        }while (opReport != 9);
+        }while (true);
     }
 
     private static void handleInvoiceMenu() {

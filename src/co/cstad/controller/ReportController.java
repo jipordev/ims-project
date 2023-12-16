@@ -35,7 +35,7 @@ public class ReportController {
         reportView.stockInReport(reportDTOList);
     }
 
-    public void StockOutReport(){
+    public void stockOutReport(){
         List<ReportDTO> reportDTOList = reportService.selectStockOut();
         reportView.stockOutReport(reportDTOList);
     }

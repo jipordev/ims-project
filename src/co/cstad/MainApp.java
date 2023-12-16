@@ -296,8 +296,8 @@ public class MainApp {
             opReport = Integer.parseInt(scanner.nextLine());
             switch (opReport){
                 case 1 -> reportController.stockCountReport();
-                case 2 -> System.out.println();
-                case 3 -> System.out.println();
+                case 2 -> reportController.stockInReport();
+                case 3 -> reportController.stockOutReport();
                 case 4 -> reportController.invoiceDetail();
                 case 5 -> reportController.invoiceAdjustment();
                 case 6 -> reportController.itemPriceHistory();

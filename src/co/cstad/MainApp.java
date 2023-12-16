@@ -27,6 +27,9 @@ public class MainApp {
     private static final CustomerController customerController = Singleton.customerController();
     public static void main(String[] args) {
         //menuView.startInterface();
+        handleLogIn();
+    }
+    private static void handleLogIn(){
         menuView.menuLogin();
 
         int option;
@@ -44,7 +47,6 @@ public class MainApp {
             }
         } while (true);
     }
-
     private static void handleAuthentication() {
         System.out.print("Enter username: ");
         String username = scanner.nextLine();
@@ -88,7 +90,7 @@ public class MainApp {
                 case 4 -> handleUserMenu();
                 case 5 -> handleReportMenu();
                 case 6 -> {
-                    handleAuthentication();
+                    handleLogIn();
                     return;
                 }
                 default -> {

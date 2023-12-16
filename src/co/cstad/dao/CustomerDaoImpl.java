@@ -59,7 +59,6 @@ public class CustomerDaoImpl implements CustomerDao , BoxBorder {
             ResultSet resultSet = preparedStatement.executeQuery();
             List<CustomerDTO> customerDTOS = new ArrayList<>();
 
-
             while (resultSet.next()) {
                 CustomerDTO customerDTO = new CustomerDTO();
                 customerDTO.setCustomersId(resultSet.getLong("customer_id"));
@@ -70,6 +69,7 @@ public class CustomerDaoImpl implements CustomerDao , BoxBorder {
                 customerDTO.setStatus(resultSet.getBoolean("status"));
                 customerDTO.setCustomerType(resultSet.getString("type"));
                 customerDTOS.add(customerDTO);
+
             }
             return customerDTOS;
 

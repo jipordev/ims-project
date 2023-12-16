@@ -44,6 +44,7 @@ public class MainApp {
                 case 1 -> handleAuthentication();
                 case 2 -> menuView.menuAboutUs();
                 case 3 -> System.exit(0);
+
             }
         } while (true);
     }

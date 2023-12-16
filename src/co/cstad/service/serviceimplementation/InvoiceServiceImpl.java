@@ -1,8 +1,9 @@
-package co.cstad.service;
+package co.cstad.service.serviceimplementation;
 
-import co.cstad.dao.InvoiceDaoImpl;
+import co.cstad.dao.daoimplementation.InvoiceDaoImpl;
 import co.cstad.model.InvoiceDTO;
 import co.cstad.model.ItemDTO;
+import co.cstad.service.InvoiceService;
 import co.cstad.util.DbSingleton;
 
 import java.sql.*;

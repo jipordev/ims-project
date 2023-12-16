@@ -5,13 +5,19 @@ import co.cstad.controller.InvoiceController;
 import co.cstad.controller.ItemController;
 import co.cstad.controller.ReportController;
 import co.cstad.controller.UserController;
-import co.cstad.dao.ItemDaoImpl;
-import co.cstad.dao.ReportDaoImpl;
-import co.cstad.dao.UserDaoImpl;
-import co.cstad.service.*;
+import co.cstad.dao.daoimplementation.ReportDaoImpl;
+import co.cstad.dao.daoimplementation.ItemDaoImpl;
+import co.cstad.dao.daoimplementation.UserDaoImpl;
+import co.cstad.service.CustomerService;
+import co.cstad.service.ItemService;
+import co.cstad.service.ReportService;
+import co.cstad.service.serviceimplementation.CustomerServiceImpl;
+import co.cstad.service.serviceimplementation.ReportServiceImpl;
+import co.cstad.service.serviceimplementation.ItemServiceImpl;
+import co.cstad.service.UserService;
+import co.cstad.service.serviceimplementation.UserServiceImpl;
 import co.cstad.view.MenuViewAdmin;
-
-import java.util.Scanner;
+import co.cstad.view.ReportView;
 
 import java.util.Scanner;
 
@@ -19,17 +25,31 @@ public class Singleton {
     private static Singleton instance = null;
     private static Scanner scanner;
     private static ItemController itemController;
-    private static ItemService itemService;
-    private static ItemDaoImpl itemDao;
-    private static UserController userController;
-    private static UserService userService;
-    private static UserDaoImpl userDao;
     private static CustomerController customerController;
     private static ReportController reportController;
-    private static ReportService reportService;
-    private static ReportDaoImpl reportDao;
     private static InvoiceController invoiceController;
+    private static ItemService itemService;
+    private static UserService userService;
+    private static ReportService reportService;
+    private static CustomerService customerService;
+    private static ItemDaoImpl itemDao;
+    private static UserController userController;
+    private static UserDaoImpl userDao;
+    private static ReportDaoImpl reportDao;
     private static MenuViewAdmin menuViewAdmin;
+    private static ReportView reportView;
+    public static CustomerService customerService() {
+        if (customerService == null) {
+            customerService = new CustomerServiceImpl();
+        }
+        return customerService;
+    }
+    public static ReportView reportView(){
+        if (reportView == null) {
+            reportView = new ReportView();
+        }
+        return reportView;
+    }
     public static InvoiceController invoiceController(){
         if (invoiceController == null) {
             invoiceController = new InvoiceController();

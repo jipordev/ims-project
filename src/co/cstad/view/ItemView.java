@@ -124,7 +124,7 @@ public class ItemView {
     }
 
     public static void printItemDetails(Collection<ItemDTO> items) {
-        Table table = new Table(9, BorderStyle.UNICODE_BOX_DOUBLE_BORDER, ShownBorders.ALL);
+        Table table = new Table(9, BorderStyle.UNICODE_BOX, ShownBorders.ALL);
         table.addCell("   Item ID   ");
         table.addCell("   Item Code   ");
         table.addCell("   Description   ");

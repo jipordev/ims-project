@@ -11,6 +11,9 @@ import java.util.Scanner;
 public class MenuViewAdmin implements BoxBorder {
     static Scanner scanner = new Scanner(System.in);
 
+
+
+
     // Main Menu Admin
     public static void mainMenuAdmin() {
         System.out.print(cyan);
@@ -779,10 +782,15 @@ public class MenuViewAdmin implements BoxBorder {
         table.setColumnWidth(2,20,20);
         table.setColumnWidth(3,20,20);
 
-        table.addCell(yellow +"  1 > Admin " + reset  );
-        table.addCell(yellow +"  2 > Manager " + reset  );
-        table.addCell(yellow +"  3 > Report " + reset  );
-        table.addCell(yellow +"  4 > Back  " + reset  );
+        table.addCell(yellow +"  1 > All " + reset  );
+        table.addCell(yellow +"  2 > Username " + reset  );
+        table.addCell(yellow +"  3 > Password " + reset  );
+        table.addCell(yellow +"  4 > Email  " + reset  );
+        table.addCell(yellow +"  5 > Contact  " + reset  );
+        table.addCell(yellow +"  6 > Address  " + reset  );
+        table.addCell(yellow +"  7 > Status  " + reset  );
+        table.addCell(yellow +"  8 > Role  " + reset  );
+        table.addCell(yellow +"  9 > Back to Menu  " + reset  );
         System.out.print(table.render());
         System.out.println("\n");
 
@@ -1030,4 +1038,3 @@ public class MenuViewAdmin implements BoxBorder {
 
 
 }
-//

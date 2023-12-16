@@ -1,10 +1,9 @@
 // UserAuthentication.java
-package co.cstad.loggingin;
+package co.cstad.service.userservice;
 
 import co.cstad.util.DbSingleton;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,9 +19,6 @@ public class UserAuthentication {
         // No need to explicitly obtain a connection here, let methods use DbSingleton
         connection = DbSingleton.instance();
     }
-    private static final String URL = "jdbc:postgresql://localhost:5432/dbims";
-    private static final String USER = "postgres";
-    private static final String PASSWORD = "78910";
 
     static {
         ConsoleHandler consoleHandler = new ConsoleHandler();
@@ -48,13 +44,14 @@ public class UserAuthentication {
     }
 
     public static String getUserRole(String username) {
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
-            String query = "SELECT r.name FROM roles r JOIN users u ON r.id = u.role_id WHERE u.username = ?";
+        try {
+            connection = DbSingleton.instance();
+            String query = "SELECT r.rolename FROM roles r JOIN users u ON r.id = u.role_id WHERE u.username = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setString(1, username);
                 try (ResultSet resultSet = preparedStatement.executeQuery()) {
                     if (resultSet.next()) {
-                        return resultSet.getString("name");
+                        return resultSet.getString("rolename");
                     }
                 }
             }

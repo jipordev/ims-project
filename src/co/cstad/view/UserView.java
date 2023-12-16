@@ -57,6 +57,7 @@ public class UserView {
 
     public static void printUserDetails(Collection<UserDTO> userDTOS) {
         Table table = new Table(8, BorderStyle.UNICODE_BOX_DOUBLE_BORDER, ShownBorders.ALL);
+        table.addCell("   User ID   ");
         table.addCell("   Username   ");
         table.addCell("   Password   ");
         table.addCell("   Email   ");
@@ -64,9 +65,9 @@ public class UserView {
         table.addCell("   Address   ");
         table.addCell("   User Status   ");
         table.addCell("   Role ID   ");
-        table.addCell("   User ID   ");
 
         for (UserDTO userDTO : userDTOS) {
+            table.addCell("   " + String.valueOf(userDTO.getUserId()) + "   ");
             table.addCell("   " + userDTO.getUsername() + "   ");
             table.addCell("   " + userDTO.getPassword()+ "   ");
             table.addCell("   " + userDTO.getEmail() + "   ");
@@ -74,7 +75,6 @@ public class UserView {
             table.addCell("   " + userDTO.getAddress() + "   ");
             table.addCell("   " + (userDTO.getStatus() ? "Active" : "Inactive") + "   ");
             table.addCell("   " + String.valueOf(userDTO.getRoleId()) + "   ");
-            table.addCell("   " + String.valueOf(userDTO.getUserId()) + "   ");
         }
 
         System.out.println(table.render());

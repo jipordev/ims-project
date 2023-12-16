@@ -1,5 +1,6 @@
-package co.cstad.dao;
+package co.cstad.dao.daoimplementation;
 
+import co.cstad.dao.ItemDao;
 import co.cstad.model.ItemDTO;
 import co.cstad.model.StockInDTO;
 import co.cstad.model.StockOutDTO;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class ItemDaoImpl implements ItemDao{
+public class ItemDaoImpl implements ItemDao {
 
     private final Connection connection;
     public ItemDaoImpl() {

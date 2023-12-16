@@ -15,9 +15,11 @@ import java.util.Scanner;
 public class ReportController {
     private final MenuViewAdmin menuViewAdmin;
     private final ReportService reportService;
+    private final ReportView reportView;
     private final Scanner scanner;
 
     public ReportController(){
+        reportView = Singleton.reportView();
         scanner = Singleton.scanner();
         reportService = Singleton.reportService();
         menuViewAdmin = Singleton.menuViewAdmin();
@@ -25,36 +27,44 @@ public class ReportController {
 
     public void stockCountReport(){
         List<ReportDTO> reportDTOList = reportService.selectStockCount();
-        ReportView.stockCountReport(reportDTOList);
+        reportView.stockCountReport(reportDTOList);
     }
 
     public void stockInReport(){
         List<ReportDTO> reportDTOList = reportService.selectStockIn();
-        ReportView.stockInReport(reportDTOList);
+        reportView.stockInReport(reportDTOList);
     }
 
     public void stockOutReport(){
         List<ReportDTO> reportDTOList = reportService.selectStockOut();
-        ReportView.stockOutReport(reportDTOList);
+        reportView.stockOutReport(reportDTOList);
     }
 
     public void invoiceDetail(){
         List<ReportDTO> reportDTOList = reportService.selectInvoiceDetail();
-        ReportView.InvoiceDetail(reportDTOList);
+        reportView.InvoiceDetail(reportDTOList);
     }
 
     public void invoiceAdjustment(){
         List<ReportDTO> reportDTOList = reportService.selectInvoiceDetail();
-        ReportView.InvoiceAdjustment(reportDTOList);
+        reportView.InvoiceAdjustment(reportDTOList);
     }
 
     public void itemPriceHistory(){
         List<ReportDTO> reportDTOList = reportService.selectItemPriceHistory();
-        ReportView.itemPriceHistory(reportDTOList);
+        reportView.itemPriceHistory(reportDTOList);
+    }
+    public void stockAlert(){
+        List<ReportDTO> reportDTOList = reportService.selectStockAlertReport();
+        reportView.stockAlert(reportDTOList);
+    }
+    public void summaryReport(){
+        List<ReportDTO> reportDTOList = reportService.selectSummaryReport();
+        reportView.summaryReport(reportDTOList);
     }
 
-    public void stockAlertReport(){
-        List<ReportDTO> reportDTOList = reportService.selectStockAlertReport();
-        ReportView.stockAlertReport(reportDTOList);
-    }
+//    public void stockAlertReport(){
+//        List<ReportDTO> reportDTOList = reportService.selectStockAlertReport();
+//        ReportView.stockAlert(reportDTOList);
+//    }
 }

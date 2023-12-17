@@ -357,6 +357,8 @@ public class ItemController {
             }
         } catch (StringInputException e) {
             System.out.println(e.getMessage());
+        } catch (NumberFormatException e){
+            System.out.println("Invalid input. Please try again");
         }
     }
     public ItemDTO delete() {
@@ -389,6 +391,8 @@ public class ItemController {
             }
         } catch (StringInputException e) {
             System.out.println(e.getMessage());
+        } catch (NumberFormatException e){
+            System.out.println("Invalid input. Please try again");
         }
         return null;
     }

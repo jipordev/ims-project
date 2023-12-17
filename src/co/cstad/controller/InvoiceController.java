@@ -1,5 +1,6 @@
 package co.cstad.controller;
 
+import co.cstad.exception.StringInputException;
 import co.cstad.model.InvoiceDTO;
 import co.cstad.service.serviceimplementation.InvoiceServiceImpl;
 import co.cstad.view.InvoiceView;
@@ -26,19 +27,25 @@ public class InvoiceController {
         InvoiceView.printInvoiceList(invoiceDTOList);
     }
     public void update() {
-        System.out.print("Enter Invoice No: ");
-        String no = Singleton.getInstance().getScanner().nextLine();
-        InvoiceDTO invoiceDTO = invoiceService.selectByNo(no);
+        try {
+            System.out.print("Enter Invoice No: ");
+            String no = Singleton.getInstance().getScanner().nextLine();
+            InvoiceDTO invoiceDTO = invoiceService.selectByNo(no);
 
-        if (invoiceDTO != null) {
-            List<InvoiceDTO> invoiceList = Collections.singletonList(invoiceDTO);
-            invoiceView.printInvoiceList(invoiceList);
-            invoiceDTO.setCancelled(true);
-            invoiceDTO.setStatus(false);
-        }
+            if (invoiceDTO != null) {
+                List<InvoiceDTO> invoiceList = Collections.singletonList(invoiceDTO);
+                invoiceView.printInvoiceList(invoiceList);
+                invoiceDTO.setCancelled(true);
+                invoiceDTO.setStatus(false);
+            }
 
-        else {
-            System.out.println("Invoice not found.");
+            else {
+                System.out.println("Invoice not found.");
+            }
+        } catch (StringInputException e){
+            System.out.println(e.getMessage());
+        } catch (NumberFormatException e){
+            System.out.println("Invalid input. Please try again");
         }
     }
 }

@@ -274,35 +274,41 @@ public class UserController {
         }
     }
     public void updateAddress(){
-        System.out.print("Enter the ID of the user to update: ");
-        Long userId = Long.parseLong(scanner.nextLine());
+        try {
+            System.out.print("Enter the ID of the user to update: ");
+            Long userId = Long.parseLong(scanner.nextLine());
 
-        UserDTO existingUser = userService.selectById(userId);
+            UserDTO existingUser = userService.selectById(userId);
 
-        if (existingUser != null) {
-            System.out.println("Existing User Details:");
-            menuViewAdmin.userConfirmation(existingUser);
+            if (existingUser != null) {
+                System.out.println("Existing User Details:");
+                menuViewAdmin.userConfirmation(existingUser);
 
-            System.out.print("Enter the new username : ");
-            String newAddress = scanner.nextLine();
+                System.out.print("Enter the new username : ");
+                String newAddress = scanner.nextLine();
 
-            if (validateStringInput(newAddress)) {
-                existingUser.setAddress(newAddress);
+                if (validateStringInput(newAddress)) {
+                    existingUser.setAddress(newAddress);
 
-                // Call the service to update the item
-                UserDTO updatedUser = userService.updateById(existingUser);
+                    // Call the service to update the item
+                    UserDTO updatedUser = userService.updateById(existingUser);
 
-                if (updatedUser != null) {
-                    System.out.println("Address updated successfully :");
-                    menuViewAdmin.userConfirmation(updatedUser);
+                    if (updatedUser != null) {
+                        System.out.println("Address updated successfully :");
+                        menuViewAdmin.userConfirmation(updatedUser);
+                    } else {
+                        System.out.println("Failed to update address.");
+                    }
                 } else {
-                    System.out.println("Failed to update address.");
+                    System.out.println("Invalid input for the new address");
                 }
             } else {
-                System.out.println("Invalid input for the new address");
+                System.out.println("User with ID " + userId + " not found.");
             }
-        } else {
-            System.out.println("User with ID " + userId + " not found.");
+        } catch (StringInputException e){
+            System.out.println(e.getMessage());
+        } catch (NumberFormatException e){
+            System.out.println("Invalid ID input. Please try again.");
         }
     }
     public void updateStatus() {

@@ -1,13 +1,11 @@
 package co.cstad.controller;
 
 import co.cstad.model.InvoiceDTO;
-import co.cstad.service.InvoiceServiceImpl;
-import co.cstad.util.DbSingleton;
+import co.cstad.service.serviceimplementation.InvoiceServiceImpl;
 import co.cstad.view.InvoiceView;
 import co.cstad.view.MenuViewAdmin;
 import co.cstad.service.InvoiceService;
 import co.cstad.util.Singleton;
-import co.cstad.view.InvoiceView;
 
 import java.util.Collections;
 import java.util.List;

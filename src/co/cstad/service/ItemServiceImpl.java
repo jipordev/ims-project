@@ -1,9 +1,10 @@
-package co.cstad.service;
+package co.cstad.service.serviceimplementation;
 
-import co.cstad.dao.ItemDaoImpl;
+import co.cstad.dao.daoimplementation.ItemDaoImpl;
 import co.cstad.model.ItemDTO;
 import co.cstad.model.StockInDTO;
 import co.cstad.model.StockOutDTO;
+import co.cstad.service.ItemService;
 import co.cstad.util.Singleton;
 
 import java.util.List;
@@ -26,18 +27,8 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public StockOutDTO stockOut(StockOutDTO stockOutDTO) {
-        return itemDao.stockOut(stockOutDTO);
-    }
-
-    @Override
-    public List<StockInDTO> selectStockIn() {
-        return itemDao.selectStockIn();
-    }
-
-    @Override
-    public List<StockOutDTO> selectStockOut() {
-        return itemDao.selectStockOut();
+    public StockOutDTO stockout(StockOutDTO stockOutDTO) {
+        return itemDao.stockout(stockOutDTO);
     }
 
     @Override

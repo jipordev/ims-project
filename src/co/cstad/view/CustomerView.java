@@ -23,8 +23,8 @@ public class CustomerView implements BoxBorder{
         customerDTO.setContact2(scanner.nextLine());
         System.out.print("  Enter Type : ");
         customerDTO.setCustomerType(scanner.nextLine());
-        System.out.print("  Enter Status : ");
-        customerDTO.setStatus(scanner.hasNextBoolean());
+        System.out.print("  Is the Customer active? (Enter 'y' for true, 'n' for false) : ");
+        customerDTO.setStatus(scanner.nextLine().equalsIgnoreCase("y"));
         scanner.nextLine();
 
         return customerDTO;
@@ -39,11 +39,11 @@ public class CustomerView implements BoxBorder{
         table.setColumnWidth(5,20,50);
         table.setColumnWidth(6,20,50);
 
-        table.addCell(yellow +"   Customer ID  " + reset );
-        table.addCell(yellow +"   Customer Name  " + reset );
-        table.addCell(yellow +"   Customer Address  " + reset  );
-        table.addCell(yellow +"   Customer Contact 1  " + reset );
-        table.addCell(yellow +"   Customer Contact 1  " + reset );
+        table.addCell(yellow + "   Customer ID  " + reset );
+        table.addCell(yellow + "   Customer Name  " + reset );
+        table.addCell(yellow + "   Customer Address  " + reset  );
+        table.addCell(yellow + "   Customer Contact 1  " + reset );
+        table.addCell(yellow + "   Customer Contact 1  " + reset );
         table.addCell(yellow + "   Customer Status  "+ reset );
         table.addCell(yellow + "   Customer Type  "+ reset );
 

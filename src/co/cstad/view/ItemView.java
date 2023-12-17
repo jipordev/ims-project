@@ -124,13 +124,12 @@ public class ItemView {
     }
 
     public static void printItemDetails(Collection<ItemDTO> items) {
-        Table table = new Table(9, BorderStyle.UNICODE_BOX_DOUBLE_BORDER, ShownBorders.ALL);
+        Table table = new Table(9, BorderStyle.UNICODE_BOX, ShownBorders.ALL);
         table.addCell("   Item ID   ");
         table.addCell("   Item Code   ");
         table.addCell("   Description   ");
         table.addCell("   Unit   ");
         table.addCell("   Quantity   ");
-        table.addCell("   Price   ");
         table.addCell("   Price A   ");
         table.addCell("   Price B   ");
         table.addCell("   Price C   ");
@@ -142,7 +141,6 @@ public class ItemView {
             table.addCell("   " + item.getItemDescription() + "   ");
             table.addCell("   " + item.getItemUnit() + "   ");
             table.addCell("   " + String.valueOf(item.getQty()) + "   ");
-//            table.addCell("   " + String.valueOf(item.getPrice()))
             table.addCell("   " + String.valueOf(item.getItemPrice_out_a()) + "   ");
             table.addCell("   " + String.valueOf(item.getItemPrice_out_b()) + "   ");
             table.addCell("   " + String.valueOf(item.getItemPrice_out_c()) + "   ");
@@ -156,42 +154,4 @@ public class ItemView {
         System.out.println("Item List:");
         printItemDetails(itemList);
     }
-
-
-    public static void printItemCount(Collection<ItemDTO> items) {
-        if (items != null) {
-            Table table = new Table(9, BorderStyle.UNICODE_BOX_DOUBLE_BORDER, ShownBorders.ALL);
-            table.addCell("   Item ID   ");
-            table.addCell("   Item Code   ");
-            table.addCell("   Description   ");
-            table.addCell("   Unit   ");
-            table.addCell("   Quantity   ");
-            table.addCell("   Price A   ");
-            table.addCell("   Price B   ");
-            table.addCell("   Price C   ");
-            table.addCell("   Status   ");
-
-            for (ItemDTO item : items) {
-                // Check if the status is "Active" before adding the row
-                if (item.getStatus() != null && item.getStatus()) {
-                    table.addCell("   " + String.valueOf(item.getItemId()) + "   ");
-                    table.addCell("   " + item.getItemCode() + "   ");
-                    table.addCell("   " + item.getItemDescription() + "   ");
-                    table.addCell("   " + item.getItemUnit() + "   ");
-                    table.addCell("   " + String.valueOf(item.getQty()) + "   ");
-                    table.addCell("   " + String.valueOf(item.getItemPrice_out_a()) + "   ");
-                    table.addCell("   " + String.valueOf(item.getItemPrice_out_b()) + "   ");
-                    table.addCell("   " + String.valueOf(item.getItemPrice_out_c()) + "   ");
-                    table.addCell("   " + "Active" + "   ");
-                }
-            }
-
-            System.out.println(table.render());
-        }
-    }
-
-
-
 }
-
-

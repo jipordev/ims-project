@@ -1,12 +1,13 @@
-package co.cstad.service;
+package co.cstad.service.serviceimplementation;
 
 import co.cstad.dao.CustomerDao;
-import co.cstad.dao.CustomerDaoImpl;
+import co.cstad.dao.daoimplementation.CustomerDaoImpl;
 import co.cstad.model.CustomerDTO;
+import co.cstad.service.CustomerService;
 
 import java.util.List;
 
-public class CustomerServiceImpl implements CustomerService{
+public class CustomerServiceImpl implements CustomerService {
     private CustomerDao customerDao;
     public CustomerServiceImpl() {
         customerDao = new CustomerDaoImpl();

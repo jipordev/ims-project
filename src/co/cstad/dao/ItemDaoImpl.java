@@ -1,6 +1,6 @@
-package co.cstad.dao;
+package co.cstad.dao.daoimplementation;
 
-import co.cstad.model.CustomerDTO;
+import co.cstad.dao.ItemDao;
 import co.cstad.model.ItemDTO;
 import co.cstad.model.StockInDTO;
 import co.cstad.model.StockOutDTO;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class ItemDaoImpl implements ItemDao{
+public class ItemDaoImpl implements ItemDao {
 
     private final Connection connection;
     public ItemDaoImpl() {
@@ -95,7 +95,7 @@ public class ItemDaoImpl implements ItemDao{
     }
 
     @Override
-    public StockOutDTO stockOut(StockOutDTO stockOutDTO)  {
+    public StockOutDTO stockout(StockOutDTO stockOutDTO)  {
         String insertStockInSql = "INSERT INTO stock_out (item_id, qty, price_out, stock_out_date) " +
                 "VALUES (?, ?, ?, CURRENT_DATE)";
         String updateItemQtySql = "UPDATE item SET qty = qty - ? WHERE item_id = ?";
@@ -135,63 +135,6 @@ public class ItemDaoImpl implements ItemDao{
         return null;
     }
 
-    @Override
-    public List<StockInDTO> selectStockIn() {
-        String sql = "SELECT * FROM stock_in";
-        try {
-
-
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            List<StockInDTO> stockInDTOS = new ArrayList<>();
-
-
-            while (resultSet.next()) {
-                StockInDTO stockInDTO = new StockInDTO();
-                stockInDTO.setItemId(resultSet.getLong("item_id"));
-                stockInDTO.setQtyIn(resultSet.getInt("qty"));
-                stockInDTO.setPriceIn(resultSet.getBigDecimal("price_in"));
-                stockInDTO.setStockInDate(resultSet.getDate("stock_in_date"));
-                stockInDTOS.add(stockInDTO);
-            }
-            return stockInDTOS;
-
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-
-        return null;
-    }
-
-    @Override
-    public List<StockOutDTO> selectStockOut() {
-        String sql = "SELECT * FROM stock_out";
-        try {
-
-
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            List<StockOutDTO> stockOutDTOS = new ArrayList<>();
-
-
-            while (resultSet.next()) {
-                StockOutDTO stockOutDTO = new StockOutDTO();
-                stockOutDTO.setItemId(resultSet.getLong("item_id"));
-                stockOutDTO.setQtyOut(resultSet.getInt("qty"));
-                stockOutDTO.setPriceOut(resultSet.getBigDecimal("price_out"));
-                stockOutDTO.setStockOutDate(resultSet.getDate("stock_out_date"));
-                stockOutDTOS.add(stockOutDTO);
-            }
-            return stockOutDTOS;
-
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-
-        return null;
-    }
 
 
     @Override
@@ -208,7 +151,6 @@ public class ItemDaoImpl implements ItemDao{
                 itemDTO.setItemDescription(resultSet.getString("description"));
                 itemDTO.setItemUnit(resultSet.getString("unit"));
                 itemDTO.setQty(resultSet.getInt("qty"));
-                itemDTO.setItemPrice(resultSet.getBigDecimal("price_in"));
                 itemDTO.setItemPrice_out_a(resultSet.getBigDecimal("price_a"));
                 itemDTO.setItemPrice_out_b(resultSet.getBigDecimal("price_b"));
                 itemDTO.setItemPrice_out_c(resultSet.getBigDecimal("price_c"));

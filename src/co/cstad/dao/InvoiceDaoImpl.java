@@ -1,5 +1,6 @@
-package co.cstad.dao;
+package co.cstad.dao.daoimplementation;
 
+import co.cstad.dao.InvoiceDao;
 import co.cstad.model.InvoiceDTO;
 import co.cstad.util.DbSingleton;
 
@@ -12,23 +13,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class InvoiceDaoImpl implements InvoiceDao{
-    private static Connection connection;
-    public InvoiceDaoImpl(){
+public class InvoiceDaoImpl implements InvoiceDao {
+    private final Connection connection;
+
+    public InvoiceDaoImpl() {
         connection = DbSingleton.instance();
     }
 
     @Override
     public InvoiceDTO insert(InvoiceDTO invoice) {
-
+        try {
             String sql = "INSERT INTO invoice (invoice_no, purchase_date, discount, is_cancelled, status, is_paid) VALUES (?, ?, ?, ?, ?, ?)";
-            try (PreparedStatement pst = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-                pst.setString(1, invoice.getInvoiceNo());
-                pst.setDate(2, java.sql.Date.valueOf(invoice.getPurchaseDate()));
-                pst.setDouble(3, invoice.getDiscount());
-                pst.setBoolean(4, invoice.getCancelled());
-                pst.setBoolean(5, invoice.getStatus());
-                pst.setBoolean(6, invoice.getPaid());
+            PreparedStatement pst = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+            pst.setString(1, invoice.getInvoiceNo());
+            pst.setDate(2, java.sql.Date.valueOf(invoice.getPurchaseDate()));
+            pst.setDouble(3, invoice.getDiscount());
+            pst.setBoolean(4, invoice.getCancelled());
+            pst.setBoolean(5, invoice.getStatus());
+            pst.setBoolean(6, invoice.getPaid());
 
             int affectedRows = pst.executeUpdate();
 

@@ -2,49 +2,45 @@
 package co.cstad;
 
 import co.cstad.controller.*;
-import co.cstad.dao.InvoiceDaoImpl;
-import co.cstad.loggingin.UserAuthentication;
+import co.cstad.service.userservice.UserAuthentication;
 import co.cstad.model.*;
-import co.cstad.model.CustomerDTO;
-import co.cstad.dao.UserDao;
-import co.cstad.model.InvoiceDTO;
 import co.cstad.util.Singleton;
 import co.cstad.model.ItemDTO;
-import co.cstad.model.UserDTO;
-import co.cstad.util.Singleton;
 import co.cstad.view.MenuView;
 import co.cstad.view.MenuViewAdmin;
 import co.cstad.view.MenuViewManager;
 import co.cstad.view.MenuViewReport;
+
 import java.util.Scanner;
 
-import static co.cstad.Main.inputValue;
+import static co.cstad.util.Singleton.reportController;
 
 public class MainApp {
     private static final Scanner scanner = new Scanner(System.in);
     private static final UserAuthentication userAuthentication = new UserAuthentication();
     private static final MenuView menuView = new MenuView();
-    private static final MenuViewAdmin menuViewAdmin = new MenuViewAdmin();
-    private static final ItemController itemController = new ItemController();
-    private static final InvoiceDaoImpl invoiceDaoImpl = new InvoiceDaoImpl();
+    private static final MenuViewAdmin menuViewAdmin = Singleton.menuViewAdmin();
+    private static final ReportController reportController = Singleton.reportController();
+    private static final ItemController itemController = Singleton.itemController();
     private static final UserController userController = Singleton.userController();
-    private static final InvoiceController invoiceController = new InvoiceController();
-    private static final CustomerController customerController = new CustomerController();
-    private static final ReportController reportController = new ReportController();
-
+    private static final InvoiceController invoiceController = Singleton.invoiceController();
+    private static final CustomerController customerController = Singleton.customerController();
     public static void main(String[] args) {
-        menuView.startInterface();
+        //menuView.startInterface();
         menuView.menuLogin();
 
         int option;
         do {
-            System.out.print(" choose ➡\uFE0F ");
+            System.out.print(" choose -> ");
             option = Integer.parseInt(Singleton.getInstance().getScanner().nextLine());
             switch (option) {
                 case 1 -> handleAuthentication();
                 case 2 -> menuView.menuAboutUs();
                 case 3 -> System.exit(0);
-
+                default -> {
+                    System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
+                    System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 3 .");
+                }
             }
         } while (true);
     }
@@ -57,13 +53,13 @@ public class MainApp {
 
         if (userAuthentication.authenticateUser(username, password)) {
             String role = userAuthentication.getUserRole(username);
-            System.out.println("✅ User authenticated successfully.");
+            System.out.println("User authenticated successfully.");
 
             if (role != null) {
                 handleRole(role);
             }
         } else {
-            System.out.println("❌ Invalid username or password.");
+            System.out.println("Invalid username or password.");
         }
     }
 
@@ -82,7 +78,7 @@ public class MainApp {
         int op;
         do {
             MenuViewAdmin.mainMenuAdmin();
-            System.out.print("choose ➡\uFE0F ");
+            System.out.print("choose -> ");
             op = Integer.parseInt(scanner.nextLine());
 
             switch (op) {
@@ -92,7 +88,12 @@ public class MainApp {
                 case 4 -> handleUserMenu();
                 case 5 -> handleReportMenu();
                 case 6 -> {
+                    handleAuthentication();
                     return;
+                }
+                default -> {
+                    System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
+                    System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 7 .");
                 }
             }
         } while (op != 0);
@@ -101,7 +102,7 @@ public class MainApp {
         int opUser;
         do {
             menuViewAdmin.userMenu();
-            System.out.print("choose ➡\uFE0F ");
+            System.out.print("choose -> ");
             opUser = Integer.parseInt(scanner.nextLine());
             switch (opUser) {
                 case 1 -> {
@@ -121,6 +122,10 @@ public class MainApp {
                 case 5 -> {
                     return;
                 }
+                default -> {
+                    System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
+                    System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 5 .");
+                }
             }
         } while (opUser != 0);
     }
@@ -129,7 +134,7 @@ public class MainApp {
         int op2;
         do {
             menuView.itemMenu();
-            System.out.print("choose ➡\uFE0F ");
+            System.out.print("choose -> ");
             op2 = Integer.parseInt(scanner.nextLine());
 
             switch (op2) {
@@ -154,7 +159,7 @@ public class MainApp {
                 }
                 default -> {
                     System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
-                    System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 5 .");
+                    System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 7 .");
                 }
             }
         } while (op2 != 0);
@@ -163,7 +168,7 @@ public class MainApp {
         int opCus;
         do {
             menuViewAdmin.customerMenu();
-            System.out.print("choose ➡\uFE0F ");
+            System.out.print("choose -> ");
             opCus = Integer.parseInt(scanner.nextLine());
             switch (opCus) {
                 case 1 -> {
@@ -174,25 +179,24 @@ public class MainApp {
                 case 4 -> {
                     CustomerDTO delete = customerController.delete();
                     if (delete != null) {
-                        customerController.delete();
+                        customerController.confirmation(delete);
                     }
                 }
                 case 5 -> {
                     return;
                 }
                 default -> {
-                    System.out.println("\n" + " ".repeat(5) + "✖\uFE0F INPUT IS INVALID !");
+                    System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
                     System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 5 .");
                 }
             }
         } while (opCus != 0);
     }
-
     private static void handleMenuUserUpdate(){
         int updateOp;
         do {
             menuViewAdmin.optionListUser();
-            System.out.print("choose ➡\uFE0F ");
+            System.out.print("choose -> ");
             updateOp = Integer.parseInt(scanner.nextLine());
             switch (updateOp) {
                 case 1 -> userController.updateAll();
@@ -208,17 +212,16 @@ public class MainApp {
                 }
                 default -> {
                     System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
-                    System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 5 .");
+                    System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 9 .");
                 }
             }
         } while (updateOp != 0);
     }
-
     private static void handleMenuItemUpdate() {
         int updateOp;
         do {
             menuView.menuItemUpdate();
-            System.out.print("choose ➡\uFE0F ");
+            System.out.print("choose -> ");
             updateOp = Integer.parseInt(scanner.nextLine());
             // Handle update options here...
             switch (updateOp) {
@@ -235,44 +238,27 @@ public class MainApp {
                 }
                 default -> {
                     System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
-                    System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 5 .");
+                    System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 9 .");
                 }
             }
         } while (updateOp != 0);
-    }
-
-    private static void handleReportMenu(){
-        int opReport;
-        do {
-            menuView.reportMenu();
-            System.out.print("Choose ➡\uFE0F ");
-            opReport = Integer.parseInt(scanner.nextLine());
-            switch (opReport){
-                case 1 -> reportController.stockCountReport();
-                case 2 -> reportController.stockInList();
-                case 3 -> reportController.stockOutList();
-                case 4 -> reportController.invoiceDetail();
-                case 5 -> reportController.invoiceAdjustment();
-                case 6 -> reportController.itemPriceHistory();
-                case 7 -> System.out.println("");
-                case 8 -> System.out.println("");
-                case 9 -> System.out.println("Back to Main Menu");
-                default -> System.out.println("Invalid option, please try again...!");
-            }
-        }while (opReport != 9);
     }
 
     private static void handleInvoiceMenu() {
         int optInvoice;
         do {
             menuView.invoiceMenu();
-            System.out.print("choose ➡\uFE0F ");
+            System.out.print("choose -> ");
             optInvoice = Integer.parseInt(scanner.nextLine());
             switch (optInvoice) {
                 case 1 -> invoiceController.update();
                 case 2 -> invoiceController.read();
                 case 3 -> {
                     return;
+                }
+                default -> {
+                    System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
+                    System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 4 .");
                 }
             }
         } while (optInvoice != 3);
@@ -281,7 +267,7 @@ public class MainApp {
         int updateOp;
         do {
             menuViewAdmin.optionListUp();
-            System.out.print("choose ➡\uFE0F ");
+            System.out.print("choose -> ");
             updateOp = Integer.parseInt(scanner.nextLine());
             // Handle update options here...
             switch (updateOp) {
@@ -297,24 +283,34 @@ public class MainApp {
                 }
                 default -> {
                     System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
-                    System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 5 .");
+                    System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 6 .");
                 }
             }
         } while (true);
     }
-    private static void handleInvoiceMenu() {
-        int optInvoice;
+    private static void handleReportMenu(){
+        int opReport;
         do {
-            menuView.invoiceMenu();
-            System.out.print("choose -> ");
-            optInvoice = Integer.parseInt(scanner.nextLine());
-            switch (optInvoice) {
-                case 1 -> invoiceController.update();
-                case 2 -> invoiceController.read();
-                case 3 -> {
+            menuView.reportMenu();
+            System.out.print("Choose ➡\uFE0F ");
+            opReport = Integer.parseInt(scanner.nextLine());
+            switch (opReport){
+                case 1 -> reportController.stockCountReport();
+                case 2 -> reportController.stockInReport();
+                case 3 -> reportController.stockOutReport();
+                case 4 -> reportController.invoiceDetail();
+                case 5 -> reportController.invoiceAdjustment();
+                case 6 -> reportController.itemPriceHistory();
+                case 7 -> reportController.stockAlert();
+                case 8 -> reportController.summaryReport();
+                case 9 -> {
                     return;
                 }
+                default -> {
+                    System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
+                    System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 9 .");
+                }
             }
-        } while (optInvoice != 3);
+        }while (opReport != 9);
     }
 }

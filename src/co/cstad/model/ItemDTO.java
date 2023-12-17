@@ -8,20 +8,11 @@ public class ItemDTO {
     private String itemCode;
     private String itemDescription;
     private String itemUnit;
-    private BigDecimal itemPrice;
     private BigDecimal itemPrice_out_a;
     private BigDecimal itemPrice_out_b;
     private BigDecimal itemPrice_out_c;
     private Integer qty;
     private Boolean status;
-
-    public BigDecimal getItemPrice() {
-        return itemPrice;
-    }
-
-    public void setItemPrice(BigDecimal itemPrice) {
-        this.itemPrice = itemPrice;
-    }
 
     public Long getItemId() {
         return itemId;

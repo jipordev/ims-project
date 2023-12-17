@@ -1,5 +1,6 @@
-package co.cstad.dao;
+package co.cstad.dao.daoimplementation;
 
+import co.cstad.dao.UserDao;
 import co.cstad.model.ItemDTO;
 import co.cstad.model.UserDTO;
 import co.cstad.util.DbSingleton;
@@ -12,14 +13,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class UserDaoImpl implements UserDao{
+public class UserDaoImpl implements UserDao {
     private final Connection connection;
     public UserDaoImpl(){
         connection = DbSingleton.instance();
     }
     public UserDTO insert(UserDTO userDTO) {
         String sql = " INSERT INTO users (username, password, email, contact, address, status, role_id)"+
-            "VALUES (?, ?, ?, ?, ?, ?, ?) ";
+                "VALUES (?, ?, ?, ?, ?, ?, ?) ";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, userDTO.getUsername());

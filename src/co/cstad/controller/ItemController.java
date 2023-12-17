@@ -1,5 +1,6 @@
 package co.cstad.controller;
 
+import co.cstad.exception.StringInputException;
 import co.cstad.model.ItemDTO;
 import co.cstad.model.StockInDTO;
 import co.cstad.model.StockOutDTO;
@@ -44,31 +45,7 @@ public class ItemController {
         }
         return null;
     }
-
     public void stockOut() {
-        while (true) {
-            StockOutDTO newStockOut = ItemView.viewCreateStockOut();
-
-            if (newStockOut != null) {
-                StockOutDTO stockOutResult = itemService.stockOut(newStockOut);
-
-                if (stockOutResult != null) {
-                    System.out.println("Restock successfully");
-                } else {
-                    System.out.println("Failed to restock");
-                }
-
-                System.out.print("Do you want to perform another restock? (yes/no): ");
-                String userChoice = scanner.nextLine().toLowerCase();
-
-                if (!userChoice.equals("yes")) {
-                    break;
-                }
-            } else {
-                System.out.println("Invalid input for restock the item.");
-                break;
-            }
-        }
     }
     public ItemDTO create() {
         ItemDTO newItem = ItemView.collectNewItemInformation();
@@ -88,267 +65,331 @@ public class ItemController {
         return null;
     }
     public void updateAll() {
-        System.out.print("Enter the ID of the item to update: ");
-        Long itemId = Long.parseLong(scanner.nextLine());
+        try {
+            System.out.print("Enter the ID of the item to update: ");
+            Long itemId = Long.parseLong(scanner.nextLine());
 
-        ItemDTO existingItem = itemService.selectById(itemId);
+            ItemDTO existingItem = itemService.selectById(itemId);
 
-        if (existingItem != null) {
-            System.out.println("Existing Item Details:");
-            menuViewAdmin.itemConfirmation(existingItem);
+            if (existingItem != null) {
+                System.out.println("Existing Item Details:");
+                menuViewAdmin.itemConfirmation(existingItem);
 
-            ItemDTO newItem = ItemView.collectNewItemInformation();
+                System.out.print("Enter the new item description: ");
+                String newItemDescription = scanner.nextLine();
 
-            if (newItem != null) {
-                // Update the existing item with the new information
-                existingItem.setItemDescription(newItem.getItemDescription());
-                existingItem.setItemUnit(newItem.getItemUnit());
-                existingItem.setQty(newItem.getQty());
-                existingItem.setItemPrice_out_a(newItem.getItemPrice_out_a());
-                existingItem.setItemPrice_out_b(newItem.getItemPrice_out_b());
-                existingItem.setItemPrice_out_c(newItem.getItemPrice_out_c());
-                existingItem.setStatus(newItem.isStatus());
+                System.out.print("Enter the new item unit: ");
+                String newItemUnit = scanner.nextLine();
+
+                // Validate the new item description and unit inputs
+                if (validateStringInput(newItemDescription) && validateStringInput(newItemUnit)) {
+                    ItemDTO newItem = ItemView.collectNewItemInformation();
+
+                    if (newItem != null) {
+                        // Update the existing item with the new information
+                        existingItem.setItemDescription(newItemDescription);
+                        existingItem.setItemUnit(newItemUnit);
+                        existingItem.setQty(newItem.getQty());
+                        existingItem.setItemPrice_out_a(newItem.getItemPrice_out_a());
+                        existingItem.setItemPrice_out_b(newItem.getItemPrice_out_b());
+                        existingItem.setItemPrice_out_c(newItem.getItemPrice_out_c());
+                        existingItem.setStatus(newItem.isStatus());
+
+                        // Call the service to update the item
+                        ItemDTO updatedItem = itemService.updateById(existingItem);
+
+                        if (updatedItem != null) {
+                            System.out.println("Item updated successfully:");
+                            menuViewAdmin.itemConfirmation(updatedItem);
+                        } else {
+                            System.out.println("Failed to update item.");
+                        }
+                    } else {
+                        System.out.println("Invalid input for updating the item.");
+                    }
+                } else {
+                    System.out.println("Invalid input for the new item description or unit.");
+                }
+            } else {
+                System.out.println("Item with ID " + itemId + " not found.");
+            }
+        } catch (StringInputException e) {
+            System.out.println(e.getMessage());
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid ID input. Please try again");
+        }
+    }
+    public void updateItemDescription(){
+        try {
+            System.out.print("Enter the ID of the item to update: ");
+            Long itemId = Long.parseLong(scanner.nextLine());
+
+            ItemDTO existingItem = itemService.selectById(itemId);
+
+            if (existingItem != null) {
+                System.out.println("Existing Item Details:");
+                menuViewAdmin.itemConfirmation(existingItem);
+
+                System.out.print("Enter the new item description: ");
+                String newItemDescription = scanner.nextLine();
+
+                existingItem.setItemDescription(newItemDescription);
 
                 // Call the service to update the item
                 ItemDTO updatedItem = itemService.updateById(existingItem);
 
                 if (updatedItem != null) {
-                    System.out.println("Item updated successfully:");
+                    System.out.println("Item description updated successfully:");
                     menuViewAdmin.itemConfirmation(updatedItem);
                 } else {
-                    System.out.println("Failed to update item.");
+                    System.out.println("Failed to update item description.");
                 }
             } else {
-                System.out.println("Invalid input for updating the item.");
+                System.out.println("Item with ID " + itemId + " not found.");
             }
-        } else {
-            System.out.println("Item with ID " + itemId + " not found.");
-        }
-    }
-    public void updateItemDescription(){
-        System.out.print("Enter the ID of the item to update: ");
-        Long itemId = Long.parseLong(scanner.nextLine());
-
-        ItemDTO existingItem = itemService.selectById(itemId);
-
-        if (existingItem != null) {
-            System.out.println("Existing Item Details:");
-            menuViewAdmin.itemConfirmation(existingItem);
-
-            System.out.print("Enter the new item description: ");
-            String newItemDescription = scanner.nextLine();
-
-            existingItem.setItemDescription(newItemDescription);
-
-            // Call the service to update the item
-            ItemDTO updatedItem = itemService.updateById(existingItem);
-
-            if (updatedItem != null) {
-                System.out.println("Item description updated successfully:");
-                menuViewAdmin.itemConfirmation(updatedItem);
-            } else {
-                System.out.println("Failed to update item description.");
-            }
-        } else {
-            System.out.println("Item with ID " + itemId + " not found.");
+        } catch (StringInputException e) {
+            System.out.println(e.getMessage());
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid ID input. Please try again.");
         }
     }
     public void updateItemUnit(){
-        System.out.print("Enter the ID of the item to update: ");
-        Long itemId = Long.parseLong(scanner.nextLine());
+        try {
+            System.out.print("Enter the ID of the item to update: ");
+            Long itemId = Long.parseLong(scanner.nextLine());
 
-        ItemDTO existingItem = itemService.selectById(itemId);
+            ItemDTO existingItem = itemService.selectById(itemId);
 
-        if (existingItem != null) {
-            System.out.println("Existing Item Details:");
-            menuViewAdmin.itemConfirmation(existingItem);
+            if (existingItem != null) {
+                System.out.println("Existing Item Details:");
+                menuViewAdmin.itemConfirmation(existingItem);
 
-            System.out.print("Enter the new item unit: ");
-            String newItemUnit = scanner.nextLine();
+                System.out.print("Enter the new item unit: ");
+                String newItemUnit = scanner.nextLine();
 
-            existingItem.setItemUnit(newItemUnit);
+                if (validateStringInput(newItemUnit)) {
+                    existingItem.setItemUnit(newItemUnit);
 
-            // Call the service to update the item
-            ItemDTO updatedItem = itemService.updateById(existingItem);
+                    // Call the service to update the item
+                    ItemDTO updatedItem = itemService.updateById(existingItem);
 
-            if (updatedItem != null) {
-                System.out.println("Item unit updated successfully:");
-                menuViewAdmin.itemConfirmation(updatedItem);
+                    if (updatedItem != null) {
+                        System.out.println("Item unit updated successfully:");
+                        menuViewAdmin.itemConfirmation(updatedItem);
+                    } else {
+                        System.out.println("Failed to update item unit.");
+                    }
+                } else {
+                    System.out.println("Invalid input for the new description");
+                }
             } else {
-                System.out.println("Failed to update item unit.");
+                System.out.println("Item with ID " + itemId + " not found.");
             }
-        } else {
-            System.out.println("Item with ID " + itemId + " not found.");
+        } catch (StringInputException e) {
+            System.out.println(e.getMessage());
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid ID input. Please try again");
         }
     }
     public void updateItemQty () {
-        System.out.print("Enter the ID of the item to update: ");
-        Long itemId = Long.parseLong(scanner.nextLine());
+        try {
+            System.out.print("Enter the ID of the item to update: ");
+            Long itemId = Long.parseLong(scanner.nextLine());
 
-        ItemDTO existingItem = itemService.selectById(itemId);
+            ItemDTO existingItem = itemService.selectById(itemId);
 
-        if (existingItem != null) {
-            System.out.println("Existing Item Details:");
-            menuViewAdmin.itemConfirmation(existingItem);
+            if (existingItem != null) {
+                System.out.println("Existing Item Details:");
+                menuViewAdmin.itemConfirmation(existingItem);
 
-            System.out.print("Enter the new item qty: ");
-            int newItemQty = Integer.parseInt(scanner.nextLine());
+                System.out.print("Enter the new item qty: ");
+                int newItemQty = Integer.parseInt(scanner.nextLine());
 
-            existingItem.setQty(newItemQty);
+                existingItem.setQty(newItemQty);
 
-            // Call the service to update the item
-            ItemDTO updatedItem = itemService.updateById(existingItem);
+                // Call the service to update the item
+                ItemDTO updatedItem = itemService.updateById(existingItem);
 
-            if (updatedItem != null) {
-                System.out.println("Item qty updated successfully:");
-                menuViewAdmin.itemConfirmation(updatedItem);
+                if (updatedItem != null) {
+                    System.out.println("Item qty updated successfully:");
+                    menuViewAdmin.itemConfirmation(updatedItem);
+                } else {
+                    System.out.println("Failed to update item qty.");
+                }
             } else {
-                System.out.println("Failed to update item qty.");
+                System.out.println("Item with ID " + itemId + " not found.");
             }
-        } else {
-            System.out.println("Item with ID " + itemId + " not found.");
+        } catch (StringInputException e) {
+            System.out.println(e.getMessage());
+        } catch (NumberFormatException e){
+            System.out.println("Invalid ID input. Please try again.");
         }
     }
     public void updateItemPriceA() {
-        System.out.print("Enter the ID of the item to update: ");
-        Long itemId = Long.parseLong(scanner.nextLine());
+        try {
+            System.out.print("Enter the ID of the item to update: ");
+            Long itemId = Long.parseLong(scanner.nextLine());
 
-        ItemDTO existingItem = itemService.selectById(itemId);
+            ItemDTO existingItem = itemService.selectById(itemId);
 
-        if (existingItem != null) {
-            System.out.println("Existing Item Details:");
-            menuViewAdmin.itemConfirmation(existingItem);
+            if (existingItem != null) {
+                System.out.println("Existing Item Details:");
+                menuViewAdmin.itemConfirmation(existingItem);
 
-            System.out.print("Enter the new item price_a : ");
-            BigDecimal newItemPriceA = new BigDecimal(scanner.nextLine());
+                System.out.print("Enter the new item price_a : ");
+                BigDecimal newItemPriceA = new BigDecimal(scanner.nextLine());
 
-            existingItem.setItemPrice_out_a(newItemPriceA);
+                existingItem.setItemPrice_out_a(newItemPriceA);
 
-            // Call the service to update the item
-            ItemDTO updatedItem = itemService.updateById(existingItem);
+                // Call the service to update the item
+                ItemDTO updatedItem = itemService.updateById(existingItem);
 
-            if (updatedItem != null) {
-                System.out.println("Item price_a updated successfully:");
-                menuViewAdmin.itemConfirmation(updatedItem);
+                if (updatedItem != null) {
+                    System.out.println("Item price_a updated successfully:");
+                    menuViewAdmin.itemConfirmation(updatedItem);
+                } else {
+                    System.out.println("Failed to update item price_a.");
+                }
             } else {
-                System.out.println("Failed to update item price_a.");
+                System.out.println("Item with ID " + itemId + " not found.");
             }
-        } else {
-            System.out.println("Item with ID " + itemId + " not found.");
+        } catch (StringInputException e){
+            System.out.println(e.getMessage());
+        } catch (NumberFormatException e){
+            System.out.println("Invalid ID input. Please try again.");
         }
     }
     public void updateItemPriceB() {
-        System.out.print("Enter the ID of the item to update: ");
-        Long itemId = Long.parseLong(scanner.nextLine());
+        try {
+            System.out.print("Enter the ID of the item to update: ");
+            Long itemId = Long.parseLong(scanner.nextLine());
 
-        ItemDTO existingItem = itemService.selectById(itemId);
+            ItemDTO existingItem = itemService.selectById(itemId);
 
-        if (existingItem != null) {
-            System.out.println("Existing Item Details:");
-            menuViewAdmin.itemConfirmation(existingItem);
+            if (existingItem != null) {
+                System.out.println("Existing Item Details:");
+                menuViewAdmin.itemConfirmation(existingItem);
 
-            System.out.print("Enter the new item price_b : ");
-            BigDecimal newItemPriceB = new BigDecimal(scanner.nextLine());
+                System.out.print("Enter the new item price_b : ");
+                BigDecimal newItemPriceB = new BigDecimal(scanner.nextLine());
 
-            existingItem.setItemPrice_out_b(newItemPriceB);
+                existingItem.setItemPrice_out_b(newItemPriceB);
 
-            // Call the service to update the item
-            ItemDTO updatedItem = itemService.updateById(existingItem);
+                // Call the service to update the item
+                ItemDTO updatedItem = itemService.updateById(existingItem);
 
-            if (updatedItem != null) {
-                System.out.println("Item price_b updated successfully:");
-                menuViewAdmin.itemConfirmation(updatedItem);
+                if (updatedItem != null) {
+                    System.out.println("Item price_b updated successfully:");
+                    menuViewAdmin.itemConfirmation(updatedItem);
+                } else {
+                    System.out.println("Failed to update item price_b.");
+                }
             } else {
-                System.out.println("Failed to update item price_b.");
+                System.out.println("Item with ID " + itemId + " not found.");
             }
-        } else {
-            System.out.println("Item with ID " + itemId + " not found.");
+        } catch (StringInputException e){
+            System.out.println(e.getMessage());
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid ID input. Please try again.");
         }
     }
     public void updateItemPriceC() {
-        System.out.print("Enter the ID of the item to update: ");
-        Long itemId = Long.parseLong(scanner.nextLine());
+        try {
+            System.out.print("Enter the ID of the item to update: ");
+            Long itemId = Long.parseLong(scanner.nextLine());
 
-        ItemDTO existingItem = itemService.selectById(itemId);
+            ItemDTO existingItem = itemService.selectById(itemId);
 
-        if (existingItem != null) {
-            System.out.println("Existing Item Details:");
-            menuViewAdmin.itemConfirmation(existingItem);
+            if (existingItem != null) {
+                System.out.println("Existing Item Details:");
+                menuViewAdmin.itemConfirmation(existingItem);
 
-            System.out.print("Enter the new item price_c : ");
-            BigDecimal newItemPriceC = new BigDecimal(scanner.nextLine());
+                System.out.print("Enter the new item price_c : ");
+                BigDecimal newItemPriceC = new BigDecimal(scanner.nextLine());
 
-            existingItem.setItemPrice_out_c(newItemPriceC);
+                existingItem.setItemPrice_out_c(newItemPriceC);
 
-            // Call the service to update the item
-            ItemDTO updatedItem = itemService.updateById(existingItem);
+                // Call the service to update the item
+                ItemDTO updatedItem = itemService.updateById(existingItem);
 
-            if (updatedItem != null) {
-                System.out.println("Item price_c updated successfully:");
-                menuViewAdmin.itemConfirmation(updatedItem);
+                if (updatedItem != null) {
+                    System.out.println("Item price_c updated successfully:");
+                    menuViewAdmin.itemConfirmation(updatedItem);
+                } else {
+                    System.out.println("Failed to update item price_c.");
+                }
             } else {
-                System.out.println("Failed to update item price_c.");
+                System.out.println("Item with ID " + itemId + " not found.");
             }
-        } else {
-            System.out.println("Item with ID " + itemId + " not found.");
+        } catch (StringInputException e) {
+            System.out.println(e.getMessage());
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid ID input. Please try again");
         }
     }
     public void updateItemStatus() {
-        System.out.print("Enter the ID of the item to update: ");
-        Long itemId = Long.parseLong(scanner.nextLine());
+        try {
+            System.out.print("Enter the ID of the item to update: ");
+            Long itemId = Long.parseLong(scanner.nextLine());
 
-        ItemDTO existingItem = itemService.selectById(itemId);
+            ItemDTO existingItem = itemService.selectById(itemId);
 
-        if (existingItem != null) {
-            System.out.println("Existing Item Details:");
-            menuViewAdmin.itemConfirmation(existingItem);
+            if (existingItem != null) {
+                System.out.println("Existing Item Details:");
+                menuViewAdmin.itemConfirmation(existingItem);
 
-            System.out.print("Enter the new item status (true/false): ");
-            boolean newItemStatus = Boolean.parseBoolean(scanner.nextLine());
+                System.out.print("Enter the new item status (true/false): ");
+                boolean newItemStatus = Boolean.parseBoolean(scanner.nextLine());
 
-            existingItem.setStatus(newItemStatus);
+                existingItem.setStatus(newItemStatus);
 
-            // Call the service to update the item
-            ItemDTO updatedItem = itemService.updateById(existingItem);
+                // Call the service to update the item
+                ItemDTO updatedItem = itemService.updateById(existingItem);
 
-            if (updatedItem != null) {
-                System.out.println("Item status updated successfully:");
-                menuViewAdmin.itemConfirmation(updatedItem);
+                if (updatedItem != null) {
+                    System.out.println("Item status updated successfully:");
+                    menuViewAdmin.itemConfirmation(updatedItem);
+                } else {
+                    System.out.println("Failed to update item status.");
+                }
             } else {
-                System.out.println("Failed to update item status.");
+                System.out.println("Item with ID " + itemId + " not found.");
             }
-        } else {
-            System.out.println("Item with ID " + itemId + " not found.");
+        } catch (StringInputException e) {
+            System.out.println(e.getMessage());
         }
     }
     public ItemDTO delete() {
-        System.out.print("Enter the ID of the item to delete: ");
-        Long itemId = Long.parseLong(scanner.nextLine());
+        try {
+            System.out.print("Enter the ID of the item to delete: ");
+            Long itemId = Long.parseLong(scanner.nextLine());
 
-        ItemDTO itemToDelete = itemService.selectById(itemId);
+            ItemDTO itemToDelete = itemService.selectById(itemId);
 
-        if (itemToDelete != null) {
-            System.out.println("Confirmation before deletion.");
-            menuViewAdmin.itemConfirmation(itemToDelete);
-            System.out.print("Do you want to proceed with the deletion? (yes/no): ");
-            String confirmation = scanner.nextLine().toLowerCase();
+            if (itemToDelete != null) {
+                System.out.println("Confirmation before deletion.");
+                menuViewAdmin.itemConfirmation(itemToDelete);
+                System.out.print("Do you want to proceed with the deletion? (yes/no): ");
+                String confirmation = scanner.nextLine().toLowerCase();
 
-            if (confirmation.equals("yes")) {
-                ItemDTO deletedItem = itemService.deleteById(itemId);
+                if (confirmation.equals("yes")) {
+                    ItemDTO deletedItem = itemService.deleteById(itemId);
 
-                if (deletedItem != null) {
-                    System.out.println("Item deleted successfully:");
-                    return deletedItem;
+                    if (deletedItem != null) {
+                        System.out.println("Item deleted successfully:");
+                        return deletedItem;
+                    } else {
+                        System.out.println("Failed to delete the item.");
+                    }
                 } else {
-                    System.out.println("Failed to delete the item.");
+                    System.out.println("Deletion canceled by user.");
                 }
             } else {
-                System.out.println("Deletion canceled by user.");
+                System.out.println("Item with ID " + itemId + " not found.");
             }
-        } else {
-            System.out.println("Item with ID " + itemId + " not found.");
+        } catch (StringInputException e) {
+            System.out.println(e.getMessage());
         }
-
         return null;
     }
     public void confirmation(ItemDTO createdItem) {
@@ -356,5 +397,11 @@ public class ItemController {
     }
     public void closeScanner() {
         scanner.close();
+    }
+    private boolean validateStringInput(String input) throws StringInputException {
+        if (input == null || input.trim().isEmpty()) {
+            throw new StringInputException("Input cannot be null or empty.");
+        }
+        return true;
     }
 }

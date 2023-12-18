@@ -1,5 +1,6 @@
 package co.cstad.view;
 
+import co.cstad.MainApp;
 import org.nocrala.tools.texttablefmt.BorderStyle;
 import org.nocrala.tools.texttablefmt.ShownBorders;
 import org.nocrala.tools.texttablefmt.Table;
@@ -10,6 +11,7 @@ import java.util.Scanner;
 
 public class MenuView implements BoxBorder {
     Scanner scanner = new Scanner(System.in);
+    float space = 0.25f;
 
     //First Interface (CSTAD)
     public void startInterface() {
@@ -44,8 +46,6 @@ public class MenuView implements BoxBorder {
         System.out.print(reset);
     }
 
-
-
     // Log In
     public void menuLogin(){
         System.out.print(cyan);
@@ -59,11 +59,11 @@ public class MenuView implements BoxBorder {
         System.out.println(cyan + "│"+" ".repeat(6)+yellow + "██╔════╝ ╚════██╗"+ reset + " ".repeat(5) +cyan + "│ │");
         System.out.print(cyan + "│ │"+" ".repeat(28)+"│");
         System.out.println(cyan + "│"+" ".repeat(6)+yellow + "██║  ███╗ █████╔╝" +reset + " ".repeat(5)  +cyan + "│ │");
-        System.out.print(cyan + "│ │"+yellow + "  1 > LOGIN " + " ".repeat(16) +cyan + "│");
+        System.out.print(cyan + "│ │"+yellow + "  1 \uD83D\uDD10 LOGINㅤㅤㅤㅤㅤㅤㅤ" + " ".repeat(4) +cyan + "│");
         System.out.println(cyan + "│"+" ".repeat(6)+yellow + "██║   ██║ ╚═══██╗" +reset + " ".repeat(5)  +cyan + "│ │");
-        System.out.print(cyan + "│ │"+ yellow + "  2 > ABOUT US " + " ".repeat(13) + cyan + "│");
+        System.out.print(cyan + "│ │"+ yellow + "  2 \uD83D\uDC65 ABOUT USㅤㅤㅤㅤㅤㅤㅤ" + " ".repeat(1) + cyan + "│");
         System.out.println(cyan + "│"+" ".repeat(6)+yellow + "╚██████╔╝██████╔╝" +reset + " ".repeat(5)  +cyan +  "│ │");
-        System.out.print(cyan + "│ │"+ yellow + "  3 > EXIT PROGRAM " + " ".repeat(9) + cyan + "│");
+        System.out.print(cyan + "│ │"+ yellow + "  3 \uD83D\uDC48 EXIT PROGRAMㅤㅤㅤㅤ"+ " ".repeat(2) + cyan + "│");
         System.out.println("│"+" ".repeat(6)+yellow + "╚═════╝ ╚═════╝" +reset + " ".repeat(7)  +cyan + "│ │");
         System.out.print("│ └" + "─".repeat(28) + "┘");
         System.out.println("└" + "─".repeat(28) + "┘ │");
@@ -82,21 +82,21 @@ public class MenuView implements BoxBorder {
         System.out.print(VERTICAL_BORDER +SPACE + TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(28) + TOP_RIGHT_CORNER);
         System.out.println(TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(28) + TOP_RIGHT_CORNER + SPACE + VERTICAL_BORDER);
         System.out.print(VERTICAL_BORDER + SPACE + VERTICAL_BORDER + " ".repeat(10)+yellow + "  MENU  "+" ".repeat(10) +cyan + VERTICAL_BORDER);
-        System.out.println(cyan + VERTICAL_BORDER +yellow + " 1 >> Sreng Chipor "+ reset + SPACE.repeat(9) +cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
+        System.out.println(cyan + VERTICAL_BORDER +yellow + " 1\uFE0F⃣ ➡ Sreng Chipor " + " ".repeat(8) + reset  + cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
         System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER +HORIZONTAL_BORDER.repeat(28)+VERTICAL_BORDER);
-        System.out.println(cyan + VERTICAL_BORDER +yellow + " 2 >> Ly Meansreang "+ reset + " ".repeat(8) +cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
+        System.out.println(cyan + VERTICAL_BORDER +yellow + " 2\uFE0F⃣ ➡ Ly Meansreang "+ reset + " ".repeat(7) +cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
         System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + " ".repeat(28)+VERTICAL_BORDER);
-        System.out.println(cyan + VERTICAL_BORDER +yellow + " 3 >> Seang Mengkheang " +reset + " ".repeat(5)  +cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER );
-        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER  + yellow + "  1 > LOGIN " + " ".repeat(16) +cyan + VERTICAL_BORDER );
-        System.out.println(cyan + VERTICAL_BORDER +yellow + " 4 >> Pov Sokny " +reset + " ".repeat(12)  +cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER );
-        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + red + "  2 > ABOUT US " + " ".repeat(13) + cyan + VERTICAL_BORDER );
-        System.out.println(cyan + VERTICAL_BORDER +yellow + " 5 >> Hom pheakakvotey " +reset + " ".repeat(5)  +cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
-        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  3 > EXIT PROGRAM " + " ".repeat(9) + cyan + VERTICAL_BORDER );
-        System.out.println(cyan + VERTICAL_BORDER +yellow + " 6 >> Nheom Tevy " +reset + " ".repeat(11)  +cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
+        System.out.println(cyan + VERTICAL_BORDER +yellow + " 3\uFE0F⃣ ➡ Seang Mengkheang " +reset + " ".repeat(4)  +cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER );
+        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER  + yellow + "  1 \uD83D\uDD10 LOGINㅤㅤㅤㅤㅤㅤㅤ" + " ".repeat(4) +cyan + VERTICAL_BORDER );
+        System.out.println(cyan + VERTICAL_BORDER +yellow + " 4\uFE0F⃣ ➡ Pov Sokny " +reset + " ".repeat(11)  +cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER );
+        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + red + "  2 \uD83D\uDC65 ABOUT USㅤㅤㅤㅤㅤㅤㅤ" + " ".repeat(1) + cyan + VERTICAL_BORDER );
+        System.out.println(cyan + VERTICAL_BORDER +yellow + " 5\uFE0F⃣ ➡ Hom pheakakvotey " +reset + " ".repeat(4)  +cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
+        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  3 \uD83D\uDC48 EXIT PROGRAMㅤㅤㅤㅤ"+ " ".repeat(2) + cyan + VERTICAL_BORDER );
+        System.out.println(cyan + VERTICAL_BORDER +yellow + " 6\uFE0F⃣ ➡ Nheom Tevy " +reset + " ".repeat(10)  +cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
         System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + " ".repeat(28)+VERTICAL_BORDER);
-        System.out.println(cyan + VERTICAL_BORDER +yellow + " 7 >> Long Piseth " +reset + " ".repeat(10)  +cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
+        System.out.println(cyan + VERTICAL_BORDER +yellow + " 7\uFE0F⃣ ➡ Long Piseth " +reset + " ".repeat(9)  +cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
         System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + " ".repeat(28)+VERTICAL_BORDER);
-        System.out.println(cyan + VERTICAL_BORDER +yellow + " 8 >> Srong Sokcheat " +reset + " ".repeat(7)  +cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
+        System.out.println(cyan + VERTICAL_BORDER +yellow + " 8\uFE0F⃣ ➡ Srong Sokcheat " +reset + " ".repeat(6)  +cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
         System.out.print(VERTICAL_BORDER + SPACE + BOTTOM_LEFT_CORNER + "─".repeat(28) + BOTTOM_RIGHT_CORNER);
         System.out.println(BOTTOM_LEFT_CORNER + HORIZONTAL_BORDER.repeat(28) + BOTTOM_RIGHT_CORNER + SPACE + VERTICAL_BORDER);
 
@@ -107,7 +107,6 @@ public class MenuView implements BoxBorder {
         System.out.println(BOTTOM_LEFT_CORNER + HORIZONTAL_BORDER.repeat(62) + BOTTOM_RIGHT_CORNER);
         System.out.print(reset);
     }
-
 
 
     // Item
@@ -122,19 +121,19 @@ public class MenuView implements BoxBorder {
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(28) + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
         System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + " ".repeat(28) + cyan + VERTICAL_BORDER);
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(6) + yellow + " ██████╗ ██████╗ " + reset + " ".repeat(5) + cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
-        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  1 > NEW ITEM  " + " ".repeat(12) + cyan + VERTICAL_BORDER);
+        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + " 1\uFE0F⃣ ➡ NEW ITEM " + " ".repeat(12 ) + cyan + VERTICAL_BORDER);
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(6) + yellow + "██╔════╝ ╚════██╗" + reset + " ".repeat(5) + cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
-        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  2 > UPDATE ITEM " + " ".repeat(10) + cyan + VERTICAL_BORDER);
+        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + " 2\uFE0F⃣ ➡ UPDATE ITEM " + " ".repeat(9)+ cyan + VERTICAL_BORDER);
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(6) + yellow + "██║  ███╗ █████╔╝" + reset + " ".repeat(5) + cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
-        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  3 > DELETE ITEM " + " ".repeat(10) + cyan + VERTICAL_BORDER);
+        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + " 3\uFE0F⃣ ➡ DELETE ITEM "+ " ".repeat(9) + cyan + VERTICAL_BORDER);
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(6) + yellow + "██║   ██║ ╚═══██╗" + reset + " ".repeat(5) + cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
-        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  4 > READ ITEM " + " ".repeat(12) + cyan + VERTICAL_BORDER);
+        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + " 4\uFE0F⃣ ➡ READ ITEM "+ " ".repeat(11) + cyan + VERTICAL_BORDER);
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(6) + yellow + "╚██████╔╝██████╔╝" + reset + " ".repeat(5) + cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
-        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  5 > STOCK IN " + " ".repeat(13) + cyan + VERTICAL_BORDER);
+        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + " 5\uFE0F⃣ ➡ STOCK IN " + " ".repeat(12) + cyan + VERTICAL_BORDER);
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(6) + yellow + "╚═════╝ ╚═════╝" + reset + " ".repeat(7) + cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
-        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  6 > STOCK OUT " + " ".repeat(12) + cyan + VERTICAL_BORDER);
+        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + " 6\uFE0F⃣ ➡ STOCK OUT " + " ".repeat(11) + cyan + VERTICAL_BORDER);
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(28) + cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
-        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  7 > BACK TO MENU " + " ".repeat(9) + cyan + VERTICAL_BORDER);
+        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + " 7\uFE0F⃣ ➡ BACK TO MENU "+ " ".repeat(8) + cyan + VERTICAL_BORDER);
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(28) + cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
         System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + " ".repeat(28) + cyan + VERTICAL_BORDER);
         System.out.println(VERTICAL_BORDER + " ".repeat(28) + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
@@ -146,8 +145,6 @@ public class MenuView implements BoxBorder {
         System.out.println(BOTTOM_LEFT_CORNER + HORIZONTAL_BORDER.repeat(62) + BOTTOM_RIGHT_CORNER);
         System.out.print(reset);
     }
-
-
 
     // Invoice
     public void invoiceMenu(){
@@ -162,11 +159,11 @@ public class MenuView implements BoxBorder {
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(6)+yellow + "██╔════╝ ╚════██╗"+ reset + " ".repeat(5) +cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
         System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + " ".repeat(28)+VERTICAL_BORDER);
         System.out.println(cyan + VERTICAL_BORDER +" ".repeat(6)+yellow + "██║  ███╗ █████╔╝" +reset + " ".repeat(5)  +cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER );
-        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  1 > INVOICE RETURN " + " ".repeat(7) +cyan + VERTICAL_BORDER );
+        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  1\uFE0F⃣ ➡ INVOICE RETURN " + " ".repeat(5) +cyan + VERTICAL_BORDER );
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(6)+yellow + "██║   ██║ ╚═══██╗" +reset + " ".repeat(5)  +cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER );
-        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  2 > INVOICE LIST " + " ".repeat(9) + cyan + VERTICAL_BORDER );
+        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  2\uFE0F⃣ ➡ INVOICE LIST " + " ".repeat(7) + cyan + VERTICAL_BORDER );
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(6)+yellow + "╚██████╔╝██████╔╝" +reset + " ".repeat(5)  +cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
-        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  3 > BACK TO MAIN MENU " + " ".repeat(4) + cyan + VERTICAL_BORDER );
+        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  3\uFE0F⃣ ➡ BACK TO MAIN MENU " + " ".repeat(2) + cyan + VERTICAL_BORDER );
         System.out.println(VERTICAL_BORDER+" ".repeat(6)+yellow + "╚═════╝ ╚═════╝" +reset + " ".repeat(7)  +cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
         System.out.print(VERTICAL_BORDER + SPACE + BOTTOM_LEFT_CORNER + "─".repeat(28) + BOTTOM_RIGHT_CORNER);
         System.out.println(BOTTOM_LEFT_CORNER + HORIZONTAL_BORDER.repeat(28) + BOTTOM_RIGHT_CORNER + SPACE + VERTICAL_BORDER);
@@ -193,23 +190,23 @@ public class MenuView implements BoxBorder {
         System.out.println(VERTICAL_BORDER + " ".repeat(28) + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
         System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + HORIZONTAL_BORDER.repeat(28) + VERTICAL_BORDER);
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(28) + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
-        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  1 > STOCK COUNT REPORT " + " ".repeat(3) + cyan + VERTICAL_BORDER);
+        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  1\uFE0F⃣ ➡ STOCK COUNT REPORT " + " ".repeat(1) + cyan + VERTICAL_BORDER);
         System.out.println(VERTICAL_BORDER + " ".repeat(28) + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
-        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  2 > STOCK IN REPORT " + " ".repeat(6) + cyan + VERTICAL_BORDER);
+        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  2\uFE0F⃣ ➡ STOCK IN REPORT " + " ".repeat(4) + cyan + VERTICAL_BORDER);
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(6) + yellow + " ██████╗ ██████╗ " + reset + " ".repeat(5) + cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
-        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  3 > STOCK OUT REPORT " + " ".repeat(5) + cyan + VERTICAL_BORDER);
+        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  3\uFE0F⃣ ➡ STOCK OUT REPORT " + " ".repeat(3) + cyan + VERTICAL_BORDER);
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(6) + yellow + "██╔════╝ ╚════██╗" + reset + " ".repeat(5) + cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
-        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  4 > INVOICE DETAIL " + " ".repeat(7) + cyan + VERTICAL_BORDER);
+        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  4\uFE0F⃣ ➡ INVOICE DETAIL " + " ".repeat(5) + cyan + VERTICAL_BORDER);
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(6) + yellow + "██║  ███╗ █████╔╝" + reset + " ".repeat(5) + cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
-        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  5 > INVOICE ADJUSTMENT " + " ".repeat(3) + cyan + VERTICAL_BORDER);
+        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  5\uFE0F⃣ ➡ INVOICE ADJUSTMENT " + " ".repeat(1) + cyan + VERTICAL_BORDER);
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(6) + yellow + "██║   ██║ ╚═══██╗" + reset + " ".repeat(5) + cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
-        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  6 > ITEMS PRICE HISTORY " + " ".repeat(2) + cyan + VERTICAL_BORDER);
+        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  6\uFE0F⃣ ➡ ITEMS PRICE HISTORY " + " ".repeat(0) + cyan + VERTICAL_BORDER);
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(6) + yellow + "╚██████╔╝██████╔╝" + reset + " ".repeat(5) + cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
-        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  7 > STOCK ALERT REPORT " + " ".repeat(3) + cyan + VERTICAL_BORDER);
+        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  7\uFE0F⃣ ➡ STOCK ALERT REPORT " + " ".repeat(1) + cyan + VERTICAL_BORDER);
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(6) + yellow + "╚═════╝ ╚═════╝" + reset + " ".repeat(7) + cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
-        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  8 > SUMMARY REPORT " + " ".repeat(7) + cyan + VERTICAL_BORDER);
+        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  8\uFE0F⃣ ➡ SUMMARY REPORT " + " ".repeat(5) + cyan + VERTICAL_BORDER);
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(28) + cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
-        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  9 > BACK TO MAIN MENU " + " ".repeat(4) + cyan + VERTICAL_BORDER);
+        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  9\uFE0F⃣ ➡ BACK TO MAIN MENU " + " ".repeat(2) + cyan + VERTICAL_BORDER);
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(28) + cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
         System.out.print(VERTICAL_BORDER + SPACE + BOTTOM_LEFT_CORNER + "─".repeat(28) + BOTTOM_RIGHT_CORNER);
         System.out.println(BOTTOM_LEFT_CORNER + HORIZONTAL_BORDER.repeat(28) + BOTTOM_RIGHT_CORNER + SPACE + VERTICAL_BORDER);

@@ -13,7 +13,6 @@ import co.cstad.view.MenuViewReport;
 
 import java.util.Scanner;
 
-import static co.cstad.util.Singleton.reportController;
 
 public class MainApp {
     private static final Scanner scanner = new Scanner(System.in);
@@ -27,22 +26,7 @@ public class MainApp {
     private static final CustomerController customerController = Singleton.customerController();
     public static void main(String[] args) {
         //menuView.startInterface();
-        menuView.menuLogin();
-
-        int option;
-        do {
-            System.out.print(" choose -> ");
-            option = Integer.parseInt(Singleton.getInstance().getScanner().nextLine());
-            switch (option) {
-                case 1 -> handleAuthentication();
-                case 2 -> menuView.menuAboutUs();
-                case 3 -> System.exit(0);
-                default -> {
-                    System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
-                    System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 3 .");
-                }
-            }
-        } while (true);
+        handleLogIn();
     }
 
     private static void handleAuthentication() {
@@ -53,14 +37,32 @@ public class MainApp {
 
         if (userAuthentication.authenticateUser(username, password)) {
             String role = userAuthentication.getUserRole(username);
-            System.out.println("User authenticated successfully.");
+            System.out.println("✅ User authenticated successfully.");
 
             if (role != null) {
                 handleRole(role);
             }
         } else {
-            System.out.println("Invalid username or password.");
+            System.out.println("❌ Invalid username or password.");
         }
+    }
+    private static void handleLogIn(){
+        menuView.menuLogin();
+
+        int option;
+        do {
+            System.out.print(" choose ➡\uFE0F ");
+            option = Integer.parseInt(Singleton.getInstance().getScanner().nextLine());
+            switch (option) {
+                case 1 -> handleAuthentication();
+                case 2 -> menuView.menuAboutUs();
+                case 3 -> System.exit(0);
+                default -> {
+                    System.out.println("\n" + " ".repeat(5) + "⚠\uFE0F INPUT IS INVALID !");
+                    System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 3 .");
+                }
+            }
+        } while (true);
     }
 
     private static void handleRole(String role) {
@@ -69,7 +71,7 @@ public class MainApp {
                 case "admin" -> handleAdminMenu();
                 case "manager" -> MenuViewManager.mainMenuManager();
                 case "report" -> MenuViewReport.mainMenuReport();
-                default -> System.out.println("Unknown role");
+                default -> System.out.println("⚠\uFE0F Unknown role");
             }
         } while (true);
     }
@@ -80,7 +82,6 @@ public class MainApp {
             MenuViewAdmin.mainMenuAdmin();
             System.out.print("choose ➡\uFE0F ");
             op = Integer.parseInt(scanner.nextLine());
-
             switch (op) {
                 case 1 -> handleItemMenu();
                 case 2 -> handleCustomerMenu();
@@ -88,11 +89,11 @@ public class MainApp {
                 case 4 -> handleUserMenu();
                 case 5 -> handleReportMenu();
                 case 6 -> {
-                    menuView.menuLogin();
+                    handleLogIn();
                     return;
                 }
                 default -> {
-                    System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
+                    System.out.println("\n" + " ".repeat(5) + "⚠\uFE0F INPUT IS INVALID !");
                     System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 7 .");
                 }
             }
@@ -123,7 +124,7 @@ public class MainApp {
                     return;
                 }
                 default -> {
-                    System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
+                    System.out.println("\n" + " ".repeat(5) + "⚠\uFE0F INPUT IS INVALID !");
                     System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 5 .");
                 }
             }
@@ -134,7 +135,7 @@ public class MainApp {
         int op2;
         do {
             menuView.itemMenu();
-            System.out.print("choose -> ");
+            System.out.print("choose ➡\uFE0F ");
             op2 = Integer.parseInt(scanner.nextLine());
 
             switch (op2) {
@@ -158,7 +159,7 @@ public class MainApp {
                     return;
                 }
                 default -> {
-                    System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
+                    System.out.println("\n" + " ".repeat(5) + "⚠\uFE0F INPUT IS INVALID !");
                     System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 7 .");
                 }
             }
@@ -186,7 +187,7 @@ public class MainApp {
                     return;
                 }
                 default -> {
-                    System.out.println("\n" + " ".repeat(5) + "✖\uFE0F INPUT IS INVALID !");
+                    System.out.println("\n" + " ".repeat(5) + "⚠\uFE0F INPUT IS INVALID !");
                     System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 5 .");
                 }
             }
@@ -211,7 +212,7 @@ public class MainApp {
                     return;
                 }
                 default -> {
-                    System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
+                    System.out.println("\n" + " ".repeat(5) + "⚠\uFE0F INPUT IS INVALID !");
                     System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 9 .");
                 }
             }
@@ -237,13 +238,12 @@ public class MainApp {
                     return;
                 }
                 default -> {
-                    System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
+                    System.out.println("\n" + " ".repeat(5) + "⚠\uFE0F INPUT IS INVALID !");
                     System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 9 .");
                 }
             }
         } while (updateOp != 0);
     }
-
     private static void handleInvoiceMenu() {
         int optInvoice;
         do {
@@ -257,7 +257,7 @@ public class MainApp {
                     return;
                 }
                 default -> {
-                    System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
+                    System.out.println("\n" + " ".repeat(5) + "⚠\uFE0F INPUT IS INVALID !");
                     System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 4 .");
                 }
             }
@@ -282,8 +282,8 @@ public class MainApp {
                     return;
                 }
                 default -> {
-                    System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
-                    System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 5 .");
+                    System.out.println("\n" + " ".repeat(5) + "⚠\uFE0F INPUT IS INVALID !");
+                    System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 6 .");
                 }
             }
         } while (true);
@@ -292,7 +292,7 @@ public class MainApp {
         int opReport;
         do {
             menuView.reportMenu();
-            System.out.print("Choose ➡\uFE0F ");
+            System.out.print("Choose ➡️\uFE0F ");
             opReport = Integer.parseInt(scanner.nextLine());
             switch (opReport){
                 case 1 -> reportController.stockCountReport();
@@ -307,7 +307,7 @@ public class MainApp {
                     return;
                 }
                 default -> {
-                    System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
+                    System.out.println("\n" + " ".repeat(5) + "⚠\uFE0F INPUT IS INVALID !");
                     System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 9 .");
                 }
             }

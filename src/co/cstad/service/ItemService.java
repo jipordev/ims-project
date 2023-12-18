@@ -3,7 +3,6 @@ package co.cstad.service;
 import co.cstad.model.ItemDTO;
 import co.cstad.model.StockInDTO;
 import co.cstad.model.StockOutDTO;
-import co.cstad.model.UserDTO;
 
 import java.util.List;
 
@@ -16,4 +15,6 @@ public interface ItemService {
     ItemDTO updateById(ItemDTO item);
     ItemDTO deleteById(Long id);
     List<ItemDTO> selectByName(String name);
+    /*List<StockInDTO> selectStockIn();
+    List<ItemDTO> selectStockOut();*/
 }

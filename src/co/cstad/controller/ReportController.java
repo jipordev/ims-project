@@ -62,4 +62,9 @@ public class ReportController {
         List<ReportDTO> reportDTOList = reportService.selectSummaryReport();
         reportView.summaryReport(reportDTOList);
     }
+
+//    public void stockAlertReport(){
+//        List<ReportDTO> reportDTOList = reportService.selectStockAlertReport();
+//        ReportView.stockAlert(reportDTOList);
+//    }
 }

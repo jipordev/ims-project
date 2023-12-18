@@ -65,6 +65,8 @@ public class MenuViewAdmin implements BoxBorder {
         table.addCell(" ".repeat(3) + cyan + newItem.getItemUnit() + reset);
         table.addCell(" ".repeat(3) + yellow + "Quantity:" + reset);
         table.addCell(" ".repeat(3) + cyan + newItem.getQty() + reset);
+        table.addCell(" ".repeat(3) + yellow + "Price:" + reset);
+        table.addCell(" ".repeat(3) + cyan + newItem.getItemPrice() + reset);
         table.addCell(" ".repeat(3) + yellow + "Price_A:" + reset);
         table.addCell(" ".repeat(3) + cyan + newItem.getItemPrice_out_a() + reset);
         table.addCell(" ".repeat(3) + yellow + "Price_B:" + reset);

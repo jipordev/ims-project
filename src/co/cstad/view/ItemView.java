@@ -108,6 +108,9 @@ public class ItemView {
         System.out.print("Enter item quantity:");
         newItem.setQty(Integer.parseInt(scanner.nextLine()));
 
+        System.out.println("Enter item Price");
+        newItem.setItemPrice(new BigDecimal(scanner.nextLine()));
+
         System.out.print("Enter item price A:");
         newItem.setItemPrice_out_a(new BigDecimal(scanner.nextLine()));
 
@@ -124,12 +127,13 @@ public class ItemView {
     }
 
     public static void printItemDetails(Collection<ItemDTO> items) {
-        Table table = new Table(9, BorderStyle.UNICODE_BOX, ShownBorders.ALL);
+        Table table = new Table(10, BorderStyle.UNICODE_BOX, ShownBorders.ALL);
         table.addCell("   Item ID   ");
         table.addCell("   Item Code   ");
         table.addCell("   Description   ");
         table.addCell("   Unit   ");
         table.addCell("   Quantity   ");
+        table.addCell("   Price   ");
         table.addCell("   Price A   ");
         table.addCell("   Price B   ");
         table.addCell("   Price C   ");
@@ -141,6 +145,7 @@ public class ItemView {
             table.addCell("   " + item.getItemDescription() + "   ");
             table.addCell("   " + item.getItemUnit() + "   ");
             table.addCell("   " + String.valueOf(item.getQty()) + "   ");
+            table.addCell("   " + String.valueOf(item.getItemPrice()+"   "));
             table.addCell("   " + String.valueOf(item.getItemPrice_out_a()) + "   ");
             table.addCell("   " + String.valueOf(item.getItemPrice_out_b()) + "   ");
             table.addCell("   " + String.valueOf(item.getItemPrice_out_c()) + "   ");

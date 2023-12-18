@@ -1,14 +1,12 @@
 package co.cstad.service;
 
-import co.cstad.model.ItemDTO;
-import co.cstad.model.StockInDTO;
-import co.cstad.model.StockOutDTO;
-import co.cstad.model.UserDTO;
+import co.cstad.model.*;
 
 import java.util.List;
 
 public interface ItemService {
     ItemDTO insert(ItemDTO item);
+    List<ItemDTO> selectStockCount();
     StockInDTO stockIn(StockInDTO stockInDTO);
     StockOutDTO stockout(StockOutDTO stockOutDTO);
     List<ItemDTO> select();

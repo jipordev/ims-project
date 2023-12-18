@@ -18,3 +18,4 @@ public class StringInputException extends RuntimeException {
         super(cause);
     }
 }
+

@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,27 +21,6 @@ public class ReportDaoImpl implements ReportDao {
         connection = DbSingleton.instance();
     }
 
-    @Override
-    public List<ReportDTO> selectStockCount() {
-        String sql = "SELECT * FROM stock_count";
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            List<ReportDTO> reportDTOS = new ArrayList<>();
-            while (resultSet.next()) {
-                ReportDTO reportDTO = new ReportDTO();
-                reportDTO.setStockCountId(resultSet.getLong("stock_id"));
-                reportDTO.setQty(resultSet.getInt("qty"));
-                reportDTO.setStockCountDate(resultSet.getDate("stock_count_date").toLocalDate());
-                reportDTO.setItemId( resultSet.getLong("item_id"));
-                reportDTOS.add(reportDTO);
-            }
-            return reportDTOS;
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return null;
-    }
 
     @Override
     public List<ReportDTO> selectStockIn() {
@@ -157,40 +137,40 @@ public class ReportDaoImpl implements ReportDao {
         return null;
     }
 
+
     @Override
     public List<ReportDTO> selectStockAlertReport() {
-        String sql = "SELECT ga.alert_id, ga.qty_alert, ga.name, ga.item_id, " +
-                "i.item_id AS item_id, i.description AS name " +
-                "FROM group_alert ga " +
-                "INNER JOIN item i ON ga.item_id = i.item_id " +
-                "WHERE ga.qty_alert > 0";
+        String sql = """
+                SELECT ga.alert_id, ga.name, ga.qty_alert , i.qty
+                FROM group_alert ga
+                INNER JOIN item i ON ga.alert_id = i.alert_id
+                WHERE i.qty IS NOT NULL AND i.qty < 20
+            """;
 
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            ResultSet resultSet = preparedStatement.executeQuery();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+
             List<ReportDTO> reportDTOS = new ArrayList<>();
+
 
             while (resultSet.next()) {
                 ReportDTO reportDTO = new ReportDTO();
+                ItemDTO item = new ItemDTO();
+
+                item.setQty(resultSet.getInt("qty"));
                 reportDTO.setAlertId(resultSet.getLong("alert_id"));
-                reportDTO.setQytAlert(resultSet.getInt("qty_alert"));
+                reportDTO.setQytAlert(item.getQty());
                 reportDTO.setName(resultSet.getString("name"));
 
-                // Create an ItemDTO and set its properties
-                ItemDTO itemDTO = new ItemDTO();
-                itemDTO.setItemId(resultSet.getLong("item_id"));
-                itemDTO.setItemDescription(resultSet.getString("name"));
 
-                // Set the ItemDTO in the ReportDTO
-                reportDTO.setItem(itemDTO);
-
-                // Add other necessary fields from group_alert table
                 reportDTOS.add(reportDTO);
+
             }
 
             return reportDTOS;
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("Error executing query: " + e.getMessage());
+            e.printStackTrace(); // Print the stack trace for debugging
         }
 
         return null;

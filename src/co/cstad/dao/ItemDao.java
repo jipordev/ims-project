@@ -1,6 +1,7 @@
 package co.cstad.dao;
 
 import co.cstad.model.ItemDTO;
+import co.cstad.model.ReportDTO;
 import co.cstad.model.StockInDTO;
 import co.cstad.model.StockOutDTO;
 
@@ -9,6 +10,7 @@ import java.util.Optional;
 
 public interface ItemDao {
     ItemDTO insert(ItemDTO item);
+    List<ItemDTO> selectStockCount();
     StockInDTO stockIn(StockInDTO stockInDTO);
     StockOutDTO stockout(StockOutDTO stockOutDTO);
     List<ItemDTO> select();

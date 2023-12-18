@@ -13,6 +13,7 @@ public class ItemDTO {
     private BigDecimal itemPrice_out_c;
     private Integer qty;
     private Boolean status;
+    private Long alert_id;
 
     public Long getItemId() {
         return itemId;
@@ -87,5 +88,13 @@ public class ItemDTO {
     }
     public Boolean isStatus() {
         return status;
+    }
+
+    public Long getAlert_id() {
+        return alert_id;
+    }
+
+    public void setAlert_id(Long alert_id) {
+        this.alert_id = alert_id;
     }
 }

@@ -1,7 +1,6 @@
 package co.cstad.controller;
 
 import co.cstad.exception.StringInputException;
-import co.cstad.model.ItemDTO;
 import co.cstad.model.UserDTO;
 import co.cstad.service.UserService;
 import co.cstad.util.Singleton;
@@ -386,3 +385,4 @@ public class UserController {
         return true;
     }
 }
+

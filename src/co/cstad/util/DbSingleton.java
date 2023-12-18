@@ -8,7 +8,7 @@ import java.sql.SQLException;
 public class DbSingleton {
     private static String url = "jdbc:postgresql://localhost:5432/postgres";
     private static String username = "postgres";
-    private static String password = "jipor206";
+    private static String password = "2002sep24";
     private static Connection connection;
 
     private DbSingleton() {

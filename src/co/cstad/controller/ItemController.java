@@ -3,7 +3,6 @@ package co.cstad.controller;
 import co.cstad.exception.StringInputException;
 import co.cstad.model.ItemDTO;
 import co.cstad.model.StockInDTO;
-import co.cstad.model.StockOutDTO;
 import co.cstad.service.ItemService;
 import co.cstad.util.Singleton;
 import co.cstad.view.ItemView;
@@ -28,13 +27,14 @@ public class ItemController {
         List<ItemDTO> itemDTOList = itemService.select();
         ItemView.printItemList(itemDTOList);
     }
-    public StockInDTO stockIn(){
+
+    public StockInDTO stockIn() {
         StockInDTO newStockIn = ItemView.viewCreateStock();
 
         if (newStockIn != null) {
             StockInDTO stockIn = itemService.stockIn(newStockIn);
 
-            if (stockIn != null){
+            if (stockIn != null) {
                 System.out.println("Restock successfully");
                 return stockIn;
             } else {
@@ -45,8 +45,10 @@ public class ItemController {
         }
         return null;
     }
+
     public void stockOut() {
     }
+
     public ItemDTO create() {
         ItemDTO newItem = ItemView.collectNewItemInformation();
 
@@ -64,6 +66,7 @@ public class ItemController {
         }
         return null;
     }
+
     public void updateAll() {
         try {
             System.out.print("Enter the ID of the item to update: ");
@@ -119,7 +122,8 @@ public class ItemController {
             System.out.println("Invalid ID input. Please try again");
         }
     }
-    public void updateItemDescription(){
+
+    public void updateItemDescription() {
         try {
             System.out.print("Enter the ID of the item to update: ");
             Long itemId = Long.parseLong(scanner.nextLine());
@@ -153,7 +157,8 @@ public class ItemController {
             System.out.println("Invalid ID input. Please try again.");
         }
     }
-    public void updateItemUnit(){
+
+    public void updateItemUnit() {
         try {
             System.out.print("Enter the ID of the item to update: ");
             Long itemId = Long.parseLong(scanner.nextLine());
@@ -191,7 +196,8 @@ public class ItemController {
             System.out.println("Invalid ID input. Please try again");
         }
     }
-    public void updateItemQty () {
+
+    public void updateItemQty() {
         try {
             System.out.print("Enter the ID of the item to update: ");
             Long itemId = Long.parseLong(scanner.nextLine());
@@ -221,10 +227,11 @@ public class ItemController {
             }
         } catch (StringInputException e) {
             System.out.println(e.getMessage());
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             System.out.println("Invalid ID input. Please try again.");
         }
     }
+
     public void updateItemPriceA() {
         try {
             System.out.print("Enter the ID of the item to update: ");
@@ -253,12 +260,13 @@ public class ItemController {
             } else {
                 System.out.println("Item with ID " + itemId + " not found.");
             }
-        } catch (StringInputException e){
+        } catch (StringInputException e) {
             System.out.println(e.getMessage());
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             System.out.println("Invalid ID input. Please try again.");
         }
     }
+
     public void updateItemPriceB() {
         try {
             System.out.print("Enter the ID of the item to update: ");
@@ -287,12 +295,13 @@ public class ItemController {
             } else {
                 System.out.println("Item with ID " + itemId + " not found.");
             }
-        } catch (StringInputException e){
+        } catch (StringInputException e) {
             System.out.println(e.getMessage());
         } catch (NumberFormatException e) {
             System.out.println("Invalid ID input. Please try again.");
         }
     }
+
     public void updateItemPriceC() {
         try {
             System.out.print("Enter the ID of the item to update: ");
@@ -327,6 +336,7 @@ public class ItemController {
             System.out.println("Invalid ID input. Please try again");
         }
     }
+
     public void updateItemStatus() {
         try {
             System.out.print("Enter the ID of the item to update: ");
@@ -359,6 +369,7 @@ public class ItemController {
             System.out.println(e.getMessage());
         }
     }
+
     public ItemDTO delete() {
         try {
             System.out.print("Enter the ID of the item to delete: ");
@@ -392,12 +403,15 @@ public class ItemController {
         }
         return null;
     }
+
     public void confirmation(ItemDTO createdItem) {
         menuViewAdmin.itemConfirmation(createdItem);
     }
+
     public void closeScanner() {
         scanner.close();
     }
+
     private boolean validateStringInput(String input) throws StringInputException {
         if (input == null || input.trim().isEmpty()) {
             throw new StringInputException("Input cannot be null or empty.");

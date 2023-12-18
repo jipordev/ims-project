@@ -10,28 +10,6 @@ import java.util.Collection;
 
 public class ReportView implements BoxBorder {
 
-    public static void stockCountReport(Collection<ReportDTO> reports){
-        System.out.println(yellow + "\t\tStock Count Report" + reset);
-        Table table = new Table(4, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
-        table.setColumnWidth(0,15,20);
-        table.setColumnWidth(1,15,20);
-        table.setColumnWidth(2,15,20);
-        table.setColumnWidth(3,15,20);
-
-        table.addCell(" ".repeat(2)+ yellow + "Stock_Count_Id");
-        table.addCell(" ".repeat(2)+ yellow +"Item_Id");
-        table.addCell(" ".repeat(2)+ yellow +"Stock_Count_Date");
-        table.addCell(" ".repeat(2)+ yellow +"Qty");
-
-        for (ReportDTO report : reports) {
-            table.addCell("   " + report.getStockCountId() + "   ");
-            table.addCell("   " + report.getItemId() + "   ");
-            table.addCell("   " + report.getStockCountDate() + "   ");
-            table.addCell("   " + report.getQty() + "   ");
-        }
-
-        System.out.println(table.render());
-    }
 
     public static void stockInReport(Collection<ReportDTO> reports){
         System.out.println(yellow + "\t\tStock In Report"+reset);
@@ -157,33 +135,42 @@ public class ReportView implements BoxBorder {
         }
         System.out.println(table.render());
     }
+
+
+
+
     public static void stockAlert(Collection<ReportDTO> reports) {
+        ItemDTO itemDTO = new ItemDTO();
+
         if (reports == null) {
             System.out.println("Reports collection is null.");
             return;
         }
 
         System.out.println(yellow + "\t\tStock Alert Report" + reset);
-        Table table = new Table(4, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
+        Table table = new Table(3, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
         table.setColumnWidth(0, 15, 20);
         table.setColumnWidth(1, 15, 20);
         table.setColumnWidth(2, 15, 20);
 
+
+
         table.addCell(" ".repeat(2) + yellow + "Alert_Id");
-        table.addCell(" ".repeat(2) + yellow + "Name");
-        table.addCell(" ".repeat(2) + yellow + "Qty_Alert");
-        table.addCell(" ".repeat(2) + yellow + "Item_ID"+reset);
+        table.addCell(" ".repeat(2) + yellow + "Description");
+        table.addCell(" ".repeat(2) + yellow + "Qty");
 
         for (ReportDTO report : reports) {
-            if (report != null && report.getQytAlert() != null && report.getItem() != null) {
-                if (report.getQytAlert() < 20) {
-                    table.addCell("   " + report.getAlertId() + "   ");
-                    table.addCell("   " + report.getItem().getItemDescription() + "   ");
-                    table.addCell("   " + report.getQytAlert() + "   ");
-                    table.addCell("   " + report.getItem().getItemId() + "   ");
-                }
+            if (report != null  ) {
+
+                    table.addCell("   " + "A" + report.getAlertId() + "   ");
+                    table.addCell("   " + report.getName());
+                    table.addCell("   " + report.getQytAlert());
+
+
+
             } else {
                 System.out.println("One or more reports have null values.");
+                break;
             }
         }
 

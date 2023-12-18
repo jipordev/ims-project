@@ -5,6 +5,8 @@ import java.sql.Date;
 import java.time.LocalDate;
 
 public class ReportDTO {
+
+    // Field of StockOut
     private Long stockCountId;
     private Long stockInId;
     private Long stockOutId;
@@ -13,6 +15,40 @@ public class ReportDTO {
     private LocalDate stockOutDate;
     private BigDecimal priceOut;
     private ItemDTO item;
+
+
+
+
+    // Field of StockIn
+    private Integer qty;
+    private LocalDate stockInDate;
+    private BigDecimal priceIn;
+    private Integer lastQty;
+    private Integer invoiceDetailId;
+    private Integer invoiceId;
+    private BigDecimal unitPrice;
+    private Integer invoiceAdjustmentId;
+    private LocalDate returnedDate;
+
+
+
+    // Field of Item history
+    private Long itemHistoryId;
+    private LocalDate updatedAt;
+    private BigDecimal price;
+
+
+
+    //Field of Alert
+    private Long alertId;
+    private Integer qytAlert;
+    private String name;
+
+
+
+
+
+    // Setter and getter StockOut
 
     public ItemDTO getItem() {
         return item;
@@ -66,17 +102,9 @@ public class ReportDTO {
         return priceOut;
     }
 
-    private Integer qty;
-    private LocalDate stockInDate;
-    private BigDecimal priceIn;
-    private Integer lastQty;
-    private Integer invoiceDetailId;
-    private Integer invoiceId;
-    private BigDecimal unitPrice;
-    private Integer invoiceAdjustmentId;
-    private LocalDate returnedDate;
 
-    // setter and getter
+
+    // setter and getter of StockIn
 
     public void setStockCountId(Long stockCountId) {
         this.stockCountId = stockCountId;
@@ -118,6 +146,9 @@ public class ReportDTO {
     public void setReturnedDate(LocalDate returnedDate) {
         this.returnedDate = returnedDate;
     }
+
+
+
 
 
     public LocalDate getStockCountDate() {
@@ -164,9 +195,11 @@ public class ReportDTO {
         return returnedDate;
     }
 
-    private Long itemHistoryId;
-    private LocalDate updatedAt;
-    private BigDecimal price;
+
+
+
+
+    // Setter and getter of History Item
 
     public Long getItemHistoryId() {
         return itemHistoryId;
@@ -191,9 +224,10 @@ public class ReportDTO {
     public BigDecimal getPrice() {
         return price;
     }
-    private Long alertId;
-    private Integer qytAlert;
-    private String name;
+
+
+
+    // Setter and getter of item alert
 
     public Long getAlertId() {
         return alertId;

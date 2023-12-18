@@ -2,6 +2,7 @@ package co.cstad.dao.daoimplementation;
 
 import co.cstad.dao.ItemDao;
 import co.cstad.model.ItemDTO;
+import co.cstad.model.ReportDTO;
 import co.cstad.model.StockInDTO;
 import co.cstad.model.StockOutDTO;
 import co.cstad.util.DbSingleton;
@@ -50,6 +51,34 @@ public class ItemDaoImpl implements ItemDao {
             System.out.println(e.getMessage());
         }
 
+        return null;
+    }
+
+
+    @Override
+    public List<ItemDTO> selectStockCount() {
+        String sql = "SELECT * FROM item";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<ItemDTO> itemDTOS = new ArrayList<>();
+            while (resultSet.next()) {
+                ItemDTO itemDTO = new ItemDTO();
+                itemDTO.setItemId(resultSet.getLong("item_id"));
+                itemDTO.setItemCode(resultSet.getString("item_code"));
+                itemDTO.setItemDescription(resultSet.getString("description"));
+                itemDTO.setItemUnit(resultSet.getString("unit"));
+                itemDTO.setQty(resultSet.getInt("qty"));
+                itemDTO.setItemPrice_out_a(resultSet.getBigDecimal("price_a"));
+                itemDTO.setItemPrice_out_b(resultSet.getBigDecimal("price_b"));
+                itemDTO.setItemPrice_out_c(resultSet.getBigDecimal("price_c"));
+                itemDTO.setStatus(resultSet.getBoolean("status"));
+                itemDTOS.add(itemDTO);
+            }
+            return itemDTOS;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
         return null;
     }
 

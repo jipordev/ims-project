@@ -32,10 +32,11 @@ public class ItemDaoImpl implements ItemDao {
             preparedStatement.setString(2, itemDTO.getItemDescription());
             preparedStatement.setString(3, itemDTO.getItemUnit());
             preparedStatement.setInt(4, itemDTO.getQty());
-            preparedStatement.setBigDecimal(5, itemDTO.getItemPrice_out_a());
-            preparedStatement.setBigDecimal(6, itemDTO.getItemPrice_out_b());
-            preparedStatement.setBigDecimal(7, itemDTO.getItemPrice_out_c());
-            preparedStatement.setBoolean(8, itemDTO.isStatus());
+            preparedStatement.setBigDecimal(5, itemDTO.getItemPrice());
+            preparedStatement.setBigDecimal(6, itemDTO.getItemPrice_out_a());
+            preparedStatement.setBigDecimal(7, itemDTO.getItemPrice_out_b());
+            preparedStatement.setBigDecimal(8, itemDTO.getItemPrice_out_c());
+            preparedStatement.setBoolean(9, itemDTO.isStatus());
 
             // Execute the query
             int affectedRows = preparedStatement.executeUpdate();

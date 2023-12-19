@@ -36,7 +36,7 @@ public class MainApp {
         int option;
         do {
             try {
-                System.out.print(" choose -> ");
+                System.out.print(" choose ➡\uFE0F ");
                 option = Integer.parseInt(Singleton.getInstance().getScanner().nextLine());
                 switch (option) {
                     case 1 -> handleAuthentication();
@@ -74,7 +74,7 @@ public class MainApp {
 
             if (userAuthentication.authenticateUser(username, password)) {
                 String role = userAuthentication.getUserRole(username);
-                System.out.println("User authenticated successfully.");
+                System.out.println("✅ User authenticated successfully.");
 
                 if (role != null) {
                     handleRole(role);
@@ -110,7 +110,7 @@ public class MainApp {
         do {
             try {
                 MenuViewAdmin.mainMenuAdmin();
-                System.out.print("choose -> ");
+                System.out.print("choose ➡\uFE0F ");
                 op = Integer.parseInt(scanner.nextLine());
 
                 switch (op) {
@@ -140,7 +140,7 @@ public class MainApp {
         do {
             try {
                 menuViewAdmin.userMenu();
-                System.out.print("choose -> ");
+                System.out.print("choose ➡\uFE0F ");
                 opUser = Integer.parseInt(scanner.nextLine());
                 switch (opUser) {
                     case 1 -> {
@@ -178,7 +178,7 @@ public class MainApp {
         do {
             try {
                 menuView.itemMenu();
-                System.out.print("choose -> ");
+                System.out.print("choose ➡\uFE0F ");
                 op2 = Integer.parseInt(scanner.nextLine());
 
                 switch (op2) {
@@ -218,7 +218,7 @@ public class MainApp {
         do {
             try {
                 menuViewAdmin.customerMenu();
-                System.out.print("choose -> ");
+                System.out.print("choose ➡\uFE0F ");
                 opCus = Integer.parseInt(scanner.nextLine());
                 switch (opCus) {
                     case 1 -> {
@@ -252,7 +252,7 @@ public class MainApp {
         do {
             try {
                 menuViewAdmin.optionListUser();
-                System.out.print("choose -> ");
+                System.out.print("choose ➡\uFE0F ");
                 updateOp = Integer.parseInt(scanner.nextLine());
                 switch (updateOp) {
                     case 1 -> userController.updateAll();
@@ -283,7 +283,7 @@ public class MainApp {
         do {
             try {
                 menuView.menuItemUpdate();
-                System.out.print("choose -> ");
+                System.out.print("choose ➡\uFE0F ");
                 updateOp = Integer.parseInt(scanner.nextLine());
                 // Handle update options here...
                 switch (updateOp) {
@@ -316,7 +316,7 @@ public class MainApp {
         do {
             try {
                 menuView.invoiceMenu();
-                System.out.print("choose -> ");
+                System.out.print("choose ➡\uFE0F ");
                 optInvoice = Integer.parseInt(scanner.nextLine());
                 switch (optInvoice) {
                     case 1 -> invoiceController.update();
@@ -341,7 +341,7 @@ public class MainApp {
         do {
             try {
                 menuViewAdmin.optionListUp();
-                System.out.print("choose -> ");
+                System.out.print("choose ➡\uFE0F ");
                 updateOp = Integer.parseInt(scanner.nextLine());
                 // Handle update options here...
                 switch (updateOp) {

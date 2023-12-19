@@ -23,8 +23,8 @@ public class ItemDaoImpl implements ItemDao {
 
     @Override
     public ItemDTO insert(ItemDTO itemDTO) {
-        String sql = "INSERT INTO item (item_code, description, unit, qty, status) " +
-                "VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO item (item_code, description, unit, qty, price_a, price_b, price_c, status) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -32,7 +32,10 @@ public class ItemDaoImpl implements ItemDao {
             preparedStatement.setString(2, itemDTO.getItemDescription());
             preparedStatement.setString(3, itemDTO.getItemUnit());
             preparedStatement.setInt(4, itemDTO.getQty());
-            preparedStatement.setBoolean(5, itemDTO.isStatus());
+            preparedStatement.setBigDecimal(5, itemDTO.getItemPrice_out_a());
+            preparedStatement.setBigDecimal(6, itemDTO.getItemPrice_out_b());
+            preparedStatement.setBigDecimal(7, itemDTO.getItemPrice_out_c());
+            preparedStatement.setBoolean(8, itemDTO.isStatus());
 
             // Execute the query
             int affectedRows = preparedStatement.executeUpdate();

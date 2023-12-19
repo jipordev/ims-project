@@ -79,8 +79,8 @@ public class InvoiceServiceImpl implements InvoiceService {
     public InvoiceDTO selectByNo(String invoiceNo) {
         InvoiceDTO invoice = null;
         try (Connection con = DbSingleton.instance()) {
-            String sql = "SELECT * FROM invoice WHERE invoice_no = '" + invoiceNo.toUpperCase() + "'";
-            try (Statement stmt = con.createStatement();
+            String sql = "SELECT * FROM invoice WHERE invoice_no = ? AND is_cancelled = false AND status = true";
+            try (Statement stmt = con.  createStatement();
                  ResultSet rs = stmt.executeQuery(sql)) {
                 if (rs.next()) {
                     invoice = new InvoiceDTO();

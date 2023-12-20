@@ -16,7 +16,10 @@ import co.cstad.service.serviceimplementation.ReportServiceImpl;
 import co.cstad.service.serviceimplementation.ItemServiceImpl;
 import co.cstad.service.UserService;
 import co.cstad.service.serviceimplementation.UserServiceImpl;
+import co.cstad.service.userservice.UserAuthentication;
 import co.cstad.view.MenuViewAdmin;
+import co.cstad.view.MenuViewManager;
+import co.cstad.view.MenuViewReport;
 import co.cstad.view.ReportView;
 
 import java.util.Scanner;
@@ -37,7 +40,28 @@ public class Singleton {
     private static UserDaoImpl userDao;
     private static ReportDaoImpl reportDao;
     private static MenuViewAdmin menuViewAdmin;
+    private static MenuViewReport menuViewReport;
+    private static MenuViewManager menuViewManager;
     private static ReportView reportView;
+    private static UserAuthentication userAuthentication;
+    public static MenuViewReport menuViewReport(){
+        if (menuViewReport == null) {
+            menuViewReport = new MenuViewReport();
+        }
+        return menuViewReport;
+    }
+    public static MenuViewManager menuViewManager(){
+        if (menuViewManager == null){
+            menuViewManager = new MenuViewManager();
+        }
+        return menuViewManager;
+    }
+    public static UserAuthentication userAuthentication(){
+        if (userAuthentication == null) {
+            userAuthentication = new UserAuthentication();
+        }
+        return userAuthentication;
+    }
     public static CustomerService customerService() {
         if (customerService == null) {
             customerService = new CustomerServiceImpl();

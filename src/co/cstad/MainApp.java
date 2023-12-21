@@ -18,9 +18,11 @@ import static co.cstad.util.Singleton.reportController;
 
 public class MainApp {
     private static final Scanner scanner = new Scanner(System.in);
-    private static final UserAuthentication userAuthentication = new UserAuthentication();
+    private static final UserAuthentication userAuthentication = Singleton.userAuthentication() ;
     private static final MenuView menuView = new MenuView();
     private static final MenuViewAdmin menuViewAdmin = Singleton.menuViewAdmin();
+    private static final MenuViewManager menuViewManager = Singleton.menuViewManager();
+    private static final MenuViewReport menuViewReport = Singleton.menuViewReport();
     private static final ReportController reportController = Singleton.reportController();
     private static final ItemController itemController = Singleton.itemController();
     private static final UserController userController = Singleton.userController();
@@ -98,12 +100,19 @@ public class MainApp {
         do {
             switch (role.toLowerCase()) {
                 case "admin" -> handleAdminMenu();
-                case "manager" -> MenuViewManager.mainMenuManager();
-                case "report" -> MenuViewReport.mainMenuReport();
+                case "manager" -> handleManagerMenu();
+                case "report" -> handleReport();
                 default -> System.out.println("Unknown role");
             }
         } while (true);
     }
+    private static void handleReport(){
+        int op;
+        do {
+            try {
+                menuViewReport.mainMenuReport();
+                System.out.print("choose -> ");
+                op = Integer.parseInt(scanner.nextLine());
 
     private static void handleAdminMenu() {
         int op;
@@ -111,6 +120,8 @@ public class MainApp {
             try {
                 MenuViewAdmin.mainMenuAdmin();
                 System.out.print("choose ➡\uFE0F ");
+                menuViewAdmin.mainMenuAdmin();
+                System.out.print("choose -> ");
                 op = Integer.parseInt(scanner.nextLine());
 
                 switch (op) {
@@ -341,7 +352,7 @@ public class MainApp {
         do {
             try {
                 menuViewAdmin.optionListUp();
-                System.out.print("choose ➡\uFE0F ");
+                System.out.print("choose -> ");
                 updateOp = Integer.parseInt(scanner.nextLine());
                 // Handle update options here...
                 switch (updateOp) {

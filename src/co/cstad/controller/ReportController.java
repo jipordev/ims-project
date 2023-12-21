@@ -2,6 +2,8 @@ package co.cstad.controller;
 
 import co.cstad.model.ItemDTO;
 import co.cstad.model.ReportDTO;
+import co.cstad.model.StockInDTO;
+import co.cstad.model.StockOutDTO;
 import co.cstad.service.ItemService;
 import co.cstad.service.ReportService;
 import co.cstad.service.UserService;
@@ -29,17 +31,17 @@ public class ReportController {
     }
 
     public void stockCountReport(){
-        List<ItemDTO> reportDTOList = itemService.selectStockCount();
-        ItemView.printItemCount(reportDTOList);
+        List<ItemDTO> reportDTOList = reportService.selectStockCount();
+        ReportView.printItemCount(reportDTOList);
     }
 
     public void stockInReport(){
-        List<ReportDTO> reportDTOList = reportService.selectStockIn();
+        List<StockInDTO> reportDTOList = reportService.selectStockIn();
         reportView.stockInReport(reportDTOList);
     }
 
     public void stockOutReport(){
-        List<ReportDTO> reportDTOList = reportService.selectStockOut();
+        List<StockOutDTO> reportDTOList = reportService.selectStockOut();
         reportView.stockOutReport(reportDTOList);
     }
 

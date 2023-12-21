@@ -19,7 +19,11 @@ public class ItemView implements BoxBorder{
     static {
         itemService = Singleton.itemService();
     }
-    public static StockInDTO viewCreateStock(){
+
+
+
+
+    public static StockInDTO viewCreateStock() {
         StockInDTO stockInDTO = new StockInDTO();
 
         do {
@@ -28,55 +32,22 @@ public class ItemView implements BoxBorder{
                 Long itemId = Long.parseLong(scanner.nextLine());
                 ItemDTO existingItem = itemService.selectById(itemId);
 
-                if (existingItem != null ){
+                if (existingItem != null) {
                     stockInDTO.setItemId(itemId);
                     break;
                 } else {
-                    System.out.println("Item with id : "+ itemId + " doesn't exist.");
+                    System.out.println("Item with id : " + itemId + " doesn't exist.");
                 }
             } catch (NumberFormatException e) {
                 System.out.println(e.getMessage());
             }
         } while (true);
-
-        System.out.print("  Enter Price : ");
+        System.out.print("  Enter price : ");
         stockInDTO.setPriceIn(new BigDecimal(scanner.nextLine()));
         System.out.print("  Enter Qty : ");
         stockInDTO.setQtyIn(Integer.parseInt(scanner.nextLine()));
 
         return stockInDTO;
-    }
-
-    public static void printItemCount(Collection<ItemDTO> items) {
-        if (items != null) {
-            Table table = new Table(9, BorderStyle.UNICODE_BOX_DOUBLE_BORDER, ShownBorders.ALL);
-            table.addCell("   Item ID   ");
-            table.addCell("   Item Code   ");
-            table.addCell("   Description   ");
-            table.addCell("   Unit   ");
-            table.addCell("   Quantity   ");
-            table.addCell("   Price A   ");
-            table.addCell("   Price B   ");
-            table.addCell("   Price C   ");
-            table.addCell("   Status   ");
-
-            for (ItemDTO item : items) {
-                // Check if the status is "Active" before adding the row
-                if (item.getStatus() != null && item.getStatus()) {
-                    table.addCell("   " + String.valueOf(item.getItemId()) + "   ");
-                    table.addCell("   " + item.getItemCode() + "   ");
-                    table.addCell("   " + item.getItemDescription() + "   ");
-                    table.addCell("   " + item.getItemUnit() + "   ");
-                    table.addCell("   " + String.valueOf(item.getQty()) + "   ");
-                    table.addCell("   " + String.valueOf(item.getItemPrice_out_a()) + "   ");
-                    table.addCell("   " + String.valueOf(item.getItemPrice_out_b()) + "   ");
-                    table.addCell("   " + String.valueOf(item.getItemPrice_out_c()) + "   ");
-                    table.addCell("   " + "Active" + "   ");
-                }
-            }
-
-            System.out.println(table.render());
-        }
     }
 
 
@@ -139,14 +110,14 @@ public class ItemView implements BoxBorder{
         System.out.print("Enter item quantity:");
         newItem.setQty(Integer.parseInt(scanner.nextLine()));
 
-        System.out.print("Enter item price A:");
-        newItem.setItemPrice_out_a(new BigDecimal(scanner.nextLine()));
+        System.out.print("Enter item price: ");
+        BigDecimal price = new BigDecimal(scanner.nextLine());
+        newItem.setItemPrice(price);
 
-        System.out.print("Enter item price B:");
-        newItem.setItemPrice_out_b(new BigDecimal(scanner.nextLine()));
-
-        System.out.print("Enter item price C:");
-        newItem.setItemPrice_out_c(new BigDecimal(scanner.nextLine()));
+        // Calculate price_a, price_b, and price_c based on the input price
+        newItem.setItemPrice_out_a(price.multiply(new BigDecimal("0.93")));
+        newItem.setItemPrice_out_b(price.multiply(new BigDecimal("0.95")));
+        newItem.setItemPrice_out_c(price.multiply(new BigDecimal("0.97")));
 
         System.out.print("Is the item active? (Enter 'y' for true, 'n' for false): ");
         newItem.setStatus(scanner.nextLine().equalsIgnoreCase("y"));
@@ -154,18 +125,20 @@ public class ItemView implements BoxBorder{
         return newItem;
     }
 
+
     public static void printItemDetails(Collection<ItemDTO> items) {
         if (items == null) {
             System.out.println("Item list is null.");
             return;
         }
 
-        Table table = new Table(9, BorderStyle.UNICODE_BOX, ShownBorders.ALL);
+        Table table = new Table(10, BorderStyle.UNICODE_BOX, ShownBorders.ALL);
         table.addCell(yellow + "   Item ID   ");
         table.addCell(yellow + "   Item Code   ");
         table.addCell(yellow + "   Description   ");
         table.addCell(yellow + "   Unit   ");
         table.addCell(yellow + "   Quantity   ");
+        table.addCell(yellow + "   Price    ");
         table.addCell(yellow + "   Price A   ");
         table.addCell(yellow + "   Price B   ");
         table.addCell(yellow + "   Price C   ");
@@ -177,6 +150,7 @@ public class ItemView implements BoxBorder{
             table.addCell(green + "   " + item.getItemDescription() + "   ");
             table.addCell(green + "   " + item.getItemUnit() + "   ");
             table.addCell(green + "   " + String.valueOf(item.getQty()) + "   ");
+            table.addCell(green + "   " + String.valueOf(item.getItemPrice()));
             table.addCell(green + "   " + String.valueOf(item.getItemPrice_out_a()) + "   ");
             table.addCell(green + "   " + String.valueOf(item.getItemPrice_out_b()) + "   ");
             table.addCell(green + "   " + String.valueOf(item.getItemPrice_out_c()) + "   ");
@@ -186,9 +160,10 @@ public class ItemView implements BoxBorder{
         System.out.println(table.render());
     }
 
+
     public static void printItemList(List<ItemDTO> itemList) {
-        System.out.println("\n".repeat(1));
-        System.out.println("~".repeat(20) + "Item List" + "~".repeat(20) );
+
+        System.out.println(red + "\n\t\t\t\tItem List" + reset );
         printItemDetails(itemList);
         System.out.println("\n".repeat(2));
     }

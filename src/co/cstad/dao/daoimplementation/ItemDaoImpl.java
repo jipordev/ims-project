@@ -7,6 +7,7 @@ import co.cstad.model.StockInDTO;
 import co.cstad.model.StockOutDTO;
 import co.cstad.util.DbSingleton;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,16 +25,19 @@ public class ItemDaoImpl implements ItemDao {
 
     @Override
     public ItemDTO insert(ItemDTO itemDTO) {
-        String sql = "INSERT INTO item (item_code, description, unit, qty, status) " +
-                "VALUES (?, ?, ?, ?, ?)";
-
+        String sql = "INSERT INTO item (item_code, description, unit, qty, price, price_a, price_b, price_c, status) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, itemDTO.getItemCode());
             preparedStatement.setString(2, itemDTO.getItemDescription());
             preparedStatement.setString(3, itemDTO.getItemUnit());
             preparedStatement.setInt(4, itemDTO.getQty());
-            preparedStatement.setBoolean(5, itemDTO.isStatus());
+            preparedStatement.setBigDecimal(5, itemDTO.getItemPrice());
+            preparedStatement.setBigDecimal(6, itemDTO.getItemPrice_out_a());
+            preparedStatement.setBigDecimal(7, itemDTO.getItemPrice_out_b());
+            preparedStatement.setBigDecimal(8, itemDTO.getItemPrice_out_c());
+            preparedStatement.setBoolean(9, itemDTO.isStatus());
 
             // Execute the query
             int affectedRows = preparedStatement.executeUpdate();
@@ -55,76 +59,79 @@ public class ItemDaoImpl implements ItemDao {
     }
 
 
-    @Override
-    public List<ItemDTO> selectStockCount() {
-        String sql = "SELECT * FROM item";
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            List<ItemDTO> itemDTOS = new ArrayList<>();
-            while (resultSet.next()) {
-                ItemDTO itemDTO = new ItemDTO();
-                itemDTO.setItemId(resultSet.getLong("item_id"));
-                itemDTO.setItemCode(resultSet.getString("item_code"));
-                itemDTO.setItemDescription(resultSet.getString("description"));
-                itemDTO.setItemUnit(resultSet.getString("unit"));
-                itemDTO.setQty(resultSet.getInt("qty"));
-                itemDTO.setItemPrice_out_a(resultSet.getBigDecimal("price_a"));
-                itemDTO.setItemPrice_out_b(resultSet.getBigDecimal("price_b"));
-                itemDTO.setItemPrice_out_c(resultSet.getBigDecimal("price_c"));
-                itemDTO.setStatus(resultSet.getBoolean("status"));
-                itemDTOS.add(itemDTO);
-            }
-            return itemDTOS;
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return null;
-    }
+
 
     @Override
     public StockInDTO stockIn(StockInDTO stockInDTO) {
-        String insertStockInSql = "INSERT INTO stock_in (item_id, qty, price_in, stock_in_date) " +
-                "VALUES (?, ?, ?, CURRENT_DATE)";
-        String updateItemQtySql = "UPDATE item SET qty = qty + ? WHERE item_id = ?";
+        String insertStockInSql = """
+        INSERT INTO stock_in (item_id, qty, price_in, stock_in_date)
+        VALUES (?, ?, ?, CURRENT_TIMESTAMP)
+    """;
+
+        String selectPriceInSql = """
+        SELECT price_in FROM stock_in
+        WHERE item_id = ? AND stock_in_date = (SELECT MAX(stock_in_date) FROM stock_in WHERE item_id = ?)
+    """;
+
+        String updateItemQtySql = """
+        UPDATE item
+        SET  qty = qty + ?,
+        price = ?,
+        price_a = ?,
+        price_b = ?,
+        price_c = ?
+        WHERE item_id = ?
+    """;
 
         try {
             // Insert into stock_in table
-            try (PreparedStatement insertStockInStatement = connection.prepareStatement(insertStockInSql, PreparedStatement.RETURN_GENERATED_KEYS)) {
+            try (PreparedStatement insertStockInStatement = connection.prepareStatement(insertStockInSql)) {
                 insertStockInStatement.setLong(1, stockInDTO.getItemId());
                 insertStockInStatement.setInt(2, stockInDTO.getQtyIn());
                 insertStockInStatement.setBigDecimal(3, stockInDTO.getPriceIn());
 
-                // Execute the query
+                // Execute the insert query
                 int affectedRows = insertStockInStatement.executeUpdate();
 
                 if (affectedRows > 0) {
-                    // Retrieve the generated keys (if any)
-                    ResultSet generatedKeys = insertStockInStatement.getGeneratedKeys();
-                    if (generatedKeys.next()) {
-                        // Set the generated ID to the stockInDTO
-                        stockInDTO.setStockInID(generatedKeys.getLong(1));
+                    // Retrieve the price_in value from the stock_in table
+                    try (PreparedStatement selectPriceInStatement = connection.prepareStatement(selectPriceInSql)) {
+                        selectPriceInStatement.setLong(1, stockInDTO.getItemId());
+                        selectPriceInStatement.setLong(2, stockInDTO.getItemId());
 
-                        // Update item quantity in the item table
-                        try (PreparedStatement updateItemQtyStatement = connection.prepareStatement(updateItemQtySql)) {
-                            updateItemQtyStatement.setInt(1, stockInDTO.getQtyIn());
-                            updateItemQtyStatement.setLong(2, stockInDTO.getItemId());
-                            updateItemQtyStatement.executeUpdate();
+                        try (ResultSet result = selectPriceInStatement.executeQuery()) {
+                            if (result.next()) {
+                                BigDecimal returnedPrice = result.getBigDecimal("price_in");
+                                stockInDTO.setPriceIn(returnedPrice);
+
+                                // Update item quantity in the item table
+                                try (PreparedStatement updateItemQtyStatement = connection.prepareStatement(updateItemQtySql)) {
+                                    updateItemQtyStatement.setInt(1, stockInDTO.getQtyIn());
+                                    updateItemQtyStatement.setBigDecimal(2, stockInDTO.getPriceIn());
+                                    updateItemQtyStatement.setBigDecimal(3, stockInDTO.getPriceIn().multiply(new BigDecimal("0.93")));
+                                    updateItemQtyStatement.setBigDecimal(4, stockInDTO.getPriceIn().multiply(new BigDecimal("0.95")));
+                                    updateItemQtyStatement.setBigDecimal(5, stockInDTO.getPriceIn().multiply(new BigDecimal("0.97")));
+                                    updateItemQtyStatement.setLong(6, stockInDTO.getItemId());
+                                    updateItemQtyStatement.executeUpdate();
+                                }
+
+                                return stockInDTO;
+                            }
                         }
-
-                        return stockInDTO;
                     }
                 }
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("Error: " + e.getMessage());
         }
 
         return null;
     }
 
+
+
     @Override
-    public StockOutDTO stockout(StockOutDTO stockOutDTO)  {
+    public StockOutDTO stockOut(StockOutDTO stockOutDTO)  {
         String insertStockInSql = "INSERT INTO stock_out (item_id, qty, price_out, stock_out_date) " +
                 "VALUES (?, ?, ?, CURRENT_DATE)";
         String updateItemQtySql = "UPDATE item SET qty = qty - ? WHERE item_id = ?";
@@ -168,7 +175,13 @@ public class ItemDaoImpl implements ItemDao {
 
     @Override
     public List<ItemDTO> select() {
-        String sql = "SELECT * FROM item";
+        String sql = """
+                SELECT *, CAST( price as numeric ) as "pr",
+                CAST( price_a as numeric ) as "pr_a",
+                CAST( price_b as numeric ) as "pr_b",
+                CAST( price_c as numeric ) as "pr_c"
+                FROM item;
+                """;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -179,16 +192,18 @@ public class ItemDaoImpl implements ItemDao {
                 itemDTO.setItemCode(resultSet.getString("item_code"));
                 itemDTO.setItemDescription(resultSet.getString("description"));
                 itemDTO.setItemUnit(resultSet.getString("unit"));
+                itemDTO.setItemPrice(resultSet.getBigDecimal("pr"));
                 itemDTO.setQty(resultSet.getInt("qty"));
-                itemDTO.setItemPrice_out_a(resultSet.getBigDecimal("price_a"));
-                itemDTO.setItemPrice_out_b(resultSet.getBigDecimal("price_b"));
-                itemDTO.setItemPrice_out_c(resultSet.getBigDecimal("price_c"));
+                itemDTO.setItemPrice_out_a(resultSet.getBigDecimal("pr_a"));
+                itemDTO.setItemPrice_out_b(resultSet.getBigDecimal("pr_b"));
+                itemDTO.setItemPrice_out_c(resultSet.getBigDecimal("pr_c"));
                 itemDTO.setStatus(resultSet.getBoolean("status"));
+
                 itemDTOS.add(itemDTO);
             }
             return itemDTOS;
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println( "error : " + e.getMessage());
         }
         return null;
     }
@@ -209,6 +224,7 @@ public class ItemDaoImpl implements ItemDao {
                 itemDTO.setItemDescription(resultSet.getString("description"));
                 itemDTO.setItemUnit(resultSet.getString("unit"));
                 itemDTO.setQty(resultSet.getInt("qty"));
+                itemDTO.setItemPrice(resultSet.getBigDecimal("price"));
                 itemDTO.setItemPrice_out_a(resultSet.getBigDecimal("price_a"));
                 itemDTO.setItemPrice_out_b(resultSet.getBigDecimal("price_b"));
                 itemDTO.setItemPrice_out_c(resultSet.getBigDecimal("price_c"));
@@ -224,7 +240,7 @@ public class ItemDaoImpl implements ItemDao {
 
     @Override
     public ItemDTO updateById(ItemDTO itemDTO) {
-        String sql = "UPDATE item SET item_code = ?, description = ?, unit = ?, qty = ?, price_a = ?, price_b = ?, price_c = ?, status = ? WHERE item_id = ?";
+        String sql = "UPDATE item SET item_code = ?, description = ?, unit = ?, qty = ?,price=?, price_a = ?, price_b = ?, price_c = ?, status = ? WHERE item_id = ?";
 
         try {
             connection.setAutoCommit(false);  // Disable auto-commit
@@ -234,11 +250,12 @@ public class ItemDaoImpl implements ItemDao {
             preparedStatement.setString(2, itemDTO.getItemDescription());
             preparedStatement.setString(3, itemDTO.getItemUnit());
             preparedStatement.setInt(4, itemDTO.getQty());
-            preparedStatement.setBigDecimal(5, itemDTO.getItemPrice_out_a());
-            preparedStatement.setBigDecimal(6, itemDTO.getItemPrice_out_b());
-            preparedStatement.setBigDecimal(7, itemDTO.getItemPrice_out_c());
-            preparedStatement.setBoolean(8, itemDTO.isStatus());
-            preparedStatement.setLong(9, itemDTO.getItemId());
+            preparedStatement.setBigDecimal(5,itemDTO.getItemPrice());
+            preparedStatement.setBigDecimal(6, itemDTO.getItemPrice_out_a());
+            preparedStatement.setBigDecimal(7, itemDTO.getItemPrice_out_b());
+            preparedStatement.setBigDecimal(8, itemDTO.getItemPrice_out_c());
+            preparedStatement.setBoolean(9, itemDTO.isStatus());
+            preparedStatement.setLong(10, itemDTO.getItemId());
 
             int affectedRows = preparedStatement.executeUpdate();
 

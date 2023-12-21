@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface ItemService {
     ItemDTO insert(ItemDTO item);
-    List<ItemDTO> selectStockCount();
+
     StockInDTO stockIn(StockInDTO stockInDTO);
-    StockOutDTO stockout(StockOutDTO stockOutDTO);
+    StockOutDTO stockOut(StockOutDTO stockOutDTO);
     List<ItemDTO> select();
     ItemDTO selectById(Long id);
     ItemDTO updateById(ItemDTO item);

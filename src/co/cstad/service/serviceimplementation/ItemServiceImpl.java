@@ -21,10 +21,7 @@ public class ItemServiceImpl implements ItemService {
     public ItemDTO insert(ItemDTO item) {
         return itemDao.insert(item);
     }
-    @Override
-    public List<ItemDTO> selectStockCount() {
-        return itemDao.selectStockCount();
-    }
+
 
     @Override
     public StockInDTO stockIn(StockInDTO stockInDTO) {
@@ -32,8 +29,8 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public StockOutDTO stockout(StockOutDTO stockOutDTO) {
-        return itemDao.stockout(stockOutDTO);
+    public StockOutDTO stockOut(StockOutDTO stockOutDTO) {
+        return itemDao.stockOut(stockOutDTO);
     }
 
     @Override

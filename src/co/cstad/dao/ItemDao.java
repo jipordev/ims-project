@@ -10,9 +10,9 @@ import java.util.Optional;
 
 public interface ItemDao {
     ItemDTO insert(ItemDTO item);
-    List<ItemDTO> selectStockCount();
+
     StockInDTO stockIn(StockInDTO stockInDTO);
-    StockOutDTO stockout(StockOutDTO stockOutDTO);
+    StockOutDTO stockOut(StockOutDTO stockOutDTO);
     List<ItemDTO> select();
     Optional<ItemDTO> selectById(Long id);
     ItemDTO updateById(ItemDTO product);

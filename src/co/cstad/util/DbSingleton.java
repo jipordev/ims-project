@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DbSingleton {
-    private static String url = "jdbc:postgresql://localhost:5432/IMS";
+    private static String url = "jdbc:postgresql://localhost:5432/dbims";
     private static String username = "postgres";
     private static String password = "78910";
     private static Connection connection;

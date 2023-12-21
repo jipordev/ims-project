@@ -14,8 +14,6 @@ import co.cstad.view.MenuViewReport;
 
 import java.util.Scanner;
 
-import static co.cstad.util.Singleton.reportController;
-
 public class MainApp {
     private static final Scanner scanner = new Scanner(System.in);
     private static final UserAuthentication userAuthentication = Singleton.userAuthentication() ;
@@ -38,7 +36,7 @@ public class MainApp {
         int option;
         do {
             try {
-                System.out.print(" choose ➡\uFE0F ");
+                System.out.print(" choose -> ");
                 option = Integer.parseInt(Singleton.getInstance().getScanner().nextLine());
                 switch (option) {
                     case 1 -> handleAuthentication();
@@ -76,7 +74,7 @@ public class MainApp {
 
             if (userAuthentication.authenticateUser(username, password)) {
                 String role = userAuthentication.getUserRole(username);
-                System.out.println("✅ User authenticated successfully.");
+                System.out.println("User authenticated successfully.");
 
                 if (role != null) {
                     handleRole(role);
@@ -114,12 +112,51 @@ public class MainApp {
                 System.out.print("choose -> ");
                 op = Integer.parseInt(scanner.nextLine());
 
+                switch (op) {
+                    case 1 -> handleReportMenu();
+                    case 2 -> {
+                        handleLogIn();
+                        return;
+                    }
+                }
+            } catch (StringInputException e){
+                System.out.println(e.getMessage());
+            } catch (NumberFormatException e){
+                System.out.println("Invalid input. Please try again");
+            }
+        } while (true);
+    }
+    private static void handleManagerMenu(){
+        int op;
+        do {
+            try {
+                menuViewManager.mainMenuManager();
+                System.out.print("choose -> ");
+                op = Integer.parseInt(scanner.nextLine());
+
+                switch (op){
+                    case 1 -> handleItemMenu();
+                    case 2 -> handleInvoiceMenu();
+                    case 3 -> {
+                        handleLogIn();
+                        return;
+                    }
+                    default -> {
+                        System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
+                        System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 3 .");
+                    }
+                }
+            } catch (StringInputException e){
+                System.out.println(e.getMessage());
+            } catch (NumberFormatException e){
+                System.out.println("Invalid input. Please try again");
+            }
+        } while (true);
+    }
     private static void handleAdminMenu() {
         int op;
         do {
             try {
-                MenuViewAdmin.mainMenuAdmin();
-                System.out.print("choose ➡\uFE0F ");
                 menuViewAdmin.mainMenuAdmin();
                 System.out.print("choose -> ");
                 op = Integer.parseInt(scanner.nextLine());
@@ -151,7 +188,7 @@ public class MainApp {
         do {
             try {
                 menuViewAdmin.userMenu();
-                System.out.print("choose ➡\uFE0F ");
+                System.out.print("choose -> ");
                 opUser = Integer.parseInt(scanner.nextLine());
                 switch (opUser) {
                     case 1 -> {
@@ -189,7 +226,7 @@ public class MainApp {
         do {
             try {
                 menuView.itemMenu();
-                System.out.print("choose ➡\uFE0F ");
+                System.out.print("choose -> ");
                 op2 = Integer.parseInt(scanner.nextLine());
 
                 switch (op2) {
@@ -229,7 +266,7 @@ public class MainApp {
         do {
             try {
                 menuViewAdmin.customerMenu();
-                System.out.print("choose ➡\uFE0F ");
+                System.out.print("choose -> ");
                 opCus = Integer.parseInt(scanner.nextLine());
                 switch (opCus) {
                     case 1 -> {
@@ -263,7 +300,7 @@ public class MainApp {
         do {
             try {
                 menuViewAdmin.optionListUser();
-                System.out.print("choose ➡\uFE0F ");
+                System.out.print("choose -> ");
                 updateOp = Integer.parseInt(scanner.nextLine());
                 switch (updateOp) {
                     case 1 -> userController.updateAll();
@@ -294,7 +331,7 @@ public class MainApp {
         do {
             try {
                 menuView.menuItemUpdate();
-                System.out.print("choose ➡\uFE0F ");
+                System.out.print("choose -> ");
                 updateOp = Integer.parseInt(scanner.nextLine());
                 // Handle update options here...
                 switch (updateOp) {
@@ -327,7 +364,7 @@ public class MainApp {
         do {
             try {
                 menuView.invoiceMenu();
-                System.out.print("choose ➡\uFE0F ");
+                System.out.print("choose -> ");
                 optInvoice = Integer.parseInt(scanner.nextLine());
                 switch (optInvoice) {
                     case 1 -> invoiceController.update();

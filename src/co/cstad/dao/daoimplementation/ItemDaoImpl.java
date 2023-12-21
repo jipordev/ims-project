@@ -56,7 +56,6 @@ public class ItemDaoImpl implements ItemDao {
 
         return null;
     }
-
     @Override
     public StockInDTO stockIn(StockInDTO stockInDTO) {
         String insertStockInSql = "INSERT INTO stock_in (item_id, qty, price_in, stock_in_date) " +
@@ -155,6 +154,7 @@ public class ItemDaoImpl implements ItemDao {
                 itemDTO.setItemDescription(resultSet.getString("description"));
                 itemDTO.setItemUnit(resultSet.getString("unit"));
                 itemDTO.setQty(resultSet.getInt("qty"));
+                itemDTO.setItemPrice(resultSet.getBigDecimal("price"));
                 itemDTO.setItemPrice_out_a(resultSet.getBigDecimal("price_a"));
                 itemDTO.setItemPrice_out_b(resultSet.getBigDecimal("price_b"));
                 itemDTO.setItemPrice_out_c(resultSet.getBigDecimal("price_c"));
@@ -184,6 +184,7 @@ public class ItemDaoImpl implements ItemDao {
                 itemDTO.setItemDescription(resultSet.getString("description"));
                 itemDTO.setItemUnit(resultSet.getString("unit"));
                 itemDTO.setQty(resultSet.getInt("qty"));
+                itemDTO.setItemPrice(resultSet.getBigDecimal("price"));
                 itemDTO.setItemPrice_out_a(resultSet.getBigDecimal("price_a"));
                 itemDTO.setItemPrice_out_b(resultSet.getBigDecimal("price_b"));
                 itemDTO.setItemPrice_out_c(resultSet.getBigDecimal("price_c"));

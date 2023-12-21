@@ -198,7 +198,7 @@ public class ReportView implements BoxBorder {
         table.addCell(" ".repeat(2) + yellow + "Qty");
 
         for (ReportDTO report : reports) {
-            if (report != null  ) {
+
 
                     table.addCell("   " + "A" + report.getAlertId() + "   ");
                     table.addCell("   " + report.getItem().getItemCode());
@@ -208,10 +208,6 @@ public class ReportView implements BoxBorder {
 
 
 
-            } else {
-                System.out.println("One or more reports have null values.");
-                break;
-            }
         }
 
         System.out.println(table.render());

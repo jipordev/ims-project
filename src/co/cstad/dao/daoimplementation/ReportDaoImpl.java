@@ -201,8 +201,9 @@ public class ReportDaoImpl implements ReportDao {
                 ReportDTO reportDTO = new ReportDTO();
                 ItemDTO item = new ItemDTO();
 
-                item.setQty(resultSet.getInt("qty"));
+
                 reportDTO.setAlertId(resultSet.getLong("alert_id"));
+                item.setQty(resultSet.getInt("qty"));
                 reportDTO.setQytAlert(item.getQty());
                 item.setItemCode(resultSet.getString("item_code"));
                 item.setItemDescription(resultSet.getString("description"));

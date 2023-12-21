@@ -31,11 +31,11 @@ public class MainApp {
         handleLogIn();
     }
     private static void handleLogIn(){
-        menuView.menuLogin();
 
         int option;
         do {
             try {
+                menuView.menuLogin();
                 System.out.print(" choose -> ");
                 option = Integer.parseInt(Singleton.getInstance().getScanner().nextLine());
                 switch (option) {
@@ -339,11 +339,12 @@ public class MainApp {
                     case 2 -> itemController.updateItemDescription();
                     case 3 -> itemController.updateItemUnit();
                     case 4 -> itemController.updateItemQty();
-                    case 5 -> itemController.updateItemPriceA();
-                    case 6 -> itemController.updateItemPriceB();
-                    case 7 -> itemController.updateItemPriceC();
-                    case 8 -> itemController.updateItemStatus();
-                    case 9 -> {
+                    case 5 -> itemController.updatePrice();
+                    case 6 -> itemController.updateItemPriceA();
+                    case 7 -> itemController.updateItemPriceB();
+                    case 8 -> itemController.updateItemPriceC();
+                    case 9 -> itemController.updateItemStatus();
+                    case 10 -> {
                         return;
                     }
                     default -> {

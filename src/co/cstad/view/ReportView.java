@@ -17,26 +17,30 @@ public class ReportView implements BoxBorder {
         }
 
         System.out.println(yellow + "\t\tStock Count Report" + reset);
-        Table table = new Table(4, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
+        Table table = new Table(5, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
         table.setColumnWidth(0, 15, 20);
         table.setColumnWidth(1, 15, 20);
         table.setColumnWidth(2, 15, 20);
         table.setColumnWidth(3, 15, 20);
+        table.setColumnWidth(4, 15, 20);  // New column for itemQty
 
         table.addCell(" ".repeat(2) + yellow + "Stock_Count_Id");
         table.addCell(" ".repeat(2) + yellow + "Item_Id");
         table.addCell(" ".repeat(2) + yellow + "Stock_Count_Date");
         table.addCell(" ".repeat(2) + yellow + "Qty");
+        table.addCell(" ".repeat(2) + yellow + "Item_Qty");  // New column for itemQty
 
         for (ReportDTO report : reports) {
             table.addCell("   " + report.getStockCountId() + "   ");
             table.addCell("   " + report.getItemId() + "   ");
             table.addCell("   " + report.getStockCountDate() + "   ");
             table.addCell("   " + report.getQty() + "   ");
+            table.addCell("   " + report.getItemQty() + "   ");  // Add itemQty column
         }
 
         System.out.println(table.render());
     }
+
 
 
     public static void stockInReport(Collection<ReportDTO> reports){

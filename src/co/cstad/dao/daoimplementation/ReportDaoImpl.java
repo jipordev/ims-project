@@ -22,23 +22,34 @@ public class ReportDaoImpl implements ReportDao {
 
     @Override
     public List<ReportDTO> selectStockCount() {
-        String sql = "SELECT * FROM stock_count WHERE active = 1";  // Assuming 'active' is a boolean column where 1 represents active and 0 represents inactive
+        String sql = "SELECT sc.stock_id, sc.qty, sc.stock_count_date, sc.item_id, i.qty AS item_qty " +
+                "FROM stock_count sc " +
+                "JOIN item i ON sc.item_id = i.item_id " +
+                "WHERE i.is_active = 1";  // Assuming is_active is a column in the item table
+
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
             List<ReportDTO> reportDTOS = new ArrayList<>();
+
             while (resultSet.next()) {
                 ReportDTO reportDTO = new ReportDTO();
                 reportDTO.setStockCountId(resultSet.getLong("stock_id"));
                 reportDTO.setQty(resultSet.getInt("qty"));
                 reportDTO.setStockCountDate(resultSet.getDate("stock_count_date").toLocalDate());
                 reportDTO.setItemId(resultSet.getLong("item_id"));
+
+                // Add item_qty to ReportDTO
+                reportDTO.setItemQty(resultSet.getInt("item_qty"));
+
                 reportDTOS.add(reportDTO);
             }
+
             return reportDTOS;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+
         return null;
     }
 

@@ -75,8 +75,17 @@ public class ReportDTO {
     private BigDecimal unitPrice;
     private Integer invoiceAdjustmentId;
     private LocalDate returnedDate;
+    private Integer itemQty;
 
     // setter and getter
+
+    public Integer getItemQty() {
+        return itemQty;
+    }
+
+    public void setItemQty(Integer itemQty) {
+        this.itemQty = itemQty;
+    }
 
     public void setStockCountId(Long stockCountId) {
         this.stockCountId = stockCountId;

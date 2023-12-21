@@ -28,13 +28,14 @@ public class ItemController {
         List<ItemDTO> itemDTOList = itemService.select();
         ItemView.printItemList(itemDTOList);
     }
-    public StockInDTO stockIn(){
+
+    public StockInDTO stockIn() {
         StockInDTO newStockIn = ItemView.viewCreateStock();
 
         if (newStockIn != null) {
             StockInDTO stockIn = itemService.stockIn(newStockIn);
 
-            if (stockIn != null){
+            if (stockIn != null) {
                 System.out.println("Restock successfully");
                 return stockIn;
             } else {
@@ -50,7 +51,7 @@ public class ItemController {
             StockOutDTO newStockOut = ItemView.viewCreateStockOut();
 
             if (newStockOut != null) {
-                StockOutDTO stockOutResult = itemService.stockout(newStockOut);
+                StockOutDTO stockOutResult = itemService.stockOut(newStockOut);
 
                 if (stockOutResult != null) {
                     System.out.println("Restock successfully");
@@ -248,40 +249,6 @@ public class ItemController {
             System.out.println("Invalid ID input. Please try again.");
         }
     }
-    public void updatePrice() {
-        try {
-            System.out.print("Enter the ID of the item to update: ");
-            Long itemId = Long.parseLong(scanner.nextLine());
-
-            ItemDTO existingItem = itemService.selectById(itemId);
-
-            if (existingItem != null) {
-                System.out.println("Existing Item Details:");
-                menuViewAdmin.itemConfirmation(existingItem);
-
-                System.out.print("Enter the new item price : ");
-                BigDecimal newItemPrice = new BigDecimal(scanner.nextLine());
-
-                existingItem.setItemPrice(newItemPrice);
-
-                // Call the service to update the item
-                ItemDTO updatedItem = itemService.updateById(existingItem);
-
-                if (updatedItem != null) {
-                    System.out.println("Item price updated successfully:");
-                    menuViewAdmin.itemConfirmation(updatedItem);
-                } else {
-                    System.out.println("Failed to update item price.");
-                }
-            } else {
-                System.out.println("Item with ID " + itemId + " not found.");
-            }
-        } catch (StringInputException e){
-            System.out.println(e.getMessage());
-        } catch (NumberFormatException e){
-            System.out.println("Invalid ID input. Please try again.");
-        }
-    }
     public void updateItemPriceA() {
         try {
             System.out.print("Enter the ID of the item to update: ");
@@ -344,12 +311,13 @@ public class ItemController {
             } else {
                 System.out.println("Item with ID " + itemId + " not found.");
             }
-        } catch (StringInputException e){
+        } catch (StringInputException e) {
             System.out.println(e.getMessage());
         } catch (NumberFormatException e) {
             System.out.println("Invalid ID input. Please try again.");
         }
     }
+
     public void updateItemPriceC() {
         try {
             System.out.print("Enter the ID of the item to update: ");
@@ -384,6 +352,7 @@ public class ItemController {
             System.out.println("Invalid ID input. Please try again");
         }
     }
+
     public void updateItemStatus() {
         try {
             System.out.print("Enter the ID of the item to update: ");
@@ -418,6 +387,7 @@ public class ItemController {
             System.out.println("Invalid input. Please try again");
         }
     }
+
     public ItemDTO delete() {
         try {
             System.out.print("Enter the ID of the item to delete: ");
@@ -453,12 +423,15 @@ public class ItemController {
         }
         return null;
     }
+
     public void confirmation(ItemDTO createdItem) {
         menuViewAdmin.itemConfirmation(createdItem);
     }
+
     public void closeScanner() {
         scanner.close();
     }
+
     private boolean validateStringInput(String input) throws StringInputException {
         if (input == null || input.trim().isEmpty()) {
             throw new StringInputException("Input cannot be null or empty.");

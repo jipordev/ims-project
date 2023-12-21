@@ -55,26 +55,16 @@ public class MainApp {
         } while (true);
     }
     private static void handleAuthentication() {
-        try {
-            System.out.print("Enter username: ");
-            String username = scanner.nextLine();
+        System.out.println("~".repeat(40));
+        System.out.print("  Enter username: ");
+        String username = scanner.nextLine();
+        System.out.print("  Enter password: ");
+        String password = scanner.nextLine();
+        System.out.println("~".repeat(40));
 
-            // Validate username input
-            if (!validateStringInput(username)) {
-                throw new StringInputException("Invalid username input.");
-            }
-
-            System.out.print("Enter password: ");
-            String password = scanner.nextLine();
-
-            // Validate password input
-            if (!validateStringInput(password)) {
-                throw new StringInputException("Invalid password input.");
-            }
-
-            if (userAuthentication.authenticateUser(username, password)) {
-                String role = userAuthentication.getUserRole(username);
-                System.out.println("User authenticated successfully.");
+        if (userAuthentication.authenticateUser(username, password)) {
+            String role = userAuthentication.getUserRole(username);
+            System.out.println("User authenticated successfully.\n\n");
 
                 if (role != null) {
                     handleRole(role);

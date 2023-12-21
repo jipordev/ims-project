@@ -3,6 +3,8 @@ package co.cstad.dao.daoimplementation;
 import co.cstad.dao.ReportDao;
 import co.cstad.model.ItemDTO;
 import co.cstad.model.ReportDTO;
+import co.cstad.model.StockInDTO;
+import co.cstad.model.StockOutDTO;
 import co.cstad.util.DbSingleton;
 
 import java.sql.Connection;
@@ -10,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,42 +23,63 @@ public class ReportDaoImpl implements ReportDao {
         connection = DbSingleton.instance();
     }
 
+
+
+
     @Override
-    public List<ReportDTO> selectStockCount() {
-        String sql = "SELECT * FROM stock_count";
+    public List<ItemDTO> selectStockCount() {
+        String sql = """
+                SELECT *, CAST( price as numeric ) as "pr",
+                CAST( price_a as numeric ) as "pr_a",
+                CAST( price_b as numeric ) as "pr_b",
+                CAST( price_c as numeric ) as "pr_c"
+                FROM item; 
+                """;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
-            List<ReportDTO> reportDTOS = new ArrayList<>();
+            List<ItemDTO> itemDTOS = new ArrayList<>();
             while (resultSet.next()) {
-                ReportDTO reportDTO = new ReportDTO();
-                reportDTO.setStockCountId(resultSet.getLong("stock_id"));
-                reportDTO.setQty(resultSet.getInt("qty"));
-                reportDTO.setStockCountDate(resultSet.getDate("stock_count_date").toLocalDate());
-                reportDTO.setItemId( resultSet.getLong("item_id"));
-                reportDTOS.add(reportDTO);
+                ItemDTO itemDTO = new ItemDTO();
+                itemDTO.setItemId(resultSet.getLong("item_id"));
+                itemDTO.setItemCode(resultSet.getString("item_code"));
+                itemDTO.setItemDescription(resultSet.getString("description"));
+                itemDTO.setItemUnit(resultSet.getString("unit"));
+                itemDTO.setItemPrice(resultSet.getBigDecimal("pr"));
+                itemDTO.setQty(resultSet.getInt("qty"));
+                itemDTO.setItemPrice_out_a(resultSet.getBigDecimal("pr_a"));
+                itemDTO.setItemPrice_out_b(resultSet.getBigDecimal("pr_b"));
+                itemDTO.setItemPrice_out_c(resultSet.getBigDecimal("pr_c"));
+                itemDTO.setStatus(resultSet.getBoolean("status"));
+
+                itemDTOS.add(itemDTO);
             }
-            return reportDTOS;
+            return itemDTOS;
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println( "error : " + e.getMessage());
         }
         return null;
     }
-
     @Override
-    public List<ReportDTO> selectStockIn() {
-        String sql = "SELECT * FROM stock_in";
+    public List<StockInDTO> selectStockIn() {
+
+        String sql = """
+                SELECT si.stock_in_id, si.qty,si.item_id, si.stock_in_date, si.price_in
+                FROM stock_in AS si
+                INNER JOIN item AS i
+                ON si.item_id = i.item_id;
+                """;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
-            List<ReportDTO> reportDTOS = new ArrayList<>();
+            List<StockInDTO> reportDTOS = new ArrayList<>();
             while (resultSet.next()) {
-                ReportDTO reportDTO = new ReportDTO();
-                reportDTO.setStockInId(resultSet.getLong("stock_in_id"));
-                reportDTO.setQty(resultSet.getInt("qty"));
-                reportDTO.setStockInDate(resultSet.getDate("stock_in_date").toLocalDate());
-                reportDTO.setPriceIn(resultSet.getBigDecimal("price_in"));
+                StockInDTO reportDTO = new StockInDTO();
+                reportDTO.setStockInID(resultSet.getLong("stock_in_id"));
                 reportDTO.setItemId(resultSet.getLong("item_id"));
+                reportDTO.setQtyIn(resultSet.getInt("qty"));
+                reportDTO.setStockInDate(resultSet.getDate("stock_in_date"));
+                reportDTO.setPriceIn(resultSet.getBigDecimal("price_in"));
                 reportDTOS.add(reportDTO);
             }
             return reportDTOS;
@@ -66,18 +90,18 @@ public class ReportDaoImpl implements ReportDao {
     }
 
     @Override
-    public List<ReportDTO> selectStockOut() {
+    public List<StockOutDTO> selectStockOut() {
         String sql = "SELECT * FROM stock_out";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
-            List<ReportDTO> reportDTOS = new ArrayList<>();
+            List<StockOutDTO> reportDTOS = new ArrayList<>();
             while (resultSet.next()) {
-                ReportDTO reportDTO = new ReportDTO();
-                reportDTO.setStockOutId(resultSet.getLong("stock_out_id"));
+                StockOutDTO reportDTO = new StockOutDTO();
+                reportDTO.setStockOutID(resultSet.getLong("stock_out_id"));
                 reportDTO.setItemId(resultSet.getLong("item_id"));
-                reportDTO.setQty(resultSet.getInt("qty"));
-                reportDTO.setStockOutDate(resultSet.getDate("stock_out_date").toLocalDate());
+                reportDTO.setQtyOut(resultSet.getInt("qty"));
+                reportDTO.setStockOutDate(resultSet.getDate("stock_out_date"));
                 reportDTO.setPriceOut(resultSet.getBigDecimal("price_out"));
                 reportDTOS.add(reportDTO);
             }
@@ -157,40 +181,41 @@ public class ReportDaoImpl implements ReportDao {
         return null;
     }
 
+
     @Override
     public List<ReportDTO> selectStockAlertReport() {
-        String sql = "SELECT ga.alert_id, ga.qty_alert, ga.name, ga.item_id, " +
-                "i.item_id AS item_id, i.description AS name " +
-                "FROM group_alert ga " +
-                "INNER JOIN item i ON ga.item_id = i.item_id " +
-                "WHERE ga.qty_alert > 0";
+        String sql = """
+                SELECT ga.alert_id , ga.qty_alert , i.qty , i.item_code , i.description
+                FROM group_alert ga
+                INNER JOIN item i ON ga.alert_id = i.alert_id
+                WHERE i.qty IS NOT NULL AND i.qty < 20
+            """;
 
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            ResultSet resultSet = preparedStatement.executeQuery();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+
             List<ReportDTO> reportDTOS = new ArrayList<>();
+
 
             while (resultSet.next()) {
                 ReportDTO reportDTO = new ReportDTO();
+                ItemDTO item = new ItemDTO();
+
+                item.setQty(resultSet.getInt("qty"));
                 reportDTO.setAlertId(resultSet.getLong("alert_id"));
-                reportDTO.setQytAlert(resultSet.getInt("qty_alert"));
-                reportDTO.setName(resultSet.getString("name"));
+                reportDTO.setQytAlert(item.getQty());
+                item.setItemCode(resultSet.getString("item_code"));
+                item.setItemDescription(resultSet.getString("description"));
+                reportDTO.setItem(item);
 
-                // Create an ItemDTO and set its properties
-                ItemDTO itemDTO = new ItemDTO();
-                itemDTO.setItemId(resultSet.getLong("item_id"));
-                itemDTO.setItemDescription(resultSet.getString("name"));
-
-                // Set the ItemDTO in the ReportDTO
-                reportDTO.setItem(itemDTO);
-
-                // Add other necessary fields from group_alert table
                 reportDTOS.add(reportDTO);
+
             }
 
             return reportDTOS;
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("Error executing query: " + e.getMessage());
+            e.printStackTrace(); // Print the stack trace for debugging
         }
 
         return null;

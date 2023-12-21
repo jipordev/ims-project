@@ -2,6 +2,7 @@ package co.cstad.service.serviceimplementation;
 
 import co.cstad.dao.daoimplementation.ItemDaoImpl;
 import co.cstad.model.ItemDTO;
+import co.cstad.model.ReportDTO;
 import co.cstad.model.StockInDTO;
 import co.cstad.model.StockOutDTO;
 import co.cstad.service.ItemService;
@@ -21,14 +22,15 @@ public class ItemServiceImpl implements ItemService {
         return itemDao.insert(item);
     }
 
+
     @Override
     public StockInDTO stockIn(StockInDTO stockInDTO) {
         return itemDao.stockIn(stockInDTO);
     }
 
     @Override
-    public StockOutDTO stockout(StockOutDTO stockOutDTO) {
-        return itemDao.stockout(stockOutDTO);
+    public StockOutDTO stockOut(StockOutDTO stockOutDTO) {
+        return itemDao.stockOut(stockOutDTO);
     }
 
     @Override

@@ -2,10 +2,12 @@ package co.cstad.dao.daoimplementation;
 
 import co.cstad.dao.ItemDao;
 import co.cstad.model.ItemDTO;
+import co.cstad.model.ReportDTO;
 import co.cstad.model.StockInDTO;
 import co.cstad.model.StockOutDTO;
 import co.cstad.util.DbSingleton;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,9 +25,8 @@ public class ItemDaoImpl implements ItemDao {
 
     @Override
     public ItemDTO insert(ItemDTO itemDTO) {
-        String sql = "INSERT INTO item (item_code, description, unit, qty, price_a, price_b, price_c, status) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-
+        String sql = "INSERT INTO item (item_code, description, unit, qty, price, price_a, price_b, price_c, status) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, itemDTO.getItemCode());
@@ -56,6 +57,10 @@ public class ItemDaoImpl implements ItemDao {
 
         return null;
     }
+
+
+
+
     @Override
     public StockInDTO stockIn(StockInDTO stockInDTO) {
         String insertStockInSql = "INSERT INTO stock_in (item_id, qty, price_in, stock_in_date) " +
@@ -97,8 +102,10 @@ public class ItemDaoImpl implements ItemDao {
         return null;
     }
 
+
+
     @Override
-    public StockOutDTO stockout(StockOutDTO stockOutDTO)  {
+    public StockOutDTO stockOut(StockOutDTO stockOutDTO)  {
         String insertStockInSql = "INSERT INTO stock_out (item_id, qty, price_out, stock_out_date) " +
                 "VALUES (?, ?, ?, CURRENT_DATE)";
         String updateItemQtySql = "UPDATE item SET qty = qty - ? WHERE item_id = ?";
@@ -142,7 +149,13 @@ public class ItemDaoImpl implements ItemDao {
 
     @Override
     public List<ItemDTO> select() {
-        String sql = "SELECT * FROM item";
+        String sql = """
+                SELECT *, CAST( price as numeric ) as "pr",
+                CAST( price_a as numeric ) as "pr_a",
+                CAST( price_b as numeric ) as "pr_b",
+                CAST( price_c as numeric ) as "pr_c"
+                FROM item;
+                """;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -153,11 +166,11 @@ public class ItemDaoImpl implements ItemDao {
                 itemDTO.setItemCode(resultSet.getString("item_code"));
                 itemDTO.setItemDescription(resultSet.getString("description"));
                 itemDTO.setItemUnit(resultSet.getString("unit"));
+                itemDTO.setItemPrice(resultSet.getBigDecimal("pr"));
                 itemDTO.setQty(resultSet.getInt("qty"));
-                itemDTO.setItemPrice(resultSet.getBigDecimal("price"));
-                itemDTO.setItemPrice_out_a(resultSet.getBigDecimal("price_a"));
-                itemDTO.setItemPrice_out_b(resultSet.getBigDecimal("price_b"));
-                itemDTO.setItemPrice_out_c(resultSet.getBigDecimal("price_c"));
+                itemDTO.setItemPrice_out_a(resultSet.getBigDecimal("pr_a"));
+                itemDTO.setItemPrice_out_b(resultSet.getBigDecimal("pr_b"));
+                itemDTO.setItemPrice_out_c(resultSet.getBigDecimal("pr_c"));
                 itemDTO.setStatus(resultSet.getBoolean("status"));
                 itemDTOS.add(itemDTO);
             }
@@ -210,7 +223,7 @@ public class ItemDaoImpl implements ItemDao {
             preparedStatement.setString(2, itemDTO.getItemDescription());
             preparedStatement.setString(3, itemDTO.getItemUnit());
             preparedStatement.setInt(4, itemDTO.getQty());
-            preparedStatement.setBigDecimal(5, itemDTO.getItemPrice());
+            preparedStatement.setBigDecimal(5,itemDTO.getItemPrice());
             preparedStatement.setBigDecimal(6, itemDTO.getItemPrice_out_a());
             preparedStatement.setBigDecimal(7, itemDTO.getItemPrice_out_b());
             preparedStatement.setBigDecimal(8, itemDTO.getItemPrice_out_c());

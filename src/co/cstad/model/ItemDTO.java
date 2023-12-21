@@ -14,6 +14,7 @@ public class ItemDTO {
     private BigDecimal itemPrice_out_c;
     private Integer qty;
     private Boolean status;
+    private Long alert_id;
 
     public BigDecimal getItemPrice() {
         return itemPrice;
@@ -53,6 +54,14 @@ public class ItemDTO {
 
     public void setItemUnit(String itemUnit) {
         this.itemUnit = itemUnit;
+    }
+
+    public BigDecimal getItemPrice() {
+        return itemPrice;
+    }
+
+    public void setItemPrice(BigDecimal itemPrice) {
+        this.itemPrice = itemPrice;
     }
 
     public BigDecimal getItemPrice_out_a() {
@@ -96,5 +105,13 @@ public class ItemDTO {
     }
     public Boolean isStatus() {
         return status;
+    }
+
+    public Long getAlert_id() {
+        return alert_id;
+    }
+
+    public void setAlert_id(Long alert_id) {
+        this.alert_id = alert_id;
     }
 }

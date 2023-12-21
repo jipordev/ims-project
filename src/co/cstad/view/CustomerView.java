@@ -53,7 +53,7 @@ public class CustomerView implements BoxBorder{
             table.addCell(green +customer.getAddress());
             table.addCell(green +customer.getContact1());
             table.addCell(green +customer.getContact2());
-            table.addCell(green +String.valueOf(customer.getStatus()));
+            table.addCell(green +  (customer.getStatus() ? "Active" : "Inactive") + "   ");
             table.addCell(green +customer.getCustomerType() + reset);
         }
         System.out.println(table.render());
@@ -65,23 +65,20 @@ public class CustomerView implements BoxBorder{
         table.setColumnWidth(0, 30, 30);
         table.setColumnWidth(1, 30, 30);
         table.addCell(" ".repeat(3) + yellow + "Customer ID :" + reset);
-        table.addCell(" ".repeat(3) + cyan + customerRead.getCustomersId() + reset);
+        table.addCell(" ".repeat(3) + green + customerRead.getCustomersId() + reset);
         table.addCell(" ".repeat(3) + yellow + "Customer Name :" + reset);
-        table.addCell(" ".repeat(3) + cyan + customerRead.getCustomerName()+ reset);
+        table.addCell(" ".repeat(3) + green + customerRead.getCustomerName()+ reset);
         table.addCell(" ".repeat(3) + yellow + "Customer Address :" + reset);
-        table.addCell(" ".repeat(3) + cyan + customerRead.getAddress() + reset);
+        table.addCell(" ".repeat(3) + green + customerRead.getAddress() + reset);
         table.addCell(" ".repeat(3) + yellow + "Customer Contact 1 :" + reset);
-        table.addCell(" ".repeat(3) + cyan + customerRead.getContact1() + reset);
+        table.addCell(" ".repeat(3) + green + customerRead.getContact1() + reset);
         table.addCell(" ".repeat(3) + yellow + "Customer Contact 2 :" + reset);
-        table.addCell(" ".repeat(3) + cyan + customerRead.getContact2() + reset);
+        table.addCell(" ".repeat(3) + green + customerRead.getContact2() + reset);
         table.addCell(" ".repeat(3) + yellow + "Customer Status :" + reset);
-        table.addCell(" ".repeat(3) + cyan + customerRead.getStatus() + reset);
+        table.addCell(" ".repeat(3)  + green +  (customerRead.getStatus() ? "Active" : "Inactive") + "   ");
         table.addCell(" ".repeat(3) + yellow + "Customer Type :" + reset);
-        table.addCell(" ".repeat(3) + cyan + customerRead.getCustomerType() + reset);
-//        if (customerRead.getStatus() != null) {
-//            table.addCell(" ".repeat(3) + yellow + "Status:" + reset);
-//            table.addCell(" ".repeat(3) + cyan + (customerRead.getStatus() ? "Active" : "Inactive") + reset);
-//        }
+        table.addCell(" ".repeat(3) + green + customerRead.getCustomerType() + reset);
+
         System.out.println(table.render());
     }
 

@@ -8,7 +8,7 @@ public class ReportDatabase {
 
     private final List<ReportDTO> reportDTOList;
     public ReportDatabase() {
-       reportDTOList = new ArrayList<>();
+        reportDTOList = new ArrayList<>();
     }
 
     public List<ReportDTO> getReportDTOList(){

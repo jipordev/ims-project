@@ -2,9 +2,7 @@ package co.cstad.controller;
 
 import co.cstad.exception.StringInputException;
 import co.cstad.model.CustomerDTO;
-import co.cstad.model.ItemDTO;
 import co.cstad.service.CustomerService;
-import co.cstad.service.serviceimplementation.CustomerServiceImpl;
 import co.cstad.util.Singleton;
 import co.cstad.view.CustomerView;
 
@@ -83,7 +81,9 @@ public class CustomerController {
         } catch (NumberFormatException e) {
             System.out.println("Invalid ID format. Please enter a valid number.");
         }
+
     }
+
     public void updateCustomerName(){
         try {
             System.out.print("Enter the ID of the customer to update : ");
@@ -232,6 +232,7 @@ public class CustomerController {
             System.out.println("Invalid ID format. Please enter a valid number.");
         }
     }
+
 
     public void updateCustomerStatus(){
         try {

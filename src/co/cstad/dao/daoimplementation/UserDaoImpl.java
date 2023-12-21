@@ -20,7 +20,7 @@ public class UserDaoImpl implements UserDao {
     }
     public UserDTO insert(UserDTO userDTO) {
         String sql = " INSERT INTO users (username, password, email, contact, address, status, role_id)"+
-            "VALUES (?, ?, ?, ?, ?, ?, ?) ";
+                "VALUES (?, ?, ?, ?, ?, ?, ?) ";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, userDTO.getUsername());

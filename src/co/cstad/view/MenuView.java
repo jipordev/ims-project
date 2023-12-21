@@ -278,16 +278,16 @@ public class MenuView implements BoxBorder {
         table.addCell(yellow +"  2 > DESCRIPTION " + reset  );
         table.addCell(yellow +"  3 > UNIT " + reset  );
         table.addCell(yellow +"  4 > QUANTITY " + reset  );
-        table.addCell(yellow +"  5 > PRICE_A " + reset  );
-        table.addCell(yellow +"  6 > PRICE_B " + reset  );
-        table.addCell(yellow +"  7 > PRICE_C " + reset  );
-        table.addCell(yellow +"  8 > STATUS " + reset  );
-        table.addCell(yellow +"  9 > EXIT " + reset  );
+        table.addCell(yellow +"  5 > PRICE " + reset  );
+        table.addCell(yellow +"  6 > PRICE_A " + reset  );
+        table.addCell(yellow +"  7 > PRICE_B " + reset  );
+        table.addCell(yellow +"  8 > PRICE_C " + reset  );
+        table.addCell(yellow +"  9 > STATUS " + reset  );
+        table.addCell(yellow +"  10 > EXIT " + reset  );
         System.out.print(table.render());
         System.out.println("\n");
 
     }
-
 
 
 

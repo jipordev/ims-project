@@ -10,18 +10,23 @@ import java.util.Collection;
 
 public class ReportView implements BoxBorder {
 
-    public static void stockCountReport(Collection<ReportDTO> reports){
+    public static void stockCountReport(Collection<ReportDTO> reports) {
+        if (reports == null) {
+            System.out.println("No data available for stock count report.");
+            return;
+        }
+
         System.out.println(yellow + "\t\tStock Count Report" + reset);
         Table table = new Table(4, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
-        table.setColumnWidth(0,15,20);
-        table.setColumnWidth(1,15,20);
-        table.setColumnWidth(2,15,20);
-        table.setColumnWidth(3,15,20);
+        table.setColumnWidth(0, 15, 20);
+        table.setColumnWidth(1, 15, 20);
+        table.setColumnWidth(2, 15, 20);
+        table.setColumnWidth(3, 15, 20);
 
-        table.addCell(" ".repeat(2)+ yellow + "Stock_Count_Id");
-        table.addCell(" ".repeat(2)+ yellow +"Item_Id");
-        table.addCell(" ".repeat(2)+ yellow +"Stock_Count_Date");
-        table.addCell(" ".repeat(2)+ yellow +"Qty");
+        table.addCell(" ".repeat(2) + yellow + "Stock_Count_Id");
+        table.addCell(" ".repeat(2) + yellow + "Item_Id");
+        table.addCell(" ".repeat(2) + yellow + "Stock_Count_Date");
+        table.addCell(" ".repeat(2) + yellow + "Qty");
 
         for (ReportDTO report : reports) {
             table.addCell("   " + report.getStockCountId() + "   ");
@@ -32,6 +37,7 @@ public class ReportView implements BoxBorder {
 
         System.out.println(table.render());
     }
+
 
     public static void stockInReport(Collection<ReportDTO> reports){
         System.out.println(yellow + "\t\tStock In Report"+reset);

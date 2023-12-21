@@ -22,7 +22,7 @@ public class ReportDaoImpl implements ReportDao {
 
     @Override
     public List<ReportDTO> selectStockCount() {
-        String sql = "SELECT * FROM stock_count";
+        String sql = "SELECT * FROM stock_count WHERE active = 1";  // Assuming 'active' is a boolean column where 1 represents active and 0 represents inactive
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -32,7 +32,7 @@ public class ReportDaoImpl implements ReportDao {
                 reportDTO.setStockCountId(resultSet.getLong("stock_id"));
                 reportDTO.setQty(resultSet.getInt("qty"));
                 reportDTO.setStockCountDate(resultSet.getDate("stock_count_date").toLocalDate());
-                reportDTO.setItemId( resultSet.getLong("item_id"));
+                reportDTO.setItemId(resultSet.getLong("item_id"));
                 reportDTOS.add(reportDTO);
             }
             return reportDTOS;

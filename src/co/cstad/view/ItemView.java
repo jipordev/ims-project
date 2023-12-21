@@ -10,6 +10,7 @@ import org.nocrala.tools.texttablefmt.ShownBorders;
 import org.nocrala.tools.texttablefmt.Table;
 import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -23,13 +24,42 @@ public class ItemView implements BoxBorder{
 
 
 
+//    public static StockInDTO viewCreateStock() {
+//        StockInDTO stockInDTO = new StockInDTO();
+//
+//        do {
+//            System.out.print("  Enter Item ID : ");
+//            try {
+//                Long itemId = Long.parseLong(scanner.nextLine());
+//                ItemDTO existingItem = itemService.selectById(itemId);
+//
+//                if (existingItem != null) {
+//                    stockInDTO.setItemId(itemId);
+//                    break;
+//                } else {
+//                    System.out.println("Item with id : " + itemId + " doesn't exist.");
+//                }
+//            } catch (NumberFormatException e) {
+//                System.out.println(e.getMessage());
+//            }
+//        } while (true);
+//        System.out.print("  Enter price : ");
+//        stockInDTO.setPriceIn(new BigDecimal(scanner.nextLine()));
+//        System.out.print("  Enter Qty : ");
+//        stockInDTO.setQtyIn(Integer.parseInt(scanner.nextLine()));
+//
+//        return stockInDTO;
+//    }
+
     public static StockInDTO viewCreateStock() {
         StockInDTO stockInDTO = new StockInDTO();
 
         do {
-            System.out.print("  Enter Item ID : ");
             try {
+                System.out.print("  Enter Item ID : ");
                 Long itemId = Long.parseLong(scanner.nextLine());
+
+                // Assuming itemService is an instance of ItemService
                 ItemDTO existingItem = itemService.selectById(itemId);
 
                 if (existingItem != null) {
@@ -39,16 +69,29 @@ public class ItemView implements BoxBorder{
                     System.out.println("Item with id : " + itemId + " doesn't exist.");
                 }
             } catch (NumberFormatException e) {
-                System.out.println(e.getMessage());
+                System.out.println("Invalid input. Please enter a valid number for Item ID.");
             }
         } while (true);
 
-        System.out.print("  Enter Price : ");
-        stockInDTO.setPriceIn(new BigDecimal(scanner.nextLine()));
-        System.out.print("  Enter Qty : ");
-        stockInDTO.setQtyIn(Integer.parseInt(scanner.nextLine()));
+        try {
+            System.out.print("  Enter price : ");
+            BigDecimal priceIn = scanner.nextBigDecimal();
+            stockInDTO.setPriceIn(priceIn);
 
-        return stockInDTO;
+            // Consume the newline character
+            scanner.nextLine();
+
+            System.out.print("  Enter Qty : ");
+            int qtyIn = Integer.parseInt(scanner.nextLine());
+            stockInDTO.setQtyIn(qtyIn);
+
+            return stockInDTO;
+        } catch (NumberFormatException | ArithmeticException | InputMismatchException e) {
+            System.out.println("Invalid input. Please enter valid numeric values for price and quantity.");
+            return null; // Handle the exception as per your application's requirements
+        }
+
+
     }
 
 

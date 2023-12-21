@@ -26,10 +26,9 @@ public class ReportController {
     }
 
     public void stockCountReport(){
-        List<ReportDTO> reportDTOList = reportService.selectStockCount();
-        reportView.stockCountReport(reportDTOList);
+        List<ItemDTO> reportDTOList = reportService.selectStockCount();
+        reportView.printItemCount(reportDTOList);
     }
-
     public void stockInReport(){
         List<ReportDTO> reportDTOList = reportService.selectStockIn();
         reportView.stockInReport(reportDTOList);
@@ -42,12 +41,12 @@ public class ReportController {
 
     public void invoiceDetail(){
         List<ReportDTO> reportDTOList = reportService.selectInvoiceDetail();
-        reportView.InvoiceDetail(reportDTOList);
+        reportView.reportInvoiceDetail(reportDTOList);
     }
 
     public void invoiceAdjustment(){
         List<ReportDTO> reportDTOList = reportService.selectInvoiceDetail();
-        reportView.InvoiceAdjustment(reportDTOList);
+        reportView.reportInvoiceAdjustment(reportDTOList);
     }
 
     public void itemPriceHistory(){

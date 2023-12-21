@@ -10,6 +10,42 @@ import java.util.Collection;
 
 public class ReportView implements BoxBorder {
 
+    public static void printItemCount(Collection<ItemDTO> items) {
+        if (items == null) {
+            System.out.println("Item list is null.");
+            return;
+        }
+
+        Table table = new Table(10, BorderStyle.UNICODE_BOX, ShownBorders.ALL);
+        table.addCell(yellow + "   Item ID   ");
+        table.addCell(yellow + "   Item Code   ");
+        table.addCell(yellow + "   Description   ");
+        table.addCell(yellow + "   Unit   ");
+        table.addCell(yellow + "   Quantity   ");
+        table.addCell(yellow + "   Price    ");
+        table.addCell(yellow + "   Price A   ");
+        table.addCell(yellow + "   Price B   ");
+        table.addCell(yellow + "   Price C   ");
+        table.addCell(yellow + "   Status   ");
+
+        for (ItemDTO item : items) {
+            if (item.getStatus() != null && item.getStatus()) {
+                table.addCell(green + "   " + String.valueOf(item.getItemId()) + "   ");
+                table.addCell(green + "   " + item.getItemCode() + "   ");
+                table.addCell(green + "   " + item.getItemDescription() + "   ");
+                table.addCell(green + "   " + item.getItemUnit() + "   ");
+                table.addCell(green + "   " + String.valueOf(item.getQty()) + "   ");
+                table.addCell(green + "   " + String.valueOf(item.getItemPrice()));
+                table.addCell(green + "   " + String.valueOf(item.getItemPrice_out_a()) + "   ");
+                table.addCell(green + "   " + String.valueOf(item.getItemPrice_out_b()) + "   ");
+                table.addCell(green + "   " + String.valueOf(item.getItemPrice_out_c()) + "   ");
+                table.addCell(green + "   " + (item.getStatus() ? "Active" : "Inactive") + "   ");
+            }
+        }
+
+        System.out.println(table.render());
+
+    }
     public static void stockCountReport(Collection<ReportDTO> reports) {
         if (reports == null) {
             System.out.println("No data available for stock count report.");
@@ -93,7 +129,7 @@ public class ReportView implements BoxBorder {
         System.out.println(table.render());
     }
 
-    public static void InvoiceDetail(Collection<ReportDTO> reports){
+    public static void reportInvoiceDetail(Collection<ReportDTO> reports){
         System.out.println(yellow + "\t\tInvoice Details"+reset);
         Table table = new Table(5, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
         table.setColumnWidth(0,15,20);
@@ -118,7 +154,7 @@ public class ReportView implements BoxBorder {
         System.out.println(table.render());
     }
 
-    public static void InvoiceAdjustment(Collection<ReportDTO> reports){
+    public static void reportInvoiceAdjustment(Collection<ReportDTO> reports){
         System.out.println(yellow + "\t\tInvoice Adjustment"+reset);
         Table table = new Table(6, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
         table.setColumnWidth(0,15,20);

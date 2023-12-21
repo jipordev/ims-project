@@ -1,6 +1,7 @@
 package co.cstad.service.serviceimplementation;
 
 import co.cstad.dao.daoimplementation.ReportDaoImpl;
+import co.cstad.model.ItemDTO;
 import co.cstad.model.ReportDTO;
 import co.cstad.service.ReportService;
 import co.cstad.util.Singleton;
@@ -15,7 +16,7 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public List<ReportDTO> selectStockCount() {
+    public List<ItemDTO> selectStockCount() {
         return reportDao.selectStockCount();
     }
 

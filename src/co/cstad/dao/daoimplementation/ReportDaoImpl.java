@@ -11,7 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class ReportDaoImpl implements ReportDao {
 
@@ -21,35 +20,37 @@ public class ReportDaoImpl implements ReportDao {
     }
 
     @Override
-    public List<ReportDTO> selectStockCount() {
-        String sql = "SELECT sc.stock_id, sc.qty, sc.stock_count_date, sc.item_id, i.qty AS item_qty " +
-                "FROM stock_count sc " +
-                "JOIN item i ON sc.item_id = i.item_id " +
-                "WHERE i.is_active = 1";  // Assuming is_active is a column in the item table
-
+    public List<ItemDTO> selectStockCount() {
+        String sql = """
+                SELECT *, CAST( price as numeric ) as "pr",
+                CAST( price_a as numeric ) as "pr_a",
+                CAST( price_b as numeric ) as "pr_b",
+                CAST( price_c as numeric ) as "pr_c"
+                FROM item; 
+                """;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
-            List<ReportDTO> reportDTOS = new ArrayList<>();
-
+            List<ItemDTO> itemDTOS = new ArrayList<>();
             while (resultSet.next()) {
-                ReportDTO reportDTO = new ReportDTO();
-                reportDTO.setStockCountId(resultSet.getLong("stock_id"));
-                reportDTO.setQty(resultSet.getInt("qty"));
-                reportDTO.setStockCountDate(resultSet.getDate("stock_count_date").toLocalDate());
-                reportDTO.setItemId(resultSet.getLong("item_id"));
+                ItemDTO itemDTO = new ItemDTO();
+                itemDTO.setItemId(resultSet.getLong("item_id"));
+                itemDTO.setItemCode(resultSet.getString("item_code"));
+                itemDTO.setItemDescription(resultSet.getString("description"));
+                itemDTO.setItemUnit(resultSet.getString("unit"));
+                itemDTO.setItemPrice(resultSet.getBigDecimal("pr"));
+                itemDTO.setQty(resultSet.getInt("qty"));
+                itemDTO.setItemPrice_out_a(resultSet.getBigDecimal("pr_a"));
+                itemDTO.setItemPrice_out_b(resultSet.getBigDecimal("pr_b"));
+                itemDTO.setItemPrice_out_c(resultSet.getBigDecimal("pr_c"));
+                itemDTO.setStatus(resultSet.getBoolean("status"));
 
-                // Add item_qty to ReportDTO
-                reportDTO.setItemQty(resultSet.getInt("item_qty"));
-
-                reportDTOS.add(reportDTO);
+                itemDTOS.add(itemDTO);
             }
-
-            return reportDTOS;
+            return itemDTOS;
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println( "error : " + e.getMessage());
         }
-
         return null;
     }
 

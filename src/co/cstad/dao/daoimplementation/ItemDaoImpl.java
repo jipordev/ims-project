@@ -23,8 +23,8 @@ public class ItemDaoImpl implements ItemDao {
 
     @Override
     public ItemDTO insert(ItemDTO itemDTO) {
-        String sql = "INSERT INTO item (item_code, description, unit, qty, price_a, price_b, price_c, status) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO item (item_code, description, unit, qty, price, price_a, price_b, price_c, status) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -36,7 +36,7 @@ public class ItemDaoImpl implements ItemDao {
             preparedStatement.setBigDecimal(6, itemDTO.getItemPrice_out_a());
             preparedStatement.setBigDecimal(7, itemDTO.getItemPrice_out_b());
             preparedStatement.setBigDecimal(8, itemDTO.getItemPrice_out_c());
-            preparedStatement.setBoolean(9, itemDTO.isStatus());
+            preparedStatement.setBoolean(9, itemDTO.isStatus());  // Remove this line
 
             // Execute the query
             int affectedRows = preparedStatement.executeUpdate();
@@ -56,6 +56,7 @@ public class ItemDaoImpl implements ItemDao {
 
         return null;
     }
+
     @Override
     public StockInDTO stockIn(StockInDTO stockInDTO) {
         String insertStockInSql = "INSERT INTO stock_in (item_id, qty, price_in, stock_in_date) " +
@@ -200,7 +201,7 @@ public class ItemDaoImpl implements ItemDao {
 
     @Override
     public ItemDTO updateById(ItemDTO itemDTO) {
-        String sql = "UPDATE item SET item_code = ?, description = ?, unit = ?, qty = ?, price_a = ?, price_b = ?, price_c = ?, status = ? WHERE item_id = ?";
+        String sql = "UPDATE item SET item_code = ?, description = ?, unit = ?, qty = ?, price = ?, price_a = ?, price_b = ?, price_c = ?, status = ? WHERE item_id = ?";
 
         try {
             connection.setAutoCommit(false);  // Disable auto-commit

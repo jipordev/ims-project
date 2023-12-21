@@ -56,14 +56,6 @@ public class ItemDTO {
         this.itemUnit = itemUnit;
     }
 
-    public BigDecimal getItemPrice() {
-        return itemPrice;
-    }
-
-    public void setItemPrice(BigDecimal itemPrice) {
-        this.itemPrice = itemPrice;
-    }
-
     public BigDecimal getItemPrice_out_a() {
         return itemPrice_out_a;
     }

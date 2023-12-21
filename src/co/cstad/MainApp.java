@@ -66,14 +66,11 @@ public class MainApp {
             String role = userAuthentication.getUserRole(username);
             System.out.println("User authenticated successfully.\n\n");
 
-                if (role != null) {
-                    handleRole(role);
-                }
-            } else {
-                System.out.println("Invalid username or password.");
+            if (role != null) {
+                handleRole(role);
             }
-        } catch (StringInputException e) {
-            System.out.println(e.getMessage());
+        } else {
+            System.out.println("Invalid username or password.");
         }
     }
 

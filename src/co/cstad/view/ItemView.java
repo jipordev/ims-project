@@ -144,29 +144,8 @@ public class ItemView implements BoxBorder{
         table.addCell(yellow + "   Price B   ");
         table.addCell(yellow + "   Price C   ");
         table.addCell(yellow + "   Status   ");
-        Table table = new Table(10, BorderStyle.UNICODE_BOX, ShownBorders.ALL);
-        table.addCell("   Item ID   ");
-        table.addCell("   Item Code   ");
-        table.addCell("   Description   ");
-        table.addCell("   Unit   ");
-        table.addCell("   Quantity   ");
-        table.addCell("   Price   ");
-        table.addCell("   Price A   ");
-        table.addCell("   Price B   ");
-        table.addCell("   Price C   ");
-        table.addCell("   Status   ");
 
         for (ItemDTO item : items) {
-            table.addCell("   " + String.valueOf(item.getItemId()) + "   ");
-            table.addCell("   " + item.getItemCode() + "   ");
-            table.addCell("   " + item.getItemDescription() + "   ");
-            table.addCell("   " + item.getItemUnit() + "   ");
-            table.addCell("   " + String.valueOf(item.getQty()) + "   ");
-            table.addCell("   " + String.valueOf(item.getItemPrice()+"   "));
-            table.addCell("   " + String.valueOf(item.getItemPrice_out_a()) + "   ");
-            table.addCell("   " + String.valueOf(item.getItemPrice_out_b()) + "   ");
-            table.addCell("   " + String.valueOf(item.getItemPrice_out_c()) + "   ");
-            table.addCell("   " + (item.getStatus() ? "Active" : "Inactive") + "   ");
             table.addCell(green + "   " + String.valueOf(item.getItemId()) + "   ");
             table.addCell(green + "   " + item.getItemCode() + "   ");
             table.addCell(green + "   " + item.getItemDescription() + "   ");

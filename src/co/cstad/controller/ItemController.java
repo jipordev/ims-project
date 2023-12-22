@@ -107,17 +107,27 @@ public class ItemController {
 
                 // Validate the new item description and unit inputs
                 if (validateStringInput(newItemDescription) && validateStringInput(newItemUnit)) {
-                    ItemDTO newItem = ItemView.collectNewItemInformation();
+                    ItemDTO newItem = new ItemDTO();
+
+                    System.out.print("Enter the new item qty: ");
+                    Integer newItemQty = Integer.parseInt(scanner.nextLine());
+
+                    System.out.print("Enter the new item price: ");
+                    BigDecimal newItemPrice = new BigDecimal(scanner.nextLine());
+
+                    System.out.print("Is the item active? (Enter 'y' for true, 'n' for false): ");
+                    Boolean newItemStatus = Boolean.parseBoolean(scanner.nextLine());
 
                     if (newItem != null) {
                         // Update the existing item with the new information
                         existingItem.setItemDescription(newItemDescription);
                         existingItem.setItemUnit(newItemUnit);
-                        existingItem.setQty(newItem.getQty());
+                        existingItem.setQty(newItemQty);
+                        existingItem.setItemPrice(newItemPrice);
                         existingItem.setItemPrice_out_a(newItem.getItemPrice_out_a());
                         existingItem.setItemPrice_out_b(newItem.getItemPrice_out_b());
                         existingItem.setItemPrice_out_c(newItem.getItemPrice_out_c());
-                        existingItem.setStatus(newItem.isStatus());
+                        existingItem.setStatus(newItemStatus);
 
                         // Call the service to update the item
                         ItemDTO updatedItem = itemService.updateById(existingItem);

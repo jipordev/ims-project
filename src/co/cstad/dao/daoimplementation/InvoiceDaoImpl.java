@@ -23,15 +23,15 @@ public class InvoiceDaoImpl implements InvoiceDao {
     @Override
     public InvoiceDTO insert(InvoiceDTO invoice) {
         try {
-            String sql = "INSERT INTO invoice (invoice_no, purchase_date, discount, is_cancelled, status, is_paid) VALUES (?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO invoice (invoice_id, invoice_no, purchase_date, discount, is_cancelled, status, is_paid) VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement pst = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-
-            pst.setString(1, invoice.getInvoiceNo());
-            pst.setDate(2, java.sql.Date.valueOf(invoice.getPurchaseDate()));
-            pst.setDouble(3, invoice.getDiscount());
-            pst.setBoolean(4, invoice.getCancelled());
-            pst.setBoolean(5, invoice.getStatus());
-            pst.setBoolean(6, invoice.getPaid());
+            pst.setLong(1,invoice.getInvoiceId());
+            pst.setString(2, invoice.getInvoiceNo());
+            pst.setDate(3, java.sql.Date.valueOf(invoice.getPurchaseDate()));
+            pst.setDouble(4, invoice.getDiscount());
+            pst.setBoolean(5, invoice.getCancelled());
+            pst.setBoolean(6, invoice.getStatus());
+            pst.setBoolean(7, invoice.getPaid());
 
             int affectedRows = pst.executeUpdate();
 

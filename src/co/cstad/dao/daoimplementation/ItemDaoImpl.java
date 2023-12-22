@@ -2,7 +2,6 @@ package co.cstad.dao.daoimplementation;
 
 import co.cstad.dao.ItemDao;
 import co.cstad.model.ItemDTO;
-import co.cstad.model.ReportDTO;
 import co.cstad.model.StockInDTO;
 import co.cstad.model.StockOutDTO;
 import co.cstad.util.DbSingleton;

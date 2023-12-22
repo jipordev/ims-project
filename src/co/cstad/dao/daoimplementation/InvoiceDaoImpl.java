@@ -80,7 +80,9 @@ public class InvoiceDaoImpl implements InvoiceDao {
     }
 
     @Override
-    public Optional<InvoiceDTO> selectByNo(String invoiceNo) {
+    public List<InvoiceDTO> selectByNo(String invoiceNo) {
+        List<InvoiceDTO> invoiceList = new ArrayList<>();
+
         try {
             String sql = "SELECT * FROM invoice WHERE invoice_no = ? AND is_cancelled = false AND status = true";
             PreparedStatement pst = connection.prepareStatement(sql);
@@ -88,8 +90,8 @@ public class InvoiceDaoImpl implements InvoiceDao {
             pst.setString(1, invoiceNo);
             ResultSet rs = pst.executeQuery();
 
-            if (rs.next()) {
-                return Optional.of(mapResultSetToInvoice(rs));
+            while (rs.next()) {
+                invoiceList.add(mapResultSetToInvoice(rs));
             }
 
             rs.close();
@@ -98,8 +100,9 @@ public class InvoiceDaoImpl implements InvoiceDao {
             e.printStackTrace();
         }
 
-        return Optional.empty();
+        return null;
     }
+
 
     @Override
     public InvoiceDTO updateById(InvoiceDTO invoice) {

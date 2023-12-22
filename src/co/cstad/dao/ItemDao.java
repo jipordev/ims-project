@@ -1,7 +1,6 @@
 package co.cstad.dao;
 
 import co.cstad.model.ItemDTO;
-import co.cstad.model.ReportDTO;
 import co.cstad.model.StockInDTO;
 import co.cstad.model.StockOutDTO;
 

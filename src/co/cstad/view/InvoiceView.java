@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class InvoiceView {
-    private static Scanner scanner = new Scanner(System.in);
 
     public static InvoiceDTO collectNewInvoiceInformation(Long id) {
         InvoiceDTO newInvoice = new InvoiceDTO();
@@ -25,9 +24,10 @@ public class InvoiceView {
         return newInvoice;
     }
     public static void printInvoiceDetails(Collection<InvoiceDTO> invoices) {
-        Table table = new Table(6, BorderStyle.UNICODE_BOX_DOUBLE_BORDER, ShownBorders.ALL);
+        Table table = new Table(7, BorderStyle.UNICODE_BOX_DOUBLE_BORDER, ShownBorders.ALL);
         table.addCell("   Invoice ID   ");
         table.addCell("   Invoice No   ");
+        table.addCell("   Customer ID   ");
         table.addCell("   Discount   ");
         table.addCell("   IS Cancelled   ");
         table.addCell("   Paid Payment   ");
@@ -36,6 +36,7 @@ public class InvoiceView {
         for (InvoiceDTO invoice : invoices) {
             table.addCell("   " + String.valueOf(invoice.getInvoiceId()) + "   ");
             table.addCell("   " + invoice.getInvoiceNo() + "   ");
+            table.addCell("   " + invoice.getCustomer().getCustomersId() + "   ");
             table.addCell("   " + invoice.getDiscount() + "   ");
             table.addCell("   " + invoice.getCancelled() + "   ");
             table.addCell("   " + invoice.getPaid() + "   ");

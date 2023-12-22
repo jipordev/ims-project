@@ -13,6 +13,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Scanner;
 
+import static co.cstad.view.BoxBorder.*;
+
 public class ItemView {
     private static Scanner scanner = new Scanner(System.in);
     private static ItemService itemService;
@@ -125,28 +127,28 @@ public class ItemView {
 
     public static void printItemDetails(Collection<ItemDTO> items) {
         Table table = new Table(10, BorderStyle.UNICODE_BOX, ShownBorders.ALL);
-        table.addCell("   Item ID   ");
-        table.addCell("   Item Code   ");
-        table.addCell("   Description   ");
-        table.addCell("   Unit   ");
-        table.addCell("   Quantity   ");
-        table.addCell("   Price   ");
-        table.addCell("   Price A   ");
-        table.addCell("   Price B   ");
-        table.addCell("   Price C   ");
-        table.addCell("   Status   ");
+        table.addCell(yellow + "   Item ID   " + reset);
+        table.addCell(yellow + "   Item Code   " + reset);
+        table.addCell(yellow + "   Description   " + reset);
+        table.addCell(yellow + "   Unit   " + reset);
+        table.addCell(yellow + "   Quantity   " + reset);
+        table.addCell(yellow + "   Price   " + reset);
+        table.addCell(yellow + "   Price A   " + reset);
+        table.addCell(yellow + "   Price B   " + reset);
+        table.addCell(yellow + "   Price C   " + reset);
+        table.addCell(yellow + "   Status   " + reset);
 
         for (ItemDTO item : items) {
-            table.addCell("   " + String.valueOf(item.getItemId()) + "   ");
-            table.addCell("   " + item.getItemCode() + "   ");
-            table.addCell("   " + item.getItemDescription() + "   ");
-            table.addCell("   " + item.getItemUnit() + "   ");
-            table.addCell("   " + String.valueOf(item.getQty()) + "   ");
-            table.addCell("   " + String.valueOf(item.getItemPrice()+"   "));
-            table.addCell("   " + String.valueOf(item.getItemPrice_out_a()) + "   ");
-            table.addCell("   " + String.valueOf(item.getItemPrice_out_b()) + "   ");
-            table.addCell("   " + String.valueOf(item.getItemPrice_out_c()) + "   ");
-            table.addCell("   " + (item.getStatus() ? "Active" : "Inactive") + "   ");
+            table.addCell(blue + String.valueOf(item.getItemId()));
+            table.addCell(green + item.getItemCode());
+            table.addCell(green + item.getItemDescription());
+            table.addCell(green + item.getItemUnit());
+            table.addCell(green + String.valueOf(item.getQty()));
+            table.addCell(green + String.valueOf(item.getItemPrice()));
+            table.addCell(green + String.valueOf(item.getItemPrice_out_a()));
+            table.addCell(green + String.valueOf(item.getItemPrice_out_b()));
+            table.addCell(green + String.valueOf(item.getItemPrice_out_c()));
+            table.addCell(green + (item.getStatus() ? "Active" : "Inactive") + reset);
         }
 
         System.out.println(table.render());

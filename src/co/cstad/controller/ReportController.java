@@ -1,7 +1,8 @@
 package co.cstad.controller;
 
-import co.cstad.model.ItemDTO;
-import co.cstad.model.ReportDTO;
+import co.cstad.model.*;
+import co.cstad.service.AlertService;
+import co.cstad.service.ItemService;
 import co.cstad.service.ReportService;
 import co.cstad.service.UserService;
 import co.cstad.util.Singleton;
@@ -16,9 +17,13 @@ public class ReportController {
     private final MenuViewAdmin menuViewAdmin;
     private final ReportService reportService;
     private final ReportView reportView;
+    private final ItemService itemService;
     private final Scanner scanner;
+    private final AlertService alertService;
 
     public ReportController(){
+        alertService = Singleton.alertService();
+        itemService= Singleton.itemService();
         reportView = Singleton.reportView();
         scanner = Singleton.scanner();
         reportService = Singleton.reportService();
@@ -27,43 +32,39 @@ public class ReportController {
 
     public void stockCountReport(){
         List<ItemDTO> reportDTOList = reportService.selectStockCount();
-        reportView.printItemCount(reportDTOList);
-    }
-    public void stockInReport(){
-        List<ReportDTO> reportDTOList = reportService.selectStockIn();
-        reportView.stockInReport(reportDTOList);
+        ReportView.printItemCount(reportDTOList);
     }
 
-    public void stockOutReport(){
-        List<ReportDTO> reportDTOList = reportService.selectStockOut();
-        reportView.stockOutReport(reportDTOList);
-    }
+//    public void stockInReport(){
+//        List<StockInDTO> reportDTOList = reportService.selectStockIn();
+//        reportView.stockInReport(reportDTOList);
+//    }
+//
+//    public void stockOutReport(){
+//        List<StockOutDTO> reportDTOList = reportService.selectStockOut();
+//        reportView.stockOutReport(reportDTOList);
+//    }
 
-    public void invoiceDetail(){
-        List<ReportDTO> reportDTOList = reportService.selectInvoiceDetail();
-        reportView.reportInvoiceDetail(reportDTOList);
-    }
+//    public void invoiceDetail(){
+//        List<ReportDTO> reportDTOList = reportService.selectInvoiceDetail();
+//        reportView.InvoiceDetail(reportDTOList);
+//    }
+//
+//    public void invoiceAdjustment(){
+//        List<ReportDTO> reportDTOList = reportService.selectInvoiceDetail();
+//        reportView.InvoiceAdjustment(reportDTOList);
+//    }
 
-    public void invoiceAdjustment(){
-        List<ReportDTO> reportDTOList = reportService.selectInvoiceDetail();
-        reportView.reportInvoiceAdjustment(reportDTOList);
-    }
-
-    public void itemPriceHistory(){
-        List<ReportDTO> reportDTOList = reportService.selectItemPriceHistory();
-        reportView.itemPriceHistory(reportDTOList);
-    }
+//    public void itemPriceHistory(){
+//        List<HistoryDTO> reportDTOList = reportService.selectItemPriceHistory();
+//        reportView.itemPriceHistory(reportDTOList);
+//    }
     public void stockAlert(){
-        List<ReportDTO> reportDTOList = reportService.selectStockAlertReport();
+        List<AlertDTO> reportDTOList = alertService.selectStockAlertReport();
         reportView.stockAlert(reportDTOList);
     }
-    public void summaryReport(){
-        List<ReportDTO> reportDTOList = reportService.selectSummaryReport();
-        reportView.summaryReport(reportDTOList);
-    }
-
-//    public void stockAlertReport(){
-//        List<ReportDTO> reportDTOList = reportService.selectStockAlertReport();
-//        ReportView.stockAlert(reportDTOList);
+//    public void summaryReport(){
+//        List<ReportDTO> reportDTOList = reportService.selectSummaryReport();
+//        reportView.summaryReport(reportDTOList);
 //    }
 }

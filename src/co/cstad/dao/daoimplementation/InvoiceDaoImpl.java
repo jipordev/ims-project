@@ -82,8 +82,37 @@ public List<InvoiceDTO> select() {
 
     @Override
     public List<InvoiceDTO> selectByNo(String invoiceNo) {
-        return null;
+        String sql = "SELECT * FROM invoice WHERE invoice_no = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, invoiceNo);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            List<InvoiceDTO> invoiceDTOS = new ArrayList<>();
+            while (resultSet.next()) {
+                InvoiceDTO invoiceDTO = new InvoiceDTO();
+                invoiceDTO.setInvoiceId(resultSet.getLong("invoice_id"));
+                invoiceDTO.setInvoiceNo(resultSet.getString("invoice_no"));
+                invoiceDTO.setDiscount(resultSet.getBigDecimal("discount"));
+                invoiceDTO.setCancelled(resultSet.getBoolean("is_cancelled"));
+                invoiceDTO.setPaid(resultSet.getBoolean("is_paid"));
+
+                // Handle customer_id
+                Long customerId = resultSet.getLong("customer_id");
+                CustomerDTO customerDTO = new CustomerDTO();
+                customerDTO.setCustomersId(customerId);
+                invoiceDTO.setCustomer(customerDTO);
+
+                invoiceDTO.setStatus(resultSet.getBoolean("status"));
+                invoiceDTOS.add(invoiceDTO);
+            }
+            return invoiceDTOS;
+        } catch (SQLException e) {
+            // Handle the exception appropriately (e.g., log it or throw a custom exception)
+            throw new RuntimeException("Error fetching invoices by invoice number from the database", e);
+        }
     }
+
 
     @Override
     public InvoiceDTO updateById(InvoiceDTO invoice) {

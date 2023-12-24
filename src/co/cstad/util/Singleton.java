@@ -5,10 +5,8 @@ import co.cstad.controller.InvoiceController;
 import co.cstad.controller.ItemController;
 import co.cstad.controller.ReportController;
 import co.cstad.controller.UserController;
-import co.cstad.dao.daoimplementation.InvoiceDaoImpl;
-import co.cstad.dao.daoimplementation.ReportDaoImpl;
-import co.cstad.dao.daoimplementation.ItemDaoImpl;
-import co.cstad.dao.daoimplementation.UserDaoImpl;
+import co.cstad.dao.AlertDao;
+import co.cstad.dao.daoimplementation.*;
 import co.cstad.service.*;
 import co.cstad.service.serviceimplementation.*;
 import co.cstad.service.userservice.UserAuthentication;
@@ -42,6 +40,20 @@ public class Singleton {
     private static InvoiceView invoiceView;
     private static UserAuthentication userAuthentication;
     private static Handle handle;
+    private static AlertService alertService;
+    private static AlertDao alertDao;
+    public static AlertDao alertDao(){
+        if (alertDao == null){
+            alertDao = new AlertDaoImpl();
+        }
+        return alertDao;
+    }
+    public static AlertService alertService(){
+        if (alertService == null){
+            alertService = new AlertServiceImpl();
+        }
+        return alertService;
+    }
     public static InvoiceView invoiceView(){
         if (invoiceView == null){
             invoiceView = new InvoiceView();

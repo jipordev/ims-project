@@ -30,6 +30,15 @@ public class InvoiceController {
         InvoiceView.printInvoiceList(invoiceDTOList);
     }
     public void update() {
+        try {
 
+            System.out.print("Enter Invoice no you want to return : ");
+            String invoiceNo = scanner.nextLine();
+
+//            InvoiceDTO invoiceDTO = invoiceService.selectByNo(invoiceNo);
+
+        } catch (StringInputException e){
+            System.out.println(e.getMessage());
+        }
     }
 }

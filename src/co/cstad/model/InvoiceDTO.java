@@ -7,7 +7,6 @@ public class InvoiceDTO {
     private Long invoiceId;
     private String invoiceNo;
     private Date invoiceDate;
-    private Double discount;
     private Boolean isCancelled;
     private Boolean status;
     private Boolean isPaid;
@@ -39,14 +38,6 @@ public class InvoiceDTO {
 
     public void setInvoiceDate(Date purchaseDate) {
         this.invoiceDate = purchaseDate;
-    }
-
-    public Double getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(Double discount) {
-        this.discount = discount;
     }
 
     public Boolean getCancelled() {

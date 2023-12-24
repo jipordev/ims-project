@@ -96,6 +96,8 @@ public class InvoiceDaoImpl implements InvoiceDao {
                 invoiceDTO.setPaid(resultSet.getBoolean("is_paid"));
                 invoiceDTO.setCustomerId(resultSet.getLong("customer_id"));
                 invoiceDTO.setStockOutId(resultSet.getLong("stock_out_id"));
+
+                return Optional.of(invoiceDTO);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -160,7 +162,8 @@ public class InvoiceDaoImpl implements InvoiceDao {
         InvoiceDTO invoice = new InvoiceDTO();
         invoice.setInvoiceId(rs.getLong("invoice_id"));
         invoice.setInvoiceNo(rs.getString("invoice_no"));
-        invoice.setDiscount(rs.getDouble("discount"));
+        invoice.setCustomerId(rs.getLong("customer_id"));
+        invoice.setStockOutId(rs.getLong("stock_out_id"));
         invoice.setCancelled(rs.getBoolean("is_cancelled"));
         invoice.setStatus(rs.getBoolean("status"));
         invoice.setPaid(rs.getBoolean("is_paid"));

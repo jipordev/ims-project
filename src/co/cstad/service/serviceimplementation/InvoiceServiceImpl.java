@@ -28,8 +28,8 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     @Override
-    public Optional<InvoiceDTO> selectById(Long id) {
-        return invoiceDao.selectById(id);
+    public InvoiceDTO selectById(Long id) {
+        return invoiceDao.selectById(id).orElse(null);
     }
 
     @Override

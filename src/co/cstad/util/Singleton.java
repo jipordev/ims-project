@@ -42,6 +42,12 @@ public class Singleton {
     private static Handle handle;
     private static AlertService alertService;
     private static AlertDao alertDao;
+    public static Handle handle(){
+        if (handle == null){
+            handle = new Handle();
+        }
+        return handle;
+    }
     public static AlertDao alertDao(){
         if (alertDao == null){
             alertDao = new AlertDaoImpl();
@@ -59,12 +65,6 @@ public class Singleton {
             invoiceDao = new InvoiceDaoImpl();
         }
         return invoiceDao;
-    }
-    public static Handle handle(){
-        if (handle == null) {
-            handle = new Handle();
-        }
-        return handle;
     }
     public static MenuView menuView(){
         if (menuView == null){
@@ -198,14 +198,6 @@ public class Singleton {
             reportService = new ReportServiceImpl();
         }
         return reportService;
-    }
-
-
-    private Singleton() {
-        // Private constructor to prevent instantiation outside the class.
-        itemController = new ItemController();
-        invoiceController = new InvoiceController();
-        scanner = new Scanner(System.in);
     }
 
     public static synchronized Singleton getInstance() {

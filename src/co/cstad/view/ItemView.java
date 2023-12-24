@@ -6,6 +6,7 @@ import co.cstad.model.StockOutDTO;
 import co.cstad.service.ItemService;
 import co.cstad.util.Singleton;
 import org.nocrala.tools.texttablefmt.BorderStyle;
+import org.nocrala.tools.texttablefmt.CellStyle;
 import org.nocrala.tools.texttablefmt.ShownBorders;
 import org.nocrala.tools.texttablefmt.Table;
 import java.math.BigDecimal;
@@ -130,6 +131,7 @@ public class ItemView {
 
     public static void printItemDetails(Collection<ItemDTO> items) {
         Table table = new Table(10, BorderStyle.UNICODE_BOX, ShownBorders.ALL);
+        CellStyle cellStyle = new CellStyle(CellStyle.HorizontalAlign.center);
         table.addCell(yellow + "   Item ID   " + reset);
         table.addCell(yellow + "   Item Code   " + reset);
         table.addCell(yellow + "   Description   " + reset);
@@ -142,7 +144,7 @@ public class ItemView {
         table.addCell(yellow + "   Status   " + reset);
 
         for (ItemDTO item : items) {
-            table.addCell(blue + String.valueOf(item.getItemId()));
+            table.addCell(blue + String.valueOf(item.getItemId()),cellStyle);
             table.addCell(green + item.getItemCode());
             table.addCell(green + item.getItemDescription());
             table.addCell(green + item.getItemUnit());

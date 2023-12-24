@@ -1,26 +1,28 @@
 package co.cstad.controller;
 
+import co.cstad.exception.StringInputException;
 import co.cstad.model.InvoiceDTO;
-import co.cstad.service.InvoiceServiceImpl;
-import co.cstad.util.DbSingleton;
+import co.cstad.service.serviceimplementation.InvoiceServiceImpl;
 import co.cstad.view.InvoiceView;
 import co.cstad.view.MenuViewAdmin;
 import co.cstad.service.InvoiceService;
 import co.cstad.util.Singleton;
-import co.cstad.view.InvoiceView;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 
 public class InvoiceController {
     private final MenuViewAdmin menuViewAdmin;
     private final InvoiceService invoiceService;
     private final InvoiceView invoiceView;
+    private final Scanner scanner;
 
     public InvoiceController() {
-        invoiceService = new InvoiceServiceImpl();
-        menuViewAdmin = new MenuViewAdmin();
-        invoiceView = new InvoiceView();
+        scanner = Singleton.scanner();
+        invoiceService = Singleton.invoiceService();
+        menuViewAdmin = Singleton.menuViewAdmin();
+        invoiceView = Singleton.invoiceView();
     }
 
     public void read() {
@@ -28,19 +30,15 @@ public class InvoiceController {
         InvoiceView.printInvoiceList(invoiceDTOList);
     }
     public void update() {
-        System.out.print("Enter Invoice No: ");
-        String no = Singleton.getInstance().scanner().nextLine();
-        InvoiceDTO invoiceDTO = invoiceService.selectByNo(no);
+        try {
 
-        if (invoiceDTO != null) {
-            List<InvoiceDTO> invoiceList = Collections.singletonList(invoiceDTO);
-            invoiceView.printInvoiceList(invoiceList);
-            invoiceDTO.setCancelled(true);
-            invoiceDTO.setStatus(false);
-        }
+            System.out.print("Enter Invoice no you want to return : ");
+            String invoiceNo = scanner.nextLine();
 
-        else {
-            System.out.println("Invoice not found.");
+//            InvoiceDTO invoiceDTO = invoiceService.selectByNo(invoiceNo);
+
+        } catch (StringInputException e){
+            System.out.println(e.getMessage());
         }
     }
 }

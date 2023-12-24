@@ -1,28 +1,27 @@
+// DbSingleton.java
 package co.cstad.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class DbSingleton {
-    private static final Logger logger = Logger.getLogger(DbSingleton.class.getName());
-    private static final String driverClassName = "org.postgresql.Driver";
-    private static final String url = "jdbc:postgresql://localhost/dbinventorymanagement";
-    private static final String username = "postgres";
-    private static final String password = "kheang";
-    private static Connection connection = null;
+    private static String url = "jdbc:postgresql://localhost:5432/inventory_management_system";
+    private static String username = "postgres";
+    private static String password = "jipor206";
+    private static Connection connection;
 
-    private DbSingleton() {}
+    private DbSingleton() {
+    }
 
     public static Connection instance() {
         if (connection == null) {
             try {
-                Class.forName(driverClassName);
+                Class.forName("org.postgresql.Driver");
                 connection = DriverManager.getConnection(url, username, password);
             } catch (ClassNotFoundException | SQLException e) {
-                logger.log(Level.SEVERE, "Error creating database connection", e);
+                // Log or rethrow the exception for better handling
+                throw new RuntimeException("Error initializing database connection", e);
             }
         }
         return connection;

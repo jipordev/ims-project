@@ -1,10 +1,9 @@
 // UserAuthentication.java
-package co.cstad.loggingin;
+package co.cstad.service.userservice;
 
 import co.cstad.util.DbSingleton;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -63,7 +62,7 @@ public class UserAuthentication {
     }
 
     private static String hashPassword(String password) {
+        // Implement password hashing logic (e.g., using bcrypt)
         return password;
     }
 }
-

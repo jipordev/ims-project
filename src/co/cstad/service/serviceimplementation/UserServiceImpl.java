@@ -1,14 +1,13 @@
-package co.cstad.service;
+package co.cstad.service.serviceimplementation;
 
-import co.cstad.dao.ItemDaoImpl;
-import co.cstad.dao.UserDaoImpl;
+import co.cstad.dao.daoimplementation.UserDaoImpl;
 import co.cstad.model.UserDTO;
+import co.cstad.service.UserService;
 import co.cstad.util.Singleton;
 
-import java.security.Signature;
 import java.util.List;
 
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
     private final UserDaoImpl userDao;
     public UserServiceImpl(){
         userDao = Singleton.getUserDao();
@@ -31,7 +30,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public UserDTO updateById(UserDTO userDTO) {
-        return null;
+        return userDao.updateById(userDTO);
     }
 
     @Override

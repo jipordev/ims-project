@@ -34,14 +34,6 @@ public class UserDTO {
         this.password = password;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -56,6 +48,14 @@ public class UserDTO {
 
     public void setContact(String contact) {
         this.contact = contact;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public Boolean getStatus() {

@@ -98,21 +98,24 @@ public class ItemView {
     public static ItemDTO collectNewItemInformation() {
         ItemDTO newItem = new ItemDTO();
 
-        System.out.print("Enter item code:");
+        System.out.print("Enter item code: ");
         newItem.setItemCode(scanner.nextLine());
 
-        System.out.print("Enter item description:");
+        System.out.print("Enter item description: ");
         newItem.setItemDescription(scanner.nextLine());
 
-        System.out.print("Enter item unit:");
+        System.out.print("Enter item unit: ");
         newItem.setItemUnit(scanner.nextLine());
 
-        System.out.print("Enter item quantity:");
+        System.out.print("Enter item quantity: ");
         newItem.setQty(Integer.parseInt(scanner.nextLine()));
 
         System.out.print("Enter item price: ");
         BigDecimal price = new BigDecimal(scanner.nextLine());
         newItem.setItemPrice(price);
+
+        System.out.print("Enter alert ID: ");
+        newItem.setAlertId(Long.parseLong(scanner.nextLine()));
 
         // Calculate price_a, price_b, and price_c based on the input price
         newItem.setItemPrice_out_a(price.multiply(new BigDecimal("0.93")));

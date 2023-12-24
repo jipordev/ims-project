@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.Duration;
 
 public class ItemDTO {
+    private Long alertId;
     private Long itemId;
     private String itemCode;
     private String itemDescription;
@@ -17,6 +18,14 @@ public class ItemDTO {
 
     public BigDecimal getItemPrice() {
         return itemPrice;
+    }
+
+    public Long getAlertId() {
+        return alertId;
+    }
+
+    public void setAlertId(Long alertId) {
+        this.alertId = alertId;
     }
 
     public void setItemPrice(BigDecimal itemPrice) {

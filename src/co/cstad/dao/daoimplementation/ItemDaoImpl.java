@@ -160,6 +160,7 @@ public class ItemDaoImpl implements ItemDao {
                 itemDTO.setItemPrice_out_b(resultSet.getBigDecimal("price_b"));
                 itemDTO.setItemPrice_out_c(resultSet.getBigDecimal("price_c"));
                 itemDTO.setStatus(resultSet.getBoolean("status"));
+                itemDTO.setAlertId(resultSet.getLong("alert_id"));
                 itemDTOS.add(itemDTO);
             }
             return itemDTOS;

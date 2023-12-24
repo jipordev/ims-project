@@ -204,33 +204,39 @@ public class ReportView implements BoxBorder {
         }
         System.out.println(table.render());
     }
-    public static void stockAlert(Collection<AlertDTO> alertDTOS) {
-        if (alertDTOS == null) {
+    public static void stockAlert(Collection<AlertDTO> reports) {
+        if (reports == null) {
             System.out.println("Reports collection is null.");
             return;
         }
-
         System.out.println(yellow + "\t\tStock Alert Report" + reset);
-        Table table = new Table(4, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
+        Table table = new Table(7, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
         table.setColumnWidth(0, 15, 20);
         table.setColumnWidth(1, 15, 20);
         table.setColumnWidth(2, 15, 20);
+        table.setColumnWidth(3, 15, 20);
+        table.setColumnWidth(4, 15, 20);
+        table.setColumnWidth(5, 15, 20);
+        table.setColumnWidth(6, 15, 20);
 
         table.addCell(" ".repeat(2) + yellow + "Alert_Id");
-        table.addCell(" ".repeat(2) + yellow + "Name");
-        table.addCell(" ".repeat(2) + yellow + "Qty_Alert");
-        table.addCell(" ".repeat(2) + yellow + "Item_ID"+reset);
+        table.addCell(" ".repeat(2) + yellow + "Item Code");
+        table.addCell(" ".repeat(2) + yellow + "Description");
+        table.addCell(" ".repeat(2) + yellow + "Qty");
+        table.addCell(" ".repeat(2) + yellow + "Unit");
+        table.addCell(" ".repeat(2) + yellow + " Item Price ");
+        table.addCell(" ".repeat(2) + yellow + "Status");
 
-        for (AlertDTO alertDTO : alertDTOS) {
-            if (alertDTO != null && alertDTO.getQytAlert() != null && alertDTO.getItem() != null) {
-                if (alertDTO.getQytAlert() < 20) {
-                    table.addCell("   " + alertDTO.getAlertId() + "   ");
-                    table.addCell("   " + alertDTO.getItem().getItemDescription() + "   ");
-                    table.addCell("   " + alertDTO.getQytAlert() + "   ");
-                    table.addCell("   " + alertDTO.getItem().getItemId() + "   ");
-                }
-            } else {
-                System.out.println("One or more reports have null values.");
+        for (AlertDTO report : reports) {
+            if ( report.getItem().getStatus()) {
+
+                table.addCell("   " + "A" + report.getAlertId() + "   ");
+                table.addCell("   " + report.getItem().getItemCode());
+                table.addCell("   " + report.getItem().getItemDescription());
+                table.addCell("   " + report.getQytAlert());
+                table.addCell("   " + report.getItem().getItemUnit());
+                table.addCell("   " + report.getItem().getItemPrice());
+                table.addCell("   " + (report.getItem().getStatus() ? "Active" : "Inactive") + "   ");
             }
         }
 

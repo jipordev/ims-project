@@ -1,5 +1,8 @@
 package co.cstad.controller;
 
+import co.cstad.model.*;
+import co.cstad.service.AlertService;
+import co.cstad.service.ItemService;
 import co.cstad.model.ItemDTO;
 import co.cstad.model.ReportDTO;
 import co.cstad.model.StockInDTO;
@@ -21,8 +24,10 @@ public class ReportController {
     private final ReportView reportView;
     private final ItemService itemService;
     private final Scanner scanner;
+    private final AlertService alertService;
 
     public ReportController(){
+        alertService = Singleton.alertService();
         itemService= Singleton.itemService();
         reportView = Singleton.reportView();
         scanner = Singleton.scanner();
@@ -54,22 +59,26 @@ public class ReportController {
         List<ReportDTO> reportDTOList = reportService.selectInvoiceDetail();
         reportView.InvoiceAdjustment(reportDTOList);
     }
+//    public void invoiceDetail(){
+//        List<ReportDTO> reportDTOList = reportService.selectInvoiceDetail();
+//        reportView.InvoiceDetail(reportDTOList);
+//    }
+//
+//    public void invoiceAdjustment(){
+//        List<ReportDTO> reportDTOList = reportService.selectInvoiceDetail();
+//        reportView.InvoiceAdjustment(reportDTOList);
+//    }
 
-    public void itemPriceHistory(){
-        List<ReportDTO> reportDTOList = reportService.selectItemPriceHistory();
-        reportView.itemPriceHistory(reportDTOList);
-    }
+//    public void itemPriceHistory(){
+//        List<HistoryDTO> reportDTOList = reportService.selectItemPriceHistory();
+//        reportView.itemPriceHistory(reportDTOList);
+//    }
     public void stockAlert(){
-        List<ReportDTO> reportDTOList = reportService.selectStockAlertReport();
+        List<AlertDTO> reportDTOList = alertService.selectStockAlertReport();
         reportView.stockAlert(reportDTOList);
     }
-    public void summaryReport(){
-        List<ReportDTO> reportDTOList = reportService.selectSummaryReport();
-        reportView.summaryReport(reportDTOList);
-    }
-
-//    public void stockAlertReport(){
-//        List<ReportDTO> reportDTOList = reportService.selectStockAlertReport();
-//        ReportView.stockAlert(reportDTOList);
+//    public void summaryReport(){
+//        List<ReportDTO> reportDTOList = reportService.selectSummaryReport();
+//        reportView.summaryReport(reportDTOList);
 //    }
 }

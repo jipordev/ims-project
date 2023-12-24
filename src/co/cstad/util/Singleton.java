@@ -5,17 +5,10 @@ import co.cstad.controller.InvoiceController;
 import co.cstad.controller.ItemController;
 import co.cstad.controller.ReportController;
 import co.cstad.controller.UserController;
-import co.cstad.dao.daoimplementation.ReportDaoImpl;
-import co.cstad.dao.daoimplementation.ItemDaoImpl;
-import co.cstad.dao.daoimplementation.UserDaoImpl;
-import co.cstad.service.CustomerService;
-import co.cstad.service.ItemService;
-import co.cstad.service.ReportService;
-import co.cstad.service.serviceimplementation.CustomerServiceImpl;
-import co.cstad.service.serviceimplementation.ReportServiceImpl;
-import co.cstad.service.serviceimplementation.ItemServiceImpl;
-import co.cstad.service.UserService;
-import co.cstad.service.serviceimplementation.UserServiceImpl;
+import co.cstad.dao.AlertDao;
+import co.cstad.dao.daoimplementation.*;
+import co.cstad.service.*;
+import co.cstad.service.serviceimplementation.*;
 import co.cstad.service.userservice.UserAuthentication;
 import co.cstad.util.handle.Handle;
 import co.cstad.view.*;
@@ -33,17 +26,52 @@ public class Singleton {
     private static UserService userService;
     private static ReportService reportService;
     private static CustomerService customerService;
+    private static InvoiceService invoiceService;
     private static ItemDaoImpl itemDao;
     private static UserController userController;
     private static UserDaoImpl userDao;
     private static ReportDaoImpl reportDao;
+    private static InvoiceDaoImpl invoiceDao;
     private static MenuView menuView;
     private static MenuViewAdmin menuViewAdmin;
     private static MenuViewReport menuViewReport;
     private static MenuViewManager menuViewManager;
     private static ReportView reportView;
+    private static InvoiceView invoiceView;
     private static UserAuthentication userAuthentication;
     private static Handle handle;
+    private static AlertService alertService;
+    private static AlertDao alertDao;
+    public static AlertDao alertDao(){
+        if (alertDao == null){
+            alertDao = new AlertDaoImpl();
+        }
+        return alertDao;
+    }
+    public static AlertService alertService(){
+        if (alertService == null){
+            alertService = new AlertServiceImpl();
+        }
+        return alertService;
+    }
+    public static InvoiceView invoiceView(){
+        if (invoiceView == null){
+            invoiceView = new InvoiceView();
+        }
+        return invoiceView;
+    }
+    public static InvoiceService invoiceService(){
+        if (invoiceService == null){
+            invoiceService = new InvoiceServiceImpl();
+        }
+        return invoiceService;
+    }
+    public static InvoiceDaoImpl invoiceDao(){
+        if (invoiceDao == null){
+            invoiceDao = new InvoiceDaoImpl();
+        }
+        return invoiceDao;
+    }
     public static Handle handle(){
         if (handle == null) {
             handle = new Handle();

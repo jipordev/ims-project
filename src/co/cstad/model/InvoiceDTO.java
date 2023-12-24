@@ -1,16 +1,25 @@
 package co.cstad.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class InvoiceDTO {
     private Long invoiceId;
     private String invoiceNo;
     private LocalDate purchaseDate;
-    private Double discount;
+    private BigDecimal discount;
     private Boolean isCancelled;
     private Boolean status;
     private Boolean isPaid;
     public CustomerDTO customer = new CustomerDTO();
+
+    public CustomerDTO getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(CustomerDTO customer) {
+        this.customer = customer;
+    }
 
     public Long getInvoiceId() {
         return invoiceId;
@@ -36,16 +45,16 @@ public class InvoiceDTO {
         this.purchaseDate = purchaseDate;
     }
 
-    public Double getDiscount() {
+    public BigDecimal getDiscount() {
         return discount;
     }
 
-    public void setDiscount(String discount) {
+    public void setDiscount(BigDecimal discount) {
         if (discount != null) {
-            this.discount = Double.parseDouble(discount.replaceAll("[^0-9.]", ""));
+            this.discount = discount;
         } else {
             // Assign a default value when discount is null
-            this.discount = 0.0;
+            this.discount = BigDecimal.valueOf(0.0);
         }
     }
     public Boolean getCancelled() {

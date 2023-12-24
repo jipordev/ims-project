@@ -1,5 +1,6 @@
 package co.cstad.view;
 
+import co.cstad.model.AlertDTO;
 import co.cstad.model.ItemDTO;
 import co.cstad.model.ReportDTO;
 import co.cstad.model.StockInDTO;
@@ -34,7 +35,7 @@ public class ReportView implements BoxBorder {
 
         for (ItemDTO item : items) {
             if (item.getStatus() != null && item.getStatus()) {
-                table.addCell(green + "   " + String.valueOf(item.getItemId()) + "   ");
+                table.addCell(green + "   " + item.getItemId() + "   ");
                 table.addCell(green + "   " + item.getItemCode() + "   ");
                 table.addCell(green + "   " + item.getItemDescription() + "   ");
                 table.addCell(green + "   " + item.getItemUnit() + "   ");
@@ -174,11 +175,8 @@ public class ReportView implements BoxBorder {
         }
         System.out.println(table.render());
     }
-
-    public static void stockAlert(Collection<ReportDTO> reports) {
-        ItemDTO itemDTO = new ItemDTO();
-
-        if (reports == null) {
+    public static void stockAlert(Collection<AlertDTO> alertDTOS) {
+        if (alertDTOS == null) {
             System.out.println("Reports collection is null.");
             return;
         }
@@ -197,17 +195,14 @@ public class ReportView implements BoxBorder {
         table.addCell(" ".repeat(2) + yellow + "Description");
         table.addCell(" ".repeat(2) + yellow + "Qty");
 
-        for (ReportDTO report : reports) {
-            if (report != null  ) {
-
-                    table.addCell("   " + "A" + report.getAlertId() + "   ");
-                    table.addCell("   " + report.getItem().getItemCode());
-                    table.addCell(" ".repeat(2) + report.getItem().getItemDescription());
-                    table.addCell("   " + report.getQytAlert());
-
-
-
-
+        for (AlertDTO alertDTO : alertDTOS) {
+            if (alertDTO != null && alertDTO.getQytAlert() != null && alertDTO.getItem() != null) {
+                if (alertDTO.getQytAlert() < 20) {
+                    table.addCell("   " + alertDTO.getAlertId() + "   ");
+                    table.addCell("   " + alertDTO.getItem().getItemDescription() + "   ");
+                    table.addCell("   " + alertDTO.getQytAlert() + "   ");
+                    table.addCell("   " + alertDTO.getItem().getItemId() + "   ");
+                }
             } else {
                 System.out.println("One or more reports have null values.");
                 break;

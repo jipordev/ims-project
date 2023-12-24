@@ -3,20 +3,14 @@ import co.cstad.dao.daoimplementation.InvoiceDaoImpl;
 import co.cstad.model.InvoiceDTO;
 import co.cstad.service.InvoiceService;
 import co.cstad.util.Singleton;
-import co.cstad.util.Singleton;
-
 import java.util.List;
 import java.util.Optional;
 
 public class InvoiceServiceImpl implements InvoiceService {
     private static InvoiceDaoImpl invoiceDao;
 
-
-    private static InvoiceDaoImpl invoiceDao;
-
     public InvoiceServiceImpl() {
         invoiceDao = Singleton.getInvoiceDao();
-        invoiceDao = Singleton.invoiceDao();
     }
 
     @Override
@@ -41,9 +35,6 @@ public class InvoiceServiceImpl implements InvoiceService {
 
 
     @Override
-    public InvoiceDTO updateById(ItemDTO item) {
-        // Implement update logic
-        return null;
     public InvoiceDTO updateById(InvoiceDTO invoiceDTO) {
         return invoiceDao.updateById(invoiceDTO);
     }
@@ -52,7 +43,5 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Override
     public InvoiceDTO deleteById(Long id) {
         return invoiceDao.deleteById(id);
-        // Implement delete logic
-        return null;
     }
 }

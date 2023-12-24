@@ -12,6 +12,7 @@ import co.cstad.view.MenuViewAdmin;
 import co.cstad.view.MenuViewManager;
 import co.cstad.view.MenuViewReport;
 
+import java.util.Calendar;
 import java.util.Scanner;
 
 
@@ -365,9 +366,10 @@ public class Handle {
                 System.out.print("choose ➡\uFE0F ");
                 optInvoice = Integer.parseInt(scanner.nextLine());
                 switch (optInvoice) {
-                    case 1 -> invoiceController.update();
-                    case 2 -> invoiceController.read();
-                    case 3 -> {
+                    case 1 -> invoiceController.newInvoice();
+                    case 2 -> invoiceController.update();
+                    case 3 -> invoiceController.read();
+                    case 4 -> {
                         return;
                     }
                     default -> {
@@ -422,7 +424,13 @@ public class Handle {
                 opReport = Integer.parseInt(scanner.nextLine());
                 switch (opReport){
                     case 1 -> reportController.stockCountReport();
+                    case 2 -> reportController.stockInReport();
+                    case 3 -> reportController.stockOutReport();
+                    case 4 -> reportController.invoiceDetail();
+                    case 5 -> reportController.invoiceAdjustment();
+                    case 6 -> reportController.itemPriceHistory();
                     case 7 -> reportController.stockAlert();
+                    case 8 -> reportController.summaryReport();
                     case 9 -> {
                         return;
                     }

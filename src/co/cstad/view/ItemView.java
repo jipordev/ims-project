@@ -6,6 +6,7 @@ import co.cstad.model.StockOutDTO;
 import co.cstad.service.ItemService;
 import co.cstad.util.Singleton;
 import org.nocrala.tools.texttablefmt.BorderStyle;
+import org.nocrala.tools.texttablefmt.CellStyle;
 import org.nocrala.tools.texttablefmt.ShownBorders;
 import org.nocrala.tools.texttablefmt.Table;
 import java.math.BigDecimal;
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import static co.cstad.view.BoxBorder.*;
+import org.nocrala.tools.texttablefmt.CellStyle;
 
 public class ItemView {
     private static Scanner scanner = new Scanner(System.in);
@@ -126,29 +128,30 @@ public class ItemView {
     }
 
     public static void printItemDetails(Collection<ItemDTO> items) {
-        Table table = new Table(10, BorderStyle.UNICODE_BOX, ShownBorders.ALL);
-        table.addCell(yellow + "   Item ID   " + reset);
-        table.addCell(yellow + "   Item Code   " + reset);
-        table.addCell(yellow + "   Description   " + reset);
-        table.addCell(yellow + "   Unit   " + reset);
-        table.addCell(yellow + "   Quantity   " + reset);
-        table.addCell(yellow + "   Price   " + reset);
-        table.addCell(yellow + "   Price A   " + reset);
-        table.addCell(yellow + "   Price B   " + reset);
-        table.addCell(yellow + "   Price C   " + reset);
-        table.addCell(yellow + "   Status   " + reset);
+        Table table = new Table(10, BorderStyle.UNICODE_BOX_DOUBLE_BORDER, ShownBorders.ALL);
+        CellStyle cellStyle = new CellStyle(CellStyle.HorizontalAlign.center);
+        table.addCell(yellow + "   Item ID   " + reset, cellStyle);
+        table.addCell(yellow + "   Item Code   " + reset, cellStyle);
+        table.addCell(yellow + "   Description   " + reset, cellStyle);
+        table.addCell(yellow + "   Unit   " + reset, cellStyle);
+        table.addCell(yellow + "   Quantity   " + reset, cellStyle);
+        table.addCell(yellow + "   Price   " + reset, cellStyle);
+        table.addCell(yellow + "   Price A   " + reset, cellStyle);
+        table.addCell(yellow + "   Price B   " + reset, cellStyle);
+        table.addCell(yellow + "   Price C   " + reset, cellStyle);
+        table.addCell(yellow + "   Status   " + reset, cellStyle);
 
         for (ItemDTO item : items) {
-            table.addCell(blue + String.valueOf(item.getItemId()));
-            table.addCell(green + item.getItemCode());
-            table.addCell(green + item.getItemDescription());
-            table.addCell(green + item.getItemUnit());
-            table.addCell(green + String.valueOf(item.getQty()));
-            table.addCell(green + String.valueOf(item.getItemPrice()));
-            table.addCell(green + String.valueOf(item.getItemPrice_out_a()));
-            table.addCell(green + String.valueOf(item.getItemPrice_out_b()));
-            table.addCell(green + String.valueOf(item.getItemPrice_out_c()));
-            table.addCell(green + (item.getStatus() ? "Active" : "Inactive") + reset);
+            table.addCell(blue + String.valueOf(item.getItemId()), cellStyle);
+            table.addCell(green + item.getItemCode(), cellStyle);
+            table.addCell(green + item.getItemDescription(), cellStyle);
+            table.addCell(green + item.getItemUnit(), cellStyle);
+            table.addCell(green + String.valueOf(item.getQty()), cellStyle);
+            table.addCell(green + String.valueOf(item.getItemPrice()), cellStyle);
+            table.addCell(green + String.valueOf(item.getItemPrice_out_a()), cellStyle);
+            table.addCell(green + String.valueOf(item.getItemPrice_out_b()), cellStyle);
+            table.addCell(green + String.valueOf(item.getItemPrice_out_c()), cellStyle);
+            table.addCell(green + (item.getStatus() ? "Active" : "Inactive") + reset, cellStyle);
         }
 
         System.out.println(table.render());

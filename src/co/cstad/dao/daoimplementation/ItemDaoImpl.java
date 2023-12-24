@@ -214,12 +214,13 @@ public class ItemDaoImpl implements ItemDao {
     @Override
     public List<ItemDTO> select() {
         String sql = """
-                SELECT *, CAST( price as numeric ) as "pr",
-                CAST( price_a as numeric ) as "pr_a",
-                CAST( price_b as numeric ) as "pr_b",
-                CAST( price_c as numeric ) as "pr_c"
-                FROM item;
-                """;
+            SELECT *, CAST(price AS NUMERIC) AS "pr",
+            CAST(price_a AS NUMERIC) AS "pr_a",
+            CAST(price_b AS NUMERIC) AS "pr_b",
+            CAST(price_c AS NUMERIC) AS "pr_c"
+            FROM item
+            ORDER BY item_id ASC;
+            """;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();

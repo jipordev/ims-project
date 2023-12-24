@@ -3,6 +3,7 @@ package co.cstad.view;
 import co.cstad.model.InvoiceDTO;
 import co.cstad.model.ItemDTO;
 import org.nocrala.tools.texttablefmt.BorderStyle;
+import org.nocrala.tools.texttablefmt.CellStyle;
 import org.nocrala.tools.texttablefmt.ShownBorders;
 import org.nocrala.tools.texttablefmt.Table;
 
@@ -11,7 +12,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Scanner;
 
-public class InvoiceView {
+public class InvoiceView implements BoxBorder {
+    private static Scanner scanner = new Scanner(System.in);
 
 
     public static InvoiceDTO collectNewInvoiceInformation() {
@@ -41,7 +43,7 @@ public class InvoiceView {
     }
 
 
-//    public static InvoiceDTO collectNewInvoiceInformation(Long id) {
+    //    public static InvoiceDTO collectNewInvoiceInformation(Long id) {
 //        InvoiceDTO newInvoice = new InvoiceDTO();
 //        newInvoice.setInvoiceId(id);
 //        newInvoice.setInvoiceNo("CSTAD" + id.toString());
@@ -52,23 +54,28 @@ public class InvoiceView {
 //        return newInvoice;
 //    }
     public static void printInvoiceDetails(Collection<InvoiceDTO> invoices) {
-        Table table = new Table(7, BorderStyle.UNICODE_BOX_DOUBLE_BORDER, ShownBorders.ALL);
-        table.addCell("   Invoice ID   ");
-        table.addCell("   Invoice No   ");
-        table.addCell("   Customer ID   ");
-        table.addCell("   Discount   ");
-        table.addCell("   IS Cancelled   ");
-        table.addCell("   Paid Payment   ");
-        table.addCell("   Status   ");
+        Table table = new Table(6, BorderStyle.UNICODE_BOX_DOUBLE_BORDER, ShownBorders.ALL);
+        CellStyle cellStyle = new CellStyle(CellStyle.HorizontalAlign.center);
+        table.setColumnWidth(0, 15, 25);
+        table.setColumnWidth(1, 20, 25);
+        table.setColumnWidth(2, 20, 25);
+        table.setColumnWidth(3, 20, 25);
+        table.setColumnWidth(4, 20, 25);
+        table.setColumnWidth(5, 20, 25);
+        table.addCell(yellow + "Invoice ID", cellStyle);
+        table.addCell(yellow + "Invoice No", cellStyle);
+        table.addCell(yellow + "Discount", cellStyle);
+        table.addCell(yellow + "IS Cancelled", cellStyle);
+        table.addCell(yellow + "Paid Payment", cellStyle);
+        table.addCell(yellow + "Status", cellStyle);
 
         for (InvoiceDTO invoice : invoices) {
-            table.addCell("   " + String.valueOf(invoice.getInvoiceId()) + "   ");
-            table.addCell("   " + invoice.getInvoiceNo() + "   ");
-            table.addCell("   " + invoice.getCustomer().getCustomersId() + "   ");
-            table.addCell("   " + invoice.getDiscount() + "   ");
-            table.addCell("   " + invoice.getCancelled() + "   ");
-            table.addCell("   " + invoice.getPaid() + "   ");
-            table.addCell("   " + (invoice.getStatus() ? "Active" : "Inactive") + "   ");
+            table.addCell(green + String.valueOf(invoice.getInvoiceId()), cellStyle);
+            table.addCell(green + invoice.getInvoiceNo(), cellStyle);
+            table.addCell(green + invoice.getDiscount(), cellStyle);
+            table.addCell(green + invoice.getCancelled(), cellStyle);
+            table.addCell(green + invoice.getPaid(), cellStyle);
+            table.addCell(green + (invoice.getStatus() ? "Active" : "Inactive"), cellStyle);
         }
         System.out.println(table.render());
     }

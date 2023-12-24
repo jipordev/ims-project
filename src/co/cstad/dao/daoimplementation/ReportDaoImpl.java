@@ -28,7 +28,8 @@ public class ReportDaoImpl implements ReportDao {
                 CAST( price_a as numeric ) as "pr_a",
                 CAST( price_b as numeric ) as "pr_b",
                 CAST( price_c as numeric ) as "pr_c"
-                FROM item; 
+                FROM item
+                ORDER BY item_id ASC
                 """;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -62,7 +63,8 @@ public class ReportDaoImpl implements ReportDao {
                 SELECT si.stock_in_id, si.qty,si.item_id, si.stock_in_date, CAST(si.price_in AS numeric) AS "pr"
                 FROM stock_in AS si
                 INNER JOIN item AS i
-                ON si.item_id = i.item_id;
+                ON si.item_id = i.item_id
+                ORDER BY si.stock_in_id ASC
                 """;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -91,7 +93,8 @@ public class ReportDaoImpl implements ReportDao {
                 FROM stock_out AS so
                 INNER JOIN item AS i
                 ON so.item_id = i.item_id
-        """;
+                ORDER BY so.stock_out_id ASC
+                """;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -207,7 +210,8 @@ public class ReportDaoImpl implements ReportDao {
                 ON i.item_id = ad.item_id
                 INNER JOIN invoice AS inv
                 ON ad.invoice_id = inv.invoice_id
-                WHERE inv.is_cancelled = 'f';
+                WHERE inv.is_cancelled = 'f'
+                ORDER BY i.item_id ASC
                 """;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);

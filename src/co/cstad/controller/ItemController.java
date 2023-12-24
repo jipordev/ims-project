@@ -203,9 +203,9 @@ public class ItemController {
                 BigDecimal newItemPrice = new BigDecimal(scanner.nextLine());
 
                 existingItem.setItemPrice(newItemPrice);
-                existingItem.setItemPrice_out_a(newItemPrice.multiply(new BigDecimal("0.93")));
+                existingItem.setItemPrice_out_a(newItemPrice.multiply(new BigDecimal("0.97")));
                 existingItem.setItemPrice_out_b(newItemPrice.multiply(new BigDecimal("0.95")));
-                existingItem.setItemPrice_out_c(newItemPrice.multiply(new BigDecimal("0.97")));
+                existingItem.setItemPrice_out_c(newItemPrice.multiply(new BigDecimal("0.93")));
 
                 // Call the service to update the item
                 ItemDTO updatedItem = itemService.updateById(existingItem);

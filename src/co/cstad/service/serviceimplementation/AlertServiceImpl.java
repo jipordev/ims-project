@@ -9,23 +9,15 @@ import co.cstad.util.Singleton;
 import java.util.List;
 
 public class AlertServiceImpl implements AlertService {
-    private static AlertDaoImpl alertDaoImpl;
+    private static AlertDao alertDaoImpl;
 
     public  AlertServiceImpl(){
         alertDaoImpl=Singleton.alertDao();
-    private final AlertDao alertDao;
-
-    public  AlertServiceImpl(){
-        alertDao = Singleton.alertDao();
     }
 
 
     @Override
     public List<AlertDTO> selectStockAlertReport() {
         return alertDaoImpl.selectStockAlertReport();
-    }
-}
-
-        return alertDao.selectStockAlertReport();
     }
 }

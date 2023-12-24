@@ -38,9 +38,8 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     @Override
-    public InvoiceDTO updateById(ItemDTO item) {
-        // Implement update logic
-        return null;
+    public InvoiceDTO updateById(InvoiceDTO invoice) {
+        return invoiceDao.updateById(invoice);
     }
 
     @Override

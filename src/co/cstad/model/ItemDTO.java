@@ -15,6 +15,24 @@ public class ItemDTO {
     private BigDecimal itemPrice_out_c;
     private Integer qty;
     private Boolean status;
+    private StockInDTO stockInDTO;
+    private StockOutDTO stockOutDTO;
+
+    public StockInDTO getStockInDTO() {
+        return stockInDTO;
+    }
+
+    public void setStockInDTO(StockInDTO stockInDTO) {
+        this.stockInDTO = stockInDTO;
+    }
+
+    public StockOutDTO getStockOutDTO() {
+        return stockOutDTO;
+    }
+
+    public void setStockOutDTO(StockOutDTO stockOutDTO) {
+        this.stockOutDTO = stockOutDTO;
+    }
 
     public BigDecimal getItemPrice() {
         return itemPrice;

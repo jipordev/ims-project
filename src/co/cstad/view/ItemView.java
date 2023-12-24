@@ -16,7 +16,7 @@ import java.util.Scanner;
 import static co.cstad.view.BoxBorder.*;
 
 public class ItemView {
-    private static Scanner scanner = new Scanner(System.in);
+    private final static Scanner scanner = Singleton.scanner();
     private static ItemService itemService;
     static {
         itemService = Singleton.itemService();

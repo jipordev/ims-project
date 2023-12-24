@@ -1,8 +1,7 @@
 package co.cstad.service.serviceimplementation;
 
 import co.cstad.dao.daoimplementation.ReportDaoImpl;
-import co.cstad.model.ItemDTO;
-import co.cstad.model.ReportDTO;
+import co.cstad.model.*;
 import co.cstad.service.ReportService;
 import co.cstad.util.Singleton;
 
@@ -15,43 +14,44 @@ public class ReportServiceImpl implements ReportService {
         reportDao = Singleton.getReportDao();
     }
 
+
     @Override
     public List<ItemDTO> selectStockCount() {
         return reportDao.selectStockCount();
     }
-
     @Override
-    public List<ReportDTO> selectStockIn() {
+    public List<StockInDTO> selectStockIn() {
         return reportDao.selectStockIn();
     }
 
     @Override
-    public List<ReportDTO> selectStockOut() {
+    public List<StockOutDTO> selectStockOut() {
         return reportDao.selectStockOut();
     }
 
-    @Override
-    public List<ReportDTO> selectInvoiceDetail() {
-        return reportDao.selectInvoiceDetail();
-    }
+//    @Override
+//    public List<ReportDTO> selectInvoiceDetail() {
+//        return reportDao.selectInvoiceDetail();
+//    }
+//
+//    @Override
+//    public List<ReportDTO> selectInvoiceAdjustment() {
+//        return reportDao.selectInvoiceAdjustment();
+//    }
 
     @Override
-    public List<ReportDTO> selectInvoiceAdjustment() {
-        return reportDao.selectInvoiceAdjustment();
-    }
-
-    @Override
-    public List<ReportDTO> selectItemPriceHistory() {
+    public List<HistoryDTO> selectItemPriceHistory() {
         return reportDao.selectItemPriceHistory();
     }
 
     @Override
-    public List<ReportDTO> selectStockAlertReport() {
-        return reportDao.selectStockAlertReport();
+    public List<AdjustmentDTO> selectAdjustment() {
+        return reportDao.selectInvoiceAdjustment();
     }
 
+
     @Override
-    public List<ReportDTO> selectSummaryReport() {
+    public List<ItemDTO> selectSummaryReport() {
         return reportDao.selectSummaryReport();
     }
 

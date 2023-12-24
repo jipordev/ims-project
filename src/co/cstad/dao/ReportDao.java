@@ -13,7 +13,7 @@ public interface ReportDao {
     List<ItemDTO> selectStockCount();
     List<StockInDTO> selectStockIn();
     List<StockOutDTO> selectStockOut();
-    //List<ReportDTO> selectInvoiceDetail();
+    List<DetailDTO> selectInvoiceDetail();
     List<AdjustmentDTO> selectInvoiceAdjustment();
     List<HistoryDTO> selectItemPriceHistory();
     List<ItemDTO> selectSummaryReport();

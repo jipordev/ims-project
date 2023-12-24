@@ -138,6 +138,24 @@ public class Singleton {
         }
         return userService;
     }
+    public static InvoiceService invoiceService(){
+        if (invoiceService == null) {
+            invoiceService = new InvoiceServiceImpl();
+        }
+        return invoiceService;
+    }
+    public static InvoiceDaoImpl getInvoiceDao(){
+        if (invoiceDao == null) {
+            invoiceDao = new InvoiceDaoImpl();
+        }
+        return invoiceDao;
+    }
+    public static AlertService alertService(){
+        if(alertService==null){
+            alertService = new AlertServiceImpl();
+        }
+        return alertService;
+    }
     public static Scanner scanner(){
         if (scanner == null) {
             scanner = new Scanner(System.in);

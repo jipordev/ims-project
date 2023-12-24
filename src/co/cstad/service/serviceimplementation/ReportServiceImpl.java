@@ -29,10 +29,10 @@ public class ReportServiceImpl implements ReportService {
         return reportDao.selectStockOut();
     }
 
-//    @Override
-//    public List<ReportDTO> selectInvoiceDetail() {
-//        return reportDao.selectInvoiceDetail();
-//    }
+    @Override
+    public List<DetailDTO> selectInvoiceDetail() {
+        return reportDao.selectInvoiceDetail();
+    }
 //
 //    @Override
 //    public List<ReportDTO> selectInvoiceAdjustment() {

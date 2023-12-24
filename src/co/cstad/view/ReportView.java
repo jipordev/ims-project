@@ -97,27 +97,45 @@ public class ReportView implements BoxBorder {
         System.out.println(table.render());
     }
 
-    public static void invoiceDetail(Collection<ReportDTO> reports){
+    public static void invoiceDetail(Collection<DetailDTO> reports){
         System.out.println(yellow + "\t\tInvoice Details"+reset);
-        Table table = new Table(5, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
+        Table table = new Table(11, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
         table.setColumnWidth(0,15,20);
         table.setColumnWidth(1,15,20);
         table.setColumnWidth(2,15,20);
         table.setColumnWidth(3,15,20);
         table.setColumnWidth(4,15,20);
+        table.setColumnWidth(5,15,20);
+        table.setColumnWidth(6,15,20);
+        table.setColumnWidth(7,15,20);
+        table.setColumnWidth(8,15,20);
+        table.setColumnWidth(9,15,20);
+        table.setColumnWidth(10,15,20);
 
         table.addCell(" ".repeat(2)+ yellow + "Invoice_Detail_Id");
-        table.addCell(" ".repeat(2)+ yellow +"Qty");
-        table.addCell(" ".repeat(2)+ yellow +"Unit_Price");
-        table.addCell(" ".repeat(2)+ yellow +"Item_Id");
-        table.addCell(" ".repeat(2)+ yellow +"Invoice_Id" + reset);
+        table.addCell(" ".repeat(2)+ yellow +"Invoice_No");
+        table.addCell(" ".repeat(2)+ yellow +"Item_Code");
+        table.addCell(" ".repeat(2)+ yellow +"Description");
+        table.addCell(" ".repeat(2)+ yellow +"Customer_Name");
+        table.addCell(" ".repeat(2)+ yellow +"QTY");
+        table.addCell(" ".repeat(2)+ yellow +"Stock_Out_Date");
+        table.addCell(" ".repeat(2)+ yellow +"Payment_Name");
+        table.addCell(" ".repeat(2)+ yellow +"Is_Paid");
+        table.addCell(" ".repeat(2)+ yellow +"Is_Cancelled");
+        table.addCell(" ".repeat(2)+ yellow +"Status"+ reset);
 
-        for (ReportDTO report : reports) {
-            table.addCell("   " + report.getInvoiceDetailId() + "   ");
-            table.addCell("   " + report.getQty() + "   ");
-            table.addCell("   " + report.getUnitPrice()+ "   ");
-            table.addCell("   " + report.getItemId() + "   ");
-            table.addCell("   " + report.getInvoiceId()+ "   ");
+        for (DetailDTO report : reports) {
+            table.addCell("   " + report.getDetailId() + "   ");
+            table.addCell("   " + report.getInvoiceDTO().getInvoiceNo() + "   ");
+            table.addCell("   " + report.getItemDTO().getItemCode()+ "   ");
+            table.addCell("   " + report.getItemDTO().getItemDescription() + "   ");
+            table.addCell("   " + report.getCustomerDTO().getCustomerName()+ "   ");
+            table.addCell("   " + report.getStockOutDTO().getQtyOut());
+            table.addCell("   " + report.getStockOutDTO().getStockOutDate());
+            table.addCell("   " + report.getPaymentMethodDTO().getPaymentMethodName());
+            table.addCell("   " + report.getInvoiceDTO().getPaid());
+            table.addCell("   " + report.getInvoiceDTO().getCancelled());
+            table.addCell("   " + report.getItemDTO().getStatus());
         }
         System.out.println(table.render());
     }

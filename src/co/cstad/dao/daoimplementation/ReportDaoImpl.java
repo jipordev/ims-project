@@ -113,28 +113,77 @@ public class ReportDaoImpl implements ReportDao {
         return null;
     }
 
-//    @Override
-//    public List<ReportDTO> selectInvoiceDetail() {
-//        String sql = "SELECT * FROM invoice_detail";
-//        try {
-//            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-//            ResultSet resultSet = preparedStatement.executeQuery();
-//            List<ReportDTO> reportDTOS = new ArrayList<>();
-//            while (resultSet.next()) {
-//                ReportDTO reportDTO = new ReportDTO();
-//                reportDTO.setInvoiceDetailId(resultSet.getInt("invoice_detail_id"));
-//                reportDTO.setQty(resultSet.getInt("qty"));
-//                reportDTO.setUnitPrice(resultSet.getBigDecimal("unit_price"));
-//                reportDTO.setItemId(resultSet.getLong("item_id"));
-//                reportDTO.setInvoiceId(resultSet.getInt("invoice_id"));
-//                reportDTOS.add(reportDTO);
-//            }
-//            return reportDTOS;
-//        } catch (SQLException e) {
-//            System.out.println(e.getMessage());
-//        }
-//        return null;
-//    }
+    @Override
+    public List<DetailDTO> selectInvoiceDetail() {
+        String sql = """
+                SELECT ind.invoice_detail_id,
+                	inv.invoice_no,
+                    i.item_code,
+                    i.description,
+                	cus."name",
+                	CAST(so.qty AS numeric) AS qty,
+                	so.stock_out_date,
+                	pmd.payment_name,
+                	inv.is_paid,
+                    inv.is_cancelled,
+                    i.status
+                FROM item AS i
+                INNER JOIN invoice_detail AS ind ON i.item_id = ind.item_id
+                INNER JOIN invoice AS inv ON ind.invoice_id = inv.invoice_id
+                INNER JOIN customer AS cus ON cus.customer_id = inv.customer_id
+                INNER JOIN stock_out AS so ON so.stock_out_id = inv.stock_out_id
+                INNER JOIN payment AS pay ON pay.invoice_id = inv.invoice_id
+                INNER JOIN payment_methods AS pmd ON pmd.method_id = pay.payment_id
+                ORDER BY i.item_id ASC;
+                """;
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<DetailDTO> reportDTOS = new ArrayList<>();
+
+            while (resultSet.next()) {
+                DetailDTO report = new DetailDTO();
+                ItemDTO item = new ItemDTO();
+                CustomerDTO customer = new CustomerDTO();
+                StockOutDTO stockOut = new StockOutDTO();
+                PaymentDTO payment = new PaymentDTO();
+                PaymentMethodDTO paymentMethod = new PaymentMethodDTO();
+                InvoiceDTO invoice = new InvoiceDTO();
+
+                // Set values using correct aliases
+                report.setDetailId(resultSet.getLong("invoice_detail_id"));
+                invoice.setInvoiceNo(resultSet.getString("invoice_no"));
+                item.setItemCode(resultSet.getString("item_code"));
+                item.setItemDescription(resultSet.getString("description"));
+                customer.setCustomerName(resultSet.getString("name"));
+                stockOut.setQtyOut(resultSet.getInt("qty"));
+                stockOut.setStockOutDate(resultSet.getDate("stock_out_date"));
+                paymentMethod.setPaymentMethodName(resultSet.getString("payment_name"));
+                invoice.setPaid(resultSet.getBoolean("is_paid"));
+                invoice.setCancelled(resultSet.getBoolean("is_cancelled"));
+                item.setStatus(resultSet.getBoolean("status"));
+
+                // Set related objects
+                report.setItemDTO(item);
+                report.setCustomerDTO(customer);
+                report.setStockOutDTO(stockOut);
+                report.setPaymentDTO(payment);
+                report.setPaymentMethodDTO(paymentMethod);
+                report.setInvoiceDTO(invoice);
+
+
+                reportDTOS.add(report);
+            }
+
+            return reportDTOS;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return null;
+    }
+
 
     @Override
     public List<AdjustmentDTO> selectInvoiceAdjustment() {
@@ -158,7 +207,7 @@ public class ReportDaoImpl implements ReportDao {
                 ON i.item_id = ad.item_id
                 INNER JOIN invoice AS inv
                 ON ad.invoice_id = inv.invoice_id
-                WHERE inv.is_cancelled = 't';
+                WHERE inv.is_cancelled = 'f';
                 """;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);

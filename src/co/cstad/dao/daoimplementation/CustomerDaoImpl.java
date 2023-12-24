@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-public class CustomerDaoImpl implements CustomerDao, BoxBorder {
+public class CustomerDaoImpl implements CustomerDao {
     private final Connection connection;
 
     public CustomerDaoImpl() {

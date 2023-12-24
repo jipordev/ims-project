@@ -7,11 +7,11 @@ import co.cstad.controller.ReportController;
 import co.cstad.controller.UserController;
 import co.cstad.dao.AlertDao;
 import co.cstad.dao.daoimplementation.*;
+import co.cstad.model.AlertDTO;
 import co.cstad.service.*;
 import co.cstad.service.serviceimplementation.*;
-import co.cstad.service.userservice.UserAuthentication;
-import co.cstad.util.handle.Handle;
-import co.cstad.view.*;
+import co.cstad.view.MenuViewAdmin;
+import co.cstad.view.ReportView;
 
 import java.util.Scanner;
 
@@ -32,11 +32,20 @@ public class Singleton {
     private static UserDaoImpl userDao;
     private static ReportDaoImpl reportDao;
     private static InvoiceDaoImpl invoiceDao;
-    private static MenuView menuView;
     private static MenuViewAdmin menuViewAdmin;
     private static MenuViewReport menuViewReport;
     private static MenuViewManager menuViewManager;
     private static ReportView reportView;
+    private static AlertService alertService;
+    public static AlertDaoImpl alertDao;
+
+
+    public static AlertDaoImpl alertDao(){
+        if( alertDao==null){
+            alertDao = new AlertDaoImpl();
+        }
+        return alertDao;
+    }
     private static InvoiceView invoiceView;
     private static UserAuthentication userAuthentication;
     private static Handle handle;
@@ -138,6 +147,24 @@ public class Singleton {
         }
         return userService;
     }
+    public static InvoiceService invoiceService(){
+        if (invoiceService == null) {
+            invoiceService = new InvoiceServiceImpl();
+        }
+        return invoiceService;
+    }
+    public static InvoiceDaoImpl getInvoiceDao(){
+        if (invoiceDao == null) {
+            invoiceDao = new InvoiceDaoImpl();
+        }
+        return invoiceDao;
+    }
+    public static AlertService alertService(){
+        if(alertService==null){
+            alertService = new AlertServiceImpl();
+        }
+        return alertService;
+    }
     public static Scanner scanner(){
         if (scanner == null) {
             scanner = new Scanner(System.in);
@@ -193,7 +220,6 @@ public class Singleton {
         }
         return reportService;
     }
-
 
     private Singleton() {
         // Private constructor to prevent instantiation outside the class.

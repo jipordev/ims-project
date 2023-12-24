@@ -13,16 +13,44 @@ import java.util.Scanner;
 
 public class InvoiceView {
 
-    public static InvoiceDTO collectNewInvoiceInformation(Long id) {
+
+    public static InvoiceDTO collectNewInvoiceInformation() {
         InvoiceDTO newInvoice = new InvoiceDTO();
-        newInvoice.setInvoiceId(id);
-        newInvoice.setInvoiceNo("CSTAD" + id.toString());
-        newInvoice.setCancelled(false);
-        newInvoice.setStatus(true);
-        newInvoice.setPaid(true);
+
+        System.out.print("Enter invoice NO : ");
+        newInvoice.setInvoiceNo(scanner.nextLine());
+
+        System.out.print("Is the invoice cancelled ? (Enter 'y' for true, 'n' for false) : ");
+        newInvoice.setCancelled(scanner.nextLine().equalsIgnoreCase("y"));
+
+        System.out.print("Is the invoice active? (Enter 'y' for true, 'n' for false) : ");
+        newInvoice.setStatus(scanner.nextLine().equalsIgnoreCase("y"));
+
+        System.out.print("Is the invoice paid? (Enter 'y' for true, 'n' for false) : ");
+        newInvoice.setPaid(scanner.nextLine().equalsIgnoreCase("y"));
+
+        System.out.print("Enter customer id : ");
+        newInvoice.setCustomerId(scanner.nextLong());
+
+        System.out.print("Enter stockOut id : ");
+        newInvoice.setStockOutId(scanner.nextLong());
+        ItemDTO itemDTO = new ItemDTO();
+
 
         return newInvoice;
     }
+
+
+//    public static InvoiceDTO collectNewInvoiceInformation(Long id) {
+//        InvoiceDTO newInvoice = new InvoiceDTO();
+//        newInvoice.setInvoiceId(id);
+//        newInvoice.setInvoiceNo("CSTAD" + id.toString());
+//        newInvoice.setCancelled(false);
+//        newInvoice.setStatus(true);
+//        newInvoice.setPaid(true);
+//
+//        return newInvoice;
+//    }
     public static void printInvoiceDetails(Collection<InvoiceDTO> invoices) {
         Table table = new Table(7, BorderStyle.UNICODE_BOX_DOUBLE_BORDER, ShownBorders.ALL);
         table.addCell("   Invoice ID   ");

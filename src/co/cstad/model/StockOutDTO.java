@@ -4,11 +4,20 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class StockOutDTO {
+    private ItemDTO itemDTO;
     private Long stockOutID ;
     private Long itemId;
     private BigDecimal priceOut;
     private  Integer qtyOut;
     private Date stockOutDate;
+
+    public ItemDTO getItemDTO() {
+        return itemDTO;
+    }
+
+    public void setItemDTO(ItemDTO itemDTO) {
+        this.itemDTO = itemDTO;
+    }
 
     public Long getStockOutID() {
         return stockOutID;

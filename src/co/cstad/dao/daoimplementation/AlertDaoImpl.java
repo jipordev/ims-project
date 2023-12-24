@@ -22,10 +22,10 @@ public class AlertDaoImpl implements AlertDao {
     @Override
     public List<AlertDTO> selectStockAlertReport() {
         String sql = """
-                SELECT ga.alert_id , ga.qty_alert , i.qty , i.item_code , i.description
+                SELECT ga.alert_id , ga.qty_alert , i.qty , i.item_code , i.description ,i.unit,CAST( i.price as numeric ) as "pr",i.status
                 FROM group_alert ga
                 INNER JOIN item i ON ga.alert_id = i.alert_id
-                WHERE i.qty IS NOT NULL AND i.qty <= 20
+                WHERE i.qty IS NOT NULL AND i.qty < 30
             """;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -40,11 +40,13 @@ public class AlertDaoImpl implements AlertDao {
 
 
                 reportDTO.setAlertId(resultSet.getLong("alert_id"));
-                System.out.println("sa");
                 item.setQty(resultSet.getInt("qty"));
                 reportDTO.setQytAlert(item.getQty());
                 item.setItemCode(resultSet.getString("item_code"));
                 item.setItemDescription(resultSet.getString("description"));
+                item.setItemUnit(resultSet.getString("unit"));
+                item.setItemPrice(resultSet.getBigDecimal("pr"));
+                item.setStatus(resultSet.getBoolean("status"));
                 reportDTO.setItem(item);
 
                 reportDTOS.add(reportDTO);

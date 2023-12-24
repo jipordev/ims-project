@@ -2,6 +2,8 @@ package co.cstad.controller;
 
 import co.cstad.model.*;
 import co.cstad.service.AlertService;
+import co.cstad.model.*;
+import co.cstad.service.AlertService;
 import co.cstad.service.ItemService;
 import co.cstad.model.ItemDTO;
 import co.cstad.model.ReportDTO;
@@ -51,21 +53,25 @@ public class ReportController {
     }
 
     public void invoiceDetail(){
-        List<ReportDTO> reportDTOList = reportService.selectInvoiceDetail();
-        reportView.InvoiceDetail(reportDTOList);
+        List<DetailDTO> reportDTOList = reportService.selectInvoiceDetail();
+        reportView.invoiceDetail(reportDTOList);
     }
 
     public void invoiceAdjustment(){
-        List<ReportDTO> reportDTOList = reportService.selectInvoiceDetail();
-        reportView.InvoiceAdjustment(reportDTOList);
+        List<AdjustmentDTO> reportDTOList = reportService.selectAdjustment();
+        reportView.invoiceAdjustment(reportDTOList);
     }
 
+    public void itemPriceHistory(){
+        List<HistoryDTO> reportDTOList = reportService.selectItemPriceHistory();
+        reportView.itemPriceHistory(reportDTOList);
+    }
     public void stockAlert(){
         List<AlertDTO> reportDTOList = alertService.selectStockAlertReport();
         reportView.stockAlert(reportDTOList);
     }
     public void summaryReport(){
-        List<ReportDTO> reportDTOList = reportService.selectSummaryReport();
+        List<ItemDTO> reportDTOList = reportService.selectSummaryReport();
         reportView.summaryReport(reportDTOList);
     }
 }

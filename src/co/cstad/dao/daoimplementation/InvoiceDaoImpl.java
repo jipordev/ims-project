@@ -23,7 +23,36 @@ public class InvoiceDaoImpl implements InvoiceDao {
 
     @Override
     public InvoiceDTO insert(InvoiceDTO invoice) {
-        return null;
+        try {
+            String sql = """
+            INSERT INTO invoice (invoice_no, is_cancelled, status, is_paid,customer_id,stock_out_id) 
+            VALUES (?, ?, ?, ?, ?, ?)
+            """;
+            PreparedStatement pst = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+            pst.setString(1, invoice.getInvoiceNo());
+            pst.setBoolean(2, invoice.getCancelled());
+            pst.setBoolean(3, invoice.getStatus());
+            pst.setBoolean(4, invoice.getPaid());
+            pst.setLong(5,invoice.getCustomerId());
+            pst.setLong(6,invoice.getStockOutId());
+
+            int affectedRows = pst.executeUpdate();
+
+            if (affectedRows > 0) {
+                ResultSet generatedKeys = pst.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    invoice.setInvoiceId(generatedKeys.getLong(1));
+                }
+                generatedKeys.close();
+            }
+
+            pst.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return invoice;
     }
 
 //    @Override
@@ -81,6 +110,9 @@ public List<InvoiceDTO> select() {
 
     @Override
     public List<InvoiceDTO> selectByNo(String invoiceNo) {
+        List<InvoiceDTO> invoiceList = new ArrayList<>();
+
+    public List<InvoiceDTO> selectByNo(String invoiceNo) {
         String sql = "SELECT * FROM invoice WHERE invoice_no = ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -96,6 +128,9 @@ public List<InvoiceDTO> select() {
                 invoiceDTO.setCancelled(resultSet.getBoolean("is_cancelled"));
                 invoiceDTO.setPaid(resultSet.getBoolean("is_paid"));
 
+            while (rs.next()) {
+                invoiceList.add(mapResultSetToInvoice(rs));
+            }
                 // Handle customer_id
                 Long customerId = resultSet.getLong("customer_id");
                 CustomerDTO customerDTO = new CustomerDTO();
@@ -110,6 +145,8 @@ public List<InvoiceDTO> select() {
             // Handle the exception appropriately (e.g., log it or throw a custom exception)
             throw new RuntimeException("Error fetching invoices by invoice number from the database", e);
         }
+
+        return null;
     }
 
 
@@ -146,6 +183,7 @@ public List<InvoiceDTO> select() {
         invoice.setInvoiceId(rs.getLong("invoice_id"));
         invoice.setInvoiceNo(rs.getString("invoice_no"));
         invoice.setDiscount(rs.getBigDecimal("discount"));
+        invoice.setDiscount(rs.getDouble("discount"));
         invoice.setCancelled(rs.getBoolean("is_cancelled"));
         invoice.setStatus(rs.getBoolean("status"));
         invoice.setPaid(rs.getBoolean("is_paid"));

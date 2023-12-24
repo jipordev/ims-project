@@ -1,11 +1,10 @@
 package co.cstad.controller;
 import co.cstad.model.InvoiceDTO;
-import co.cstad.service.serviceimplementation.InvoiceServiceImpl;
 import co.cstad.view.InvoiceView;
 import co.cstad.view.MenuViewAdmin;
 import co.cstad.service.InvoiceService;
 import co.cstad.util.Singleton;
-import java.util.Collections;
+
 import java.util.List;
 
 public class InvoiceController {
@@ -17,6 +16,23 @@ public class InvoiceController {
         invoiceService = Singleton.invoiceService();
         menuViewAdmin = new MenuViewAdmin();
         invoiceView = new InvoiceView();
+    }
+
+    public InvoiceDTO newInvoice(){
+        InvoiceDTO newInvoice = InvoiceView.collectNewInvoiceInformation();
+        if (newInvoice != null) {
+            InvoiceDTO createdInvoice = invoiceService.insert(newInvoice);
+
+            if (createdInvoice != null) {
+                System.out.println("Item created successfully:");
+                return createdInvoice;
+            } else {
+                System.out.println("Failed to create the item.");
+            }
+        } else {
+            System.out.println("Invalid input for creating a new item.");
+        }
+        return null;
     }
 
     public void read() {
@@ -37,6 +53,12 @@ public class InvoiceController {
 //
 //        else {
 //            System.out.println("Invoice not found.");
-        }
+//        }
+    }
+
+
+
+
+
 
 }

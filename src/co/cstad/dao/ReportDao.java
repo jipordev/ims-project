@@ -1,10 +1,7 @@
 package co.cstad.dao;
 
 
-import co.cstad.model.HistoryDTO;
-import co.cstad.model.ItemDTO;
-import co.cstad.model.StockInDTO;
-import co.cstad.model.StockOutDTO;
+import co.cstad.model.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,8 +14,8 @@ public interface ReportDao {
     List<StockInDTO> selectStockIn();
     List<StockOutDTO> selectStockOut();
     //List<ReportDTO> selectInvoiceDetail();
-    //List<ReportDTO> selectInvoiceAdjustment();
+    List<AdjustmentDTO> selectInvoiceAdjustment();
     List<HistoryDTO> selectItemPriceHistory();
-    //List<ReportDTO> selectSummaryReport();
+    List<ItemDTO> selectSummaryReport();
 
 }

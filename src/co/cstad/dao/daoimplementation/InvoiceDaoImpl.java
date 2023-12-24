@@ -23,15 +23,18 @@ public class InvoiceDaoImpl implements InvoiceDao {
     @Override
     public InvoiceDTO insert(InvoiceDTO invoice) {
         try {
-            String sql = "INSERT INTO invoice (invoice_no, purchase_date, discount, is_cancelled, status, is_paid) VALUES (?, ?, ?, ?, ?, ?)";
+            String sql = """
+            INSERT INTO invoice (invoice_no, is_cancelled, status, is_paid,customer_id,stock_out_id) 
+            VALUES (?, ?, ?, ?, ?, ?)
+            """;
             PreparedStatement pst = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             pst.setString(1, invoice.getInvoiceNo());
-            pst.setDate(2, java.sql.Date.valueOf(invoice.getPurchaseDate()));
-            pst.setDouble(3, invoice.getDiscount());
-            pst.setBoolean(4, invoice.getCancelled());
-            pst.setBoolean(5, invoice.getStatus());
-            pst.setBoolean(6, invoice.getPaid());
+            pst.setBoolean(2, invoice.getCancelled());
+            pst.setBoolean(3, invoice.getStatus());
+            pst.setBoolean(4, invoice.getPaid());
+            pst.setLong(5,invoice.getCustomerId());
+            pst.setLong(6,invoice.getStockOutId());
 
             int affectedRows = pst.executeUpdate();
 
@@ -136,7 +139,7 @@ public class InvoiceDaoImpl implements InvoiceDao {
         InvoiceDTO invoice = new InvoiceDTO();
         invoice.setInvoiceId(rs.getLong("invoice_id"));
         invoice.setInvoiceNo(rs.getString("invoice_no"));
-        invoice.setDiscount(rs.getString("discount"));
+        invoice.setDiscount(rs.getDouble("discount"));
         invoice.setCancelled(rs.getBoolean("is_cancelled"));
         invoice.setStatus(rs.getBoolean("status"));
         invoice.setPaid(rs.getBoolean("is_paid"));

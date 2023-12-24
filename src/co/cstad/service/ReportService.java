@@ -11,6 +11,6 @@ public interface ReportService {
     List<StockInDTO> selectStockIn();
     List<StockOutDTO> selectStockOut();
     List<HistoryDTO> selectItemPriceHistory();
-
-    //List<ReportDTO> selectSummaryReport();
+    List<AdjustmentDTO> selectAdjustment();
+    List<ItemDTO> selectSummaryReport();
 }

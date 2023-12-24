@@ -49,11 +49,11 @@ public class ReportController {
 //        List<ReportDTO> reportDTOList = reportService.selectInvoiceDetail();
 //        reportView.InvoiceDetail(reportDTOList);
 //    }
-//
-//    public void invoiceAdjustment(){
-//        List<ReportDTO> reportDTOList = reportService.selectInvoiceDetail();
-//        reportView.InvoiceAdjustment(reportDTOList);
-//    }
+
+    public void invoiceAdjustment(){
+        List<AdjustmentDTO> reportDTOList = reportService.selectAdjustment();
+        reportView.InvoiceAdjustment(reportDTOList);
+    }
 
     public void itemPriceHistory(){
         List<HistoryDTO> reportDTOList = reportService.selectItemPriceHistory();
@@ -63,8 +63,8 @@ public class ReportController {
         List<AlertDTO> reportDTOList = alertService.selectStockAlertReport();
         reportView.stockAlert(reportDTOList);
     }
-//    public void summaryReport(){
-//        List<ReportDTO> reportDTOList = reportService.selectSummaryReport();
-//        reportView.summaryReport(reportDTOList);
-//    }
+    public void summaryReport(){
+        List<ItemDTO> reportDTOList = reportService.selectSummaryReport();
+        reportView.summaryReport(reportDTOList);
+    }
 }

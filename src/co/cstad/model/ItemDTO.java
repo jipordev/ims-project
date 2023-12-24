@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.time.Duration;
 
 public class ItemDTO {
+    private StockInDTO stockInDTO;
+    private StockOutDTO stockOutDTO;
     private Long itemId;
     private String itemCode;
     private String itemDescription;
@@ -105,5 +107,22 @@ public class ItemDTO {
 
     public void setAlert_id(Long alert_id) {
         this.alert_id = alert_id;
+    }
+
+
+    public StockInDTO getStockInDTO() {
+        return stockInDTO;
+    }
+
+    public void setStockInDTO(StockInDTO stockInDTO) {
+        this.stockInDTO = stockInDTO;
+    }
+
+    public StockOutDTO getStockOutDTO() {
+        return stockOutDTO;
+    }
+
+    public void setStockOutDTO(StockOutDTO stockOutDTO) {
+        this.stockOutDTO = stockOutDTO;
     }
 }

@@ -44,12 +44,16 @@ public class ReportServiceImpl implements ReportService {
         return reportDao.selectItemPriceHistory();
     }
 
+    @Override
+    public List<AdjustmentDTO> selectAdjustment() {
+        return reportDao.selectInvoiceAdjustment();
+    }
 
 
-//    @Override
-//    public List<ReportDTO> selectSummaryReport() {
-//        return reportDao.selectSummaryReport();
-//    }
+    @Override
+    public List<ItemDTO> selectSummaryReport() {
+        return reportDao.selectSummaryReport();
+    }
 
 
 }

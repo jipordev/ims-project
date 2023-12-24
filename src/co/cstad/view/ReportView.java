@@ -187,7 +187,7 @@ public class ReportView implements BoxBorder {
     }
 
     public static void itemPriceHistory(Collection<HistoryDTO> reports){
-        System.out.println(yellow + "\t\tInvoice Adjustment"+reset);
+        System.out.println(yellow + "\t\tItem Price History"+reset);
         Table table = new Table(4, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
         table.setColumnWidth(0,15,20);
         table.setColumnWidth(1,15,20);

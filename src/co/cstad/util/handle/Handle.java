@@ -426,6 +426,7 @@ public class Handle {
                     case 1 -> reportController.stockCountReport();
                     case 2 -> reportController.stockInReport();
                     case 3 -> reportController.stockOutReport();
+                    case 4 -> reportController.invoiceDetail();
                     case 5 -> reportController.invoiceAdjustment();
                     case 6 -> reportController.itemPriceHistory();
                     case 7 -> reportController.stockAlert();

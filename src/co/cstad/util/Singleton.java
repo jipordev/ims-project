@@ -48,23 +48,11 @@ public class Singleton {
         }
         return alertDao;
     }
-    public static AlertService alertService(){
-        if (alertService == null){
-            alertService = new AlertServiceImpl();
-        }
-        return alertService;
-    }
     public static InvoiceView invoiceView(){
         if (invoiceView == null){
             invoiceView = new InvoiceView();
         }
         return invoiceView;
-    }
-    public static InvoiceService invoiceService(){
-        if (invoiceService == null){
-            invoiceService = new InvoiceServiceImpl();
-        }
-        return invoiceService;
     }
     public static InvoiceDaoImpl invoiceDao(){
         if (invoiceDao == null){

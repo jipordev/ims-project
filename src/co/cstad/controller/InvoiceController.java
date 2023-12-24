@@ -37,7 +37,7 @@ public class InvoiceController {
             System.out.print("Enter Invoice id you want to return : ");
             Long id = Long.parseLong(scanner.nextLine());
 
-            InvoiceDTO existingInvoice = invoiceService.selectById(id);
+//            InvoiceDTO existingInvoice = invoiceService.selectById(id);
 
 
         } catch (StringInputException e){

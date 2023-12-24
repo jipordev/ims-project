@@ -1,7 +1,12 @@
 package co.cstad.view;
 
+import co.cstad.model.AlertDTO;
+import co.cstad.model.ItemDTO;
+import co.cstad.model.StockInDTO;
+import co.cstad.model.StockOutDTO;
 import co.cstad.model.*;
 import org.nocrala.tools.texttablefmt.BorderStyle;
+import org.nocrala.tools.texttablefmt.CellStyle;
 import org.nocrala.tools.texttablefmt.ShownBorders;
 import org.nocrala.tools.texttablefmt.Table;
 
@@ -17,177 +22,191 @@ public class ReportView implements BoxBorder {
             return;
         }
 
-        Table table = new Table(10, BorderStyle.UNICODE_BOX, ShownBorders.ALL);
-        table.addCell(yellow + "   Item ID   ");
-        table.addCell(yellow + "   Item Code   ");
-        table.addCell(yellow + "   Description   ");
-        table.addCell(yellow + "   Unit   ");
-        table.addCell(yellow + "   Quantity   ");
-        table.addCell(yellow + "   Price    ");
-        table.addCell(yellow + "   Price A   ");
-        table.addCell(yellow + "   Price B   ");
-        table.addCell(yellow + "   Price C   ");
-        table.addCell(yellow + "   Status   ");
+        Table table = new Table(10, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
+        CellStyle cellStyle = new CellStyle(CellStyle.HorizontalAlign.center);
+        table.setColumnWidth(0, 15, 25);
+        table.setColumnWidth(1, 20, 50);
+        table.setColumnWidth(2, 20, 50);
+        table.setColumnWidth(3, 20, 50);
+        table.setColumnWidth(4, 20, 50);
+        table.setColumnWidth(5, 20, 50);
+        table.setColumnWidth(6, 15, 25);
+        table.setColumnWidth(7, 20, 50);
+        table.setColumnWidth(8, 20, 50);
+        table.setColumnWidth(9, 20, 50);
+        table.addCell(yellow + "Item ID", cellStyle);
+        table.addCell(yellow + "Item Code", cellStyle);
+        table.addCell(yellow + "Description", cellStyle);
+        table.addCell(yellow + "Unit", cellStyle);
+        table.addCell(yellow + "Quantity", cellStyle);
+        table.addCell(yellow + "Price", cellStyle);
+        table.addCell(yellow + "Price A", cellStyle);
+        table.addCell(yellow + "Price B", cellStyle);
+        table.addCell(yellow + "Price C", cellStyle);
+        table.addCell(yellow + "Status", cellStyle);
 
         for (ItemDTO item : items) {
             if (item.getStatus() != null && item.getStatus()) {
-                table.addCell(green + "   " + String.valueOf(item.getItemId()) + "   ");
-                table.addCell(green + "   " + item.getItemCode() + "   ");
-                table.addCell(green + "   " + item.getItemDescription() + "   ");
-                table.addCell(green + "   " + item.getItemUnit() + "   ");
-                table.addCell(green + "   " + String.valueOf(item.getQty()) + "   ");
-                table.addCell(green + "   " + String.valueOf(item.getItemPrice()));
-                table.addCell(green + "   " + String.valueOf(item.getItemPrice_out_a()) + "   ");
-                table.addCell(green + "   " + String.valueOf(item.getItemPrice_out_b()) + "   ");
-                table.addCell(green + "   " + String.valueOf(item.getItemPrice_out_c()) + "   ");
-                table.addCell(green + "   " + (item.getStatus() ? "Active" : "Inactive") + "   ");
+                table.addCell(green + item.getItemId(), cellStyle);
+                table.addCell(green + item.getItemCode(), cellStyle);
+                table.addCell(green + item.getItemDescription(), cellStyle);
+                table.addCell(green + item.getItemUnit(), cellStyle);
+                table.addCell(green + String.valueOf(item.getQty()), cellStyle);
+                table.addCell(green + String.valueOf(item.getItemPrice()), cellStyle);
+                table.addCell(green + String.valueOf(item.getItemPrice_out_a()), cellStyle);
+                table.addCell(green + String.valueOf(item.getItemPrice_out_b()), cellStyle);
+                table.addCell(green + String.valueOf(item.getItemPrice_out_c()), cellStyle);
+                table.addCell(green + (item.getStatus() ? "Active" : "Inactive"), cellStyle);
             }
         }
 
         System.out.println(table.render());
-
     }
-    public static void stockInReport(Collection<StockInDTO> reports){
-        System.out.println(yellow + "\t\tStock In Report"+reset);
+    public static void stockInReport(Collection<StockInDTO> reports) {
+        System.out.println(yellow + "\t\tStock In Report" + reset);
         Table table = new Table(5, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
-        table.setColumnWidth(0,15,20);
-        table.setColumnWidth(1,15,20);
-        table.setColumnWidth(2,15,20);
-        table.setColumnWidth(3,15,20);
-        table.setColumnWidth(4,15,20);
+        CellStyle cellStyle = new CellStyle(CellStyle.HorizontalAlign.center);
+        table.setColumnWidth(0, 15, 20);
+        table.setColumnWidth(1, 15, 20);
+        table.setColumnWidth(2, 15, 20);
+        table.setColumnWidth(3, 15, 20);
+        table.setColumnWidth(4, 15, 20);
 
-        table.addCell(" ".repeat(2)+ yellow + "Stock_In_Id");
-        table.addCell(" ".repeat(2)+ yellow +"Item_Id");
-        table.addCell(" ".repeat(2)+ yellow +"Qty");
-        table.addCell(" ".repeat(2)+ yellow +"Price_In");
-        table.addCell(" ".repeat(2)+ yellow +"Stock_In_Date" + reset);
+        table.addCell(yellow+"Stock_In_Id", cellStyle);
+        table.addCell(yellow+"Item_Id", cellStyle);
+        table.addCell(yellow+"Qty", cellStyle);
+        table.addCell(yellow+"Price_In", cellStyle);
+        table.addCell(yellow+"Stock_In_Date", cellStyle);
 
         for (StockInDTO report : reports) {
-            table.addCell("   " + green + report.getStockInID() + "   ");
-            table.addCell("   " + green + report.getItemId() + "   ");
-            table.addCell("   " + green + report.getQtyIn() + "   ");
-            table.addCell("   " + green + report.getPriceIn() + "   ");
-            table.addCell("   " + green + report.getStockInDate() + "   " + reset);
+            table.addCell(green + report.getStockInID(), cellStyle);
+            table.addCell(green + report.getItemId(), cellStyle);
+            table.addCell(green + report.getQtyIn(), cellStyle);
+            table.addCell(green + report.getPriceIn(), cellStyle);
+            table.addCell(green + report.getStockInDate() + reset, cellStyle);
         }
         System.out.println(table.render());
     }
 
-    public static void stockOutReport(Collection<StockOutDTO> reports){
-        System.out.println(yellow + "\t\tStock Out Report"+reset);
+    public static void stockOutReport(Collection<StockOutDTO> reports) {
+        System.out.println(yellow + "\t\tStock Out Report" + reset);
         Table table = new Table(5, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
-        table.setColumnWidth(0,15,20);
-        table.setColumnWidth(1,15,20);
-        table.setColumnWidth(2,15,20);
-        table.setColumnWidth(3,15,20);
-        table.setColumnWidth(4,15,20);
+        CellStyle cellStyle = new CellStyle(CellStyle.HorizontalAlign.center);
+        table.setColumnWidth(0, 15, 20);
+        table.setColumnWidth(1, 15, 20);
+        table.setColumnWidth(2, 15, 20);
+        table.setColumnWidth(3, 15, 20);
+        table.setColumnWidth(4, 15, 20);
 
-        table.addCell(" ".repeat(2)+ yellow + "Stock_Out_Id");
-        table.addCell(" ".repeat(2)+ yellow +"Item_Id");
-        table.addCell(" ".repeat(2)+ yellow +"Qty");
-        table.addCell(" ".repeat(2)+ yellow +"Stock_Out_Date");
-        table.addCell(" ".repeat(2)+ yellow +"Price_Out" + reset);
+        table.addCell(yellow+"Stock_Out_Id", cellStyle);
+        table.addCell(yellow+"Item_Id", cellStyle);
+        table.addCell(yellow+"Qty", cellStyle);
+        table.addCell(yellow+"Stock_Out_Date", cellStyle);
+        table.addCell(yellow+"Price_Out", cellStyle);
 
         for (StockOutDTO report : reports) {
-            table.addCell("   " + green + report.getStockOutID() + "   ");
-            table.addCell("   " + green + report.getItemId() + "   ");
-            table.addCell("   " + green + report.getQtyOut() + "   ");
-            table.addCell("   " + green + report.getStockOutDate() + "   ");
-            table.addCell("   " + green + report.getPriceOut() + "   " + reset);
+            table.addCell(green + report.getStockOutID(), cellStyle);
+            table.addCell(green + report.getItemId(), cellStyle);
+            table.addCell(green + report.getQtyOut(), cellStyle);
+            table.addCell(green + report.getStockOutDate(), cellStyle);
+            table.addCell(green + report.getPriceOut() + reset, cellStyle);
         }
         System.out.println(table.render());
     }
 
-    public static void invoiceDetail(Collection<DetailDTO> reports){
-        System.out.println(yellow + "\t\tInvoice Details"+reset);
+    public static void invoiceDetail(Collection<DetailDTO> reports) {
+        System.out.println(yellow + "\t\tInvoice Details" + reset);
         Table table = new Table(11, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
-        table.setColumnWidth(0,15,20);
-        table.setColumnWidth(1,15,20);
-        table.setColumnWidth(2,15,20);
-        table.setColumnWidth(3,15,20);
-        table.setColumnWidth(4,15,20);
-        table.setColumnWidth(5,15,20);
-        table.setColumnWidth(6,15,20);
-        table.setColumnWidth(7,15,20);
-        table.setColumnWidth(8,15,20);
-        table.setColumnWidth(9,15,20);
-        table.setColumnWidth(10,15,20);
+        CellStyle cellStyle = new CellStyle(CellStyle.HorizontalAlign.center);
+        table.setColumnWidth(0, 15, 20);
+        table.setColumnWidth(1, 15, 20);
+        table.setColumnWidth(2, 15, 20);
+        table.setColumnWidth(3, 15, 20);
+        table.setColumnWidth(4, 15, 20);
+        table.setColumnWidth(5, 15, 20);
+        table.setColumnWidth(6, 15, 20);
+        table.setColumnWidth(7, 15, 20);
+        table.setColumnWidth(8, 15, 20);
+        table.setColumnWidth(9, 15, 20);
+        table.setColumnWidth(10, 15, 20);
 
-        table.addCell(" ".repeat(2)+ yellow + "Invoice_Detail_Id");
-        table.addCell(" ".repeat(2)+ yellow +"Invoice_No");
-        table.addCell(" ".repeat(2)+ yellow +"Item_Code");
-        table.addCell(" ".repeat(2)+ yellow +"Description");
-        table.addCell(" ".repeat(2)+ yellow +"Customer_Name");
-        table.addCell(" ".repeat(2)+ yellow +"QTY");
-        table.addCell(" ".repeat(2)+ yellow +"Stock_Out_Date");
-        table.addCell(" ".repeat(2)+ yellow +"Payment_Name");
-        table.addCell(" ".repeat(2)+ yellow +"Is_Paid");
-        table.addCell(" ".repeat(2)+ yellow +"Is_Cancelled");
-        table.addCell(" ".repeat(2)+ yellow +"Status"+ reset);
+        table.addCell(yellow+"Invoice_Detail_Id", cellStyle);
+        table.addCell(yellow+"Invoice_No", cellStyle);
+        table.addCell(yellow+"Item_Code", cellStyle);
+        table.addCell(yellow+"Description", cellStyle);
+        table.addCell(yellow+"Customer_Name", cellStyle);
+        table.addCell(yellow+"QTY", cellStyle);
+        table.addCell(yellow+"Stock_Out_Date", cellStyle);
+        table.addCell(yellow+"Payment_Name", cellStyle);
+        table.addCell(yellow+"Is_Paid", cellStyle);
+        table.addCell(yellow+"Is_Cancelled", cellStyle);
+        table.addCell(yellow+"Status", cellStyle);
 
         for (DetailDTO report : reports) {
-            table.addCell("   " + report.getDetailId() + "   ");
-            table.addCell("   " + report.getInvoiceDTO().getInvoiceNo() + "   ");
-            table.addCell("   " + report.getItemDTO().getItemCode()+ "   ");
-            table.addCell("   " + report.getItemDTO().getItemDescription() + "   ");
-            table.addCell("   " + report.getCustomerDTO().getCustomerName()+ "   ");
-            table.addCell("   " + report.getStockOutDTO().getQtyOut());
-            table.addCell("   " + report.getStockOutDTO().getStockOutDate());
-            table.addCell("   " + report.getPaymentMethodDTO().getPaymentMethodName());
-            table.addCell("   " + report.getInvoiceDTO().getPaid());
-            table.addCell("   " + report.getInvoiceDTO().getCancelled());
-            table.addCell("   " + report.getItemDTO().getStatus());
+            table.addCell(green + report.getDetailId(), cellStyle);
+            table.addCell(green + report.getInvoiceDTO().getInvoiceNo(),cellStyle);
+            table.addCell(green + report.getItemDTO().getItemCode(),cellStyle);
+            table.addCell(green + report.getItemDTO().getItemDescription(),cellStyle);
+            table.addCell(green + report.getCustomerDTO().getCustomerName(),cellStyle);
+            table.addCell(green + report.getStockOutDTO().getQtyOut(),cellStyle);
+            table.addCell(green + report.getStockOutDTO().getStockOutDate(),cellStyle);
+            table.addCell(green + report.getPaymentMethodDTO().getPaymentMethodName(),cellStyle);
+            table.addCell(green + report.getInvoiceDTO().getPaid(),cellStyle);
+            table.addCell(green + report.getInvoiceDTO().getCancelled(),cellStyle);
+            table.addCell(green + report.getItemDTO().getStatus(),cellStyle);
         }
         System.out.println(table.render());
     }
 
-    public static void invoiceAdjustment(Collection<AdjustmentDTO> reports){
-        System.out.println(yellow + "\t\tInvoice Adjustment"+reset);
+    public static void invoiceAdjustment(Collection<AdjustmentDTO> reports) {
+        System.out.println(yellow + "\t\tInvoice Adjustment" + reset);
         Table table = new Table(12, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
-        table.setColumnWidth(0,15,20);
-        table.setColumnWidth(1,15,20);
-        table.setColumnWidth(2,15,20);
-        table.setColumnWidth(3,15,20);
-        table.setColumnWidth(4,15,20);
-        table.setColumnWidth(5,15,20);
-        table.setColumnWidth(6,15,20);
-        table.setColumnWidth(7,15,20);
-        table.setColumnWidth(8,15,20);
-        table.setColumnWidth(9,15,20);
-        table.setColumnWidth(10,15,25);
-        table.setColumnWidth(11,15,20);
+        CellStyle cellStyle = new CellStyle(CellStyle.HorizontalAlign.center);
+        table.setColumnWidth(0, 15, 20);
+        table.setColumnWidth(1, 15, 20);
+        table.setColumnWidth(2, 15, 20);
+        table.setColumnWidth(3, 15, 20);
+        table.setColumnWidth(4, 15, 20);
+        table.setColumnWidth(5, 15, 20);
+        table.setColumnWidth(6, 15, 20);
+        table.setColumnWidth(7, 15, 20);
+        table.setColumnWidth(8, 15, 20);
+        table.setColumnWidth(9, 15, 20);
+        table.setColumnWidth(10, 15, 25);
+        table.setColumnWidth(11, 15, 22);
 
-        table.addCell(" ".repeat(2)+ yellow + "Invoice_Adj_Id");
-        table.addCell(" ".repeat(2) + yellow + "Item Code");
-        table.addCell(" ".repeat(2) + yellow + "Description");
-        table.addCell(" ".repeat(2) + yellow + " QTY ");
-        table.addCell(" ".repeat(2) + yellow + " Unt ");
-        table.addCell(" ".repeat(2) + yellow + " Price " );
-        table.addCell(" ".repeat(2) + yellow + "Price A ");
-        table.addCell(" ".repeat(2) + yellow + "Price B ");
-        table.addCell(" ".repeat(2) + yellow + "Price C ");
-        table.addCell(" ".repeat(2) + yellow + " Status");
-        table.addCell(" ".repeat(2)+ yellow +"Adjustment Date");
-        table.addCell(" ".repeat(2)+ yellow +" Cancelled " + reset);
+        table.addCell(yellow + "Invoice_Adj_Id", cellStyle);
+        table.addCell(yellow + "Item Code", cellStyle);
+        table.addCell(yellow + "Description", cellStyle);
+        table.addCell(yellow + "QTY", cellStyle);
+        table.addCell(yellow + "Unt", cellStyle);
+        table.addCell(yellow + "Price", cellStyle);
+        table.addCell(yellow + "Price A", cellStyle);
+        table.addCell(yellow + "Price B", cellStyle);
+        table.addCell(yellow + "Price C", cellStyle);
+        table.addCell(yellow + "Status", cellStyle);
+        table.addCell(yellow + "Adjustment Date", cellStyle);
+        table.addCell(yellow + "Cancelled" + reset, cellStyle);
 
         for (AdjustmentDTO report : reports) {
-            table.addCell("   " + report.getAdjustmentId() + "   ");
-            table.addCell("   " + report.getItemDTO().getItemCode() + "   ");
-            table.addCell("   " + report.getItemDTO().getItemDescription() + "   ");
-            table.addCell("   " + report.getItemDTO().getQty() + "   ");
-            table.addCell("   " + report.getItemDTO().getItemUnit() + "   ");
-            table.addCell("   " + report.getItemDTO().getItemPrice() + "   ");
-            table.addCell("   " + report.getItemDTO().getItemPrice_out_a() + "   ");
-            table.addCell("   " + report.getItemDTO().getItemPrice_out_b() + "   ");
-            table.addCell("   " + report.getItemDTO().getItemPrice_out_c() + "   ");
-            table.addCell("   " + (report.getItemDTO().getStatus() ? "Active" : "Inactive") + "   ");
-            table.addCell("   " + report.getReturnDate() + "   ");
-            table.addCell("   " + (report.getInvoiceDTO().getCancelled() ? " Cancelled" :" Don't Cancelled") + "   ");
+            table.addCell(green + report.getAdjustmentId(), cellStyle);
+            table.addCell(green + report.getItemDTO().getItemCode(), cellStyle);
+            table.addCell(green + report.getItemDTO().getItemDescription(), cellStyle);
+            table.addCell(green + report.getItemDTO().getQty(), cellStyle);
+            table.addCell(green + report.getItemDTO().getItemUnit(), cellStyle);
+            table.addCell(green + report.getItemDTO().getItemPrice(), cellStyle);
+            table.addCell(green + report.getItemDTO().getItemPrice_out_a(), cellStyle);
+            table.addCell(green + report.getItemDTO().getItemPrice_out_b(), cellStyle);
+            table.addCell(green + report.getItemDTO().getItemPrice_out_c(), cellStyle);
+            table.addCell(green + (report.getItemDTO().getStatus() ? "Active" : "Inactive"), cellStyle);
+            table.addCell(green + report.getReturnDate(), cellStyle);
+            table.addCell(green + (report.getInvoiceDTO().getCancelled() ? "Cancelled" : "Don't Cancelled"), cellStyle);
         }
         System.out.println(table.render());
     }
 
     public static void itemPriceHistory(Collection<HistoryDTO> reports){
-        System.out.println(yellow + "\t\tItem Price History"+reset);
+        System.out.println(yellow + "\t\tInvoice Adjustment"+reset);
         Table table = new Table(4, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
         table.setColumnWidth(0,15,20);
         table.setColumnWidth(1,15,20);
@@ -200,10 +219,10 @@ public class ReportView implements BoxBorder {
         table.addCell(" ".repeat(2)+ yellow +"Item_Id");
 
         for (HistoryDTO report : reports) {
-            table.addCell("   " + report.getItemHistoryId() + "   ");
-            table.addCell("   " + report.getPrice()+ "   ");
-            table.addCell("   " + report.getUpdatedAt()+ "   ");
-            table.addCell("   " + report.getItem() + "   ");
+            table.addCell("   " +green + report.getItemHistoryId() + "   ");
+            table.addCell("   " +green + report.getPrice()+ "   ");
+            table.addCell("   " +green + report.getUpdatedAt()+ "   ");
+            table.addCell("   " +green + report.getItem() + "   ");
         }
         System.out.println(table.render());
     }
@@ -215,6 +234,7 @@ public class ReportView implements BoxBorder {
         }
         System.out.println(yellow + "\t\tStock Alert Report" + reset);
         Table table = new Table(7, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
+        CellStyle cellStyle = new CellStyle(CellStyle.HorizontalAlign.center);
         table.setColumnWidth(0, 15, 20);
         table.setColumnWidth(1, 15, 20);
         table.setColumnWidth(2, 15, 20);
@@ -223,24 +243,23 @@ public class ReportView implements BoxBorder {
         table.setColumnWidth(5, 15, 20);
         table.setColumnWidth(6, 15, 20);
 
-        table.addCell(" ".repeat(2) + yellow + "Alert_Id");
-        table.addCell(" ".repeat(2) + yellow + "Item Code");
-        table.addCell(" ".repeat(2) + yellow + "Description");
-        table.addCell(" ".repeat(2) + yellow + "Qty");
-        table.addCell(" ".repeat(2) + yellow + "Unit");
-        table.addCell(" ".repeat(2) + yellow + " Item Price ");
-        table.addCell(" ".repeat(2) + yellow + "Status");
+        table.addCell(yellow + "Alert_Id", cellStyle);
+        table.addCell(yellow + "Item Code", cellStyle);
+        table.addCell(yellow + "Description", cellStyle);
+        table.addCell(yellow + "Qty", cellStyle);
+        table.addCell(yellow + "Unit", cellStyle);
+        table.addCell(yellow + "Item Price", cellStyle);
+        table.addCell(yellow + "Status", cellStyle);
 
         for (AlertDTO report : reports) {
-            if ( report.getItem().getStatus()) {
-
-                table.addCell("   " + "A" + report.getAlertId() + "   ");
-                table.addCell("   " + report.getItem().getItemCode());
-                table.addCell(" ".repeat(2) + report.getItem().getItemDescription());
-                table.addCell("   " + report.getQytAlert());
-                table.addCell("   " + report.getItem().getItemUnit());
-                table.addCell("   " + report.getItem().getItemPrice());
-                table.addCell("   " + (report.getItem().getStatus() ? "Active" : "Inactive") + "   ");
+            if (report.getItem().getStatus()) {
+                table.addCell(green + "A" + report.getAlertId(), cellStyle);
+                table.addCell(green + report.getItem().getItemCode(), cellStyle);
+                table.addCell(green + report.getItem().getItemDescription(), cellStyle);
+                table.addCell(green + report.getQytAlert(), cellStyle);
+                table.addCell(green + report.getItem().getItemUnit(), cellStyle);
+                table.addCell(green + report.getItem().getItemPrice(), cellStyle);
+                table.addCell(green + (report.getItem().getStatus() ? "Active" : "Inactive"), cellStyle);
             }
         }
 
@@ -255,6 +274,7 @@ public class ReportView implements BoxBorder {
 
         System.out.println(yellow + "\t\tSummary Report" + reset);
         Table table = new Table(12, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
+        CellStyle cellStyle = new CellStyle(CellStyle.HorizontalAlign.center);
         table.setColumnWidth(0, 15, 20);
         table.setColumnWidth(1, 15, 20);
         table.setColumnWidth(2, 15, 20);
@@ -268,34 +288,33 @@ public class ReportView implements BoxBorder {
         table.setColumnWidth(10, 15, 22);
         table.setColumnWidth(11, 15, 20);
 
-
-        table.addCell(" ".repeat(2) + yellow + "Item_ID");
-        table.addCell(" ".repeat(2) + yellow + "Item Code");
-        table.addCell(" ".repeat(2) + yellow + "Description");
-        table.addCell(" ".repeat(2) + yellow + " QTY ");
-        table.addCell(" ".repeat(2) + yellow + " Unt ");
-        table.addCell(" ".repeat(2) + yellow + " Price " );
-        table.addCell(" ".repeat(2) + yellow + "Price A ");
-        table.addCell(" ".repeat(2) + yellow + "Price B ");
-        table.addCell(" ".repeat(2) + yellow + "Price C ");
-        table.addCell(" ".repeat(2) + yellow + "Total Stock In QTY");
-        table.addCell(" ".repeat(2) + yellow + "Total Stock Out QTY");
-        table.addCell(" ".repeat(2) + yellow + " Status");
+        table.addCell(yellow + "Item_ID", cellStyle);
+        table.addCell(yellow + "Item Code", cellStyle);
+        table.addCell(yellow + "Description", cellStyle);
+        table.addCell(yellow + "QTY", cellStyle);
+        table.addCell(yellow + "Unt", cellStyle);
+        table.addCell(yellow + "Price", cellStyle);
+        table.addCell(yellow + "Price A", cellStyle);
+        table.addCell(yellow + "Price B", cellStyle);
+        table.addCell(yellow + "Price C", cellStyle);
+        table.addCell(yellow + "Total Stock In QTY", cellStyle);
+        table.addCell(yellow + "Total Stock Out QTY", cellStyle);
+        table.addCell(yellow + "Status", cellStyle);
 
 
         for (ItemDTO item : itemDTOS) {
-            table.addCell("   " + item.getItemId() + "   ");
-            table.addCell("   " + item.getItemCode() + "   ");
-            table.addCell("   " + item.getItemDescription() + "   ");
-            table.addCell("   " + item.getQty() + "   ");
-            table.addCell("   " + item.getItemUnit() + "   ");
-            table.addCell("   " + item.getItemPrice() + "   ");
-            table.addCell("   " + item.getItemPrice_out_a() + "   ");
-            table.addCell("   " + item.getItemPrice_out_b() + "   ");
-            table.addCell("   " + item.getItemPrice_out_c() + "   ");
-            table.addCell("   " + item.getStockInDTO().getQtyIn() + "   ");
-            table.addCell("   " + item.getStockOutDTO().getQtyOut() + "   ");
-            table.addCell("   " + (item.getStatus() ? "Active" : "Inactive") + "   ");
+            table.addCell(green + item.getItemId(), cellStyle);
+            table.addCell(green + item.getItemCode(), cellStyle);
+            table.addCell(green + item.getItemDescription(), cellStyle);
+            table.addCell(green + item.getQty(), cellStyle);
+            table.addCell(green + item.getItemUnit(), cellStyle);
+            table.addCell(green + item.getItemPrice(), cellStyle);
+            table.addCell(green + item.getItemPrice_out_a(), cellStyle);
+            table.addCell(green + item.getItemPrice_out_b(), cellStyle);
+            table.addCell(green + item.getItemPrice_out_c(), cellStyle);
+            table.addCell(green + item.getStockInDTO().getQtyIn(), cellStyle);
+            table.addCell(green + item.getStockOutDTO().getQtyOut(), cellStyle);
+            table.addCell(green + (item.getStatus() ? "Active" : "Inactive"), cellStyle);
         }
 
         System.out.println(table.render());

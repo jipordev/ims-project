@@ -3,6 +3,7 @@ package co.cstad.view;
 import co.cstad.model.UserDTO;
 import co.cstad.util.Singleton;
 import org.nocrala.tools.texttablefmt.BorderStyle;
+import org.nocrala.tools.texttablefmt.CellStyle;
 import org.nocrala.tools.texttablefmt.ShownBorders;
 import org.nocrala.tools.texttablefmt.Table;
 
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.Scanner;
 
 
-public class UserView {
+public class UserView implements BoxBorder {
     private static Scanner scanner = new Scanner(System.in);
 
     public static UserDTO collectNewUserInformation() {
@@ -57,24 +58,33 @@ public class UserView {
 
     public static void printUserDetails(Collection<UserDTO> userDTOS) {
         Table table = new Table(8, BorderStyle.UNICODE_BOX_DOUBLE_BORDER, ShownBorders.ALL);
-        table.addCell("   User ID   ");
-        table.addCell("   Username   ");
-        table.addCell("   Password   ");
-        table.addCell("   Email   ");
-        table.addCell("   User Contact   ");
-        table.addCell("   Address   ");
-        table.addCell("   User Status   ");
-        table.addCell("   Role ID   ");
+        CellStyle cellStyle = new CellStyle(CellStyle.HorizontalAlign.center);
+        table.setColumnWidth(0, 15, 25);
+        table.setColumnWidth(1, 20, 50);
+        table.setColumnWidth(2, 20, 50);
+        table.setColumnWidth(3, 20, 50);
+        table.setColumnWidth(4, 20, 50);
+        table.setColumnWidth(5, 20, 50);
+        table.setColumnWidth(6, 20, 50);
+        table.setColumnWidth(7, 20, 50);
+        table.addCell(yellow + "User ID", cellStyle);
+        table.addCell(yellow + "Username", cellStyle);
+        table.addCell(yellow + "Password", cellStyle);
+        table.addCell(yellow + "Email", cellStyle);
+        table.addCell(yellow + "User Contact", cellStyle);
+        table.addCell(yellow + "Address", cellStyle);
+        table.addCell(yellow + "User Status", cellStyle);
+        table.addCell(yellow + "Role ID", cellStyle);
 
         for (UserDTO userDTO : userDTOS) {
-            table.addCell("   " + String.valueOf(userDTO.getUserId()) + "   ");
-            table.addCell("   " + userDTO.getUsername() + "   ");
-            table.addCell("   " + userDTO.getPassword()+ "   ");
-            table.addCell("   " + userDTO.getEmail() + "   ");
-            table.addCell("   " + userDTO.getContact() + "   ");
-            table.addCell("   " + userDTO.getAddress() + "   ");
-            table.addCell("   " + (userDTO.getStatus() ? "Active" : "Inactive") + "   ");
-            table.addCell("   " + String.valueOf(userDTO.getRoleId()) + "   ");
+            table.addCell(green + String.valueOf(userDTO.getUserId()), cellStyle);
+            table.addCell(green + userDTO.getUsername(), cellStyle);
+            table.addCell(green + userDTO.getPassword(), cellStyle);
+            table.addCell(green + userDTO.getEmail(), cellStyle);
+            table.addCell(green + userDTO.getContact(), cellStyle);
+            table.addCell(green + userDTO.getAddress(), cellStyle);
+            table.addCell(green + (userDTO.getStatus() ? "Active" : "Inactive"), cellStyle);
+            table.addCell(green + String.valueOf(userDTO.getRoleId()), cellStyle);
         }
 
         System.out.println(table.render());

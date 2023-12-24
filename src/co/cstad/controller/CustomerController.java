@@ -29,7 +29,6 @@ public class CustomerController {
         CustomerView.viewCreateCustomer(customerDTO,scanner);
         customerDTO=customerService.insert(customerDTO);
         System.out.println(" Successfully saved ");
-        System.out.println(customerDTO);
     }
     private boolean validateStringInput(String input) throws StringInputException {
         if (input == null || input.trim().isEmpty()) {
@@ -246,7 +245,7 @@ public class CustomerController {
                 CustomerView.readOneCustomer(customerDTO1);
 
                 System.out.print("Enter the new customer status : ");
-                Boolean newStatus = scanner.hasNext();
+                Boolean newStatus = Boolean.parseBoolean(scanner.nextLine());
 
                 customerDTO1.setStatus(newStatus);
 

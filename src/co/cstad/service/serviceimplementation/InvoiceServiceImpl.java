@@ -1,11 +1,9 @@
 package co.cstad.service.serviceimplementation;
-
 import co.cstad.dao.daoimplementation.InvoiceDaoImpl;
 import co.cstad.model.InvoiceDTO;
 import co.cstad.model.ItemDTO;
 import co.cstad.service.InvoiceService;
 import co.cstad.util.Singleton;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -45,6 +43,6 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Override
     public InvoiceDTO deleteById(Long id) {
         // Implement delete logic
-        return null;
+        return invoiceDao.deleteById(id);
     }
 }

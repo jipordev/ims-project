@@ -52,7 +52,10 @@ public class UserDaoImpl implements UserDao {
         return null;
     }
     public List<UserDTO> select() {
-        String sql = "SELECT * FROM users";
+        String sql = """
+            SELECT * FROM users
+            ORDER BY user_id ASC
+            """;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();

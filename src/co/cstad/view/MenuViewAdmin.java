@@ -1,5 +1,6 @@
 package co.cstad.view;
 
+import co.cstad.model.CustomerDTO;
 import co.cstad.model.ItemDTO;
 import co.cstad.model.UserDTO;
 import org.nocrala.tools.texttablefmt.BorderStyle;
@@ -12,31 +13,29 @@ public class MenuViewAdmin implements BoxBorder {
     static Scanner scanner = new Scanner(System.in);
 
 
-
-
     // Main Menu Admin
     public static void mainMenuAdmin() {
         System.out.print(cyan);
         System.out.println(TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(62) + TOP_RIGHT_CORNER);
         System.out.print(VERTICAL_BORDER + SPACE + TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(28) + TOP_RIGHT_CORNER);
         System.out.println(TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(28) + TOP_RIGHT_CORNER + SPACE + VERTICAL_BORDER);
-        System.out.print(VERTICAL_BORDER + SPACE + VERTICAL_BORDER + " ".repeat(10) + yellow + "  MENU  " + " ".repeat(10) + cyan + VERTICAL_BORDER);
+        System.out.print(VERTICAL_BORDER + SPACE + VERTICAL_BORDER + " ".repeat(7) + yellow + " MAIN MENU  " + " ".repeat(9) + cyan + VERTICAL_BORDER);
         System.out.println(VERTICAL_BORDER + " ".repeat(28) + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
         System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + HORIZONTAL_BORDER.repeat(28) + VERTICAL_BORDER);
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(28) + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
         System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + " ".repeat(28) + cyan + VERTICAL_BORDER);
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(6) + yellow + " ██████╗ ██████╗ " + reset + " ".repeat(5) + cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
-        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  1\uFE0F⃣ > ITEM ㅤㅤㅤㅤㅤㅤㅤ" + " ".repeat(4) + cyan + VERTICAL_BORDER);
+        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  1\uFE0F⃣ ➡ ITEM " + " ".repeat(15) + cyan + VERTICAL_BORDER);
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(6) + yellow + "██╔════╝ ╚════██╗" + reset + " ".repeat(5) + cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
-        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  2\uFE0F⃣ > CUSTOMER ㅤㅤㅤㅤㅤㅤㅤ" + " ".repeat(0) + cyan + VERTICAL_BORDER);
+        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  2\uFE0F⃣ ➡ CUSTOMER " + " ".repeat(11) + cyan + VERTICAL_BORDER);
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(6) + yellow + "██║  ███╗ █████╔╝" + reset + " ".repeat(5) + cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
-        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  3\uFE0F⃣ > INVOICE ㅤㅤㅤㅤㅤㅤㅤ" + " ".repeat(1) + cyan + VERTICAL_BORDER);
+        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  3\uFE0F⃣ ➡ INVOICE " + " ".repeat(12) + cyan + VERTICAL_BORDER);
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(6) + yellow + "██║   ██║ ╚═══██╗" + reset + " ".repeat(5) + cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
-        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  4\uFE0F⃣ > USER  ㅤㅤㅤㅤㅤㅤㅤ" + " ".repeat(3) + cyan + VERTICAL_BORDER);
+        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  4\uFE0F⃣ ➡ USER " + " ".repeat(15) + cyan + VERTICAL_BORDER);
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(6) + yellow + "╚██████╔╝██████╔╝" + reset + " ".repeat(5) + cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
-        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  5\uFE0F⃣ > REPORT ㅤㅤㅤㅤㅤㅤㅤ" + " ".repeat(2) + cyan + VERTICAL_BORDER);
+        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  5\uFE0F⃣ ➡ REPORT " + " ".repeat(13) + cyan + VERTICAL_BORDER);
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(6) + yellow + "╚═════╝ ╚═════╝" + reset + " ".repeat(7) + cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
-        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  6\uFE0F⃣ > SIGN OUT ㅤㅤㅤㅤㅤㅤㅤ" + " ".repeat(0) + cyan + VERTICAL_BORDER);
+        System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + yellow + "  6\uFE0F⃣ ➡ SIGN OUT " + " ".repeat(11) + cyan + VERTICAL_BORDER);
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(28)  + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
         System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + " ".repeat(28) + cyan + VERTICAL_BORDER);
         System.out.println(VERTICAL_BORDER + " ".repeat(28) + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
@@ -112,7 +111,7 @@ public class MenuViewAdmin implements BoxBorder {
         System.out.println(TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(62) + TOP_RIGHT_CORNER);
         System.out.print(VERTICAL_BORDER + SPACE + TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(28) + TOP_RIGHT_CORNER);
         System.out.println(TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(28) + TOP_RIGHT_CORNER + SPACE + VERTICAL_BORDER);
-        System.out.print(VERTICAL_BORDER + SPACE + VERTICAL_BORDER + " ".repeat(10) + yellow + "  MENU  " + " ".repeat(10) + cyan + VERTICAL_BORDER);
+        System.out.print(VERTICAL_BORDER + SPACE + VERTICAL_BORDER + " ".repeat(7) + yellow + " CUSTOMER MENU  " + " ".repeat(5) + cyan + VERTICAL_BORDER);
         System.out.println(VERTICAL_BORDER + " ".repeat(28) + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
         System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + HORIZONTAL_BORDER.repeat(28) + VERTICAL_BORDER);
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(28) + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
@@ -751,7 +750,7 @@ public class MenuViewAdmin implements BoxBorder {
         System.out.println(TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(62) + TOP_RIGHT_CORNER);
         System.out.print(VERTICAL_BORDER + SPACE + TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(28) + TOP_RIGHT_CORNER);
         System.out.println(TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(28) + TOP_RIGHT_CORNER + SPACE + VERTICAL_BORDER);
-        System.out.print(VERTICAL_BORDER + SPACE + VERTICAL_BORDER + " ".repeat(10) + yellow + "  MENU  " + " ".repeat(10) + cyan + VERTICAL_BORDER);
+        System.out.print(VERTICAL_BORDER + SPACE + VERTICAL_BORDER + " ".repeat(7) + yellow + " USER MENU  " + " ".repeat(9) + cyan + VERTICAL_BORDER);
         System.out.println(VERTICAL_BORDER + " ".repeat(28) + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
         System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + HORIZONTAL_BORDER.repeat(28) + VERTICAL_BORDER);
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(28) + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
@@ -1035,7 +1034,30 @@ public class MenuViewAdmin implements BoxBorder {
         System.out.println("\n");
 
     }
-
+    public void customerConfirmation(CustomerDTO newCustomer) {
+        System.out.println();
+        Table table = new Table(2, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.SURROUND);
+        table.setColumnWidth(0, 30, 30);
+        table.setColumnWidth(1, 30, 30);
+        table.addCell(" ".repeat(3) + yellow + "Customer_Id:" + reset);
+        table.addCell(" ".repeat(3) + cyan + newCustomer.getCustomersId() + reset);
+        table.addCell(" ".repeat(3) + yellow + "Name:" + reset);
+        table.addCell(" ".repeat(3) + cyan + newCustomer.getCustomerName() + reset);
+        table.addCell(" ".repeat(3) + yellow + "Address:" + reset);
+        table.addCell(" ".repeat(3) + cyan + newCustomer.getAddress() + reset);
+        table.addCell(" ".repeat(3) + yellow + "Contact1:" + reset);
+        table.addCell(" ".repeat(3) + cyan + newCustomer.getContact1() + reset);
+        table.addCell(" ".repeat(3) + yellow + "Contact2:" + reset);
+        table.addCell(" ".repeat(3) + cyan + newCustomer.getContact2() + reset);
+        table.addCell(" ".repeat(3) + yellow + "Status:" + reset);
+        table.addCell(" ".repeat(3) + cyan + newCustomer.getStatus() + reset);
+        table.addCell(" ".repeat(3) + yellow + "Price_A:" + reset);
+        if (newCustomer.getStatus() != null) {
+            table.addCell(" ".repeat(3) + yellow + "Status:" + reset);
+            table.addCell(" ".repeat(3) + cyan + (newCustomer.getStatus() ? "Active" : "Inactive") + reset);
+        }
+        System.out.println(table.render());
+    }
 
 
 

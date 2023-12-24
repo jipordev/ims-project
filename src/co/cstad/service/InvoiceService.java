@@ -1,7 +1,6 @@
 package co.cstad.service;
 
 import co.cstad.model.InvoiceDTO;
-import co.cstad.model.ItemDTO;
 
 import java.util.List;
 import java.util.Optional;

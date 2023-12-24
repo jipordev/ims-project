@@ -2,7 +2,6 @@ package co.cstad.dao.daoimplementation;
 
 import co.cstad.dao.InvoiceDao;
 import co.cstad.model.InvoiceDTO;
-import co.cstad.model.ItemDTO;
 import co.cstad.util.DbSingleton;
 
 import java.sql.Connection;

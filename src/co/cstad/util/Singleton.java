@@ -200,6 +200,14 @@ public class Singleton {
         return reportService;
     }
 
+
+    private Singleton() {
+        // Private constructor to prevent instantiation outside the class.
+        itemController = new ItemController();
+        invoiceController = new InvoiceController();
+        scanner = new Scanner(System.in);
+    }
+
     public static synchronized Singleton getInstance() {
         if (instance == null) {
             instance = new Singleton();

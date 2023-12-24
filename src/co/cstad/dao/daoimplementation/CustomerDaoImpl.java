@@ -52,7 +52,10 @@ public class CustomerDaoImpl implements CustomerDao {
 
     @Override
     public List<CustomerDTO> select() {
-        String sql = "SELECT * FROM customer";
+        String sql = """ 
+                SELECT * FROM customer 
+                ORDER BY customer_id ASC
+                """;
         try {
 
 

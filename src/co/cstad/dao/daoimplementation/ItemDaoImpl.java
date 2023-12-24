@@ -57,11 +57,17 @@ public class ItemDaoImpl implements ItemDao {
         return null;
     }
 
+
+
+
     @Override
     public StockInDTO stockIn(StockInDTO stockInDTO) {
-        String insertStockInSql = "INSERT INTO stock_in (item_id, qty, price_in, stock_in_date) " +
-                "VALUES (?, ?, ?, CURRENT_DATE)";
-        String updateItemQtySql = "UPDATE item SET qty = qty + ? WHERE item_id = ?";
+        String insertStockInSql = """
+        INSERT INTO stock_in (item_id, qty, price_in, stock_in_date)
+        VALUES (?, ?, ?, CURRENT_TIMESTAMP)
+    """;
+
+        String updateItemQtySql = "UPDATE item SET qty = qty + ?, price = ?, price_a = ?, price_b = ?, price_c = ? WHERE item_id = ?";
 
         try {
             // Insert into stock_in table
@@ -143,7 +149,14 @@ public class ItemDaoImpl implements ItemDao {
 
     @Override
     public List<ItemDTO> select() {
-        String sql = "SELECT * FROM item";
+        String sql = """
+            SELECT *, CAST(price AS NUMERIC) AS "pr",
+            CAST(price_a AS NUMERIC) AS "pr_a",
+            CAST(price_b AS NUMERIC) AS "pr_b",
+            CAST(price_c AS NUMERIC) AS "pr_c"
+            FROM item
+            ORDER BY item_id ASC;
+            """;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -155,10 +168,9 @@ public class ItemDaoImpl implements ItemDao {
                 itemDTO.setItemDescription(resultSet.getString("description"));
                 itemDTO.setItemUnit(resultSet.getString("unit"));
                 itemDTO.setQty(resultSet.getInt("qty"));
-                itemDTO.setItemPrice(resultSet.getBigDecimal("price"));
-                itemDTO.setItemPrice_out_a(resultSet.getBigDecimal("price_a"));
-                itemDTO.setItemPrice_out_b(resultSet.getBigDecimal("price_b"));
-                itemDTO.setItemPrice_out_c(resultSet.getBigDecimal("price_c"));
+                itemDTO.setItemPrice_out_a(resultSet.getBigDecimal("pr_a"));
+                itemDTO.setItemPrice_out_b(resultSet.getBigDecimal("pr_b"));
+                itemDTO.setItemPrice_out_c(resultSet.getBigDecimal("pr_c"));
                 itemDTO.setStatus(resultSet.getBoolean("status"));
                 itemDTO.setAlertId(resultSet.getLong("alert_id"));
                 itemDTOS.add(itemDTO);

@@ -278,10 +278,6 @@ public class ItemController {
                 int newItemQty = Integer.parseInt(scanner.nextLine());
 
                 existingItem.setQty(newItemQty);
-                existingItem.setItemPrice(newItemPrice);
-                existingItem.setItemPrice_out_a(newItemPrice.multiply(new BigDecimal("0.93")));
-                existingItem.setItemPrice_out_b(newItemPrice.multiply(new BigDecimal("0.95")));
-                existingItem.setItemPrice_out_c(newItemPrice.multiply(new BigDecimal("0.97")));
 
                 // Call the service to update the itemu
                 ItemDTO updatedItem = itemService.updateById(existingItem);

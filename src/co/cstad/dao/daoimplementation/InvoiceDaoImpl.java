@@ -145,7 +145,7 @@ public List<InvoiceDTO> select() {
         InvoiceDTO invoice = new InvoiceDTO();
         invoice.setInvoiceId(rs.getLong("invoice_id"));
         invoice.setInvoiceNo(rs.getString("invoice_no"));
-        invoice.setDiscount(rs.getString("discount"));
+        invoice.setDiscount(rs.getBigDecimal("discount"));
         invoice.setCancelled(rs.getBoolean("is_cancelled"));
         invoice.setStatus(rs.getBoolean("status"));
         invoice.setPaid(rs.getBoolean("is_paid"));

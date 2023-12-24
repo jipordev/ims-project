@@ -45,14 +45,14 @@ public class ReportController {
         reportView.stockOutReport(reportDTOList);
     }
 
-//    public void invoiceDetail(){
-//        List<ReportDTO> reportDTOList = reportService.selectInvoiceDetail();
-//        reportView.InvoiceDetail(reportDTOList);
-//    }
+    public void invoiceDetail(){
+        List<DetailDTO> reportDTOList = reportService.selectInvoiceDetail();
+        reportView.invoiceDetail(reportDTOList);
+    }
 
     public void invoiceAdjustment(){
         List<AdjustmentDTO> reportDTOList = reportService.selectAdjustment();
-        reportView.InvoiceAdjustment(reportDTOList);
+        reportView.invoiceAdjustment(reportDTOList);
     }
 
     public void itemPriceHistory(){

@@ -112,12 +112,12 @@ public class ItemView {
 
         System.out.print("Enter item price: ");
         BigDecimal price = new BigDecimal(scanner.nextLine());
-        newItem.setItemPrice(price);
+        newItem.setItemPrice(price.toString());
 
         // Calculate price_a, price_b, and price_c based on the input price
-        newItem.setItemPrice_out_a(price.multiply(new BigDecimal("0.93")));
-        newItem.setItemPrice_out_b(price.multiply(new BigDecimal("0.95")));
-        newItem.setItemPrice_out_c(price.multiply(new BigDecimal("0.97")));
+        newItem.setItemPrice_out_a(price.multiply(new BigDecimal("0.93")).toString());
+        newItem.setItemPrice_out_b(price.multiply(new BigDecimal("0.95")).toString());
+        newItem.setItemPrice_out_c(price.multiply(new BigDecimal("0.97")).toString());
 
         System.out.print("Is the item active? (Enter 'y' for true, 'n' for false): ");
         newItem.setStatus(scanner.nextLine().equalsIgnoreCase("y"));

@@ -265,9 +265,6 @@ public class MenuView implements BoxBorder {
     }
 
 
-
-
-
     public void menuItemUpdate(){
         Table table = new Table(3, BorderStyle.UNICODE_BOX,ShownBorders.SURROUND);
         table.setColumnWidth(0,25,25);
@@ -289,6 +286,12 @@ public class MenuView implements BoxBorder {
 
     }
 
+
+    public void validationAlert(String message) {
+        System.out.println(HORIZONTAL_BORDER.repeat(message.length() + 8));
+        System.out.println(SPACE.repeat(3) + message + SPACE.repeat(4));
+        System.out.println(HORIZONTAL_BORDER.repeat(message.length() + 8));
+    }
 
 
 }

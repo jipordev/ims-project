@@ -38,11 +38,11 @@ public class ReportDaoImpl implements ReportDao {
                 itemDTO.setItemCode(resultSet.getString("item_code"));
                 itemDTO.setItemDescription(resultSet.getString("description"));
                 itemDTO.setItemUnit(resultSet.getString("unit"));
-                itemDTO.setItemPrice(resultSet.getBigDecimal("pr"));
+                itemDTO.setItemPrice(resultSet.getString("pr"));
                 itemDTO.setQty(resultSet.getInt("qty"));
-                itemDTO.setItemPrice_out_a(resultSet.getBigDecimal("pr_a"));
-                itemDTO.setItemPrice_out_b(resultSet.getBigDecimal("pr_b"));
-                itemDTO.setItemPrice_out_c(resultSet.getBigDecimal("pr_c"));
+                itemDTO.setItemPrice_out_a(resultSet.getString("pr_a"));
+                itemDTO.setItemPrice_out_b(resultSet.getString("pr_b"));
+                itemDTO.setItemPrice_out_c(resultSet.getString("pr_c"));
                 itemDTO.setStatus(resultSet.getBoolean("status"));
 
                 itemDTOS.add(itemDTO);

@@ -1,7 +1,8 @@
 package co.cstad.model;
 
 import java.math.BigDecimal;
-import java.time.Duration;
+
+import co.cstad.util.handle.Handle;
 
 public class ItemDTO {
     private Long itemId;
@@ -19,8 +20,8 @@ public class ItemDTO {
         return itemPrice;
     }
 
-    public void setItemPrice(BigDecimal itemPrice) {
-        this.itemPrice = itemPrice;
+    public void setItemPrice(String itemPrice) {
+        this.itemPrice = Handle.XdrToBigDecimalConverter(itemPrice.toString());
     }
 
     public Long getItemId() {
@@ -59,24 +60,24 @@ public class ItemDTO {
         return itemPrice_out_a;
     }
 
-    public void setItemPrice_out_a(BigDecimal itemPrice_out_a) {
-        this.itemPrice_out_a = itemPrice_out_a;
+    public void setItemPrice_out_a(String itemPrice_out_a) {
+        this.itemPrice_out_a = Handle.XdrToBigDecimalConverter(itemPrice_out_a.toString());
     }
 
     public BigDecimal getItemPrice_out_b() {
         return itemPrice_out_b;
     }
 
-    public void setItemPrice_out_b(BigDecimal itemPrice_out_b) {
-        this.itemPrice_out_b = itemPrice_out_b;
+    public void setItemPrice_out_b(String itemPrice_out_b) {
+        this.itemPrice_out_b = Handle.XdrToBigDecimalConverter(itemPrice_out_b.toString());
     }
 
     public BigDecimal getItemPrice_out_c() {
         return itemPrice_out_c;
     }
 
-    public void setItemPrice_out_c(BigDecimal itemPrice_out_c) {
-        this.itemPrice_out_c = itemPrice_out_c;
+    public void setItemPrice_out_c(String itemPrice_out_c) {
+        this.itemPrice_out_c = Handle.XdrToBigDecimalConverter(itemPrice_out_c.toString());
     }
 
     public Integer getQty() {

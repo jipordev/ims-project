@@ -122,10 +122,10 @@ public class ItemController {
                         existingItem.setItemDescription(newItemDescription);
                         existingItem.setItemUnit(newItemUnit);
                         existingItem.setQty(newItemQty);
-                        existingItem.setItemPrice(newItemPrice);
-                        existingItem.setItemPrice_out_a(newItemPrice.multiply(new BigDecimal("0.93")));
-                        existingItem.setItemPrice_out_b(newItemPrice.multiply(new BigDecimal("0.95")));
-                        existingItem.setItemPrice_out_c(newItemPrice.multiply(new BigDecimal("0.97")));
+                        existingItem.setItemPrice(newItemPrice.toString());
+                        existingItem.setItemPrice_out_a(newItemPrice.multiply(new BigDecimal("0.93")).toString());
+                        existingItem.setItemPrice_out_b(newItemPrice.multiply(new BigDecimal("0.95")).toString());
+                        existingItem.setItemPrice_out_c(newItemPrice.multiply(new BigDecimal("0.97")).toString());
                         existingItem.setStatus(newItemStatus);
 
                         // Call the service to update the item
@@ -272,10 +272,10 @@ public class ItemController {
                 System.out.print("Enter the new item price : ");
                 BigDecimal newItemPrice = new BigDecimal(scanner.nextLine());
 
-                existingItem.setItemPrice(newItemPrice);
-                existingItem.setItemPrice_out_a(newItemPrice.multiply(new BigDecimal("0.93")));
-                existingItem.setItemPrice_out_b(newItemPrice.multiply(new BigDecimal("0.95")));
-                existingItem.setItemPrice_out_c(newItemPrice.multiply(new BigDecimal("0.97")));
+                existingItem.setItemPrice(newItemPrice.toString());
+                existingItem.setItemPrice_out_a(newItemPrice.multiply(new BigDecimal("0.93")).toString());
+                existingItem.setItemPrice_out_b(newItemPrice.multiply(new BigDecimal("0.95")).toString());
+                existingItem.setItemPrice_out_c(newItemPrice.multiply(new BigDecimal("0.97")).toString());
 
                 // Call the service to update the itemu
                 ItemDTO updatedItem = itemService.updateById(existingItem);
@@ -309,7 +309,7 @@ public class ItemController {
                 System.out.print("Enter the new item price_a : ");
                 BigDecimal newItemPriceA = new BigDecimal(scanner.nextLine());
 
-                existingItem.setItemPrice_out_a(newItemPriceA);
+                existingItem.setItemPrice_out_a(newItemPriceA.toString());
 
                 // Call the service to update the item
                 ItemDTO updatedItem = itemService.updateById(existingItem);
@@ -343,7 +343,7 @@ public class ItemController {
                 System.out.print("Enter the new item price_b : ");
                 BigDecimal newItemPriceB = new BigDecimal(scanner.nextLine());
 
-                existingItem.setItemPrice_out_b(newItemPriceB);
+                existingItem.setItemPrice_out_b(newItemPriceB.toString());
 
                 // Call the service to update the item
                 ItemDTO updatedItem = itemService.updateById(existingItem);
@@ -377,7 +377,7 @@ public class ItemController {
                 System.out.print("Enter the new item price_c : ");
                 BigDecimal newItemPriceC = new BigDecimal(scanner.nextLine());
 
-                existingItem.setItemPrice_out_c(newItemPriceC);
+                existingItem.setItemPrice_out_c(newItemPriceC.toString());
 
                 // Call the service to update the item
                 ItemDTO updatedItem = itemService.updateById(existingItem);

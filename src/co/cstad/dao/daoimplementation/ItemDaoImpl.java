@@ -153,12 +153,12 @@ public class ItemDaoImpl implements ItemDao {
                 itemDTO.setItemId(resultSet.getLong("item_id"));
                 itemDTO.setItemCode(resultSet.getString("item_code"));
                 itemDTO.setItemDescription(resultSet.getString("description"));
-                itemDTO.setItemUnit(resultSet.getString("unit"));
+                //itemDTO.setItemUnit(resultSet.getString("unit"));
                 itemDTO.setQty(resultSet.getInt("qty"));
-                itemDTO.setItemPrice(resultSet.getBigDecimal("price"));
-                itemDTO.setItemPrice_out_a(resultSet.getBigDecimal("price_a"));
-                itemDTO.setItemPrice_out_b(resultSet.getBigDecimal("price_b"));
-                itemDTO.setItemPrice_out_c(resultSet.getBigDecimal("price_c"));
+                itemDTO.setItemPrice(resultSet.getString("price"));
+                itemDTO.setItemPrice_out_a(resultSet.getString("price_a"));
+                itemDTO.setItemPrice_out_b(resultSet.getString("price_b"));
+                itemDTO.setItemPrice_out_c(resultSet.getString("price_c"));
                 itemDTO.setStatus(resultSet.getBoolean("status"));
                 itemDTOS.add(itemDTO);
             }
@@ -185,10 +185,10 @@ public class ItemDaoImpl implements ItemDao {
                 itemDTO.setItemDescription(resultSet.getString("description"));
                 itemDTO.setItemUnit(resultSet.getString("unit"));
                 itemDTO.setQty(resultSet.getInt("qty"));
-                itemDTO.setItemPrice(resultSet.getBigDecimal("price"));
-                itemDTO.setItemPrice_out_a(resultSet.getBigDecimal("price_a"));
-                itemDTO.setItemPrice_out_b(resultSet.getBigDecimal("price_b"));
-                itemDTO.setItemPrice_out_c(resultSet.getBigDecimal("price_c"));
+                itemDTO.setItemPrice(resultSet.getString("price"));
+                itemDTO.setItemPrice_out_a(resultSet.getString("price_a"));
+                itemDTO.setItemPrice_out_b(resultSet.getString("price_b"));
+                itemDTO.setItemPrice_out_c(resultSet.getString("price_c"));
                 itemDTO.setStatus(resultSet.getBoolean("status"));
 
                 return Optional.of(itemDTO);

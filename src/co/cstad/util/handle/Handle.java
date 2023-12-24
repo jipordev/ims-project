@@ -40,14 +40,14 @@ public class Handle {
                     case 2 -> menuView.menuAboutUs();
                     case 3 -> System.exit(0);
                     default -> {
-                        System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
+                        System.out.println("\n" + " ".repeat(5) + "⚠\uFE0F INPUT IS INVALID !");
                         System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 3 .");
                     }
                 }
             } catch (StringInputException e){
                 System.out.println(e.getMessage());
             } catch (NumberFormatException e){
-                System.out.println("Invalid input. Please try again");
+                System.out.println("⚠\uFE0F Invalid input. Please try again");
             }
         } while (true);
     }
@@ -58,7 +58,7 @@ public class Handle {
 
             // Validate username input
             if (!validateStringInput(username)) {
-                throw new StringInputException("Invalid username input.");
+                throw new StringInputException("❌ Invalid username input.");
             }
 
             System.out.print("Enter password: ");
@@ -66,18 +66,18 @@ public class Handle {
 
             // Validate password input
             if (!validateStringInput(password)) {
-                throw new StringInputException("Invalid password input.");
+                throw new StringInputException("❌ Invalid password input.");
             }
 
             if (userAuthentication.authenticateUser(username, password)) {
                 String role = userAuthentication.getUserRole(username);
-                System.out.println("User authenticated successfully.");
+                System.out.println("✔\uFE0F User authenticated successfully.");
 
                 if (role != null) {
                     handleRole(role);
                 }
             } else {
-                System.out.println("Invalid username or password.");
+                System.out.println("❌ Invalid username or password.");
             }
         } catch (StringInputException e) {
             System.out.println(e.getMessage());
@@ -87,7 +87,7 @@ public class Handle {
     // The validateStringInput method
     public static boolean validateStringInput(String input) throws StringInputException {
         if (input == null || input.trim().isEmpty()) {
-            throw new StringInputException("Input cannot be null or empty.");
+            throw new StringInputException("⚠\uFE0F Input cannot be null or empty.");
         }
         return true;
     }
@@ -119,7 +119,7 @@ public class Handle {
             } catch (StringInputException e){
                 System.out.println(e.getMessage());
             } catch (NumberFormatException e){
-                System.out.println("Invalid input. Please try again");
+                System.out.println("⚠\uFE0F Invalid input. Please try again");
             }
         } while (true);
     }
@@ -139,14 +139,14 @@ public class Handle {
                         return;
                     }
                     default -> {
-                        System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
+                        System.out.println("\n" + " ".repeat(5) + "⚠\uFE0F INPUT IS INVALID !");
                         System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 3 .");
                     }
                 }
             } catch (StringInputException e){
                 System.out.println(e.getMessage());
             } catch (NumberFormatException e){
-                System.out.println("Invalid input. Please try again");
+                System.out.println("⚠\uFE0F Invalid input. Please try again");
             }
         } while (true);
     }
@@ -169,14 +169,14 @@ public class Handle {
                         return;
                     }
                     default -> {
-                        System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
+                        System.out.println("\n" + " ".repeat(5) + "⚠\uFE0F INPUT IS INVALID !");
                         System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 7 .");
                     }
                 }
             } catch (StringInputException e){
                 System.out.println(e.getMessage());
             } catch (NumberFormatException e){
-                System.out.println("Invalid input. Please try again");
+                System.out.println("⚠\uFE0F Invalid input. Please try again");
             }
         } while (true);
     }
@@ -206,14 +206,14 @@ public class Handle {
                         return;
                     }
                     default -> {
-                        System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
+                        System.out.println("\n" + " ".repeat(5) + "⚠\uFE0F INPUT IS INVALID !");
                         System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 5 .");
                     }
                 }
             } catch (StringInputException e){
                 System.out.println(e.getMessage());
             } catch (NumberFormatException e){
-                System.out.println("Invalid input. Please try again.");
+                System.out.println("⚠\uFE0F Invalid input. Please try again.");
             }
         } while (true);
     }
@@ -247,14 +247,14 @@ public class Handle {
                         return;
                     }
                     default -> {
-                        System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
+                        System.out.println("\n" + " ".repeat(5) + "⚠\uFE0F INPUT IS INVALID !");
                         System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 7 .");
                     }
                 }
             } catch (StringInputException e){
                 System.out.println(e.getMessage());
             } catch (NumberFormatException e){
-                System.out.println("Invalid input. Please try again.");
+                System.out.println("⚠\uFE0F Invalid input. Please try again.");
             }
         } while (true);
     }
@@ -281,14 +281,14 @@ public class Handle {
                         return;
                     }
                     default -> {
-                        System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
+                        System.out.println("\n" + " ".repeat(5) + "⚠\uFE0F INPUT IS INVALID !");
                         System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 5 .");
                     }
                 }
             } catch (StringInputException e){
                 System.out.println(e.getMessage());
             } catch (NumberFormatException e){
-                System.out.println("Invalid input. Please try again.");
+                System.out.println("⚠\uFE0F Invalid input. Please try again.");
             }
         } while (true);
     }
@@ -312,14 +312,14 @@ public class Handle {
                         return;
                     }
                     default -> {
-                        System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
+                        System.out.println("\n" + " ".repeat(5) + "⚠\uFE0F INPUT IS INVALID !");
                         System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 9 .");
                     }
                 }
             } catch (StringInputException e){
                 System.out.println(e.getMessage());
             } catch (NumberFormatException e){
-                System.out.println("Invalid input. Please try again.");
+                System.out.println("⚠\uFE0F Invalid input. Please try again.");
             }
         } while (true);
     }
@@ -345,14 +345,14 @@ public class Handle {
                         return;
                     }
                     default -> {
-                        System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
+                        System.out.println("\n" + " ".repeat(5) + "⚠\uFE0F INPUT IS INVALID !");
                         System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 9 .");
                     }
                 }
             } catch (StringInputException e){
                 System.out.println(e.getMessage());
             } catch (NumberFormatException e){
-                System.out.println("Invalid input. Please try again");
+                System.out.println("⚠\uFE0F Invalid input. Please try again");
             }
         } while (true);
     }
@@ -371,14 +371,14 @@ public class Handle {
                         return;
                     }
                     default -> {
-                        System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
+                        System.out.println("\n" + " ".repeat(5) + "⚠\uFE0F INPUT IS INVALID !");
                         System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 4 .");
                     }
                 }
             } catch (StringInputException e){
                 System.out.println(e.getMessage());
             } catch (NumberFormatException e){
-                System.out.println("Invalid input. Please try again.");
+                System.out.println("⚠\uFE0F Invalid input. Please try again.");
             }
         } while (true);
     }
@@ -402,14 +402,14 @@ public class Handle {
                         return;
                     }
                     default -> {
-                        System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
+                        System.out.println("\n" + " ".repeat(5) + "⚠\uFE0F INPUT IS INVALID !");
                         System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 6 .");
                     }
                 }
             } catch (StringInputException e){
                 System.out.println(e.getMessage());
             } catch (NumberFormatException e){
-                System.out.println("Invalid input. Please try again.");
+                System.out.println("⚠\uFE0F Invalid input. Please try again.");
             }
         } while (true);
     }
@@ -433,14 +433,14 @@ public class Handle {
                         return;
                     }
                     default -> {
-                        System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
+                        System.out.println("\n" + " ".repeat(5) + "⚠\uFE0F INPUT IS INVALID !");
                         System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 9 .");
                     }
                 }
             } catch (StringInputException e){
                 System.out.println(e.getMessage());
             } catch (NumberFormatException e){
-                System.out.println("Invalid input. Please try again");
+                System.out.println("⚠\uFE0F Invalid input. Please try again");
             }
         }while (true);
     }

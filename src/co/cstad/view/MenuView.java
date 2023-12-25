@@ -19,17 +19,17 @@ public class MenuView implements BoxBorder {
 
     //First Interface (CSTAD)
     public void startInterface() {
-//        for (int i = 0; i <= 100; i+=2) {
-//            int totalBlocks = 50;
-//            int blocksToShow = (i * totalBlocks) / 100;
-//            System.out.print(" ".repeat(20) + " Loading [ " + i + "% ]");
-//            System.out.print(" ".repeat(10) + getProgressBar(blocksToShow, totalBlocks) + "\r");
-//            try {
-//                Thread.sleep(100);
-//            } catch (InterruptedException e) {
-//                throw new RuntimeException(e);
-//            }
-//        }
+        for (int i = 0; i <= 100; i+=2) {
+            int totalBlocks = 50;
+            int blocksToShow = (i * totalBlocks) / 100;
+            System.out.print(" ".repeat(20) + " Loading [ " + i + "% ]");
+            System.out.print(" ".repeat(10) + getProgressBar(blocksToShow, totalBlocks) + "\r");
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
         System.out.println("\n".repeat(5));
         System.out.print(cyan);
         System.out.println( TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(72) + TOP_RIGHT_CORNER);
@@ -194,7 +194,7 @@ public class MenuView implements BoxBorder {
         System.out.println(TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(62) + TOP_RIGHT_CORNER);
         System.out.print(VERTICAL_BORDER + SPACE + TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(28) + TOP_RIGHT_CORNER);
         System.out.println(TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(28) + TOP_RIGHT_CORNER + SPACE + VERTICAL_BORDER);
-        System.out.print(VERTICAL_BORDER + SPACE + VERTICAL_BORDER + " ".repeat(10) + yellow + "  MENU  " + " ".repeat(10) + cyan + VERTICAL_BORDER);
+        System.out.print(VERTICAL_BORDER + SPACE + VERTICAL_BORDER + " ".repeat(7) + yellow + " REPORT MENU  " + " ".repeat(7) + cyan + VERTICAL_BORDER);
         System.out.println(VERTICAL_BORDER + " ".repeat(28) + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
         System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + HORIZONTAL_BORDER.repeat(28) + VERTICAL_BORDER);
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(28) + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);

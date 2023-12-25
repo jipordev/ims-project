@@ -47,51 +47,48 @@ public class ReportView implements BoxBorder {
 
         for (ItemDTO item : items) {
             if (item.getStatus() != null && item.getStatus()) {
-                table.addCell(green + "   " + String.valueOf(item.getItemId()) + "   ");
-                table.addCell(green + "   " + item.getItemCode() + "   ");
-                table.addCell(green + "   " + item.getItemDescription() + "   ");
-                table.addCell(green + "   " + item.getItemUnit() + "   ");
-                table.addCell(green + "   " + String.valueOf(item.getQty()) + "   ");
-                table.addCell(green + "   " + String.valueOf(item.getItemPrice()));
-                table.addCell(green + "   " + String.valueOf(item.getItemPrice_out_a()) + "   ");
-                table.addCell(green + "   " + String.valueOf(item.getItemPrice_out_b()) + "   ");
-                table.addCell(green + "   " + String.valueOf(item.getItemPrice_out_c()) + "   ");
-                table.addCell(green + "   " + (item.getStatus() ? "Active" : "Inactive") + "   ");
+                table.addCell(green + item.getItemId(), cellStyle);
+                table.addCell(green + item.getItemCode(), cellStyle);
+                table.addCell(green + item.getItemDescription(), cellStyle);
+                table.addCell(green + item.getItemUnit(), cellStyle);
+                table.addCell(green + String.valueOf(item.getQty()), cellStyle);
+                table.addCell(green + String.valueOf(item.getItemPrice()), cellStyle);
+                table.addCell(green + String.valueOf(item.getItemPrice_out_a()), cellStyle);
+                table.addCell(green + String.valueOf(item.getItemPrice_out_b()), cellStyle);
+                table.addCell(green + String.valueOf(item.getItemPrice_out_c()), cellStyle);
+                table.addCell(green + (item.getStatus() ? "Active" : "Inactive"), cellStyle);
             }
->>>>>>>>> Temporary merge branch 2
         }
 
         System.out.println(table.render());
-
-<<<<<<<<< Temporary merge branch 1
-
-
-    public static void stockInReport(Collection<ReportDTO> reports){
-=========
     }
-    public static void stockInReport(Collection<StockInDTO> reports){
->>>>>>>>> Temporary merge branch 2
-        System.out.println(yellow + "\t\tStock In Report"+reset);
-        Table table = new Table(5, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
-        table.setColumnWidth(0,15,20);
-        table.setColumnWidth(1,15,20);
-        table.setColumnWidth(2,15,20);
-        table.setColumnWidth(3,15,20);
-        table.setColumnWidth(4,15,20);
 
-        table.addCell(" ".repeat(2)+ yellow + "Stock_In_Id");
-        table.addCell(" ".repeat(2)+ yellow +"Item_Id");
-        table.addCell(" ".repeat(2)+ yellow +"Qty");
-        table.addCell(" ".repeat(2)+ yellow +"Price_In");
-        table.addCell(" ".repeat(2)+ yellow +"Stock_In_Date" + reset);
+
+    public static void stockInReport(Collection<StockInDTO> reports) {
+        System.out.println(yellow + "\t\tStock In Report" + reset);
+        Table table = new Table(5, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
+        table.setColumnWidth(0, 15, 20);
+        table.setColumnWidth(1, 15, 20);
+        table.setColumnWidth(2, 15, 20);
+        table.setColumnWidth(3, 15, 20);
+        table.setColumnWidth(4, 15, 20);
+
+        CellStyle cellStyle = new CellStyle(CellStyle.HorizontalAlign.center);
+
+        table.addCell(yellow + "Stock_In_Id", cellStyle);
+        table.addCell(yellow + "Item_Id", cellStyle);
+        table.addCell(yellow + "Qty", cellStyle);
+        table.addCell(yellow + "Price_In", cellStyle);
+        table.addCell(yellow + "Stock_In_Date" + reset, cellStyle);
 
         for (StockInDTO report : reports) {
-            table.addCell("   " + green + report.getStockInID() + "   ");
-            table.addCell("   " + green + report.getItemId() + "   ");
-            table.addCell("   " + green + report.getQtyIn() + "   ");
-            table.addCell("   " + green + report.getPriceIn() + "   ");
-            table.addCell("   " + green + report.getStockInDate() + "   " + reset);
+            table.addCell(green + report.getStockInID(), cellStyle);
+            table.addCell(green + report.getItemId(), cellStyle);
+            table.addCell(green + report.getQtyIn(), cellStyle);
+            table.addCell(green + report.getPriceIn(), cellStyle);
+            table.addCell(green + report.getStockInDate() + reset, cellStyle);
         }
+
         System.out.println(table.render());
     }
 

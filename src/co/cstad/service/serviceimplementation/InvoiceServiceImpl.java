@@ -10,10 +10,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class InvoiceServiceImpl implements InvoiceService {
-    private static InvoiceDaoImpl invoiceDao;
-
-    public InvoiceServiceImpl() {
-        invoiceDao = Singleton.getInvoiceDao();
 
     private static InvoiceDaoImpl invoiceDao;
 
@@ -29,19 +25,6 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Override
     public List<InvoiceDTO> select() {
         return invoiceDao.select();
-    }
-
-    @Override
-    public Optional<InvoiceDTO> selectById(Long id) {
-        return invoiceDao.selectById(id);
-    }
-
-    @Override
-    public List<InvoiceDTO> selectByNo(String no) {
-        return invoiceDao.selectByNo(no);
-    }
-
-
     }
 
     @Override
@@ -63,6 +46,5 @@ public class InvoiceServiceImpl implements InvoiceService {
     public InvoiceDTO deleteById(Long id) {
         // Implement delete logic
         return null;
-        return invoiceDao.deleteById(id);
     }
 }

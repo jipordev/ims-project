@@ -2,6 +2,7 @@ package co.cstad.dao.daoimplementation;
 
 import co.cstad.dao.UserDao;
 import co.cstad.model.ItemDTO;
+import co.cstad.model.RoleDTO;
 import co.cstad.model.UserDTO;
 import co.cstad.util.DbSingleton;
 
@@ -53,23 +54,28 @@ public class UserDaoImpl implements UserDao {
     }
     public List<UserDTO> select() {
         String sql = """
-            SELECT * FROM users
-            ORDER BY user_id ASC
-            """;
+                    SELECT u.user_id, u.username,r."name" , u.address, u.email, u.contact, u.status
+                                         FROM users AS u
+                                         INNER JOIN roles AS r
+                                         ON r."id" = u.role_id
+                                         ORDER BY u.user_id
+                """;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
             List<UserDTO> userDTOS = new ArrayList<>();
             while (resultSet.next()) {
+                RoleDTO role = new RoleDTO();
                 UserDTO userDTO = new UserDTO();
                 userDTO.setUsername(resultSet.getString("username"));
-                userDTO.setPassword(resultSet.getString("password"));
                 userDTO.setEmail(resultSet.getString("email"));
                 userDTO.setContact(resultSet.getString("contact"));
                 userDTO.setAddress(resultSet.getString("address"));
                 userDTO.setStatus(resultSet.getBoolean("status"));
-                userDTO.setRoleId(resultSet.getLong("role_id"));
+                role.setRoleName(resultSet.getString("name"));
                 userDTO.setUserId(resultSet.getLong("user_id"));
+
+                userDTO.setRoleDTO(role);
                 userDTOS.add(userDTO);
             }
             return userDTOS;

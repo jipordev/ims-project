@@ -11,7 +11,6 @@ public interface InvoiceService {
     List<InvoiceDTO> select();
     InvoiceDTO selectById(Long id);
     List<InvoiceDTO> selectByNo(String no);
-    InvoiceDTO updateById(InvoiceDTO item);
     InvoiceDTO updateById(InvoiceDTO invoice);
     InvoiceDTO deleteById(Long id);
 }

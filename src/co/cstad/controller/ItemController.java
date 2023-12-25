@@ -13,6 +13,8 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Scanner;
 
+import static co.cstad.util.handle.Handle.validateStringInput;
+
 public class ItemController {
     private final MenuViewAdmin menuViewAdmin;
     private final ItemService itemService;
@@ -50,7 +52,6 @@ public class ItemController {
             StockOutDTO newStockOut = ItemView.viewCreateStockOut();
 
             if (newStockOut != null) {
-                StockOutDTO stockOutResult = itemService.stockOut(newStockOut);
                 StockOutDTO stockOutResult = itemService.stockout(newStockOut);
 
                 if (stockOutResult != null) {
@@ -227,7 +228,7 @@ public class ItemController {
             System.out.println("Invalid ID input. Please try again.");
         }
     }
-    public void updateItemUnit(){
+
     public void updateItemQty () {
         try {
             System.out.print("Enter the ID of the item to update: ");
@@ -266,7 +267,7 @@ public class ItemController {
             System.out.println("Invalid ID input. Please try again");
         }
     }
-    public void updateItemQty () {
+
     public void updatePrice() {
         try {
             System.out.print("Enter the ID of the item to update: ");

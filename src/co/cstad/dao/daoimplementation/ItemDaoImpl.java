@@ -6,10 +6,8 @@ import co.cstad.model.StockInDTO;
 import co.cstad.model.StockOutDTO;
 import co.cstad.util.DbSingleton;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.math.BigDecimal;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -172,8 +170,8 @@ public class ItemDaoImpl implements ItemDao {
 
     @Override
     public StockOutDTO stockout(StockOutDTO stockOutDTO)  {
-        String insertStockInSql = "INSERT INTO stock_out (item_id, qty, price_out, stock_out_date) " +
-                "VALUES (?, ?, ?, CURRENT_DATE)";
+        String insertStockInSql = "INSERT INTO stock_out (item_id, price_out, stock_out_date) " +
+                "VALUES (?, ?, CURRENT_DATE)";
         String updateItemQtySql = "UPDATE item SET qty = qty - ? WHERE item_id = ?";
 
         try {
@@ -181,7 +179,6 @@ public class ItemDaoImpl implements ItemDao {
             try (PreparedStatement insertStockInStatement = connection.prepareStatement(insertStockInSql, PreparedStatement.RETURN_GENERATED_KEYS)) {
                 insertStockInStatement.setLong(1, stockOutDTO.getItemId());
                 insertStockInStatement.setInt(2, stockOutDTO.getQtyOut());
-                insertStockInStatement.setBigDecimal(3, stockOutDTO.getPriceOut());
 
                 // Execute the query
                 int affectedRows = insertStockInStatement.executeUpdate();
@@ -282,7 +279,6 @@ public class ItemDaoImpl implements ItemDao {
     @Override
     public ItemDTO updateById(ItemDTO itemDTO) {
         String sql = "UPDATE item SET item_code = ?, description = ?, unit = ?, qty = ?,price=?, price_a = ?, price_b = ?, price_c = ?, status = ? WHERE item_id = ?";
-        String sql = "UPDATE item SET item_code = ?, description = ?, unit = ?, qty = ?, price = ?, price_a = ?, price_b = ?, price_c = ?, status = ? WHERE item_id = ?";
 
         try {
             connection.setAutoCommit(false);  // Disable auto-commit

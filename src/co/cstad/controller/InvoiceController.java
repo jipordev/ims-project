@@ -12,16 +12,15 @@ import co.cstad.util.Singleton;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 
 public class InvoiceController {
     private final MenuViewAdmin menuViewAdmin;
     private final InvoiceService invoiceService;
     private final InvoiceView invoiceView;
+    private final Scanner scanner;
 
     public InvoiceController() {
-        invoiceService = Singleton.invoiceService();
-        menuViewAdmin = new MenuViewAdmin();
-        invoiceView = new InvoiceView();
         scanner = Singleton.scanner();
         invoiceService = Singleton.invoiceService();
         menuViewAdmin = Singleton.menuViewAdmin();
@@ -84,31 +83,4 @@ public class InvoiceController {
         }
         return null;
     }
-
-    public void read() {
-        List<InvoiceDTO> invoiceDTOList = invoiceService.select();
-        InvoiceView.printInvoiceList(invoiceDTOList);
-    }
-    public void update() {
-//        System.out.print("Enter Invoice No: ");
-//        String no = Singleton.getInstance().getScanner().nextLine();
-//        InvoiceDTO invoiceDTO = invoiceService.selectByNo(no);
-//
-//        if (invoiceDTO != null) {
-//            List<InvoiceDTO> invoiceList = Collections.singletonList(invoiceDTO);
-//            invoiceView.printInvoiceList(invoiceList);
-//            invoiceDTO.setCancelled(true);
-//            invoiceDTO.setStatus(false);
-//        }
-//
-//        else {
-//            System.out.println("Invoice not found.");
-//        }
-    }
-
-
-
-
-
-
 }

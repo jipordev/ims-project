@@ -21,15 +21,14 @@ public class ItemServiceImpl implements ItemService {
         return itemDao.insert(item);
     }
 
-
     @Override
     public StockInDTO stockIn(StockInDTO stockInDTO) {
         return itemDao.stockIn(stockInDTO);
     }
 
     @Override
-    public StockOutDTO stockOut(StockOutDTO stockOutDTO) {
-        return itemDao.stockOut(stockOutDTO);
+    public StockOutDTO stockout(StockOutDTO stockOutDTO) {
+        return itemDao.stockout(stockOutDTO);
     }
 
     @Override

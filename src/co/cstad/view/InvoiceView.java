@@ -14,8 +14,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class InvoiceView implements BoxBorder {
-    private static Scanner scanner = new Scanner(System.in);
-public class InvoiceView {
     private final static Scanner scanner = Singleton.scanner();
 
 //    public static InvoiceDTO collectNewInvoiceInformation(Long id) {
@@ -53,14 +51,6 @@ public class InvoiceView {
     }
 
     public static void printInvoiceDetails(Collection<InvoiceDTO> invoices) {
-        Table table = new Table(7, BorderStyle.UNICODE_BOX_DOUBLE_BORDER, ShownBorders.ALL);
-        table.addCell("   Invoice ID   ");
-        table.addCell("   Invoice No   ");
-        table.addCell("   Customer ID   ");
-        table.addCell("   Stock OUT ID   ");
-        table.addCell("   IS Cancelled   ");
-        table.addCell("   Paid Payment   ");
-        table.addCell("   Status   ");
         Table table = new Table(6, BorderStyle.UNICODE_BOX_DOUBLE_BORDER, ShownBorders.ALL);
         CellStyle cellStyle = new CellStyle(CellStyle.HorizontalAlign.center);
         table.setColumnWidth(0, 15, 25);

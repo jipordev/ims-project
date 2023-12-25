@@ -22,17 +22,12 @@ public class AlertDaoImpl implements AlertDao {
     @Override
     public List<AlertDTO> selectStockAlertReport() {
         String sql = """
-<<<<<<<<< Temporary merge branch 1
-                SELECT ga.alert_id , ga.qty_alert , i.qty , i.item_code , i.description
-                FROM group_alert ga
-                INNER JOIN item i ON ga.alert_id = i.alert_id
-                WHERE i.qty IS NOT NULL AND i.qty <= 20
-=========
-                SELECT ga.alert_id , ga.qty_alert , i.qty , i.item_code , i.description ,i.unit,CAST( i.price as numeric ) as "pr",i.status
-                FROM group_alert ga
-                INNER JOIN item i ON ga.alert_id = i.alert_id
-                WHERE i.qty IS NOT NULL AND i.qty < 30
-            """;
+                    SELECT ga.alert_id , ga.qty_alert , i.qty , i.item_code , i.description ,i.unit,CAST( i.price as numeric ) as "pr",i.status
+                                                                              FROM group_alert ga
+                                                                              INNER JOIN item i ON ga.alert_id = i.alert_id
+                                                                              WHERE i.qty IS NOT NULL AND i.qty <= 60
+                                                                              ORDER BY ga.alert_id ASC
+                """;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql);
              ResultSet resultSet = preparedStatement.executeQuery()) {

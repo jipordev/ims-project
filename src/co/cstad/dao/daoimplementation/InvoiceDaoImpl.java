@@ -24,7 +24,7 @@ public class InvoiceDaoImpl implements InvoiceDao {
     public InvoiceDTO insert(InvoiceDTO invoice) {
         try {
             String sql = """
-            INSERT INTO invoice (invoice_no, is_cancelled, status, is_paid,customer_id,stock_out_id) 
+            INSERT INTO invoice (invoice_no, is_cancelled, status, is_paid, customer_id, stock_out_id) 
             VALUES (?, ?, ?, ?, ?, ?)
             """;
             PreparedStatement pst = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -79,6 +79,28 @@ public class InvoiceDaoImpl implements InvoiceDao {
 
     @Override
     public Optional<InvoiceDTO> selectById(Long id) {
+        String sql = "SELECT * FROM invoice WHERE invoice_id = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setLong(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                InvoiceDTO invoiceDTO = new InvoiceDTO();
+                // Populate itemDTO fields from resultSet
+                invoiceDTO.setInvoiceId(resultSet.getLong("invoice_id"));
+                invoiceDTO.setInvoiceNo(resultSet.getString("invoice_no"));
+                invoiceDTO.setCancelled(resultSet.getBoolean("is_cancelled"));
+                invoiceDTO.setStatus(resultSet.getBoolean("status"));
+                invoiceDTO.setPaid(resultSet.getBoolean("is_paid"));
+                invoiceDTO.setCustomerId(resultSet.getLong("customer_id"));
+                invoiceDTO.setStockOutId(resultSet.getLong("stock_out_id"));
+
+                return Optional.of(invoiceDTO);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
         return Optional.empty();
     }
 
@@ -139,7 +161,8 @@ public class InvoiceDaoImpl implements InvoiceDao {
         InvoiceDTO invoice = new InvoiceDTO();
         invoice.setInvoiceId(rs.getLong("invoice_id"));
         invoice.setInvoiceNo(rs.getString("invoice_no"));
-        invoice.setDiscount(rs.getDouble("discount"));
+        invoice.setCustomerId(rs.getLong("customer_id"));
+        invoice.setStockOutId(rs.getLong("stock_out_id"));
         invoice.setCancelled(rs.getBoolean("is_cancelled"));
         invoice.setStatus(rs.getBoolean("status"));
         invoice.setPaid(rs.getBoolean("is_paid"));

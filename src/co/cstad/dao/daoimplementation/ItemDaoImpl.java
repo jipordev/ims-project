@@ -6,8 +6,10 @@ import co.cstad.model.StockInDTO;
 import co.cstad.model.StockOutDTO;
 import co.cstad.util.DbSingleton;
 
-import java.math.BigDecimal;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -169,7 +171,7 @@ public class ItemDaoImpl implements ItemDao {
 
 
     @Override
-    public StockOutDTO stockOut(StockOutDTO stockOutDTO)  {
+    public StockOutDTO stockout(StockOutDTO stockOutDTO)  {
         String insertStockInSql = "INSERT INTO stock_out (item_id, qty, price_out, stock_out_date) " +
                 "VALUES (?, ?, ?, CURRENT_DATE)";
         String updateItemQtySql = "UPDATE item SET qty = qty - ? WHERE item_id = ?";
@@ -237,12 +239,12 @@ public class ItemDaoImpl implements ItemDao {
                 itemDTO.setItemPrice_out_b(resultSet.getBigDecimal("pr_b"));
                 itemDTO.setItemPrice_out_c(resultSet.getBigDecimal("pr_c"));
                 itemDTO.setStatus(resultSet.getBoolean("status"));
-
+                itemDTO.setAlertId(resultSet.getLong("alert_id"));
                 itemDTOS.add(itemDTO);
             }
             return itemDTOS;
         } catch (SQLException e) {
-            System.out.println( "error : " + e.getMessage());
+            System.out.println(e.getMessage());
         }
         return null;
     }
@@ -280,6 +282,7 @@ public class ItemDaoImpl implements ItemDao {
     @Override
     public ItemDTO updateById(ItemDTO itemDTO) {
         String sql = "UPDATE item SET item_code = ?, description = ?, unit = ?, qty = ?,price=?, price_a = ?, price_b = ?, price_c = ?, status = ? WHERE item_id = ?";
+        String sql = "UPDATE item SET item_code = ?, description = ?, unit = ?, qty = ?, price = ?, price_a = ?, price_b = ?, price_c = ?, status = ? WHERE item_id = ?";
 
         try {
             connection.setAutoCommit(false);  // Disable auto-commit
@@ -289,6 +292,7 @@ public class ItemDaoImpl implements ItemDao {
             preparedStatement.setString(2, itemDTO.getItemDescription());
             preparedStatement.setString(3, itemDTO.getItemUnit());
             preparedStatement.setInt(4, itemDTO.getQty());
+            preparedStatement.setBigDecimal(5, itemDTO.getItemPrice());
             preparedStatement.setBigDecimal(5,itemDTO.getItemPrice());
             preparedStatement.setBigDecimal(6, itemDTO.getItemPrice_out_a());
             preparedStatement.setBigDecimal(7, itemDTO.getItemPrice_out_b());

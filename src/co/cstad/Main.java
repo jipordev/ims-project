@@ -1,13 +1,12 @@
 package co.cstad;
 
-import co.cstad.view.MenuView;
-import co.cstad.view.MenuViewAdmin;
-import co.cstad.view.MenuViewManager;
-import co.cstad.view.MenuViewReport;
+import co.cstad.view.staticmenu.MenuView;
+import co.cstad.view.staticmenu.MenuViewAdmin;
+import co.cstad.view.staticmenu.MenuViewManager;
+import co.cstad.view.staticmenu.MenuViewReport;
 
 import java.awt.*;
 import java.net.URI;
-import java.sql.SQLOutput;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 

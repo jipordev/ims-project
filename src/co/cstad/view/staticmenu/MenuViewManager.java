@@ -1,4 +1,4 @@
-package co.cstad.view;
+package co.cstad.view.staticmenu;
 
 public class MenuViewManager extends MenuViewAdmin {
     public static void mainMenuManager() {

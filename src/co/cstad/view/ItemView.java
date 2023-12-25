@@ -13,7 +13,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Scanner;
 
-import static co.cstad.view.BoxBorder.*;
+import static co.cstad.view.staticmenu.BoxBorder.*;
 
 public class ItemView {
     private final static Scanner scanner = Singleton.scanner();

@@ -1,8 +1,7 @@
 package co.cstad.view;
 
 import co.cstad.model.CustomerDTO;
-import co.cstad.model.ItemDTO;
-import co.cstad.util.Singleton;
+import co.cstad.view.staticmenu.BoxBorder;
 import org.nocrala.tools.texttablefmt.BorderStyle;
 import org.nocrala.tools.texttablefmt.ShownBorders;
 import org.nocrala.tools.texttablefmt.Table;
@@ -10,7 +9,7 @@ import org.nocrala.tools.texttablefmt.Table;
 import java.util.Collection;
 import java.util.Scanner;
 
-public class CustomerView implements BoxBorder{
+public class CustomerView implements BoxBorder {
     public static CustomerDTO viewCreateCustomer(CustomerDTO  customerDTO , Scanner scanner){
 
         System.out.print("  Enter Name : ");

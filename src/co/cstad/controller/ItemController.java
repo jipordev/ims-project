@@ -7,7 +7,7 @@ import co.cstad.model.StockOutDTO;
 import co.cstad.service.ItemService;
 import co.cstad.util.Singleton;
 import co.cstad.view.ItemView;
-import co.cstad.view.MenuViewAdmin;
+import co.cstad.view.staticmenu.MenuViewAdmin;
 
 import java.math.BigDecimal;
 import java.util.List;

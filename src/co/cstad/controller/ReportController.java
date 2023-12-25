@@ -4,10 +4,8 @@ import co.cstad.model.*;
 import co.cstad.service.AlertService;
 import co.cstad.service.ItemService;
 import co.cstad.service.ReportService;
-import co.cstad.service.UserService;
 import co.cstad.util.Singleton;
-import co.cstad.view.ItemView;
-import co.cstad.view.MenuViewAdmin;
+import co.cstad.view.staticmenu.MenuViewAdmin;
 import co.cstad.view.ReportView;
 
 import java.util.List;

@@ -1,6 +1,7 @@
 package co.cstad.view;
 
 import co.cstad.model.*;
+import co.cstad.view.staticmenu.BoxBorder;
 import org.nocrala.tools.texttablefmt.BorderStyle;
 import org.nocrala.tools.texttablefmt.ShownBorders;
 import org.nocrala.tools.texttablefmt.Table;

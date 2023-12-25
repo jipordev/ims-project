@@ -3,19 +3,13 @@ package co.cstad.dao.daoimplementation;
 import co.cstad.dao.CustomerDao;
 import co.cstad.model.CustomerDTO;
 import co.cstad.util.DbSingleton;
-import co.cstad.view.BoxBorder;
-import org.nocrala.tools.texttablefmt.BorderStyle;
-import org.nocrala.tools.texttablefmt.ShownBorders;
-import org.nocrala.tools.texttablefmt.Table;
 
-import javax.xml.transform.Result;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 public class CustomerDaoImpl implements CustomerDao {

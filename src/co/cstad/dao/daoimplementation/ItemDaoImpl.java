@@ -6,10 +6,8 @@ import co.cstad.model.StockInDTO;
 import co.cstad.model.StockOutDTO;
 import co.cstad.util.DbSingleton;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.math.BigDecimal;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -71,7 +69,7 @@ public class ItemDaoImpl implements ItemDao {
 
         try {
             // Insert into stock_in table
-            try (PreparedStatement insertStockInStatement = connection.prepareStatement(insertStockInSql, PreparedStatement.RETURN_GENERATED_KEYS)) {
+            try (PreparedStatement insertStockInStatement = connection.prepareStatement(insertStockInSql, Statement.RETURN_GENERATED_KEYS)) {
                 insertStockInStatement.setLong(1, stockInDTO.getItemId());
                 insertStockInStatement.setInt(2, stockInDTO.getQtyIn());
                 insertStockInStatement.setBigDecimal(3, stockInDTO.getPriceIn());
@@ -80,30 +78,26 @@ public class ItemDaoImpl implements ItemDao {
                 int affectedRows = insertStockInStatement.executeUpdate();
 
                 if (affectedRows > 0) {
-                    // Retrieve the generated keys (if any)
-                    ResultSet generatedKeys = insertStockInStatement.getGeneratedKeys();
-                    if (generatedKeys.next()) {
-                        // Set the generated ID to the stockInDTO
-                        stockInDTO.setStockInID(generatedKeys.getLong(1));
-
-                        // Update item quantity in the item table
-                        try (PreparedStatement updateItemQtyStatement = connection.prepareStatement(updateItemQtySql)) {
-                            updateItemQtyStatement.setInt(1, stockInDTO.getQtyIn());
-                            updateItemQtyStatement.setLong(2, stockInDTO.getItemId());
-                            updateItemQtyStatement.executeUpdate();
-                        }
-
-                        return stockInDTO;
+                    // Retrieve the price_in value from the stock_in table
+                    try (PreparedStatement updateItemQtyStatement = connection.prepareStatement(updateItemQtySql)) {
+                        updateItemQtyStatement.setInt(1, stockInDTO.getQtyIn());
+                        updateItemQtyStatement.setBigDecimal(2, stockInDTO.getPriceIn());
+                        updateItemQtyStatement.setBigDecimal(3, stockInDTO.getPriceIn().multiply(new BigDecimal("0.97")));
+                        updateItemQtyStatement.setBigDecimal(4, stockInDTO.getPriceIn().multiply(new BigDecimal("0.95")));
+                        updateItemQtyStatement.setBigDecimal(5, stockInDTO.getPriceIn().multiply(new BigDecimal("0.93")));
+                        updateItemQtyStatement.setLong(6, stockInDTO.getItemId());
+                        updateItemQtyStatement.executeUpdate();
+                    }catch (SQLException e ){
+                        System.out.println(e.getErrorCode());
                     }
                 }
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("Error: " + e.getMessage());
         }
 
         return null;
     }
-
     @Override
     public StockOutDTO stockout(StockOutDTO stockOutDTO)  {
         String insertStockInSql = "INSERT INTO stock_out (item_id, qty, price_out, stock_out_date) " +

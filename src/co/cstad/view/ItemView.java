@@ -23,6 +23,8 @@ public class ItemView {
     static {
         itemService = Singleton.itemService();
     }
+
+
     public static StockInDTO viewCreateStock(){
         StockInDTO stockInDTO = new StockInDTO();
 
@@ -50,7 +52,6 @@ public class ItemView {
 
         return stockInDTO;
     }
-
 
 
     public static StockOutDTO viewCreateStockOut() {

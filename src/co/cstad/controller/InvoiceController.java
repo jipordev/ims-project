@@ -12,16 +12,15 @@ import co.cstad.util.Singleton;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 
 public class InvoiceController {
     private final MenuViewAdmin menuViewAdmin;
     private final InvoiceService invoiceService;
     private final InvoiceView invoiceView;
+    private final Scanner scanner;
 
     public InvoiceController() {
-        invoiceService = Singleton.invoiceService();
-        menuViewAdmin = new MenuViewAdmin();
-        invoiceView = new InvoiceView();
         scanner = Singleton.scanner();
         invoiceService = Singleton.invoiceService();
         menuViewAdmin = Singleton.menuViewAdmin();
@@ -34,22 +33,42 @@ public class InvoiceController {
     }
     public void update() {
         try {
-
-            System.out.print("Enter Invoice id you want to return : ");
+            System.out.print("Enter Invoice id you want to return: ");
             Long id = Long.parseLong(scanner.nextLine());
 
-//            InvoiceDTO existingInvoice = invoiceService.selectById(id);
+            // Retrieve the existing invoice
+            InvoiceDTO existingInvoice = invoiceService.selectById(id);
 
+            if (existingInvoice != null) {
+                // Display existing invoice details (optional)
+                System.out.println("Existing Invoice Details:");
+                System.out.println(existingInvoice);
 
-        } catch (StringInputException e){
-            System.out.println(e.getMessage());
+                // Perform the update (assuming you have the updated details)
+                existingInvoice.setCancelled(true);
+                existingInvoice.setStatus(false);
+
+                // Call the service layer to update the invoice
+                InvoiceDTO updatedInvoice = invoiceService.updateById(existingInvoice);
+
+                if (updatedInvoice != null) {
+                    System.out.println("Invoice updated successfully!");
+                } else {
+                    System.out.println("Failed to update the invoice.");
+                }
+            } else {
+                System.out.println("Invoice not found with ID: " + id);
+            }
+
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please enter a valid numeric ID.");
+        } catch (Exception e) {
+            System.out.println("An error occurred: " + e.getMessage());
         }
     }
     public InvoiceDTO create() {
         InvoiceDTO newInvoice = invoiceView.collectNewInvoiceInformation();
 
-    public InvoiceDTO newInvoice(){
-        InvoiceDTO newInvoice = InvoiceView.collectNewInvoiceInformation();
         if (newInvoice != null) {
             InvoiceDTO createdInvoice = invoiceService.insert(newInvoice);
 
@@ -64,31 +83,4 @@ public class InvoiceController {
         }
         return null;
     }
-
-    public void read() {
-        List<InvoiceDTO> invoiceDTOList = invoiceService.select();
-        InvoiceView.printInvoiceList(invoiceDTOList);
-    }
-    public void update() {
-//        System.out.print("Enter Invoice No: ");
-//        String no = Singleton.getInstance().getScanner().nextLine();
-//        InvoiceDTO invoiceDTO = invoiceService.selectByNo(no);
-//
-//        if (invoiceDTO != null) {
-//            List<InvoiceDTO> invoiceList = Collections.singletonList(invoiceDTO);
-//            invoiceView.printInvoiceList(invoiceList);
-//            invoiceDTO.setCancelled(true);
-//            invoiceDTO.setStatus(false);
-//        }
-//
-//        else {
-//            System.out.println("Invoice not found.");
-//        }
-    }
-
-
-
-
-
-
 }

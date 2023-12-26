@@ -54,7 +54,7 @@ public class UserDaoImpl implements UserDao {
     public List<UserDTO> select() {
         String sql = """
             SELECT * FROM users
-            ORDER BY user_id ASC
+            ORDER BY id ASC
             """;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -62,19 +62,18 @@ public class UserDaoImpl implements UserDao {
             List<UserDTO> userDTOS = new ArrayList<>();
             while (resultSet.next()) {
                 UserDTO userDTO = new UserDTO();
+                userDTO.setUserId(resultSet.getLong("id"));
+                userDTO.setRoleId(resultSet.getLong("role_id"));
                 userDTO.setUsername(resultSet.getString("username"));
                 userDTO.setPassword(resultSet.getString("password"));
+                userDTO.setAddress(resultSet.getString("address"));
                 userDTO.setEmail(resultSet.getString("email"));
                 userDTO.setContact(resultSet.getString("contact"));
-                userDTO.setAddress(resultSet.getString("address"));
                 userDTO.setStatus(resultSet.getBoolean("status"));
-                userDTO.setRoleId(resultSet.getLong("role_id"));
-                userDTO.setUserId(resultSet.getLong("user_id"));
                 userDTOS.add(userDTO);
             }
             return userDTOS;
         } catch (SQLException e) {
-            // Log or throw an exception for better error handling
             e.printStackTrace();
         }
         return null;

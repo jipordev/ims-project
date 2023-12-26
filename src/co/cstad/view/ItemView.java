@@ -19,10 +19,7 @@ import org.nocrala.tools.texttablefmt.CellStyle;
 
 public class ItemView {
     private final static Scanner scanner = Singleton.scanner();
-    private static ItemService itemService;
-    static {
-        itemService = Singleton.itemService();
-    }
+    private static ItemService itemService = Singleton.itemService();
     public static StockInDTO viewCreateStock(){
         StockInDTO stockInDTO = new StockInDTO();
 
@@ -146,6 +143,16 @@ public class ItemView {
     public static void printItemDetails(Collection<ItemDTO> items) {
         Table table = new Table(10, BorderStyle.UNICODE_BOX_DOUBLE_BORDER, ShownBorders.ALL);
         CellStyle cellStyle = new CellStyle(CellStyle.HorizontalAlign.center);
+        table.setColumnWidth(0,25,25);
+        table.setColumnWidth(1,25,25);
+        table.setColumnWidth(2,25,25);
+        table.setColumnWidth(3,25,25);
+        table.setColumnWidth(4,25,25);
+        table.setColumnWidth(5,25,25);
+        table.setColumnWidth(6,25,25);
+        table.setColumnWidth(7,25,25);
+        table.setColumnWidth(8,25,25);
+        table.setColumnWidth(9,25,25);
         table.addCell(yellow + "   Item ID   " + reset, cellStyle);
         table.addCell(yellow + "   Item Code   " + reset, cellStyle);
         table.addCell(yellow + "   Description   " + reset, cellStyle);

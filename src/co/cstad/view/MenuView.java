@@ -247,21 +247,6 @@ public class MenuView implements BoxBorder {
     }
 
 
-    public void inputValidation(){
-        System.out.println(cyan + TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(40) + TOP_RIGHT_CORNER);
-        System.out.println(VERTICAL_BORDER+ SPACE.repeat(40)+ VERTICAL_BORDER);
-        System.out.println(VERTICAL_BORDER + SPACE.repeat(7) + TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(24) + TOP_RIGHT_CORNER+ SPACE.repeat(7) + VERTICAL_BORDER);
-        System.out.println(VERTICAL_BORDER + SPACE.repeat(7)+ VERTICAL_BORDER+ reset + red + " Input invalid data...!"+ reset + cyan + SPACE + VERTICAL_BORDER + SPACE.repeat(7)+VERTICAL_BORDER);
-        System.out.println(VERTICAL_BORDER + SPACE.repeat(7) + BOTTOM_LEFT_CORNER + HORIZONTAL_BORDER.repeat(24) + BOTTOM_RIGHT_CORNER+ SPACE.repeat(7) + VERTICAL_BORDER);
-
-        System.out.println(VERTICAL_BORDER+ SPACE.repeat(40)+ VERTICAL_BORDER);
-        System.out.println(VERTICAL_BORDER + SPACE.repeat(2) + TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(34) + TOP_RIGHT_CORNER+ SPACE.repeat(2) + VERTICAL_BORDER);
-        System.out.println(VERTICAL_BORDER + SPACE.repeat(2)+ VERTICAL_BORDER+ reset + yellow + " Press Enter key to Try again...!"+ reset + cyan + SPACE + VERTICAL_BORDER + SPACE.repeat(2)+VERTICAL_BORDER);
-        System.out.println(VERTICAL_BORDER + SPACE.repeat(2) + BOTTOM_LEFT_CORNER + HORIZONTAL_BORDER.repeat(34) + BOTTOM_RIGHT_CORNER+ SPACE.repeat(2) + VERTICAL_BORDER);
-        System.out.println(VERTICAL_BORDER   + SPACE.repeat(40) + VERTICAL_BORDER);
-        System.out.println(BOTTOM_LEFT_CORNER + HORIZONTAL_BORDER.repeat(40) + BOTTOM_RIGHT_CORNER);
-    }
-
 
 
 
@@ -277,11 +262,8 @@ public class MenuView implements BoxBorder {
         table.addCell(yellow +"  3 > UNIT " + reset  );
         table.addCell(yellow +"  4 > QUANTITY " + reset  );
         table.addCell(yellow +"  5 > PRICE " + reset  );
-        table.addCell(yellow +"  6 > PRICE_A " + reset  );
-        table.addCell(yellow +"  7 > PRICE_B " + reset  );
-        table.addCell(yellow +"  8 > PRICE_C " + reset  );
-        table.addCell(yellow +"  9 > STATUS " + reset  );
-        table.addCell(yellow +"  10 > EXIT " + reset  );
+        table.addCell(yellow +"  6 > STATUS " + reset  );
+        table.addCell(yellow +"  7 > EXIT " + reset  );
         System.out.print(table.render());
         System.out.println("\n");
 

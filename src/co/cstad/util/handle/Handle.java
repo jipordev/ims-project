@@ -273,9 +273,9 @@ public class Handle {
                     case 2 -> customerController.read();
                     case 3 -> handleMenuCustomerUpdate();
                     case 4 -> {
-                        CustomerDTO delete = customerController.delete();
-                        if (delete != null) {
-                            customerController.confirmation(delete);
+                        CustomerDTO deletedCustomer = customerController.delete();
+                        if (deletedCustomer != null) {
+                            customerController.confirmation(deletedCustomer);
                         }
                     }
                     case 5 -> {
@@ -338,11 +338,8 @@ public class Handle {
                     case 3 -> itemController.updateItemUnit();
                     case 4 -> itemController.updateItemQty();
                     case 5 -> itemController.updatePrice();
-                    case 6 -> itemController.updateItemPriceA();
-                    case 7 -> itemController.updateItemPriceB();
-                    case 8 -> itemController.updateItemPriceC();
-                    case 9 -> itemController.updateItemStatus();
-                    case 10 -> {
+                    case 6 -> itemController.updateItemStatus();
+                    case 7 -> {
                         return;
                     }
                     default -> {

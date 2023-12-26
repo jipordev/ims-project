@@ -5,18 +5,21 @@ import co.cstad.model.CustomerDTO;
 import co.cstad.service.CustomerService;
 import co.cstad.util.Singleton;
 import co.cstad.view.CustomerView;
+import co.cstad.view.MenuViewAdmin;
 
 import java.util.List;
 import java.util.Scanner;
 
 public class CustomerController {
     private final Scanner scanner ;
+    private final MenuViewAdmin menuViewAdmin;
     private final CustomerDTO customerDTO;
     private final CustomerService customerService;
     public CustomerController(){
         scanner = Singleton.scanner();
         customerDTO = new CustomerDTO();
         customerService = Singleton.customerService();
+        menuViewAdmin = Singleton.menuViewAdmin();
     }
 
     public void read(){
@@ -336,8 +339,7 @@ public class CustomerController {
             System.out.println("Invalid ID format. Please enter a valid number.");
         }
         return null;
-    }
-    public void confirmation(CustomerDTO createdCustomer) {
-        CustomerView.readOneCustomer(createdCustomer);
+    }    public void confirmation(CustomerDTO createdCustomer) {
+        menuViewAdmin.cutomerConfirmation(createdCustomer);
     }
 }

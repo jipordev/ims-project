@@ -83,5 +83,8 @@ public class CustomerView implements BoxBorder{
 
         System.out.println(table.render());
     }
+    public void confirmation(CustomerDTO createdCustomer) {
+        CustomerView.readOneCustomer(createdCustomer);
+    }
 
 }

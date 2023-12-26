@@ -62,21 +62,24 @@ public class ReportView implements BoxBorder {
 
         System.out.println(table.render());
     }
+
+
     public static void stockInReport(Collection<StockInDTO> reports) {
         System.out.println(yellow + "\t\tStock In Report" + reset);
         Table table = new Table(5, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
-        CellStyle cellStyle = new CellStyle(CellStyle.HorizontalAlign.center);
         table.setColumnWidth(0, 15, 20);
         table.setColumnWidth(1, 15, 20);
         table.setColumnWidth(2, 15, 20);
         table.setColumnWidth(3, 15, 20);
         table.setColumnWidth(4, 15, 20);
 
-        table.addCell(yellow+"Stock_In_Id", cellStyle);
-        table.addCell(yellow+"Item_Id", cellStyle);
-        table.addCell(yellow+"Qty", cellStyle);
-        table.addCell(yellow+"Price_In", cellStyle);
-        table.addCell(yellow+"Stock_In_Date", cellStyle);
+        CellStyle cellStyle = new CellStyle(CellStyle.HorizontalAlign.center);
+
+        table.addCell(yellow + "Stock_In_Id", cellStyle);
+        table.addCell(yellow + "Item_Id", cellStyle);
+        table.addCell(yellow + "Qty", cellStyle);
+        table.addCell(yellow + "Price_In", cellStyle);
+        table.addCell(yellow + "Stock_In_Date" + reset, cellStyle);
 
         for (StockInDTO report : reports) {
             table.addCell(green + report.getStockInID(), cellStyle);
@@ -85,6 +88,7 @@ public class ReportView implements BoxBorder {
             table.addCell(green + report.getPriceIn(), cellStyle);
             table.addCell(green + report.getStockInDate() + reset, cellStyle);
         }
+
         System.out.println(table.render());
     }
 

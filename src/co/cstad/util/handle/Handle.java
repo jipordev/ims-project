@@ -273,9 +273,9 @@ public class Handle {
                     case 2 -> customerController.read();
                     case 3 -> handleMenuCustomerUpdate();
                     case 4 -> {
-                        CustomerDTO delete = customerController.delete();
-                        if (delete != null) {
-                            customerController.confirmation(delete);
+                        CustomerDTO deletedCustomer = customerController.delete();
+                        if (deletedCustomer != null) {
+                            customerController.confirmation(deletedCustomer);
                         }
                     }
                     case 5 -> {
@@ -338,11 +338,8 @@ public class Handle {
                     case 3 -> itemController.updateItemUnit();
                     case 4 -> itemController.updateItemQty();
                     case 5 -> itemController.updatePrice();
-                    case 6 -> itemController.updateItemPriceA();
-                    case 7 -> itemController.updateItemPriceB();
-                    case 8 -> itemController.updateItemPriceC();
-                    case 9 -> itemController.updateItemStatus();
-                    case 10 -> {
+                    case 6 -> itemController.updateItemStatus();
+                    case 7 -> {
                         return;
                     }
                     default -> {
@@ -366,7 +363,7 @@ public class Handle {
                 System.out.print("choose ➡\uFE0F ");
                 optInvoice = Integer.parseInt(scanner.nextLine());
                 switch (optInvoice) {
-                    case 1 -> invoiceController.newInvoice();
+                    case 1 -> invoiceController.create();
                     case 2 -> invoiceController.update();
                     case 3 -> invoiceController.read();
                     case 4 -> {
@@ -428,7 +425,6 @@ public class Handle {
                     case 3 -> reportController.stockOutReport();
                     case 4 -> reportController.invoiceDetail();
                     case 5 -> reportController.invoiceAdjustment();
-                    case 6 -> reportController.itemPriceHistory();
                     case 7 -> reportController.stockAlert();
                     case 8 -> reportController.summaryReport();
                     case 9 -> {

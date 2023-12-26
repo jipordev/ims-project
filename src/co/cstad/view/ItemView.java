@@ -18,11 +18,8 @@ import static co.cstad.view.BoxBorder.*;
 import org.nocrala.tools.texttablefmt.CellStyle;
 
 public class ItemView {
-    private static Scanner scanner = new Scanner(System.in);
-    private static ItemService itemService;
-    static {
-        itemService = Singleton.itemService();
-    }
+    private final static Scanner scanner = Singleton.scanner();
+    private static ItemService itemService = Singleton.itemService();
     public static StockInDTO viewCreateStock(){
         StockInDTO stockInDTO = new StockInDTO();
 
@@ -32,12 +29,16 @@ public class ItemView {
                 Long itemId = Long.parseLong(scanner.nextLine());
                 ItemDTO existingItem = itemService.selectById(itemId);
 
-                if (existingItem != null ){
-                    stockInDTO.setItemId(itemId);
-                    break;
-                } else {
-                    System.out.println("Item with id : "+ itemId + " doesn't exist.");
+                if(existingItem != null ){
+                    if (existingItem.isStatus()){
+                        stockInDTO.setItemId(itemId);
+                        break;
+                    } else
+                        System.out.println("Item with ID " + itemId + " has status 'false'. \n Please try again with a different item.\n");
                 }
+                else
+                    System.out.println("Item with id : "+ itemId + " doesn't exist.");
+
             } catch (NumberFormatException e) {
                 System.out.println(e.getMessage());
             }
@@ -68,7 +69,28 @@ public class ItemView {
                     // Check if quantity is greater than 0
                     if (existingItem.getQty() > 0) {
                         stockOutDTO.setItemId(itemId);
-                        break;
+
+                        // Display current available quantity
+                        System.out.println("  => ItemID " +itemId + " have quantity : "+ existingItem.getQty());
+
+                        // Ask user for quantity to stock out
+                        do {
+                            try {
+                                System.out.print("  Enter Qty : ");
+                                int enteredQty = Integer.parseInt(scanner.nextLine());
+
+                                // Check if entered quantity is valid
+                                if (enteredQty > 0 && enteredQty <= existingItem.getQty()) {
+                                    stockOutDTO.setQtyOut(enteredQty);
+                                    return stockOutDTO;
+                                } else {
+                                    System.out.println("Invalid quantity. Please enter a valid quantity within the available stock.\n");
+                                }
+                            } catch (NumberFormatException e) {
+                                System.out.println("Invalid input. Please enter a valid numeric quantity.\n");
+                            }
+                        } while (true);
+
                     } else {
                         System.out.println("Item with ID " + itemId + " has zero quantity.\n Please try again with a different item.\n");
                     }
@@ -81,40 +103,31 @@ public class ItemView {
                 System.out.println("Invalid input. Please enter a valid numeric Item ID.\n");
             }
         } while (true);
-
-        try {
-            System.out.print("  Enter Price : ");
-            stockOutDTO.setPriceOut(new BigDecimal(scanner.nextLine()));
-
-            System.out.print("  Enter Qty : ");
-            stockOutDTO.setQtyOut(Integer.parseInt(scanner.nextLine()));
-
-            return stockOutDTO;
-        } catch (NumberFormatException | ArithmeticException e) {
-            System.out.println("Invalid input for price or quantity. \nPlease enter valid numeric values.\n");
-            return null;
-        }
     }
+
 
 
     public static ItemDTO collectNewItemInformation() {
         ItemDTO newItem = new ItemDTO();
 
-        System.out.print("Enter item code:");
+        System.out.print("Enter item code: ");
         newItem.setItemCode(scanner.nextLine());
 
-        System.out.print("Enter item description:");
+        System.out.print("Enter item description: ");
         newItem.setItemDescription(scanner.nextLine());
 
-        System.out.print("Enter item unit:");
+        System.out.print("Enter item unit: ");
         newItem.setItemUnit(scanner.nextLine());
 
-        System.out.print("Enter item quantity:");
+        System.out.print("Enter item quantity: ");
         newItem.setQty(Integer.parseInt(scanner.nextLine()));
 
         System.out.print("Enter item price: ");
         BigDecimal price = new BigDecimal(scanner.nextLine());
         newItem.setItemPrice(price);
+
+        System.out.print("Enter alert ID: ");
+        newItem.setAlertId(Long.parseLong(scanner.nextLine()));
 
         // Calculate price_a, price_b, and price_c based on the input price
         newItem.setItemPrice_out_a(price.multiply(new BigDecimal("0.93")));
@@ -130,6 +143,16 @@ public class ItemView {
     public static void printItemDetails(Collection<ItemDTO> items) {
         Table table = new Table(10, BorderStyle.UNICODE_BOX_DOUBLE_BORDER, ShownBorders.ALL);
         CellStyle cellStyle = new CellStyle(CellStyle.HorizontalAlign.center);
+        table.setColumnWidth(0,25,25);
+        table.setColumnWidth(1,25,25);
+        table.setColumnWidth(2,25,25);
+        table.setColumnWidth(3,25,25);
+        table.setColumnWidth(4,25,25);
+        table.setColumnWidth(5,25,25);
+        table.setColumnWidth(6,25,25);
+        table.setColumnWidth(7,25,25);
+        table.setColumnWidth(8,25,25);
+        table.setColumnWidth(9,25,25);
         table.addCell(yellow + "   Item ID   " + reset, cellStyle);
         table.addCell(yellow + "   Item Code   " + reset, cellStyle);
         table.addCell(yellow + "   Description   " + reset, cellStyle);
@@ -153,7 +176,6 @@ public class ItemView {
             table.addCell(green + String.valueOf(item.getItemPrice_out_c()), cellStyle);
             table.addCell(green + (item.getStatus() ? "Active" : "Inactive") + reset, cellStyle);
         }
-
         System.out.println(table.render());
     }
 

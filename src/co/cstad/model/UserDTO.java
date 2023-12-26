@@ -9,6 +9,15 @@ public class UserDTO {
     private String address;
     private Boolean status;
     private Long roleId;
+    private RoleDTO roleDTO;
+
+    public RoleDTO getRoleDTO() {
+        return roleDTO;
+    }
+
+    public void setRoleDTO(RoleDTO roleDTO) {
+        this.roleDTO = roleDTO;
+    }
 
     public Long getUserId() {
         return userId;

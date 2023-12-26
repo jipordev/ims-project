@@ -1,5 +1,6 @@
 package co.cstad.view;
 
+import co.cstad.model.RoleDTO;
 import co.cstad.model.UserDTO;
 import co.cstad.util.Singleton;
 import org.nocrala.tools.texttablefmt.BorderStyle;
@@ -57,7 +58,7 @@ public class UserView implements BoxBorder {
     }
 
     public static void printUserDetails(Collection<UserDTO> userDTOS) {
-        Table table = new Table(8, BorderStyle.UNICODE_BOX_DOUBLE_BORDER, ShownBorders.ALL);
+        Table table = new Table(7, BorderStyle.UNICODE_BOX_DOUBLE_BORDER, ShownBorders.ALL);
         CellStyle cellStyle = new CellStyle(CellStyle.HorizontalAlign.center);
         table.setColumnWidth(0, 15, 25);
         table.setColumnWidth(1, 20, 50);
@@ -66,25 +67,24 @@ public class UserView implements BoxBorder {
         table.setColumnWidth(4, 20, 50);
         table.setColumnWidth(5, 20, 50);
         table.setColumnWidth(6, 20, 50);
-        table.setColumnWidth(7, 20, 50);
+
         table.addCell(yellow + "User ID", cellStyle);
         table.addCell(yellow + "Username", cellStyle);
-        table.addCell(yellow + "Password", cellStyle);
-        table.addCell(yellow + "Email", cellStyle);
+        table.addCell(yellow + "Role Name", cellStyle);
+        table.addCell(yellow + "User Email", cellStyle);
         table.addCell(yellow + "User Contact", cellStyle);
         table.addCell(yellow + "Address", cellStyle);
         table.addCell(yellow + "User Status", cellStyle);
-        table.addCell(yellow + "Role ID", cellStyle);
 
         for (UserDTO userDTO : userDTOS) {
             table.addCell(green + String.valueOf(userDTO.getUserId()), cellStyle);
             table.addCell(green + userDTO.getUsername(), cellStyle);
-            table.addCell(green + userDTO.getPassword(), cellStyle);
+            table.addCell(green + userDTO.getRoleDTO().getRoleName() , cellStyle);
             table.addCell(green + userDTO.getEmail(), cellStyle);
             table.addCell(green + userDTO.getContact(), cellStyle);
             table.addCell(green + userDTO.getAddress(), cellStyle);
             table.addCell(green + (userDTO.getStatus() ? "Active" : "Inactive"), cellStyle);
-            table.addCell(green + String.valueOf(userDTO.getRoleId()), cellStyle);
+
         }
 
         System.out.println(table.render());

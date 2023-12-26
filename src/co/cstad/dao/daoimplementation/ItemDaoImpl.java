@@ -169,9 +169,9 @@ public class ItemDaoImpl implements ItemDao {
 
 
     @Override
-    public StockOutDTO stockOut(StockOutDTO stockOutDTO)  {
-        String insertStockInSql = "INSERT INTO stock_out (item_id, qty, price_out, stock_out_date) " +
-                "VALUES (?, ?, ?, CURRENT_DATE)";
+    public StockOutDTO stockout(StockOutDTO stockOutDTO)  {
+        String insertStockInSql = "INSERT INTO stock_out (item_id, price_out, stock_out_date) " +
+                "VALUES (?, ?, CURRENT_DATE)";
         String updateItemQtySql = "UPDATE item SET qty = qty - ? WHERE item_id = ?";
 
         try {
@@ -179,7 +179,6 @@ public class ItemDaoImpl implements ItemDao {
             try (PreparedStatement insertStockInStatement = connection.prepareStatement(insertStockInSql, PreparedStatement.RETURN_GENERATED_KEYS)) {
                 insertStockInStatement.setLong(1, stockOutDTO.getItemId());
                 insertStockInStatement.setInt(2, stockOutDTO.getQtyOut());
-                insertStockInStatement.setBigDecimal(3, stockOutDTO.getPriceOut());
 
                 // Execute the query
                 int affectedRows = insertStockInStatement.executeUpdate();
@@ -237,12 +236,12 @@ public class ItemDaoImpl implements ItemDao {
                 itemDTO.setItemPrice_out_b(resultSet.getBigDecimal("pr_b"));
                 itemDTO.setItemPrice_out_c(resultSet.getBigDecimal("pr_c"));
                 itemDTO.setStatus(resultSet.getBoolean("status"));
-
+                itemDTO.setAlertId(resultSet.getLong("alert_id"));
                 itemDTOS.add(itemDTO);
             }
             return itemDTOS;
         } catch (SQLException e) {
-            System.out.println( "error : " + e.getMessage());
+            System.out.println(e.getMessage());
         }
         return null;
     }
@@ -289,6 +288,7 @@ public class ItemDaoImpl implements ItemDao {
             preparedStatement.setString(2, itemDTO.getItemDescription());
             preparedStatement.setString(3, itemDTO.getItemUnit());
             preparedStatement.setInt(4, itemDTO.getQty());
+            preparedStatement.setBigDecimal(5, itemDTO.getItemPrice());
             preparedStatement.setBigDecimal(5,itemDTO.getItemPrice());
             preparedStatement.setBigDecimal(6, itemDTO.getItemPrice_out_a());
             preparedStatement.setBigDecimal(7, itemDTO.getItemPrice_out_b());

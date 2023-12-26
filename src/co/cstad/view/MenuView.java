@@ -19,17 +19,17 @@ public class MenuView implements BoxBorder {
 
     //First Interface (CSTAD)
     public void startInterface() {
-//        for (int i = 0; i <= 100; i+=2) {
-//            int totalBlocks = 50;
-//            int blocksToShow = (i * totalBlocks) / 100;
-//            System.out.print(" ".repeat(20) + " Loading [ " + i + "% ]");
-//            System.out.print(" ".repeat(10) + getProgressBar(blocksToShow, totalBlocks) + "\r");
-//            try {
-//                Thread.sleep(100);
-//            } catch (InterruptedException e) {
-//                throw new RuntimeException(e);
-//            }
-//        }
+        for (int i = 0; i <= 100; i+=2) {
+            int totalBlocks = 50;
+            int blocksToShow = (i * totalBlocks) / 100;
+            System.out.print(" ".repeat(20) + " Loading [ " + i + "% ]");
+            System.out.print(" ".repeat(10) + getProgressBar(blocksToShow, totalBlocks) + "\r");
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
         System.out.println("\n".repeat(5));
         System.out.print(cyan);
         System.out.println( TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(72) + TOP_RIGHT_CORNER);
@@ -194,7 +194,7 @@ public class MenuView implements BoxBorder {
         System.out.println(TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(62) + TOP_RIGHT_CORNER);
         System.out.print(VERTICAL_BORDER + SPACE + TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(28) + TOP_RIGHT_CORNER);
         System.out.println(TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(28) + TOP_RIGHT_CORNER + SPACE + VERTICAL_BORDER);
-        System.out.print(VERTICAL_BORDER + SPACE + VERTICAL_BORDER + " ".repeat(10) + yellow + "  MENU  " + " ".repeat(10) + cyan + VERTICAL_BORDER);
+        System.out.print(VERTICAL_BORDER + SPACE + VERTICAL_BORDER + " ".repeat(7) + yellow + " REPORT MENU  " + " ".repeat(7) + cyan + VERTICAL_BORDER);
         System.out.println(VERTICAL_BORDER + " ".repeat(28) + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
         System.out.print(cyan + VERTICAL_BORDER + SPACE + VERTICAL_BORDER + HORIZONTAL_BORDER.repeat(28) + VERTICAL_BORDER);
         System.out.println(cyan + VERTICAL_BORDER + " ".repeat(28) + VERTICAL_BORDER + SPACE + VERTICAL_BORDER);
@@ -247,21 +247,6 @@ public class MenuView implements BoxBorder {
     }
 
 
-    public void inputValidation(){
-        System.out.println(cyan + TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(40) + TOP_RIGHT_CORNER);
-        System.out.println(VERTICAL_BORDER+ SPACE.repeat(40)+ VERTICAL_BORDER);
-        System.out.println(VERTICAL_BORDER + SPACE.repeat(7) + TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(24) + TOP_RIGHT_CORNER+ SPACE.repeat(7) + VERTICAL_BORDER);
-        System.out.println(VERTICAL_BORDER + SPACE.repeat(7)+ VERTICAL_BORDER+ reset + red + " Input invalid data...!"+ reset + cyan + SPACE + VERTICAL_BORDER + SPACE.repeat(7)+VERTICAL_BORDER);
-        System.out.println(VERTICAL_BORDER + SPACE.repeat(7) + BOTTOM_LEFT_CORNER + HORIZONTAL_BORDER.repeat(24) + BOTTOM_RIGHT_CORNER+ SPACE.repeat(7) + VERTICAL_BORDER);
-
-        System.out.println(VERTICAL_BORDER+ SPACE.repeat(40)+ VERTICAL_BORDER);
-        System.out.println(VERTICAL_BORDER + SPACE.repeat(2) + TOP_LEFT_CORNER + HORIZONTAL_BORDER.repeat(34) + TOP_RIGHT_CORNER+ SPACE.repeat(2) + VERTICAL_BORDER);
-        System.out.println(VERTICAL_BORDER + SPACE.repeat(2)+ VERTICAL_BORDER+ reset + yellow + " Press Enter key to Try again...!"+ reset + cyan + SPACE + VERTICAL_BORDER + SPACE.repeat(2)+VERTICAL_BORDER);
-        System.out.println(VERTICAL_BORDER + SPACE.repeat(2) + BOTTOM_LEFT_CORNER + HORIZONTAL_BORDER.repeat(34) + BOTTOM_RIGHT_CORNER+ SPACE.repeat(2) + VERTICAL_BORDER);
-        System.out.println(VERTICAL_BORDER   + SPACE.repeat(40) + VERTICAL_BORDER);
-        System.out.println(BOTTOM_LEFT_CORNER + HORIZONTAL_BORDER.repeat(40) + BOTTOM_RIGHT_CORNER);
-    }
-
 
 
 
@@ -277,11 +262,8 @@ public class MenuView implements BoxBorder {
         table.addCell(yellow +"  3 > UNIT " + reset  );
         table.addCell(yellow +"  4 > QUANTITY " + reset  );
         table.addCell(yellow +"  5 > PRICE " + reset  );
-        table.addCell(yellow +"  6 > PRICE_A " + reset  );
-        table.addCell(yellow +"  7 > PRICE_B " + reset  );
-        table.addCell(yellow +"  8 > PRICE_C " + reset  );
-        table.addCell(yellow +"  9 > STATUS " + reset  );
-        table.addCell(yellow +"  10 > EXIT " + reset  );
+        table.addCell(yellow +"  6 > STATUS " + reset  );
+        table.addCell(yellow +"  7 > EXIT " + reset  );
         System.out.print(table.render());
         System.out.println("\n");
 

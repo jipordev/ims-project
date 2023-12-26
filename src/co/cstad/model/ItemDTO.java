@@ -4,8 +4,7 @@ import java.math.BigDecimal;
 import java.time.Duration;
 
 public class ItemDTO {
-    private StockInDTO stockInDTO;
-    private StockOutDTO stockOutDTO;
+    private Long alertId;
     private Long itemId;
     private String itemCode;
     private String itemDescription;
@@ -16,10 +15,35 @@ public class ItemDTO {
     private BigDecimal itemPrice_out_c;
     private Integer qty;
     private Boolean status;
-    private Long alert_id;
+    private StockInDTO stockInDTO;
+    private StockOutDTO stockOutDTO;
+
+    public StockInDTO getStockInDTO() {
+        return stockInDTO;
+    }
+
+    public void setStockInDTO(StockInDTO stockInDTO) {
+        this.stockInDTO = stockInDTO;
+    }
+
+    public StockOutDTO getStockOutDTO() {
+        return stockOutDTO;
+    }
+
+    public void setStockOutDTO(StockOutDTO stockOutDTO) {
+        this.stockOutDTO = stockOutDTO;
+    }
 
     public BigDecimal getItemPrice() {
         return itemPrice;
+    }
+
+    public Long getAlertId() {
+        return alertId;
+    }
+
+    public void setAlertId(Long alertId) {
+        this.alertId = alertId;
     }
 
     public void setItemPrice(BigDecimal itemPrice) {
@@ -99,30 +123,5 @@ public class ItemDTO {
     }
     public Boolean isStatus() {
         return status;
-    }
-
-    public Long getAlert_id() {
-        return alert_id;
-    }
-
-    public void setAlert_id(Long alert_id) {
-        this.alert_id = alert_id;
-    }
-
-
-    public StockInDTO getStockInDTO() {
-        return stockInDTO;
-    }
-
-    public void setStockInDTO(StockInDTO stockInDTO) {
-        this.stockInDTO = stockInDTO;
-    }
-
-    public StockOutDTO getStockOutDTO() {
-        return stockOutDTO;
-    }
-
-    public void setStockOutDTO(StockOutDTO stockOutDTO) {
-        this.stockOutDTO = stockOutDTO;
     }
 }

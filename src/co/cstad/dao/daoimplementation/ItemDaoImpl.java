@@ -248,19 +248,61 @@ public class ItemDaoImpl implements ItemDao {
 
     @Override
     public ItemDTO deleteById(Long id) {
-        String sql = "DELETE FROM item WHERE item_id = ?";
-
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setLong(1, id);
+            // Delete related records in stock_count
+            String deleteStockCountSql = "DELETE FROM stock_count WHERE item_id = ?";
+            try (PreparedStatement stockCountStatement = connection.prepareStatement(deleteStockCountSql)) {
+                stockCountStatement.setLong(1, id);
+                stockCountStatement.executeUpdate();
+            }
 
-            int affectedRows = preparedStatement.executeUpdate();
+            // Delete related records in invoice_adjustment
+            String deleteInvoiceAdjustmentSql = "DELETE FROM invoice_adjustment WHERE item_id = ?";
+            try (PreparedStatement invoiceAdjustmentStatement = connection.prepareStatement(deleteInvoiceAdjustmentSql)) {
+                invoiceAdjustmentStatement.setLong(1, id);
+                invoiceAdjustmentStatement.executeUpdate();
+            }
 
-            if (affectedRows > 0) {
-                // Successfully deleted, return the deleted item (optional)
-                ItemDTO deletedItem = new ItemDTO();
-                deletedItem.setItemId(id);
-                return deletedItem;
+            // Delete related records in invoice_detail
+            String deleteInvoiceDetailSql = "DELETE FROM invoice_detail WHERE item_id = ?";
+            try (PreparedStatement invoiceDetailStatement = connection.prepareStatement(deleteInvoiceDetailSql)) {
+                invoiceDetailStatement.setLong(1, id);
+                invoiceDetailStatement.executeUpdate();
+            }
+
+            // Delete related records in stock_out
+            String deleteStockOutSql = "DELETE FROM stock_out WHERE item_id = ?";
+            try (PreparedStatement stockOutStatement = connection.prepareStatement(deleteStockOutSql)) {
+                stockOutStatement.setLong(1, id);
+                stockOutStatement.executeUpdate();
+            }
+
+            // Delete related records in stock_in
+            String deleteStockInSql = "DELETE FROM stock_in WHERE item_id = ?";
+            try (PreparedStatement stockInStatement = connection.prepareStatement(deleteStockInSql)) {
+                stockInStatement.setLong(1, id);
+                stockInStatement.executeUpdate();
+            }
+
+            // Delete related records in item_price_history
+            String deletePriceHistorySql = "DELETE FROM item_price_history WHERE item_id = ?";
+            try (PreparedStatement priceHistoryStatement = connection.prepareStatement(deletePriceHistorySql)) {
+                priceHistoryStatement.setLong(1, id);
+                priceHistoryStatement.executeUpdate();
+            }
+
+            // Delete the item in the item table
+            String deleteItemSql = "DELETE FROM item WHERE item_id = ?";
+            try (PreparedStatement itemStatement = connection.prepareStatement(deleteItemSql)) {
+                itemStatement.setLong(1, id);
+                int affectedRows = itemStatement.executeUpdate();
+
+                if (affectedRows > 0) {
+                    // Successfully deleted, return the deleted item (optional)
+                    ItemDTO deletedItem = new ItemDTO();
+                    deletedItem.setItemId(id);
+                    return deletedItem;
+                }
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -268,6 +310,9 @@ public class ItemDaoImpl implements ItemDao {
 
         return null;
     }
+
+
+
 
     @Override
     public List<ItemDTO> selectByName(String name) {

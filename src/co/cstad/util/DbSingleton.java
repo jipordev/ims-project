@@ -21,7 +21,7 @@ public class DbSingleton {
                 connection = DriverManager.getConnection(url, username, password);
             } catch (ClassNotFoundException | SQLException e) {
                 // Log or rethrow the exception for better handling
-                throw new RuntimeException("Error initializing database connection", e);
+                throw new RuntimeException(" Error initializing database connection", e);
             }
         }
         return connection;

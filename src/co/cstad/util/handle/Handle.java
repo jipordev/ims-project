@@ -168,6 +168,9 @@ public class Handle {
                         handleLogIn();
                         return;
                     }
+                    case 7 -> {
+
+                    }
                     default -> {
                         System.err.println("\n" + " ".repeat(5) + "✖\uFE0FINPUT IS INVALID !");
                         System.err.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 3 .");

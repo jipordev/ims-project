@@ -24,6 +24,7 @@ public interface BoxBorder {
     String cyan = "\u001B[36m";
     String white = "\u001B[37m";
     String black = "\u001B[30m";
+    String orange = "\u001B[38;5;208m";
     String blueBackGround = "\u001B[44m";
     String redBackGround = "\u001B[41m";
 }

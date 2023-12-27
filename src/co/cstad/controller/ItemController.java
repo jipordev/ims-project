@@ -13,8 +13,6 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Scanner;
 
-import static co.cstad.util.handle.Handle.validateStringInput;
-
 public class ItemController {
     private final MenuViewAdmin menuViewAdmin;
     private final ItemService itemService;
@@ -52,7 +50,7 @@ public class ItemController {
             StockOutDTO newStockOut = ItemView.viewCreateStockOut();
 
             if (newStockOut != null) {
-                StockOutDTO stockOutResult = itemService.stockout(newStockOut);
+                StockOutDTO stockOutResult = itemService.stockOut(newStockOut);
 
                 if (stockOutResult != null) {
                     System.out.println("Restock successfully");
@@ -89,7 +87,6 @@ public class ItemController {
         }
         return null;
     }
-
     public void updateAll() {
         try {
             System.out.print("Enter the ID of the item to update: ");
@@ -126,9 +123,9 @@ public class ItemController {
                         existingItem.setItemUnit(newItemUnit);
                         existingItem.setQty(newItemQty);
                         existingItem.setItemPrice(newItemPrice);
-                        existingItem.setItemPrice_out_a(newItemPrice.multiply(new BigDecimal("0.97")));
+                        existingItem.setItemPrice_out_a(newItemPrice.multiply(new BigDecimal("0.93")));
                         existingItem.setItemPrice_out_b(newItemPrice.multiply(new BigDecimal("0.95")));
-                        existingItem.setItemPrice_out_c(newItemPrice.multiply(new BigDecimal("0.93")));
+                        existingItem.setItemPrice_out_c(newItemPrice.multiply(new BigDecimal("0.97")));
                         existingItem.setStatus(newItemStatus);
 
                         // Call the service to update the item
@@ -155,8 +152,7 @@ public class ItemController {
             System.out.println("Invalid ID input. Please try again");
         }
     }
-
-    public void updateItemDescription() {
+    public void updateItemDescription(){
         try {
             System.out.print("Enter the ID of the item to update: ");
             Long itemId = Long.parseLong(scanner.nextLine());
@@ -190,46 +186,7 @@ public class ItemController {
             System.out.println("Invalid ID input. Please try again.");
         }
     }
-
-    public void updateItemUnit() {
-        try {
-            System.out.print("Enter the ID of the item to update: ");
-            Long itemId = Long.parseLong(scanner.nextLine());
-
-            ItemDTO existingItem = itemService.selectById(itemId);
-
-            if (existingItem != null) {
-                System.out.println("Existing Item Details:");
-                menuViewAdmin.itemConfirmation(existingItem);
-
-                System.out.print("Enter the new item price : ");
-                BigDecimal newItemPrice = new BigDecimal(scanner.nextLine());
-
-                existingItem.setItemPrice(newItemPrice);
-                existingItem.setItemPrice_out_a(newItemPrice.multiply(new BigDecimal("0.97")));
-                existingItem.setItemPrice_out_b(newItemPrice.multiply(new BigDecimal("0.95")));
-                existingItem.setItemPrice_out_c(newItemPrice.multiply(new BigDecimal("0.93")));
-
-                // Call the service to update the item
-                ItemDTO updatedItem = itemService.updateById(existingItem);
-
-                if (updatedItem != null) {
-                    System.out.println("Item price updated successfully:");
-                    menuViewAdmin.itemConfirmation(updatedItem);
-                } else {
-                    System.out.println("Failed to update item price.");
-                }
-            } else {
-                System.out.println("Item with ID " + itemId + " not found.");
-            }
-        } catch (StringInputException e){
-            System.out.println(e.getMessage());
-        } catch (NumberFormatException e){
-            System.out.println("Invalid ID input. Please try again.");
-        }
-    }
-
-    public void updateItemQty () {
+    public void updateItemUnit(){
         try {
             System.out.print("Enter the ID of the item to update: ");
             Long itemId = Long.parseLong(scanner.nextLine());
@@ -267,8 +224,7 @@ public class ItemController {
             System.out.println("Invalid ID input. Please try again");
         }
     }
-
-    public void updatePrice() {
+    public void updateItemQty () {
         try {
             System.out.print("Enter the ID of the item to update: ");
             Long itemId = Long.parseLong(scanner.nextLine());
@@ -284,7 +240,7 @@ public class ItemController {
 
                 existingItem.setQty(newItemQty);
 
-                // Call the service to update the itemu
+                // Call the service to update the item
                 ItemDTO updatedItem = itemService.updateById(existingItem);
 
                 if (updatedItem != null) {
@@ -300,6 +256,145 @@ public class ItemController {
             System.out.println(e.getMessage());
         } catch (NumberFormatException e){
             System.out.println("Invalid ID input. Please try again.");
+        }
+    }
+    public void updatePrice() {
+        try {
+            System.out.print("Enter the ID of the item to update: ");
+            Long itemId = Long.parseLong(scanner.nextLine());
+
+            ItemDTO existingItem = itemService.selectById(itemId);
+
+            if (existingItem != null) {
+                System.out.println("Existing Item Details:");
+                menuViewAdmin.itemConfirmation(existingItem);
+
+                System.out.print("Enter the new item price : ");
+                BigDecimal newItemPrice = new BigDecimal(scanner.nextLine());
+
+                existingItem.setItemPrice(newItemPrice);
+                existingItem.setItemPrice_out_a(newItemPrice.multiply(new BigDecimal("0.93")));
+                existingItem.setItemPrice_out_b(newItemPrice.multiply(new BigDecimal("0.95")));
+                existingItem.setItemPrice_out_c(newItemPrice.multiply(new BigDecimal("0.97")));
+
+                // Call the service to update the itemu
+                ItemDTO updatedItem = itemService.updateById(existingItem);
+
+                if (updatedItem != null) {
+                    System.out.println("Item price updated successfully:");
+                    menuViewAdmin.itemConfirmation(updatedItem);
+                } else {
+                    System.out.println("Failed to update item price.");
+                }
+            } else {
+                System.out.println("Item with ID " + itemId + " not found.");
+            }
+        } catch (StringInputException e){
+            System.out.println(e.getMessage());
+        } catch (NumberFormatException e){
+            System.out.println("Invalid ID input. Please try again.");
+        }
+    }
+    public void updateItemPriceA() {
+        try {
+            System.out.print("Enter the ID of the item to update: ");
+            Long itemId = Long.parseLong(scanner.nextLine());
+
+            ItemDTO existingItem = itemService.selectById(itemId);
+
+            if (existingItem != null) {
+                System.out.println("Existing Item Details:");
+                menuViewAdmin.itemConfirmation(existingItem);
+
+                System.out.print("Enter the new item price_a : ");
+                BigDecimal newItemPriceA = new BigDecimal(scanner.nextLine());
+
+                existingItem.setItemPrice_out_a(newItemPriceA);
+
+                // Call the service to update the item
+                ItemDTO updatedItem = itemService.updateById(existingItem);
+
+                if (updatedItem != null) {
+                    System.out.println("Item price_a updated successfully:");
+                    menuViewAdmin.itemConfirmation(updatedItem);
+                } else {
+                    System.out.println("Failed to update item price_a.");
+                }
+            } else {
+                System.out.println("Item with ID " + itemId + " not found.");
+            }
+        } catch (StringInputException e){
+            System.out.println(e.getMessage());
+        } catch (NumberFormatException e){
+            System.out.println("Invalid ID input. Please try again.");
+        }
+    }
+    public void updateItemPriceB() {
+        try {
+            System.out.print("Enter the ID of the item to update: ");
+            Long itemId = Long.parseLong(scanner.nextLine());
+
+            ItemDTO existingItem = itemService.selectById(itemId);
+
+            if (existingItem != null) {
+                System.out.println("Existing Item Details:");
+                menuViewAdmin.itemConfirmation(existingItem);
+
+                System.out.print("Enter the new item price_b : ");
+                BigDecimal newItemPriceB = new BigDecimal(scanner.nextLine());
+
+                existingItem.setItemPrice_out_b(newItemPriceB);
+
+                // Call the service to update the item
+                ItemDTO updatedItem = itemService.updateById(existingItem);
+
+                if (updatedItem != null) {
+                    System.out.println("Item price_b updated successfully:");
+                    menuViewAdmin.itemConfirmation(updatedItem);
+                } else {
+                    System.out.println("Failed to update item price_b.");
+                }
+            } else {
+                System.out.println("Item with ID " + itemId + " not found.");
+            }
+        } catch (StringInputException e){
+            System.out.println(e.getMessage());
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid ID input. Please try again.");
+        }
+    }
+    public void updateItemPriceC() {
+        try {
+            System.out.print("Enter the ID of the item to update: ");
+            Long itemId = Long.parseLong(scanner.nextLine());
+
+            ItemDTO existingItem = itemService.selectById(itemId);
+
+            if (existingItem != null) {
+                System.out.println("Existing Item Details:");
+                menuViewAdmin.itemConfirmation(existingItem);
+
+                System.out.print("Enter the new item price_c : ");
+                BigDecimal newItemPriceC = new BigDecimal(scanner.nextLine());
+
+                existingItem.setItemPrice_out_c(newItemPriceC);
+
+                // Call the service to update the item
+                ItemDTO updatedItem = itemService.updateById(existingItem);
+
+                if (updatedItem != null) {
+                    System.out.println("Item price_c updated successfully:");
+                    menuViewAdmin.itemConfirmation(updatedItem);
+                } else {
+                    System.out.println("Failed to update item price_c.");
+                }
+            } else {
+                System.out.println("Item with ID " + itemId + " not found.");
+            }
+        } catch (StringInputException e) {
+            System.out.println(e.getMessage());
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid ID input. Please try again");
         }
     }
     public void updateItemStatus() {
@@ -365,7 +460,7 @@ public class ItemController {
                 System.out.println("Item with ID " + itemId + " not found.");
             }
         } catch (StringInputException e) {
-            System.out.println(e.getMessage());
+            System.out.println(" error"+e.getMessage());
         } catch (NumberFormatException e){
             System.out.println("Invalid input. Please try again");
         }

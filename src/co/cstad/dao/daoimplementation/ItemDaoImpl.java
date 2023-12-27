@@ -21,8 +21,8 @@ public class ItemDaoImpl implements ItemDao {
 
     @Override
     public ItemDTO insert(ItemDTO itemDTO) {
-        String sql = "INSERT INTO item (item_code, description, unit, qty, price, price_a, price_b, price_c, status) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO item (item_code, description, unit, qty, price, price_a, price_b, price_c, status,alert_id) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, itemDTO.getItemCode());
@@ -34,6 +34,7 @@ public class ItemDaoImpl implements ItemDao {
             preparedStatement.setBigDecimal(7, itemDTO.getItemPrice_out_b());
             preparedStatement.setBigDecimal(8, itemDTO.getItemPrice_out_c());
             preparedStatement.setBoolean(9, itemDTO.isStatus());
+            preparedStatement.setLong(10, itemDTO.getAlertId());
 
             // Execute the query
             int affectedRows = preparedStatement.executeUpdate();
@@ -262,23 +263,23 @@ public class ItemDaoImpl implements ItemDao {
                 itemDTO.setItemDescription(resultSet.getString("description"));
                 itemDTO.setItemUnit(resultSet.getString("unit"));
                 itemDTO.setQty(resultSet.getInt("qty"));
-                itemDTO.setItemPrice(resultSet.getBigDecimal("price"));
-                itemDTO.setItemPrice_out_a(resultSet.getBigDecimal("price_a"));
-                itemDTO.setItemPrice_out_b(resultSet.getBigDecimal("price_b"));
-                itemDTO.setItemPrice_out_c(resultSet.getBigDecimal("price_c"));
+                itemDTO.setItemPrice(BigDecimal.valueOf(resultSet.getDouble("price")));
+                itemDTO.setItemPrice_out_a(BigDecimal.valueOf(resultSet.getDouble("price_a")));
+                itemDTO.setItemPrice_out_b(BigDecimal.valueOf(resultSet.getDouble("price_b")));
+                itemDTO.setItemPrice_out_c(BigDecimal.valueOf(resultSet.getDouble("price_c")));
                 itemDTO.setStatus(resultSet.getBoolean("status"));
 
                 return Optional.of(itemDTO);
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("SQL Error: " + e.getMessage());
         }
         return Optional.empty();
     }
 
     @Override
     public ItemDTO updateById(ItemDTO itemDTO) {
-        String sql = "UPDATE item SET item_code = ?, description = ?, unit = ?, qty = ?,price=?, price_a = ?, price_b = ?, price_c = ?, status = ? WHERE item_id = ?";
+        String sql = "UPDATE item SET item_code = ?, description = ?, unit = ?, qty = ?, price = ?, price_a = ?, price_b = ?, price_c = ?, status = ? WHERE item_id = ?";
 
         try {
             connection.setAutoCommit(false);  // Disable auto-commit
@@ -289,7 +290,6 @@ public class ItemDaoImpl implements ItemDao {
             preparedStatement.setString(3, itemDTO.getItemUnit());
             preparedStatement.setInt(4, itemDTO.getQty());
             preparedStatement.setBigDecimal(5, itemDTO.getItemPrice());
-            preparedStatement.setBigDecimal(5,itemDTO.getItemPrice());
             preparedStatement.setBigDecimal(6, itemDTO.getItemPrice_out_a());
             preparedStatement.setBigDecimal(7, itemDTO.getItemPrice_out_b());
             preparedStatement.setBigDecimal(8, itemDTO.getItemPrice_out_c());
@@ -319,32 +319,63 @@ public class ItemDaoImpl implements ItemDao {
 
         return null;
     }
-
-
-
-
-    @Override
     public ItemDTO deleteById(Long id) {
-        String sql = "DELETE FROM item WHERE item_id = ?";
-
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setLong(1, id);
+            // Delete related records in stock_count
+            String deleteStockCountSql = "DELETE FROM stock_count WHERE item_id = ?";
+            try (PreparedStatement stockCountStatement = connection.prepareStatement(deleteStockCountSql)) {
+                stockCountStatement.setLong(1, id);
+                stockCountStatement.executeUpdate();
+            }
 
-            int affectedRows = preparedStatement.executeUpdate();
+            // Delete related records in invoice_adjustment
+            String deleteInvoiceAdjustmentSql = "DELETE FROM invoice_adjustment WHERE item_id = ?";
+            try (PreparedStatement invoiceAdjustmentStatement = connection.prepareStatement(deleteInvoiceAdjustmentSql)) {
+                invoiceAdjustmentStatement.setLong(1, id);
+                invoiceAdjustmentStatement.executeUpdate();
+            }
 
-            if (affectedRows > 0) {
-                // Successfully deleted, return the deleted item (optional)
-                ItemDTO deletedItem = new ItemDTO();
-                deletedItem.setItemId(id);
-                return deletedItem;
+            // Delete related records in invoice_detail
+            String deleteInvoiceDetailSql = "DELETE FROM invoice_detail WHERE item_id = ?";
+            try (PreparedStatement invoiceDetailStatement = connection.prepareStatement(deleteInvoiceDetailSql)) {
+                invoiceDetailStatement.setLong(1, id);
+                invoiceDetailStatement.executeUpdate();
+            }
+
+            // Delete related records in stock_out
+            String deleteStockOutSql = "DELETE FROM stock_out WHERE item_id = ?";
+            try (PreparedStatement stockOutStatement = connection.prepareStatement(deleteStockOutSql)) {
+                stockOutStatement.setLong(1, id);
+                stockOutStatement.executeUpdate();
+            }
+
+            // Delete related records in stock_in
+            String deleteStockInSql = "DELETE FROM stock_in WHERE item_id = ?";
+            try (PreparedStatement stockInStatement = connection.prepareStatement(deleteStockInSql)) {
+                stockInStatement.setLong(1, id);
+                stockInStatement.executeUpdate();
+            }
+
+            // Delete the item in the item table
+            String deleteItemSql = "DELETE FROM item WHERE item_id = ?";
+            try (PreparedStatement itemStatement = connection.prepareStatement(deleteItemSql)) {
+                itemStatement.setLong(1, id);
+                int affectedRows = itemStatement.executeUpdate();
+
+                if (affectedRows > 0) {
+                    // Successfully deleted, return the deleted item (optional)
+                    ItemDTO deletedItem = new ItemDTO();
+                    deletedItem.setItemId(id);
+                    return deletedItem;
+                }
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("error"+e.getMessage());
         }
 
         return null;
     }
+
 
     @Override
     public List<ItemDTO> selectByName(String name) {

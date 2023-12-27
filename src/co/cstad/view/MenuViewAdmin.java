@@ -10,7 +10,6 @@ import org.nocrala.tools.texttablefmt.Table;
 import java.util.Scanner;
 
 public class MenuViewAdmin implements BoxBorder {
-    static Scanner scanner = new Scanner(System.in);
 
 
     // Main Menu Admin

@@ -27,7 +27,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public StockOutDTO stockout(StockOutDTO stockOutDTO) {
+    public StockOutDTO stockOut(StockOutDTO stockOutDTO) {
         return itemDao.stockout(stockOutDTO);
     }
 

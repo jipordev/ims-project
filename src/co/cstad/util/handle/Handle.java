@@ -5,18 +5,16 @@ import co.cstad.exception.StringInputException;
 import co.cstad.model.CustomerDTO;
 import co.cstad.model.ItemDTO;
 import co.cstad.model.UserDTO;
+import co.cstad.service.ReportService;
 import co.cstad.service.userservice.UserAuthentication;
 import co.cstad.util.Singleton;
-import co.cstad.view.MenuView;
-import co.cstad.view.MenuViewAdmin;
-import co.cstad.view.MenuViewManager;
-import co.cstad.view.MenuViewReport;
+import co.cstad.view.*;
 
 import java.util.Calendar;
 import java.util.Scanner;
 
 
-public class Handle {
+public class Handle implements BoxBorder {
     private static final Scanner scanner = Singleton.scanner();
     private static final UserAuthentication userAuthentication = Singleton.userAuthentication() ;
     private static final MenuView menuView = Singleton.menuView();
@@ -34,51 +32,52 @@ public class Handle {
         do {
             try {
                 menuView.menuLogin();
-                System.out.print(" choose ➡\uFE0F ");
+                System.out.print(" CHOOSE ➡\uFE0F ");
                 option = Integer.parseInt(Singleton.getInstance().getScanner().nextLine());
                 switch (option) {
                     case 1 -> handleAuthentication();
                     case 2 -> menuView.menuAboutUs();
                     case 3 -> System.exit(0);
                     default -> {
-                        System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
-                        System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 3 .");
+                        System.out.println(orange+"INPUT IS INVALID !");
+                        System.out.println("PLEASE CHOOSE AN OPTION FROM 1 TO 3 .\n"+reset);
                     }
                 }
             } catch (StringInputException e){
                 System.out.println(e.getMessage());
             } catch (NumberFormatException e){
-                System.out.println("Invalid input. Please try again");
+                System.out.println(red+"❌ INVALID INPUT . PLEASE TRY AGAIN.\n"+reset);
             }
         } while (true);
     }
     public static void handleAuthentication() {
         try {
+            System.out.println("_".repeat(40));
             System.out.print("Enter username: ");
             String username = scanner.nextLine();
 
             // Validate username input
             if (!validateStringInput(username)) {
-                throw new StringInputException("Invalid username input.");
+                throw new StringInputException(red+"INVALID USERNAME INPUT."+reset);
             }
 
             System.out.print("Enter password: ");
             String password = scanner.nextLine();
-
+            System.out.println("_".repeat(40));
             // Validate password input
             if (!validateStringInput(password)) {
-                throw new StringInputException("Invalid password input.");
+                throw new StringInputException(red+"INVALID PASSWORD INPUT."+ reset);
             }
 
             if (userAuthentication.authenticateUser(username, password)) {
                 String role = userAuthentication.getUserRole(username);
-                System.out.println("User authenticated successfully.");
+                System.out.println("User authenticated successfully.\n");
 
                 if (role != null) {
                     handleRole(role);
                 }
             } else {
-                System.out.println("Invalid username or password.");
+                System.out.println(red+"INVALID USERNAME OR PASSWORD."+reset);
             }
         } catch (StringInputException e) {
             System.out.println(e.getMessage());
@@ -88,7 +87,7 @@ public class Handle {
     // The validateStringInput method
     public static boolean validateStringInput(String input) throws StringInputException {
         if (input == null || input.trim().isEmpty()) {
-            throw new StringInputException("Input cannot be null or empty.");
+            throw new StringInputException(red+"INPUT CANNOT BE NULL OR EMPTY.\n"+reset);
         }
         return true;
     }
@@ -98,7 +97,7 @@ public class Handle {
                 case "admin" -> handleAdminMenu();
                 case "manager" -> handleManagerMenu();
                 case "report" -> handleReport();
-                default -> System.out.println("Unknown role");
+                default -> System.out.println(red+"UNKNOWN ROLE.\n"+reset);
             }
         } while (true);
     }
@@ -107,7 +106,7 @@ public class Handle {
         do {
             try {
                 menuViewReport.mainMenuReport();
-                System.out.print("choose ➡\uFE0F ");
+                System.out.print(" CHOOSE ➡\uFE0F ");
                 op = Integer.parseInt(scanner.nextLine());
 
                 switch (op) {
@@ -120,7 +119,7 @@ public class Handle {
             } catch (StringInputException e){
                 System.out.println(e.getMessage());
             } catch (NumberFormatException e){
-                System.out.println("Invalid input. Please try again");
+                System.out.println(red+"❌ INVALID INPUT . PLEASE TRY AGAIN.\n"+reset);
             }
         } while (true);
     }
@@ -129,9 +128,9 @@ public class Handle {
         do {
             try {
                 menuViewManager.mainMenuManager();
-                System.out.print("choose ➡\uFE0F- ");
+                System.out.print(" CHOOSE ➡\uFE0F ");
                 op = Integer.parseInt(scanner.nextLine());
-
+                System.out.println("\n");
                 switch (op){
                     case 1 -> handleItemMenu();
                     case 2 -> handleInvoiceMenu();
@@ -140,14 +139,14 @@ public class Handle {
                         return;
                     }
                     default -> {
-                        System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
-                        System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 3 .");
+                        System.out.println(orange+"INPUT IS INVALID !");
+                        System.out.println("PLEASE CHOOSE AN OPTION FROM 1 TO 3 .\n"+reset);
                     }
                 }
             } catch (StringInputException e){
                 System.out.println(e.getMessage());
             } catch (NumberFormatException e){
-                System.out.println("Invalid input. Please try again");
+                System.out.println(red+"❌ INVALID INPUT . PLEASE TRY AGAIN.\n"+reset);
             }
         } while (true);
     }
@@ -156,9 +155,9 @@ public class Handle {
         do {
             try {
                 menuViewAdmin.mainMenuAdmin();
-                System.out.print("choose ➡\uFE0F ");
+                System.out.print(" CHOOSE ➡\uFE0F ");
                 op = Integer.parseInt(scanner.nextLine());
-
+                System.out.println("\n");
                 switch (op) {
                     case 1 -> handleItemMenu();
                     case 2 -> handleCustomerMenu();
@@ -170,14 +169,14 @@ public class Handle {
                         return;
                     }
                     default -> {
-                        System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
-                        System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 7 .");
+                        System.out.println(orange+"INPUT IS INVALID !");
+                        System.out.println("PLEASE CHOOSE AN OPTION FROM 1 TO 6 .\n"+reset);
                     }
                 }
             } catch (StringInputException e){
                 System.out.println(e.getMessage());
             } catch (NumberFormatException e){
-                System.out.println("Invalid input. Please try again");
+                System.out.println(red+"❌ INVALID INPUT . PLEASE TRY AGAIN.\n"+reset);
             }
         } while (true);
     }
@@ -186,8 +185,9 @@ public class Handle {
         do {
             try {
                 menuViewAdmin.userMenu();
-                System.out.print("choose ➡\uFE0F ");
+                System.out.print(" CHOOSE ➡\uFE0F ");
                 opUser = Integer.parseInt(scanner.nextLine());
+                System.out.println("\n");
                 switch (opUser) {
                     case 1 -> {
                         UserDTO createdUser = userController.create();
@@ -207,14 +207,14 @@ public class Handle {
                         return;
                     }
                     default -> {
-                        System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
-                        System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 5 .");
+                        System.out.println(orange+"INPUT IS INVALID !");
+                        System.out.println("PLEASE CHOOSE AN OPTION FROM 1 TO 5 .\n"+reset);
                     }
                 }
             } catch (StringInputException e){
                 System.out.println(e.getMessage());
             } catch (NumberFormatException e){
-                System.out.println("Invalid input. Please try again.");
+                System.out.println(red+"❌ INVALID INPUT . PLEASE TRY AGAIN.\n"+reset);
             }
         } while (true);
     }
@@ -224,9 +224,9 @@ public class Handle {
         do {
             try {
                 menuView.itemMenu();
-                System.out.print("choose ➡\uFE0F ");
+                System.out.print(" CHOOSE ➡\uFE0F ");
                 op2 = Integer.parseInt(scanner.nextLine());
-
+                System.out.println("\n");
                 switch (op2) {
                     case 1 -> {
                         ItemDTO createdItem = itemController.create();
@@ -248,14 +248,14 @@ public class Handle {
                         return;
                     }
                     default -> {
-                        System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
-                        System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 7 .");
+                        System.out.println(orange+"INPUT IS INVALID !");
+                        System.out.println("PLEASE CHOOSE AN OPTION FROM 1 TO 7 .\n"+reset);
                     }
                 }
             } catch (StringInputException e){
                 System.out.println(e.getMessage());
             } catch (NumberFormatException e){
-                System.out.println("Invalid input. Please try again.");
+                System.out.println(red+"❌ INVALID INPUT . PLEASE TRY AGAIN."+reset);
             }
         } while (true);
     }
@@ -264,8 +264,9 @@ public class Handle {
         do {
             try {
                 menuViewAdmin.customerMenu();
-                System.out.print("choose ➡\uFE0F ");
+                System.out.print(" CHOOSE ➡\uFE0F ");
                 opCus = Integer.parseInt(scanner.nextLine());
+                System.out.println("\n");
                 switch (opCus) {
                     case 1 -> {
                         customerController.newCustomer();
@@ -282,14 +283,14 @@ public class Handle {
                         return;
                     }
                     default -> {
-                        System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
-                        System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 5 .");
+                        System.out.println(orange+"INPUT IS INVALID !");
+                        System.out.println("PLEASE CHOOSE AN OPTION FROM 1 TO 4 .\n"+reset);
                     }
                 }
             } catch (StringInputException e){
                 System.out.println(e.getMessage());
             } catch (NumberFormatException e){
-                System.out.println("Invalid input. Please try again.");
+                System.out.println(red+"❌ INVALID INPUT . PLEASE TRY AGAIN.\n"+reset);
             }
         } while (true);
     }
@@ -298,8 +299,9 @@ public class Handle {
         do {
             try {
                 menuViewAdmin.optionListUser();
-                System.out.print("choose ➡\uFE0F ");
+                System.out.print(" CHOOSE ➡\uFE0F ");
                 updateOp = Integer.parseInt(scanner.nextLine());
+                System.out.println("\n");
                 switch (updateOp) {
                     case 1 -> userController.updateAll();
                     case 2 -> userController.updateUsername();
@@ -313,14 +315,14 @@ public class Handle {
                         return;
                     }
                     default -> {
-                        System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
-                        System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 9 .");
+                        System.out.println(orange+"INPUT IS INVALID !");
+                        System.out.println("PLEASE CHOOSE AN OPTION FROM 1 TO 9 .\n"+reset);
                     }
                 }
             } catch (StringInputException e){
                 System.out.println(e.getMessage());
             } catch (NumberFormatException e){
-                System.out.println("Invalid input. Please try again.");
+                System.out.println(red+"❌ INVALID INPUT . PLEASE TRY AGAIN.\n"+reset);
             }
         } while (true);
     }
@@ -329,7 +331,7 @@ public class Handle {
         do {
             try {
                 menuView.menuItemUpdate();
-                System.out.print("choose ➡\uFE0F ");
+                System.out.print(" CHOOSE ➡\uFE0F ");
                 updateOp = Integer.parseInt(scanner.nextLine());
                 // Handle update options here...
                 switch (updateOp) {
@@ -343,14 +345,14 @@ public class Handle {
                         return;
                     }
                     default -> {
-                        System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
-                        System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 9 .");
+                        System.out.println(orange+"INPUT IS INVALID !");
+                        System.out.println("PLEASE CHOOSE AN OPTION FROM 1 TO 7 .\n"+reset);
                     }
                 }
             } catch (StringInputException e){
                 System.out.println(e.getMessage());
             } catch (NumberFormatException e){
-                System.out.println("Invalid input. Please try again");
+                System.out.println(red+"❌ INVALID INPUT . PLEASE TRY AGAIN.\n"+reset);
             }
         } while (true);
     }
@@ -360,8 +362,9 @@ public class Handle {
         do {
             try {
                 menuView.invoiceMenu();
-                System.out.print("choose ➡\uFE0F ");
+                System.out.print(" CHOOSE ➡\uFE0F ");
                 optInvoice = Integer.parseInt(scanner.nextLine());
+                System.out.println("\n");
                 switch (optInvoice) {
                     case 1 -> invoiceController.create();
                     case 2 -> invoiceController.update();
@@ -370,14 +373,14 @@ public class Handle {
                         return;
                     }
                     default -> {
-                        System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
-                        System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 4 .");
+                        System.out.println(orange+"INPUT IS INVALID !");
+                        System.out.println("PLEASE CHOOSE AN OPTION FROM 1 TO 4 .\n"+reset);
                     }
                 }
             } catch (StringInputException e){
                 System.out.println(e.getMessage());
             } catch (NumberFormatException e){
-                System.out.println("Invalid input. Please try again.");
+                System.out.println(red+"❌ INVALID INPUT . PLEASE TRY AGAIN.\n"+reset);
             }
         } while (true);
     }
@@ -386,8 +389,9 @@ public class Handle {
         do {
             try {
                 menuViewAdmin.optionListUp();
-                System.out.print("choose ➡\uFE0F ");
+                System.out.print(" CHOOSE ➡\uFE0F ");
                 updateOp = Integer.parseInt(scanner.nextLine());
+                System.out.println("\n");
                 // Handle update options here...
                 switch (updateOp) {
                     case 1 -> customerController.updateAll();
@@ -401,14 +405,14 @@ public class Handle {
                         return;
                     }
                     default -> {
-                        System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
-                        System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 6 .");
+                        System.out.println(orange+"INPUT IS INVALID !");
+                        System.out.println("PLEASE CHOOSE AN OPTION FROM 1 TO 8 .\n"+reset);
                     }
                 }
             } catch (StringInputException e){
                 System.out.println(e.getMessage());
             } catch (NumberFormatException e){
-                System.out.println("Invalid input. Please try again.");
+                System.out.println(red+"❌ INVALID INPUT . PLEASE TRY AGAIN.\n"+reset);
             }
         } while (true);
     }
@@ -417,8 +421,9 @@ public class Handle {
         do {
             try {
                 menuView.reportMenu();
-                System.out.print("choose ➡\uFE0F ");
+                System.out.print(" CHOOSE ➡\uFE0F ");
                 opReport = Integer.parseInt(scanner.nextLine());
+                System.out.println("\n");
                 switch (opReport){
                     case 1 -> reportController.stockCountReport();
                     case 2 -> reportController.stockInReport();
@@ -431,14 +436,14 @@ public class Handle {
                         return;
                     }
                     default -> {
-                        System.out.println("\n" + " ".repeat(5) + "INPUT IS INVALID !");
-                        System.out.println(" ".repeat(5) + "PLEASE CHOOSE AN OPTION FROM 1 TO 9 .");
+                        System.out.println(orange+"INPUT IS INVALID !");
+                        System.out.println("PLEASE CHOOSE AN OPTION FROM 1 TO 9 .\n"+reset);
                     }
                 }
             } catch (StringInputException e){
                 System.out.println(e.getMessage());
             } catch (NumberFormatException e){
-                System.out.println("Invalid input. Please try again");
+                System.out.println(red+"❌ INVALID INPUT . PLEASE TRY AGAIN.\n"+reset);
             }
         }while (true);
     }

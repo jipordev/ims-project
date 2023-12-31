@@ -35,10 +35,10 @@ public class ItemController {
             StockInDTO stockIn = itemService.stockIn(newStockIn);
 
             if (stockIn != null){
-                System.out.println("Restock successfully");
+                System.out.println("Failed to restock");
                 return stockIn;
             } else {
-                System.out.println("Failed to restock");
+                System.out.println("Restock successfully");
             }
         } else {
             System.out.println("Invalid input for restock the item.");

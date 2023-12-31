@@ -320,6 +320,7 @@ public class ItemDaoImpl implements ItemDao {
 
         return null;
     }
+
     public ItemDTO deleteById(Long id) {
         try {
             // Delete related records in stock_count

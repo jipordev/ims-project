@@ -366,9 +366,9 @@ public class Handle implements BoxBorder {
                 optInvoice = Integer.parseInt(scanner.nextLine());
                 System.out.println("\n");
                 switch (optInvoice) {
-                    case 1 -> invoiceController.create();
-                    case 2 -> invoiceController.update();
-                    case 3 -> invoiceController.read();
+                    case 1 -> System.out.println(yellow+"STILL IN MAINTENANCE"+reset);
+                    case 2 -> System.out.println(yellow+"STILL IN MAINTENANCE"+reset);
+                    case 3 -> System.out.println(yellow+"STILL IN MAINTENANCE"+reset);
                     case 4 -> {
                         return;
                     }
@@ -428,8 +428,9 @@ public class Handle implements BoxBorder {
                     case 1 -> reportController.stockCountReport();
                     case 2 -> reportController.stockInReport();
                     case 3 -> reportController.stockOutReport();
-                    case 4 -> reportController.invoiceDetail();
+                    case 4 -> System.out.println(orange+"STILL IN MAINTENANCE"+ reset);
                     case 5 -> reportController.invoiceAdjustment();
+                    case 6 -> System.out.println(orange+"STILL IN MAINTENANCE"+ reset);
                     case 7 -> reportController.stockAlert();
                     case 8 -> reportController.summaryReport();
                     case 9 -> {

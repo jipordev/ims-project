@@ -30,11 +30,21 @@ public class ItemView {
                 Long itemId = Long.parseLong(scanner.nextLine());
                 ItemDTO existingItem = itemService.selectById(itemId);
 
-                if (existingItem != null ){
-                    stockInDTO.setItemId(itemId);
-                    break;
+                if (existingItem != null) {
+                    System.out.println("Current quantity for Item ID " + itemId + ": " + existingItem.getQty());
+
+                    // Ask the user if they want to proceed with stock in
+                    System.out.print("Do you want to proceed with stock in? (yes/no): ");
+                    String proceed = scanner.nextLine().toLowerCase();
+
+                    if ("yes".equals(proceed)) {
+                        stockInDTO.setItemId(itemId);
+                        break;
+                    } else {
+                        System.out.println("Stock in operation canceled.\n");
+                    }
                 } else {
-                    System.out.println("Item with id : "+ itemId + " doesn't exist.");
+                    System.out.println("Item with id : " + itemId + " doesn't exist.\n");
                 }
             } catch (NumberFormatException e) {
                 System.out.println(e.getMessage());
@@ -48,6 +58,7 @@ public class ItemView {
 
         return stockInDTO;
     }
+
 
 
 
@@ -66,7 +77,28 @@ public class ItemView {
                     // Check if quantity is greater than 0
                     if (existingItem.getQty() > 0) {
                         stockOutDTO.setItemId(itemId);
-                        break;
+
+                        // Display current available quantity
+                        System.out.println("Current available quantity: " + existingItem.getQty());
+
+                        // Ask user for quantity to stock out
+                        do {
+                            try {
+                                System.out.print("  Enter Qty : ");
+                                int enteredQty = Integer.parseInt(scanner.nextLine());
+
+                                // Check if entered quantity is valid
+                                if (enteredQty > 0 && enteredQty <= existingItem.getQty()) {
+                                    stockOutDTO.setQtyOut(enteredQty);
+                                    return stockOutDTO;
+                                } else {
+                                    System.out.println("Invalid quantity. Please enter a valid quantity within the available stock.\n");
+                                }
+                            } catch (NumberFormatException e) {
+                                System.out.println("Invalid input. Please enter a valid numeric quantity.\n");
+                            }
+                        } while (true);
+
                     } else {
                         System.out.println("Item with ID " + itemId + " has zero quantity.\n Please try again with a different item.\n");
                     }
@@ -79,19 +111,6 @@ public class ItemView {
                 System.out.println("Invalid input. Please enter a valid numeric Item ID.\n");
             }
         } while (true);
-
-        try {
-            System.out.print("  Enter Price : ");
-            stockOutDTO.setPriceOut(new BigDecimal(scanner.nextLine()));
-
-            System.out.print("  Enter Qty : ");
-            stockOutDTO.setQtyOut(Integer.parseInt(scanner.nextLine()));
-
-            return stockOutDTO;
-        } catch (NumberFormatException | ArithmeticException e) {
-            System.out.println("Invalid input for price or quantity. \nPlease enter valid numeric values.\n");
-            return null;
-        }
     }
 
 

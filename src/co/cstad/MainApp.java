@@ -16,8 +16,6 @@ public class MainApp {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        /*
-        }*/
 
         handle.handleLogIn();
     }

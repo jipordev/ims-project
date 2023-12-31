@@ -1,6 +1,5 @@
 package co.cstad.view;
 
-import co.cstad.exception.StringInputException;
 import co.cstad.model.ItemDTO;
 import co.cstad.model.StockInDTO;
 import co.cstad.model.StockOutDTO;
@@ -26,34 +25,40 @@ public class ItemView {
         StockInDTO stockInDTO = new StockInDTO();
 
         do {
+            System.out.print("  Enter Item ID : ");
             try {
-                System.out.print("  Enter Item ID : ");
-                try {
-                    Long itemId = Long.parseLong(scanner.nextLine());
-                    ItemDTO existingItem = itemService.selectById(itemId);
+                Long itemId = Long.parseLong(scanner.nextLine());
+                ItemDTO existingItem = itemService.selectById(itemId);
 
-                    if (existingItem != null) {
+                if (existingItem != null) {
+                    System.out.println("Current quantity for Item ID " + itemId + ": " + existingItem.getQty());
+
+                    // Ask the user if they want to proceed with stock in
+                    System.out.print("Do you want to proceed with stock in? (yes/no): ");
+                    String proceed = scanner.nextLine().toLowerCase();
+
+                    if ("yes".equals(proceed)) {
                         stockInDTO.setItemId(itemId);
                         break;
                     } else {
-                        System.out.println("ITEM WITH ID: " + itemId + " DOESN'T EXIST.");
+                        System.out.println("Stock in operation canceled.\n");
                     }
-                } catch (NumberFormatException e) {
-                    System.out.println("INVALID INPUT. PLEASE ENTER A VALID NUMERIC ITEM ID.");
+                } else {
+                    System.out.println("Item with id : " + itemId + " doesn't exist.\n");
                 }
-                System.out.print("  Enter Price : ");
-                stockInDTO.setPriceIn(new BigDecimal(scanner.nextLine()));
-                System.out.print("  Enter Qty : ");
-                stockInDTO.setQtyIn(Integer.parseInt(scanner.nextLine()));
-            } catch (StringInputException e){
+            } catch (NumberFormatException e) {
                 System.out.println(e.getMessage());
-            } catch (NumberFormatException e){
-                System.out.println("INVALID INPUT. PLEASE TRY AGAIN");
             }
         } while (true);
 
+        System.out.print("  Enter Price : ");
+        stockInDTO.setPriceIn(new BigDecimal(scanner.nextLine()));
+        System.out.print("  Enter Qty : ");
+        stockInDTO.setQtyIn(Integer.parseInt(scanner.nextLine()));
+
         return stockInDTO;
     }
+
 
 
 
@@ -69,40 +74,44 @@ public class ItemView {
                 ItemDTO existingItem = itemService.selectById(itemId);
 
                 if (existingItem != null && existingItem.isStatus()) {
-                    // Display current quantity of the item
-                    System.out.println("Current Quantity of Item ID " + itemId + ": " + existingItem.getQty());
-
                     // Check if quantity is greater than 0
                     if (existingItem.getQty() > 0) {
                         stockOutDTO.setItemId(itemId);
-                        break;
+
+                        // Display current available quantity
+                        System.out.println("Current available quantity: " + existingItem.getQty());
+
+                        // Ask user for quantity to stock out
+                        do {
+                            try {
+                                System.out.print("  Enter Qty : ");
+                                int enteredQty = Integer.parseInt(scanner.nextLine());
+
+                                // Check if entered quantity is valid
+                                if (enteredQty > 0 && enteredQty <= existingItem.getQty()) {
+                                    stockOutDTO.setQtyOut(enteredQty);
+                                    return stockOutDTO;
+                                } else {
+                                    System.out.println("Invalid quantity. Please enter a valid quantity within the available stock.\n");
+                                }
+                            } catch (NumberFormatException e) {
+                                System.out.println("Invalid input. Please enter a valid numeric quantity.\n");
+                            }
+                        } while (true);
+
                     } else {
-                        System.out.println("Item with ID " + itemId + " has zero quantity.\nPlease try again with a different item.\n");
+                        System.out.println("Item with ID " + itemId + " has zero quantity.\n Please try again with a different item.\n");
                     }
                 } else if (existingItem == null) {
-                    System.out.println("Item with ID " + itemId + " doesn't exist.\nPlease try again.\n");
+                    System.out.println("Item with ID " + itemId + " doesn't exist. \n Please try again.\n");
                 } else {
-                    System.out.println("Item with ID " + itemId + " has status 'false'.\nPlease try again with a different item.\n");
+                    System.out.println("Item with ID " + itemId + " has status 'false'. \n Please try again with a different item.\n");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Invalid input. Please enter a valid numeric Item ID.\n");
             }
         } while (true);
-
-        try {
-            System.out.print("  Enter Price : ");
-            stockOutDTO.setPriceOut(new BigDecimal(scanner.nextLine()));
-
-            System.out.print("  Enter Qty : ");
-            stockOutDTO.setQtyOut(Integer.parseInt(scanner.nextLine()));
-
-            return stockOutDTO;
-        } catch (NumberFormatException | ArithmeticException e) {
-            System.out.println("Invalid input for price or quantity.\nPlease enter valid numeric values.\n");
-            return null;
-        }
     }
-
 
 
     public static ItemDTO collectNewItemInformation() {

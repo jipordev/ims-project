@@ -5,10 +5,13 @@ import co.cstad.exception.StringInputException;
 import co.cstad.model.CustomerDTO;
 import co.cstad.model.ItemDTO;
 import co.cstad.model.UserDTO;
+import co.cstad.service.ReportService;
 import co.cstad.service.userservice.UserAuthentication;
 import co.cstad.util.Singleton;
+import co.cstad.view.*;
 import co.cstad.view.staticmenu.*;
 
+import java.util.Calendar;
 import java.util.Scanner;
 
 
@@ -75,7 +78,7 @@ public class Handle implements BoxBorder {
                     handleRole(role);
                 }
             } else {
-                System.out.println(red+"❌ INVALID USERNAME OR PASSWORD."+reset);
+                System.out.println(red+"INVALID USERNAME OR PASSWORD."+reset);
             }
         } catch (StringInputException e) {
             System.out.println(e.getMessage());
@@ -85,7 +88,7 @@ public class Handle implements BoxBorder {
     // The validateStringInput method
     public static boolean validateStringInput(String input) throws StringInputException {
         if (input == null || input.trim().isEmpty()) {
-            throw new StringInputException(red+"❌ INPUT CANNOT BE NULL OR EMPTY.\n"+reset);
+            throw new StringInputException(red+"INPUT CANNOT BE NULL OR EMPTY.\n"+reset);
         }
         return true;
     }
@@ -364,9 +367,9 @@ public class Handle implements BoxBorder {
                 optInvoice = Integer.parseInt(scanner.nextLine());
                 System.out.println("\n");
                 switch (optInvoice) {
-                    case 1 -> invoiceController.create();
-                    case 2 -> invoiceController.update();
-                    case 3 -> invoiceController.read();
+                    case 1 -> System.out.println(yellow+"STILL IN MAINTENANCE, PLEASE WAIT....!"+reset);
+                    case 2 -> System.out.println(yellow+"STILL IN MAINTENANCE"+reset);
+                    case 3 -> System.out.println(yellow+"STILL IN MAINTENANCE"+reset);
                     case 4 -> {
                         return;
                     }
@@ -426,8 +429,9 @@ public class Handle implements BoxBorder {
                     case 1 -> reportController.stockCountReport();
                     case 2 -> reportController.stockInReport();
                     case 3 -> reportController.stockOutReport();
-                    case 4 -> reportController.invoiceDetail();
+                    case 4 -> System.out.println(orange+"STILL IN MAINTENANCE, PlEASE WAIT...!"+ reset);
                     case 5 -> reportController.invoiceAdjustment();
+                    case 6 -> System.out.println(orange+"STILL IN MAINTENANCE"+ reset);
                     case 7 -> reportController.stockAlert();
                     case 8 -> reportController.summaryReport();
                     case 9 -> {

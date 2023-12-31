@@ -7,11 +7,10 @@ import co.cstad.view.staticmenu.MenuView;
 
 
 public class MainApp {
-    private static MenuView menuView =new MenuView();
+    private static MenuView menuView = Singleton.menuView();
     private static final Handle handle = Singleton.handle();
     public static void main(String[] args) {
         menuView.startInterface();
-
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {

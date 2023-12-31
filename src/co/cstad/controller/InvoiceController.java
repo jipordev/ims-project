@@ -49,16 +49,16 @@ public class InvoiceController {
                 if (updatedInvoice != null) {
                     System.out.println("Invoice updated successfully!");
                 } else {
-                    System.out.println("Failed to update the invoice.");
+                    System.err.println("❌Failed to update the invoice.");
                 }
             } else {
-                System.out.println("Invoice not found with ID: " + id);
+                System.err.println("❌Invoice not found with ID: " + id);
             }
 
         } catch (NumberFormatException e) {
-            System.out.println("Invalid input. Please enter a valid numeric ID.");
+            System.out.println("❌Invalid input. Please enter a valid numeric ID.");
         } catch (Exception e) {
-            System.out.println("An error occurred: " + e.getMessage());
+            System.out.println("❌An error occurred: " + e.getMessage());
         }
     }
     public InvoiceDTO create() {
@@ -71,10 +71,10 @@ public class InvoiceController {
                 System.out.println("Invoice created successfully:");
                 return createdInvoice;
             } else {
-                System.out.println("Failed to create the invoice.");
+                System.err.println("❌Failed to create the invoice.");
             }
         } else {
-            System.out.println("Invalid input for creating a new invoice.");
+            System.err.println("❌Invalid input for creating a new invoice.");
         }
         return null;
     }

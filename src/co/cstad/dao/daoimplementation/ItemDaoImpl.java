@@ -170,6 +170,7 @@ public class ItemDaoImpl implements ItemDao {
         return null;
     }
 
+
     @Override
     public Optional<ItemDTO> selectById(Long id) {
         String sql = "SELECT * FROM item WHERE item_id = ?";
@@ -242,6 +243,7 @@ public class ItemDaoImpl implements ItemDao {
 
         return null;
     }
+
     public ItemDTO deleteById(Long id) {
         try {
             // Delete related records in stock_count

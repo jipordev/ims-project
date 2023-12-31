@@ -28,66 +28,45 @@ public class ItemController {
         List<ItemDTO> itemDTOList = itemService.select();
         ItemView.printItemList(itemDTOList);
     }
-    public void stockIn(){
-        while (true){
-            try {
-                StockInDTO newStockIn = ItemView.viewCreateStock();
+    public StockInDTO stockIn(){
+        StockInDTO newStockIn = ItemView.viewCreateStock();
 
-                if (newStockIn != null) {
-                    StockInDTO stockIn = itemService.stockIn(newStockIn);
+        if (newStockIn != null) {
+            StockInDTO stockIn = itemService.stockIn(newStockIn);
 
-                    if (stockIn != null){
-                        System.out.println("Restock successfully");
-                    } else {
-                        System.out.println("Failed to restock");
-                    }
-
-                    System.out.print("Do you want to perform another restock? (yes/no): ");
-                    String userChoice = scanner.nextLine().toLowerCase();
-
-                    if (!userChoice.equals("yes")) {
-                        break;
-                    }
-
-                } else {
-                    System.out.println("Invalid input for restock the item.");
-                }
-            } catch (StringInputException e){
-                System.out.println(e.getMessage());
-            } catch (NumberFormatException e){
-                System.out.println("Invalid ID input. Please try again");
+            if (stockIn != null){
+                System.out.println("Failed to restock");
+                return stockIn;
+            } else {
+                System.out.println("Restock successfully");
             }
+        } else {
+            System.out.println("Invalid input for restock the item.");
         }
+        return null;
     }
-
     public void stockOut() {
         while (true) {
-            try {
-                StockOutDTO newStockOut = ItemView.viewCreateStockOut();
+            StockOutDTO newStockOut = ItemView.viewCreateStockOut();
 
-                if (newStockOut != null) {
-                    StockOutDTO stockOutResult = itemService.stockOut(newStockOut);
+            if (newStockOut != null) {
+                StockOutDTO stockOutResult = itemService.stockOut(newStockOut);
 
-                    if (stockOutResult != null) {
-                        System.out.println("Stock out successfully");
-                    } else {
-                        System.out.println("Failed to stock out");
-                    }
-
-                    System.out.print("Do you want to perform another restock? (yes/no): ");
-                    String userChoice = scanner.nextLine().toLowerCase();
-
-                    if (!userChoice.equals("yes")) {
-                        break;
-                    }
+                if (stockOutResult != null) {
+                    System.out.println("Restock successfully");
                 } else {
-                    System.out.println("Invalid input for restock the item.");
+                    System.out.println("Failed to restock");
+                }
+
+                System.out.print("Do you want to perform another restock? (yes/no): ");
+                String userChoice = scanner.nextLine().toLowerCase();
+
+                if (!userChoice.equals("yes")) {
                     break;
                 }
-            } catch (StringInputException e){
-                System.out.println(e.getMessage());
-            } catch (NumberFormatException e){
-                System.out.println("Invalid ID input. Please try again");
+            } else {
+                System.out.println("Invalid input for restock the item.");
+                break;
             }
         }
     }

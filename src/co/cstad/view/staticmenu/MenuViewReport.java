@@ -1,5 +1,7 @@
 package co.cstad.view.staticmenu;
 
+import co.cstad.view.staticmenu.BoxBorder;
+
 public class MenuViewReport implements BoxBorder {
     public static void mainMenuReport(){
         int option;

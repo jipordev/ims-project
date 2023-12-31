@@ -1,5 +1,6 @@
 package co.cstad.view;
 
+import co.cstad.exception.StringInputException;
 import co.cstad.model.ItemDTO;
 import co.cstad.model.StockInDTO;
 import co.cstad.model.StockOutDTO;
@@ -13,7 +14,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Scanner;
 
-import static co.cstad.view.BoxBorder.*;
+import static co.cstad.view.staticmenu.BoxBorder.*;
 
 public class ItemView {
     private final static Scanner scanner = Singleton.scanner();
@@ -25,26 +26,31 @@ public class ItemView {
         StockInDTO stockInDTO = new StockInDTO();
 
         do {
-            System.out.print("  Enter Item ID : ");
             try {
-                Long itemId = Long.parseLong(scanner.nextLine());
-                ItemDTO existingItem = itemService.selectById(itemId);
+                System.out.print("  Enter Item ID : ");
+                try {
+                    Long itemId = Long.parseLong(scanner.nextLine());
+                    ItemDTO existingItem = itemService.selectById(itemId);
 
-                if (existingItem != null ){
-                    stockInDTO.setItemId(itemId);
-                    break;
-                } else {
-                    System.out.println("Item with id : "+ itemId + " doesn't exist.");
+                    if (existingItem != null) {
+                        stockInDTO.setItemId(itemId);
+                        break;
+                    } else {
+                        System.out.println("ITEM WITH ID: " + itemId + " DOESN'T EXIST.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("INVALID INPUT. PLEASE ENTER A VALID NUMERIC ITEM ID.");
                 }
-            } catch (NumberFormatException e) {
+                System.out.print("  Enter Price : ");
+                stockInDTO.setPriceIn(new BigDecimal(scanner.nextLine()));
+                System.out.print("  Enter Qty : ");
+                stockInDTO.setQtyIn(Integer.parseInt(scanner.nextLine()));
+            } catch (StringInputException e){
                 System.out.println(e.getMessage());
+            } catch (NumberFormatException e){
+                System.out.println("INVALID INPUT. PLEASE TRY AGAIN");
             }
         } while (true);
-
-        System.out.print("  Enter Price : ");
-        stockInDTO.setPriceIn(new BigDecimal(scanner.nextLine()));
-        System.out.print("  Enter Qty : ");
-        stockInDTO.setQtyIn(Integer.parseInt(scanner.nextLine()));
 
         return stockInDTO;
     }
@@ -63,17 +69,20 @@ public class ItemView {
                 ItemDTO existingItem = itemService.selectById(itemId);
 
                 if (existingItem != null && existingItem.isStatus()) {
+                    // Display current quantity of the item
+                    System.out.println("Current Quantity of Item ID " + itemId + ": " + existingItem.getQty());
+
                     // Check if quantity is greater than 0
                     if (existingItem.getQty() > 0) {
                         stockOutDTO.setItemId(itemId);
                         break;
                     } else {
-                        System.out.println("Item with ID " + itemId + " has zero quantity.\n Please try again with a different item.\n");
+                        System.out.println("Item with ID " + itemId + " has zero quantity.\nPlease try again with a different item.\n");
                     }
                 } else if (existingItem == null) {
-                    System.out.println("Item with ID " + itemId + " doesn't exist. \n Please try again.\n");
+                    System.out.println("Item with ID " + itemId + " doesn't exist.\nPlease try again.\n");
                 } else {
-                    System.out.println("Item with ID " + itemId + " has status 'false'. \n Please try again with a different item.\n");
+                    System.out.println("Item with ID " + itemId + " has status 'false'.\nPlease try again with a different item.\n");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Invalid input. Please enter a valid numeric Item ID.\n");
@@ -89,10 +98,11 @@ public class ItemView {
 
             return stockOutDTO;
         } catch (NumberFormatException | ArithmeticException e) {
-            System.out.println("Invalid input for price or quantity. \nPlease enter valid numeric values.\n");
+            System.out.println("Invalid input for price or quantity.\nPlease enter valid numeric values.\n");
             return null;
         }
     }
+
 
 
     public static ItemDTO collectNewItemInformation() {

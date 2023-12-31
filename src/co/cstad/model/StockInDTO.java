@@ -35,7 +35,7 @@ public class StockInDTO {
     }
 
     public Integer getQtyIn() {
-        return qtyIn;
+        return qtyIn != null ? qtyIn.intValue() : 0; // Provide a default value if qtyIn is null
     }
 
     public void setQtyIn(Integer qtyIn) {

@@ -1,4 +1,4 @@
-package co.cstad.view;
+package co.cstad.view.staticmenu;
 
 public class MenuViewReport implements BoxBorder {
     public static void mainMenuReport(){

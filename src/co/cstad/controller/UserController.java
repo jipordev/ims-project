@@ -4,7 +4,7 @@ import co.cstad.exception.StringInputException;
 import co.cstad.model.UserDTO;
 import co.cstad.service.UserService;
 import co.cstad.util.Singleton;
-import co.cstad.view.MenuViewAdmin;
+import co.cstad.view.staticmenu.MenuViewAdmin;
 import co.cstad.view.UserView;
 
 import java.util.List;

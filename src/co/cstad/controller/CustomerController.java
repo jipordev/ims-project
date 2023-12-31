@@ -5,7 +5,7 @@ import co.cstad.model.CustomerDTO;
 import co.cstad.service.CustomerService;
 import co.cstad.util.Singleton;
 import co.cstad.view.CustomerView;
-import co.cstad.view.MenuViewAdmin;
+import co.cstad.view.staticmenu.MenuViewAdmin;
 
 import java.util.List;
 import java.util.Scanner;
@@ -247,7 +247,7 @@ public class CustomerController {
 
                 CustomerView.readOneCustomer(customerDTO1);
 
-                System.out.print("Enter the new customer status : ");
+                System.out.print("Enter the new customer status (true/false): ");
                 Boolean newStatus = Boolean.parseBoolean(scanner.nextLine());
 
                 customerDTO1.setStatus(newStatus);

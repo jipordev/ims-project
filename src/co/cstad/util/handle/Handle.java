@@ -5,12 +5,10 @@ import co.cstad.exception.StringInputException;
 import co.cstad.model.CustomerDTO;
 import co.cstad.model.ItemDTO;
 import co.cstad.model.UserDTO;
-import co.cstad.service.ReportService;
 import co.cstad.service.userservice.UserAuthentication;
 import co.cstad.util.Singleton;
-import co.cstad.view.*;
+import co.cstad.view.staticmenu.*;
 
-import java.util.Calendar;
 import java.util.Scanner;
 
 

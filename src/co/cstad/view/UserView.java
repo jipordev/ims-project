@@ -1,8 +1,7 @@
 package co.cstad.view;
 
-import co.cstad.model.RoleDTO;
 import co.cstad.model.UserDTO;
-import co.cstad.util.Singleton;
+import co.cstad.view.staticmenu.BoxBorder;
 import org.nocrala.tools.texttablefmt.BorderStyle;
 import org.nocrala.tools.texttablefmt.CellStyle;
 import org.nocrala.tools.texttablefmt.ShownBorders;

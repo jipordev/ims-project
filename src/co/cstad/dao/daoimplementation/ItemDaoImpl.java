@@ -54,16 +54,12 @@ public class ItemDaoImpl implements ItemDao {
 
         return null;
     }
-
-
-
-
     @Override
     public StockInDTO stockIn(StockInDTO stockInDTO) {
         String insertStockInSql = """
-        INSERT INTO stock_in (item_id, qty, price_in, stock_in_date)
-        VALUES (?, ?, ?, CURRENT_TIMESTAMP)
-    """;
+                    INSERT INTO stock_in (item_id, qty, price_in, stock_in_date)
+                    VALUES (?, ?, ?, CURRENT_TIMESTAMP)
+                """;
 
         String updateItemQtySql = "UPDATE item SET qty = qty + ?, price = ?, price_a = ?, price_b = ?, price_c = ? WHERE item_id = ?";
 
@@ -96,79 +92,6 @@ public class ItemDaoImpl implements ItemDao {
 
         return null;
     }
-
-//    public StockInDTO stockIn(StockInDTO stockInDTO) {
-//        String insertStockInSql = """
-//        INSERT INTO stock_in (item_id, qty, price_in, stock_in_date)
-//        VALUES (?, ?, ?, CURRENT_TIMESTAMP)
-//    """;
-//
-////        String selectPriceInSql = """
-////        SELECT price_in FROM stock_in
-////        WHERE item_id = ? AND stock_in_date = (SELECT MAX(stock_in_date) FROM stock_in WHERE item_id = ?)
-////    """;
-//
-//        String selectPriceInSql = "SELECT price_in FROM stock_in WHERE item_id = ?";
-//
-////        String updateItemQtySql = """
-////        UPDATE item
-////        SET  qty = qty + ?,
-////        price = ?,
-////        price_a = ?,
-////        price_b = ?,
-////        price_c = ?
-////        WHERE item_id = ?
-////    """;
-//        String updateItemQtySql = "UPDATE item SET qty = qty + ?, price = ?, price_a = ?, price_b = ?, price_c = ? WHERE item_id = ?";
-//
-//        try {
-//            // Insert into stock_in table
-//            try (PreparedStatement insertStockInStatement = connection.prepareStatement(insertStockInSql)) {
-//                insertStockInStatement.setLong(1, stockInDTO.getItemId());
-//                insertStockInStatement.setInt(2, stockInDTO.getQtyIn());
-//                insertStockInStatement.setBigDecimal(3, stockInDTO.getPriceIn());
-//
-//                // Execute the insert query
-//                int affectedRows = insertStockInStatement.executeUpdate();
-//
-//                if (affectedRows > 0) {
-//                    // Retrieve the price_in value from the stock_in table
-//                    try (PreparedStatement selectPriceInStatement = connection.prepareStatement(selectPriceInSql)) {
-//                        selectPriceInStatement.setLong(1, stockInDTO.getItemId());
-//                        //selectPriceInStatement.setLong(2, stockInDTO.getItemId());
-//
-//                        try (ResultSet result = selectPriceInStatement.executeQuery()) {
-//                            if (result.next()) {
-//                                BigDecimal returnedPrice = result.getBigDecimal("price_in");
-//                                stockInDTO.setPriceIn(returnedPrice);
-//
-//                                // Update item quantity in the item table
-//                                try (PreparedStatement updateItemQtyStatement = connection.prepareStatement(updateItemQtySql)) {
-//                                    updateItemQtyStatement.setInt(1, stockInDTO.getQtyIn());
-//                                    updateItemQtyStatement.setBigDecimal(2, stockInDTO.getPriceIn());
-////                                    updateItemQtyStatement.setBigDecimal(3, stockInDTO.getPriceIn().multiply(new BigDecimal("0.93")));
-//                                    updateItemQtyStatement.setBigDecimal(3, stockInDTO.getPriceIn());
-//                                    updateItemQtyStatement.setBigDecimal(4, stockInDTO.getPriceIn());
-//                                    updateItemQtyStatement.setBigDecimal(5, stockInDTO.getPriceIn());
-//                                    updateItemQtyStatement.setLong(6, stockInDTO.getItemId());
-//                                    updateItemQtyStatement.executeUpdate();
-//                                }
-//
-//                                return stockInDTO;
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        } catch (SQLException e) {
-//            System.out.println("Error: " + e.getMessage());
-//        }
-//
-//        return null;
-//    }
-
-
-
     @Override
     public StockOutDTO stockout(StockOutDTO stockOutDTO)  {
         String insertStockInSql = "INSERT INTO stock_out (item_id, price_out, stock_out_date) " +

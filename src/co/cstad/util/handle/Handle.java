@@ -428,7 +428,7 @@ public class Handle implements BoxBorder {
                     case 1 -> reportController.stockCountReport();
                     case 2 -> reportController.stockInReport();
                     case 3 -> reportController.stockOutReport();
-                    case 4 -> System.out.println(orange+"STILL IN MAINTENANCE"+ reset);
+                    case 4 -> System.out.println(orange+"STILL IN MAINTENANCE, PlEASE WAIT...!"+ reset);
                     case 5 -> reportController.invoiceAdjustment();
                     case 6 -> System.out.println(orange+"STILL IN MAINTENANCE"+ reset);
                     case 7 -> reportController.stockAlert();

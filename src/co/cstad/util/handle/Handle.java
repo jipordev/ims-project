@@ -366,7 +366,7 @@ public class Handle implements BoxBorder {
                 optInvoice = Integer.parseInt(scanner.nextLine());
                 System.out.println("\n");
                 switch (optInvoice) {
-                    case 1 -> System.out.println(yellow+"STILL IN MAINTENANCE"+reset);
+                    case 1 -> System.out.println(yellow+"STILL IN MAINTENANCE, PLEASE WAIT....!"+reset);
                     case 2 -> System.out.println(yellow+"STILL IN MAINTENANCE"+reset);
                     case 3 -> System.out.println(yellow+"STILL IN MAINTENANCE"+reset);
                     case 4 -> {

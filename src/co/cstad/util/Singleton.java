@@ -12,6 +12,10 @@ import co.cstad.service.serviceimplementation.*;
 import co.cstad.service.userservice.UserAuthentication;
 import co.cstad.util.handle.Handle;
 import co.cstad.view.*;
+import co.cstad.view.staticmenu.MenuView;
+import co.cstad.view.staticmenu.MenuViewAdmin;
+import co.cstad.view.staticmenu.MenuViewManager;
+import co.cstad.view.staticmenu.MenuViewReport;
 
 import java.util.Scanner;
 

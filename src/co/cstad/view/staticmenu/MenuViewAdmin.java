@@ -1,8 +1,9 @@
-package co.cstad.view;
+package co.cstad.view.staticmenu;
 
 import co.cstad.model.CustomerDTO;
 import co.cstad.model.ItemDTO;
 import co.cstad.model.UserDTO;
+import co.cstad.view.staticmenu.BoxBorder;
 import org.nocrala.tools.texttablefmt.BorderStyle;
 import org.nocrala.tools.texttablefmt.ShownBorders;
 import org.nocrala.tools.texttablefmt.Table;

@@ -1,4 +1,4 @@
-package co.cstad.view;
+package co.cstad.view.staticmenu;
 
 public interface BoxBorder {
     static final String TOP_LEFT_CORNER = "┌";

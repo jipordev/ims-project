@@ -5,6 +5,7 @@ import co.cstad.model.ItemDTO;
 import co.cstad.model.StockInDTO;
 import co.cstad.model.StockOutDTO;
 import co.cstad.model.*;
+import co.cstad.view.staticmenu.BoxBorder;
 import org.nocrala.tools.texttablefmt.BorderStyle;
 import org.nocrala.tools.texttablefmt.CellStyle;
 import org.nocrala.tools.texttablefmt.ShownBorders;

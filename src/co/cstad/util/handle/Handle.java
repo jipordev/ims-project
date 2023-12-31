@@ -75,7 +75,7 @@ public class Handle implements BoxBorder {
                     handleRole(role);
                 }
             } else {
-                System.out.println(red+"INVALID USERNAME OR PASSWORD."+reset);
+                System.out.println(red+"❌ INVALID USERNAME OR PASSWORD."+reset);
             }
         } catch (StringInputException e) {
             System.out.println(e.getMessage());
@@ -85,7 +85,7 @@ public class Handle implements BoxBorder {
     // The validateStringInput method
     public static boolean validateStringInput(String input) throws StringInputException {
         if (input == null || input.trim().isEmpty()) {
-            throw new StringInputException(red+"INPUT CANNOT BE NULL OR EMPTY.\n"+reset);
+            throw new StringInputException(red+"❌ INPUT CANNOT BE NULL OR EMPTY.\n"+reset);
         }
         return true;
     }
